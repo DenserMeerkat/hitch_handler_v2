@@ -12,33 +12,37 @@ Widget clearButton(TextEditingController controller) {
   );
 }
 
-Widget suffixIcon(IconData icon) {
+Widget suffixIcon(IconData icon, Color? color) {
   return Icon(
     icon,
+    color: color,
     size: 16,
   );
 }
 
-Widget multiFieldButton(IconData icon, Function() onTap) {
+Widget multiFieldButton(IconData icon, Function() onTap, Color? color) {
   return IconButton(
     onPressed: onTap,
     icon: Icon(
       icon,
+      color: color,
       size: 16,
     ),
   );
 }
 
-Widget obscureButton(bool obscure, Function() onTap) {
+Widget obscureButton(bool obscure, Function() onTap, Color? color) {
   return IconButton(
     onPressed: onTap,
     icon: obscure
-        ? const Icon(
+        ? Icon(
             Icons.visibility_rounded,
+            color: color,
             size: 16,
           )
-        : const Icon(
+        : Icon(
             Icons.visibility_off_rounded,
+            color: color,
             size: 16,
           ),
   );
@@ -49,38 +53,8 @@ OutlineInputBorder inputBorder(String type, BuildContext context,
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(radius),
     borderSide: BorderSide(
-      width: width ?? getBorderWidth(type),
-      color: color ?? getBorderColor(type, context),
+      width: width ?? 0,
+      color: color ?? Colors.transparent,
     ),
   );
-}
-
-double getBorderWidth(String type) {
-  switch (type) {
-    case "focused":
-      return 2;
-    case "focusedError":
-      return 2;
-    default:
-      return 1;
-  }
-}
-
-Color getBorderColor(String type, BuildContext context) {
-  switch (type) {
-    case "border":
-      return Theme.of(context).colorScheme.surfaceVariant;
-    case "error":
-      return Theme.of(context).colorScheme.error;
-    case "disabled":
-      return Theme.of(context).colorScheme.onSurface;
-    case "enabled":
-      return Theme.of(context).colorScheme.primary.withOpacity(0.4);
-    case "focused":
-      return Theme.of(context).colorScheme.primary.withOpacity(0.6);
-    case "focusedError":
-      return Theme.of(context).colorScheme.error;
-    default:
-      return Theme.of(context).colorScheme.primary;
-  }
 }

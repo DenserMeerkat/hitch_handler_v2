@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/utils/inputs/field_functions.dart';
-import 'package:hitch_handler_v2/app/utils/inputs/multi_field_types.dart';
+import 'package:hitch_handler_v2/app/types/input_types.dart';
 import 'custom_field.dart';
 
 class MultiField extends StatefulWidget {
@@ -25,7 +25,6 @@ class _MultiFieldState extends State<MultiField> {
       _onStateChange();
     });
     _suffixIcon = fields[currentIndex].suffixIcon;
-    suffix = multiFieldButton(_suffixIcon, onTap);
   }
 
   @override
@@ -41,7 +40,8 @@ class _MultiFieldState extends State<MultiField> {
       });
     } else {
       setState(() {
-        suffix = multiFieldButton(_suffixIcon, onTap);
+        suffix = multiFieldButton(
+            _suffixIcon, onTap, Theme.of(context).colorScheme.primary);
       });
     }
   }
@@ -50,21 +50,26 @@ class _MultiFieldState extends State<MultiField> {
     setState(() {
       currentIndex = currentIndex == fields.length - 1 ? 0 : currentIndex + 1;
       _suffixIcon = fields[currentIndex].suffixIcon;
-      suffix = multiFieldButton(_suffixIcon, onTap);
+      suffix =
+          multiFieldButton(_suffixIcon, onTap, Theme.of(context).primaryColor);
       controller.clear();
       focusNode.unfocus();
-      WidgetsBinding.instance.addPostFrameCallback(
-        (_) {
-          Future.delayed(const Duration(milliseconds: 500), () {
-            focusNode.requestFocus();
-          });
-        },
-      );
+      if (focusNode.hasFocus) {
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) {
+            Future.delayed(const Duration(milliseconds: 500), () {
+              focusNode.requestFocus();
+            });
+          },
+        );
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    suffix =
+        multiFieldButton(_suffixIcon, onTap, Theme.of(context).primaryColor);
     return CustomField(
       controller: controller,
       validator: fields[currentIndex].validator,

@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+
+class LeadingWidget extends StatelessWidget {
+  final IconData? iconData;
+  final Widget icon;
+  final String? tooltip;
+  final Function()? onPressed;
+  const LeadingWidget({
+    super.key,
+    this.iconData,
+    this.icon = const Icon(Icons.arrow_back_outlined),
+    this.tooltip = "Back",
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: FittedBox(
+            child: IconButton(
+              icon: iconData == null ? icon : Icon(iconData),
+              onPressed: () {
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                onPressed?.call();
+              },
+              tooltip: tooltip,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

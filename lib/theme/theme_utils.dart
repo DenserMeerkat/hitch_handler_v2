@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-void setSystemOverlay(BuildContext context) {
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      systemNavigationBarColor: Theme.of(context).colorScheme.surface,
-      systemNavigationBarIconBrightness:
-          Theme.of(context).colorScheme.brightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark,
-      systemNavigationBarDividerColor: Theme.of(context).colorScheme.surface,
-      statusBarColor: Theme.of(context).colorScheme.surface,
-      statusBarBrightness:
-          Theme.of(context).colorScheme.brightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark,
-      statusBarIconBrightness:
-          Theme.of(context).colorScheme.brightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark,
-    ),
-  );
-  SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ],
-  );
-}
+import 'package:hitch_handler_v2/theme/constants.dart';
 
 bool isDark(BuildContext context) {
   return Theme.of(context).colorScheme.brightness == Brightness.dark;
+}
+
+class SystemOverlayWrapper extends StatelessWidget {
+  final Widget child;
+  const SystemOverlayWrapper({
+    super.key,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    SystemUiOverlayStyle mySystemTheme = SystemUiOverlayStyle(
+      systemNavigationBarColor: isDark(context) ? kBlack20 : kLBackgroundColor,
+      systemNavigationBarIconBrightness:
+          isDark(context) ? Brightness.light : Brightness.dark,
+      systemNavigationBarDividerColor: Colors.transparent,
+      statusBarColor: isDark(context) ? kBlack20 : kLBackgroundColor,
+      statusBarBrightness: isDark(context) ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness:
+          isDark(context) ? Brightness.light : Brightness.dark,
+    );
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: mySystemTheme,
+      child: child,
+    );
+  }
 }

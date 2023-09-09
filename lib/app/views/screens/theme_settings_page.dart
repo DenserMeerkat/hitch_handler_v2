@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hitch_handler_v2/app/views/widgets/common/bottom_line.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
+import 'package:hitch_handler_v2/theme/constants.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -13,31 +15,17 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    setSystemOverlay(context);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: isDark(context) ? kBlack20 : kLBackgroundColor,
         title: const Text(
-          "Settings",
+          "Theme Settings",
           style: TextStyle(
             fontSize: 20,
           ),
         ),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: FittedBox(
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back_outlined),
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                    context.pop("settings");
-                  },
-                  tooltip: "Back",
-                ),
-              ),
-            );
-          },
+        leading: LeadingWidget(
+          onPressed: () => context.go('/'),
         ),
         bottom: bottomLine(context),
         toolbarHeight: kToolbarHeight,

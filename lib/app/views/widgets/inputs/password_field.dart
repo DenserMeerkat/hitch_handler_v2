@@ -20,7 +20,6 @@ class _PasswordFieldState extends State<PasswordField> {
   void initState() {
     super.initState();
     focusNode.addListener(() {});
-    suffix = obscureButton(obscureText, onTap);
   }
 
   @override
@@ -32,12 +31,15 @@ class _PasswordFieldState extends State<PasswordField> {
     setState(() {
       obscureText = !obscureText;
       letterSpacing = obscureText ? 1.5 : 1.2;
-      suffix = obscureButton(obscureText, onTap);
+      suffix = obscureButton(
+          obscureText, onTap, Theme.of(context).colorScheme.primary);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    suffix = obscureButton(
+        obscureText, onTap, Theme.of(context).colorScheme.primary);
     return CustomField(
       controller: passwordController,
       validator: passwordValidator,

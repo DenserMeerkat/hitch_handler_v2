@@ -1,17 +1,20 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
+import 'package:hitch_handler_v2/app/views/widgets/inputs/password_field.dart';
+import 'package:hitch_handler_v2/theme/illustrations.dart';
 
-class LoginBody extends StatefulWidget {
-  const LoginBody({
+class SignInBody extends StatefulWidget {
+  const SignInBody({
     super.key,
   });
 
   @override
-  State<LoginBody> createState() => _LoginBodyState();
+  State<SignInBody> createState() => _SignInBodyState();
 }
 
-class _LoginBodyState extends State<LoginBody> {
+class _SignInBodyState extends State<SignInBody> {
   bool loading = false;
 
   @override
@@ -31,19 +34,15 @@ class _LoginBodyState extends State<LoginBody> {
                 SizedBox(
                   height: 20.h,
                 ),
-                const FittedBox(
-                  child: Text(
-                    "Welcome Back!",
-                  ),
-                ),
+                Illustrations.renderSignIn(context),
                 SizedBox(
-                  height: 10.h,
+                  height: 20.h,
                 ),
-                FittedBox(
-                  child: Text(
-                    "Sign In to continue to app.",
-                  ),
+                const MultiField(),
+                const SizedBox(
+                  height: 20,
                 ),
+                const PasswordField(),
                 SizedBox(height: 45.h),
               ],
             ),
