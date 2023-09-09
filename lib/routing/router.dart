@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/screens/index.dart';
 import 'package:hitch_handler_v2/app/views/screens/theme_settings_page.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/views/widgets/misc/system_overlay_wrapper.dart';
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[

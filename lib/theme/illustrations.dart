@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/types/illustration_type.dart';
-import 'package:hitch_handler_v2/theme/svg_asset_image.dart';
+import 'package:hitch_handler_v2/app/views/widgets/misc/svg_asset_image.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class Illustrations {
