@@ -21,6 +21,8 @@ class LeadingWidget extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: FittedBox(
             child: IconButton(
+              highlightColor:
+                  Theme.of(context).colorScheme.primary.withOpacity(0.2),
               icon: iconData == null ? icon : Icon(iconData),
               onPressed: () {
                 ScaffoldMessenger.of(context).removeCurrentSnackBar();

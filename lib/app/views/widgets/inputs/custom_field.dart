@@ -74,7 +74,7 @@ class _CustomFieldState extends State<CustomField> {
 
   @override
   Widget build(BuildContext context) {
-    shadowColor = isDark(context) ? kBlack20 : kGrey40;
+    shadowColor = isDark(context) ? kBlack20 : kLGrey40;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -91,9 +91,6 @@ class _CustomFieldState extends State<CustomField> {
             alignment: Alignment.topLeft,
             children: [
               TextFormField(
-                onTapOutside: (event) {
-                  widget.focusNode?.unfocus();
-                },
                 onEditingComplete: () {
                   widget.focusNode?.unfocus();
                 },
@@ -132,16 +129,18 @@ class _CustomFieldState extends State<CustomField> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    color: isDark(context) ? kBlack20 : kGrey40,
+                    color: isDark(context)
+                        ? kBlack20
+                        : Theme.of(context).colorScheme.primaryContainer,
                     borderRadius: BorderRadius.horizontal(
                       left: const Radius.circular(8),
                       right: Radius.circular(1.r),
                     ),
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
-                        color: kBlack10,
+                        color: isDark(context) ? kBlack10 : kLBlack20,
                         blurRadius: 1,
-                        offset: Offset(2, 0),
+                        offset: const Offset(2, 0),
                       ),
                     ]),
                 height: 48,
@@ -149,7 +148,9 @@ class _CustomFieldState extends State<CustomField> {
                 child: Center(
                     child: Icon(
                   widget.icon,
-                  color: kStudentColor,
+                  color: isDark(context)
+                      ? Theme.of(context).colorScheme.tertiary
+                      : Theme.of(context).colorScheme.onPrimaryContainer,
                   size: 20,
                 )),
               )

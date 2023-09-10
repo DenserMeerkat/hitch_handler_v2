@@ -4,26 +4,52 @@ import 'package:hitch_handler_v2/app/views/widgets/misc/svg_asset_image.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class Illustrations {
-  static const IllustrationType signIn = IllustrationType(
-    pathName: "assets/svg/illustrations/undraw_login.svg",
-    height: 160,
+  static const IllustrationType login = IllustrationType(
+    pathName: "assets/illustrations/undraw_login.svg",
+    height: 140,
     lightMixValue: 15,
   );
 
   static const IllustrationType signUp = IllustrationType(
-    pathName: "assets/svg/illustrations/undraw_access_account.svg",
+    pathName: "assets/illustrations/undraw_sign_up.svg",
+    height: 140,
+    lightMixValue: 10,
+    mixValue: 10,
+  );
+
+  static const IllustrationType accessAccount = IllustrationType(
+    pathName: "assets/illustrations/undraw_access_account.svg",
+    height: 170,
+    lightMixValue: 10,
+    mixValue: 10,
+  );
+
+  static const IllustrationType mobileLogin = IllustrationType(
+    pathName: "assets/illustrations/undraw_mobile_login.svg",
+    height: 160,
+    lightMixValue: 10,
+    mixValue: 10,
+  );
+
+  static const IllustrationType darkMode = IllustrationType(
+    pathName: "assets/illustrations/undraw_dark_mode.svg",
     height: 200,
     lightMixValue: 10,
     mixValue: 10,
   );
 
   static Widget renderSignIn(BuildContext context) => SvgAssetImage(
-        illustration: signIn,
+        illustration: accessAccount,
         color: Theme.of(context).colorScheme.primary,
         isDark: isDark(context),
       );
   static Widget renderSignUp(BuildContext context) => SvgAssetImage(
-        illustration: signUp,
+        illustration: mobileLogin,
+        color: Theme.of(context).colorScheme.primary,
+        isDark: isDark(context),
+      );
+  static Widget renderTheme(BuildContext context) => SvgAssetImage(
+        illustration: darkMode,
         color: Theme.of(context).colorScheme.primary,
         isDark: isDark(context),
       );

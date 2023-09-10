@@ -13,12 +13,14 @@ class PageTitle extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 8, 30, 8).r,
       decoration: BoxDecoration(
-          color: isDark(context) ? kBackgroundColor : kGrey50,
+          color: isDark(context)
+              ? kBackgroundColor
+              : Theme.of(context).colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(50),
           boxShadow: [
             BoxShadow(
               offset: const Offset(0, 2),
-              color: isDark(context) ? kBlack10 : kGrey30,
+              color: isDark(context) ? kBlack10 : kLGrey30,
             )
           ]),
       child: Row(
@@ -27,13 +29,17 @@ class PageTitle extends StatelessWidget {
           Icon(
             icon,
             size: 18,
-            color: kTextColor,
+            color: isDark(context)
+                ? kTextColor
+                : Theme.of(context).colorScheme.onSecondaryContainer,
           ),
           SizedBox(width: 15.w),
           Text(
             title,
-            style: const TextStyle(
-              color: kTextColor,
+            style: TextStyle(
+              color: isDark(context)
+                  ? kTextColor
+                  : Theme.of(context).colorScheme.onSecondaryContainer,
               fontSize: 16,
               fontWeight: FontWeight.w500,
               letterSpacing: 1.5,

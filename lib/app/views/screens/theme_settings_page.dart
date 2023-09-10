@@ -34,15 +34,15 @@ class _SettingsPageState extends State<SettingsPage> {
       currentThemeIndex = getThemeIndex(currentThemeMode);
     });
     children = {
-      0: ThemeSegment(
+      0: const ThemeSegment(
         iconData: Icons.smartphone_outlined,
         label: "System",
       ),
-      1: ThemeSegment(
+      1: const ThemeSegment(
         iconData: Icons.light_mode_outlined,
         label: "Light",
       ),
-      2: ThemeSegment(
+      2: const ThemeSegment(
         iconData: Icons.dark_mode_outlined,
         label: "Dark",
       ),
@@ -69,7 +69,7 @@ class _SettingsPageState extends State<SettingsPage> {
       body: FutureBuilder<String>(
         future: getCurrentTheme(),
         builder: (context, snapshot) {
-          currentThemeMode = snapshot.data ?? 'system';
+          currentThemeMode = snapshot.data ?? 'dark';
           currentThemeIndex = getThemeIndex(currentThemeMode);
           return Center(
             child: Column(
@@ -95,7 +95,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: isDark(context)
                         ? Theme.of(context).colorScheme.onPrimary
                         : Theme.of(context).colorScheme.onPrimaryContainer,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                   ),
                   unselectedTextStyle: TextStyle(
                     color: isDark(context)
@@ -132,12 +132,18 @@ class ThemeSegment extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    late String currentThemeMode;
+    ThemeProvider themeProvider =
+        Provider.of<ThemeProvider>(context, listen: true);
+    themeProvider.getThemeMode.then((value) {
+      currentThemeMode = value;
+    });
     return FutureBuilder(
         future: getCurrentTheme(),
         builder: (context, snapshot) {
-          final String currentThemeMode = snapshot.data ?? 'system';
+          currentThemeMode = snapshot.data ?? 'dark';
           return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -152,7 +158,7 @@ class ThemeSegment extends StatelessWidget {
                           : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(
-                  width: 8,
+                  width: 6,
                 ),
                 Text(
                   label,

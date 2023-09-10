@@ -8,3 +8,14 @@ class AuthTabType {
     required this.icon,
   });
 }
+
+final List<AuthTabType> authTabs = <AuthTabType>[
+  const AuthTabType(
+    title: "Sign In",
+    icon: Icons.person,
+  ),
+  const AuthTabType(
+    title: "Sign Up",
+    icon: Icons.person_add,
+  ),
+];

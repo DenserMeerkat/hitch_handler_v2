@@ -33,9 +33,6 @@ class SvgAssetImage extends StatelessWidget {
         if (snapshot.hasData) {
           return Container(
             padding: padding ?? const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              border: Border.all(color: color),
-            ),
             child: SvgPicture.string(
               snapshot.data!,
               height: illustration.height,
@@ -56,8 +53,14 @@ class SvgAssetImage extends StatelessWidget {
             ),
           );
         } else {
-          return Center(
-            child: placeholder ?? const CircularProgressIndicator(),
+          return ConstrainedBox(
+            constraints: BoxConstraints.tightFor(
+              height: illustration.height,
+              width: illustration.width,
+            ),
+            child: Center(
+              child: placeholder ?? const CircularProgressIndicator(),
+            ),
           );
         }
       },

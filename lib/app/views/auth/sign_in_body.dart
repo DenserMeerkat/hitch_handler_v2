@@ -1,8 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/password_field.dart';
+import 'package:hitch_handler_v2/app/views/auth/sign_in_form.dart';
+import 'package:hitch_handler_v2/app/views/template/body_template.dart';
 import 'package:hitch_handler_v2/theme/illustrations.dart';
 
 class SignInBody extends StatefulWidget {
@@ -15,39 +14,15 @@ class SignInBody extends StatefulWidget {
 }
 
 class _SignInBodyState extends State<SignInBody> {
-  bool loading = false;
-
+  final textController = TextEditingController();
+  final passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          loading ? const LinearProgressIndicator() : Container(height: 4),
-          Container(
-            constraints: const BoxConstraints(maxWidth: 380),
-            padding: EdgeInsets.only(
-              left: 30.w,
-              right: 30.w,
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20.h,
-                ),
-                Illustrations.renderSignIn(context),
-                SizedBox(
-                  height: 20.h,
-                ),
-                const MultiField(),
-                const SizedBox(
-                  height: 20,
-                ),
-                const PasswordField(),
-                SizedBox(height: 45.h),
-              ],
-            ),
-          ),
-        ],
+    return BodyTemplate(
+      illustration: Illustrations.renderSignIn(context),
+      form: SignInForm(
+        textController: textController,
+        passController: passController,
       ),
     );
   }

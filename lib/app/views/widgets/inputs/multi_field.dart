@@ -4,14 +4,17 @@ import 'package:hitch_handler_v2/app/types/input_types.dart';
 import 'custom_field.dart';
 
 class MultiField extends StatefulWidget {
-  const MultiField({super.key});
+  final TextEditingController controller;
+  const MultiField({
+    super.key,
+    required this.controller,
+  });
 
   @override
   State<MultiField> createState() => _MultiFieldState();
 }
 
 class _MultiFieldState extends State<MultiField> {
-  final TextEditingController controller = TextEditingController();
   final FocusNode focusNode = FocusNode();
   List<FieldType> fields = MultiFields().list;
   int currentIndex = 0;
@@ -20,7 +23,7 @@ class _MultiFieldState extends State<MultiField> {
   @override
   void initState() {
     super.initState();
-    controller.addListener(_onStateChange);
+    widget.controller.addListener(_onStateChange);
     focusNode.addListener(() {
       _onStateChange();
     });
@@ -30,13 +33,13 @@ class _MultiFieldState extends State<MultiField> {
   @override
   void dispose() {
     super.dispose();
-    controller.dispose();
+    widget.controller.dispose();
   }
 
   void _onStateChange() {
-    if (controller.text.isNotEmpty && focusNode.hasFocus) {
+    if (widget.controller.text.isNotEmpty && focusNode.hasFocus) {
       setState(() {
-        suffix = clearButton(controller);
+        suffix = clearButton(widget.controller);
       });
     } else {
       setState(() {
@@ -52,7 +55,7 @@ class _MultiFieldState extends State<MultiField> {
       _suffixIcon = fields[currentIndex].suffixIcon;
       suffix =
           multiFieldButton(_suffixIcon, onTap, Theme.of(context).primaryColor);
-      controller.clear();
+      widget.controller.clear();
       focusNode.unfocus();
       if (focusNode.hasFocus) {
         WidgetsBinding.instance.addPostFrameCallback(
@@ -71,7 +74,7 @@ class _MultiFieldState extends State<MultiField> {
     suffix =
         multiFieldButton(_suffixIcon, onTap, Theme.of(context).primaryColor);
     return CustomField(
-      controller: controller,
+      controller: widget.controller,
       validator: fields[currentIndex].validator,
       placeHolder: fields[currentIndex].placeHolder,
       keyboardType: fields[currentIndex].keyboardType,
