@@ -20,10 +20,6 @@ class _SettingsPageState extends State<SettingsPage> {
   late String currentThemeMode;
   late int currentThemeIndex;
   late Map<int, Widget> children;
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
         leading: LeadingWidget(
-          onPressed: () => context.go('/'),
+          onPressed: () => context.pop(),
         ),
         bottom: bottomLine(context,
             color: isDark(context)
@@ -106,6 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   borderRadius: 10.0,
                   horizontalPadding: EdgeInsets.zero,
                   onSegmentTapped: (index) {
+                    if (!mounted) return;
                     setState(() {
                       currentThemeIndex = index;
                       themeProvider

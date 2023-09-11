@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 String appName = "Hitch Handler";
 String orgName = "CEG Tech Forum";
 
-double kAppBarHeight = 56.0;
-double kPadding = 20.0;
+const double kDefaultPadding = 20.0;
+const double kHeaderHeight = 120.0;
+const int otpCountdownTime = 90;
 
 const kStudentColor = Color.fromARGB(255, 104, 206, 201);
 const kLStudentColor = Color.fromARGB(255, 87, 237, 229);
@@ -39,5 +40,3 @@ const kSecButtonColor = Color.fromARGB(255, 255, 189, 128);
 const kErrorColor = Color.fromARGB(255, 201, 69, 69);
 const kValidColor = Color.fromARGB(255, 99, 182, 74);
 const kWarnColor = Color.fromARGB(255, 241, 217, 95);
-const double kDefaultPadding = 20.0;
-const double kHeaderHeight = 120.0;

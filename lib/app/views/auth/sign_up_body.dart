@@ -16,6 +16,14 @@ class SignUpBody extends StatefulWidget {
 class _SignUpBodyState extends State<SignUpBody> {
   final rollController = TextEditingController();
   final dateController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    rollController.dispose();
+    dateController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BodyTemplate(

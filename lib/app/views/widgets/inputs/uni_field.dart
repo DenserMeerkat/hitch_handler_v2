@@ -30,18 +30,15 @@ class _UniFieldState extends State<UniField> {
     });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    widget.controller.dispose();
-  }
-
   void _onStateChange() {
+    if (!mounted) return;
     if (widget.controller.text.isNotEmpty && focusNode.hasFocus) {
+      if (!mounted) return;
       setState(() {
         suffix = clearButton(widget.controller);
       });
     } else {
+      if (!mounted) return;
       setState(() {
         suffix = suffixIcon(
             widget.type.suffixIcon, Theme.of(context).colorScheme.primary);

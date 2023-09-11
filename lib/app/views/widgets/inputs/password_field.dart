@@ -4,45 +4,31 @@ import 'package:hitch_handler_v2/app/utils/inputs/validators.dart';
 import 'custom_field.dart';
 
 class PasswordField extends StatefulWidget {
-  const PasswordField({super.key});
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
+  const PasswordField({
+    super.key,
+    required this.controller,
+    this.validator,
+  });
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  final TextEditingController passwordController = TextEditingController();
   final FocusNode focusNode = FocusNode();
   bool obscureText = true;
   double letterSpacing = 1.5;
   late Widget suffix;
-  @override
-  void initState() {
-    super.initState();
-    focusNode.addListener(() {});
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  void onTap() {
-    setState(() {
-      obscureText = !obscureText;
-      letterSpacing = obscureText ? 1.5 : 1.2;
-      suffix = obscureButton(
-          obscureText, onTap, Theme.of(context).colorScheme.primary);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     suffix = obscureButton(
         obscureText, onTap, Theme.of(context).colorScheme.primary);
     return CustomField(
-      controller: passwordController,
-      validator: passwordValidator,
+      controller: widget.controller,
+      validator: widget.validator ?? passwordValidator,
       placeHolder: "Password",
       keyboardType: TextInputType.visiblePassword,
       icon: Icons.password_outlined,
@@ -51,5 +37,15 @@ class _PasswordFieldState extends State<PasswordField> {
       letterSpacing: letterSpacing,
       focusNode: focusNode,
     );
+  }
+
+  void onTap() {
+    if (!mounted) return;
+    setState(() {
+      obscureText = !obscureText;
+      letterSpacing = obscureText ? 1.5 : 1.2;
+      suffix = obscureButton(
+          obscureText, onTap, Theme.of(context).colorScheme.primary);
+    });
   }
 }

@@ -21,7 +21,7 @@ class MultiFields {
     keyboardType: TextInputType.number,
   );
 
-  List<FieldType> get list => [email, mobile, roll];
+  List<FieldType> get list => [roll, email, mobile];
   List<FieldType> get listWithoutRoll => [email, mobile];
 }
 

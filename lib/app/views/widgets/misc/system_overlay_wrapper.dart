@@ -5,19 +5,29 @@ import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class SystemOverlayWrapper extends StatelessWidget {
   final Widget child;
+  final Color navBarDarkColor;
+  final Color navBarLightColor;
+  final Color statusBarDarkColor;
+  final Color statusBarLightColor;
   const SystemOverlayWrapper({
     super.key,
     required this.child,
+    this.navBarDarkColor = kBlack20,
+    this.navBarLightColor = kLBackgroundColor,
+    this.statusBarDarkColor = kBlack20,
+    this.statusBarLightColor = kLBackgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
     SystemUiOverlayStyle mySystemTheme = SystemUiOverlayStyle(
-      systemNavigationBarColor: isDark(context) ? kBlack20 : kLBackgroundColor,
+      systemNavigationBarColor:
+          isDark(context) ? navBarDarkColor : navBarLightColor,
       systemNavigationBarIconBrightness:
           isDark(context) ? Brightness.light : Brightness.dark,
       systemNavigationBarDividerColor: Colors.transparent,
-      statusBarColor: isDark(context) ? kBlack20 : kLBackgroundColor,
+      statusBarColor:
+          isDark(context) ? statusBarDarkColor : statusBarLightColor,
       statusBarBrightness: isDark(context) ? Brightness.light : Brightness.dark,
       statusBarIconBrightness:
           isDark(context) ? Brightness.light : Brightness.dark,

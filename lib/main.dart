@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hitch_handler_v2/theme/constants.dart';
 import 'package:hitch_handler_v2/theme/theme_provider.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
               themeMode = getThemeMode(snapshot.data ?? 'dark');
               return MaterialApp.router(
                 debugShowCheckedModeBanner: false,
-                title: 'Flutter Demo',
+                title: appName,
                 theme: lightTheme,
                 darkTheme: darkTheme,
                 themeMode: themeMode,

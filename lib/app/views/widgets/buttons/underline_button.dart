@@ -6,25 +6,30 @@ class UnderlineButton extends StatelessWidget {
   final Function()? onPressed;
   final Color? color;
   final bool enabled;
+  final TextDecorationStyle? decorationStyle;
   const UnderlineButton({
     super.key,
     required this.label,
     this.onPressed,
     this.color,
     this.enabled = true,
+    this.decorationStyle = TextDecorationStyle.solid,
   });
 
   @override
   Widget build(BuildContext context) {
+    Color? foreGroundColor = enabled
+        ? color ?? Theme.of(context).colorScheme.tertiary
+        : Theme.of(context).colorScheme.outline;
     return TextButton(
       style: TextButton.styleFrom(
-        foregroundColor: color ?? Theme.of(context).colorScheme.tertiary,
+        foregroundColor: foreGroundColor,
         padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      onPressed: enabled ? (onPressed ?? () {}) : null,
+      onPressed: enabled ? (onPressed) : null,
       child: Text(
         label,
         style: TextStyle(
@@ -34,12 +39,13 @@ class UnderlineButton extends StatelessWidget {
           color: Colors.transparent,
           shadows: [
             Shadow(
-              color: Theme.of(context).colorScheme.tertiary,
+              color: foreGroundColor,
               offset: const Offset(0, -4),
             )
           ],
           decoration: TextDecoration.underline,
-          decorationColor: color ?? Theme.of(context).colorScheme.tertiary,
+          decorationStyle: decorationStyle,
+          decorationColor: foreGroundColor,
         ),
       ),
     );

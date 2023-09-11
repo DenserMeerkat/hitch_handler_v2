@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hitch_handler_v2/app/utils/inputs/validators.dart';
+import 'package:hitch_handler_v2/app/views/auth/forgot_sheet.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/underline_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
@@ -18,8 +20,6 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  _SignInFormState();
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -32,10 +32,13 @@ class _SignInFormState extends State<SignInForm> {
             MultiField(
               controller: widget.textController,
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 10.h,
             ),
-            const PasswordField(),
+            PasswordField(
+              controller: widget.passController,
+              validator: lengthValidator,
+            ),
             SizedBox(
               height: 10.h,
             ),
@@ -43,8 +46,10 @@ class _SignInFormState extends State<SignInForm> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 UnderlineButton(
-                  onPressed: () {},
-                  label: "ForgotPassword?",
+                  onPressed: () {
+                    showForgotSheet(context);
+                  },
+                  label: "Forgot Password?",
                 ),
               ],
             ),

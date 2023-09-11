@@ -9,21 +9,18 @@ class Illustrations {
     height: 140,
     lightMixValue: 15,
   );
-
   static const IllustrationType signUp = IllustrationType(
     pathName: "assets/illustrations/undraw_sign_up.svg",
     height: 140,
     lightMixValue: 10,
     mixValue: 10,
   );
-
   static const IllustrationType accessAccount = IllustrationType(
     pathName: "assets/illustrations/undraw_access_account.svg",
     height: 170,
     lightMixValue: 10,
     mixValue: 10,
   );
-
   static const IllustrationType mobileLogin = IllustrationType(
     pathName: "assets/illustrations/undraw_mobile_login.svg",
     height: 160,
@@ -34,6 +31,24 @@ class Illustrations {
   static const IllustrationType darkMode = IllustrationType(
     pathName: "assets/illustrations/undraw_dark_mode.svg",
     height: 200,
+    lightMixValue: 10,
+    mixValue: 10,
+  );
+  static const IllustrationType forgotPassword = IllustrationType(
+    pathName: "assets/illustrations/undraw_forgot_password.svg",
+    height: 140,
+    lightMixValue: 10,
+    mixValue: 10,
+  );
+  static const IllustrationType confidentialLetter = IllustrationType(
+    pathName: "assets/illustrations/undraw_confidential_letter.svg",
+    height: 160,
+    lightMixValue: 10,
+    mixValue: 10,
+  );
+  static const IllustrationType letter = IllustrationType(
+    pathName: "assets/illustrations/undraw_letter.svg",
+    height: 160,
     lightMixValue: 10,
     mixValue: 10,
   );
@@ -50,6 +65,16 @@ class Illustrations {
       );
   static Widget renderTheme(BuildContext context) => SvgAssetImage(
         illustration: darkMode,
+        color: Theme.of(context).colorScheme.primary,
+        isDark: isDark(context),
+      );
+  static Widget renderForgotPassword(BuildContext context) => SvgAssetImage(
+        illustration: forgotPassword,
+        color: Theme.of(context).colorScheme.primary,
+        isDark: isDark(context),
+      );
+  static Widget renderOtp(BuildContext context) => SvgAssetImage(
+        illustration: confidentialLetter,
         color: Theme.of(context).colorScheme.primary,
         isDark: isDark(context),
       );

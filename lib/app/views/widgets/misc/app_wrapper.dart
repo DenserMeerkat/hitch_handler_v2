@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/screens/auth_page.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
-class AppPage extends StatefulWidget {
-  const AppPage({super.key});
+class AppWrapper extends StatelessWidget {
+  final Widget child;
+  const AppWrapper({
+    super.key,
+    required this.child,
+  });
 
-  @override
-  State<AppPage> createState() => _AppPageState();
-}
-
-class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 40,
         backgroundColor: isDark(context) ? kBlack20 : kLBackgroundColor,
         title: Text(
@@ -28,7 +27,7 @@ class _AppPageState extends State<AppPage> {
         ),
         centerTitle: true,
       ),
-      body: const AuthPage(),
+      body: child,
     );
   }
 }

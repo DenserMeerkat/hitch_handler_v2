@@ -17,14 +17,14 @@ class BodyTemplate extends StatefulWidget {
 }
 
 class _BodyTemplateState extends State<BodyTemplate> {
-  bool loading = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          loading ? const LinearProgressIndicator() : Container(height: 4),
+          isLoading ? const LinearProgressIndicator() : Container(height: 4),
           Container(
             constraints: const BoxConstraints(maxWidth: 380),
             padding: EdgeInsets.only(
@@ -44,7 +44,7 @@ class _BodyTemplateState extends State<BodyTemplate> {
                   child: widget.form,
                   onNotification: (notification) {
                     setState(() {
-                      loading = notification.isLoading;
+                      isLoading = notification.isLoading;
                     });
                     return true;
                   },

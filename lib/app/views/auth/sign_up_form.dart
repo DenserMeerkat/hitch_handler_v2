@@ -18,8 +18,6 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  _SignUpFormState();
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -34,16 +32,17 @@ class _SignUpFormState extends State<SignUpForm> {
               controller: widget.rollController,
               type: MultiFields.roll,
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const PasswordField(),
             SizedBox(
-              height: 30.h,
+              height: 10.h,
+            ),
+            PasswordField(
+              controller: widget.dateController,
+            ),
+            SizedBox(
+              height: 20.h,
             ),
             LongFilledButton(
               label: "Let's Get Started",
-              icon: Icons.double_arrow_rounded,
               onPressed: () {},
             ),
           ],

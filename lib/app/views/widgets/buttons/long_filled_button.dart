@@ -6,30 +6,32 @@ class LongFilledButton extends StatelessWidget {
   final Color? foreGroundColor;
   final Color? backgroundColor;
   final Function()? onPressed;
+  final bool enabled;
   const LongFilledButton({
     super.key,
     required this.label,
-    required this.icon,
+    this.icon = Icons.arrow_forward_rounded,
     this.foreGroundColor,
     this.backgroundColor,
     this.onPressed,
+    this.enabled = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      style: FilledButton.styleFrom(
-        foregroundColor: foreGroundColor,
-        backgroundColor: backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: 300,
       ),
-      onPressed: onPressed,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: 380,
+      child: FilledButton(
+        style: FilledButton.styleFrom(
+          foregroundColor: foreGroundColor,
+          backgroundColor: backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
+        onPressed: enabled ? (onPressed) : null,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
