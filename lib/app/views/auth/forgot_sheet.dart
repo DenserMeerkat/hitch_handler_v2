@@ -29,13 +29,6 @@ class ForgotSheet extends StatefulWidget {
 class _ForgotSheetState extends State<ForgotSheet> {
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
-  bool isButtonEnabled = false;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(_updateButtonEnabledState);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +54,6 @@ class _ForgotSheetState extends State<ForgotSheet> {
           ),
           const SizedBox(height: 10),
           LongFilledButton(
-            enabled: isButtonEnabled,
             label: "Send OTP",
             icon: Icons.send_rounded,
             onPressed: () {
@@ -76,11 +68,5 @@ class _ForgotSheetState extends State<ForgotSheet> {
         ],
       ),
     );
-  }
-
-  void _updateButtonEnabledState() {
-    setState(() {
-      isButtonEnabled = widget.controller.text.length > 5;
-    });
   }
 }

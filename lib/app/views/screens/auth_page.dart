@@ -47,35 +47,51 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return AppWrapper(
-      child: Scaffold(
-        backgroundColor: isDark(context) ? kGrey30 : kLBlack10,
-        appBar: AppBar(
-          toolbarHeight: 80,
-          backgroundColor: isDark(context) ? kBlack20 : kLBackgroundColor,
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          flexibleSpace: CustomAppBar(
-            leading: LeadingWidget(
-              onPressed: () => context.go('/'),
+      child: WillPopScope(
+        onWillPop: () {
+          if (current == 0) {
+            context.go('/');
+          } else {
+            _tabController.animateTo(0);
+          }
+          return Future.value(false);
+        },
+        child: Scaffold(
+          backgroundColor: isDark(context) ? kGrey30 : kLBlack10,
+          appBar: AppBar(
+            toolbarHeight: 80,
+            backgroundColor: isDark(context) ? kBlack20 : kLBackgroundColor,
+            automaticallyImplyLeading: false,
+            elevation: 0,
+            flexibleSpace: CustomAppBar(
+              leading: LeadingWidget(
+                onPressed: () {
+                  if (current == 0) {
+                    context.go('/');
+                  } else {
+                    _tabController.animateTo(0);
+                  }
+                },
+              ),
+              title: AuthPageTitle(
+                tabController: _tabController,
+              ),
             ),
-            title: AuthPageTitle(
-              tabController: _tabController,
-            ),
+            bottom: bottomLine(context),
           ),
-          bottom: bottomLine(context),
+          body: TabBarView(
+            controller: _tabController,
+            children: const [
+              Center(
+                child: SignInBody(),
+              ),
+              Center(
+                child: SignUpBody(),
+              )
+            ],
+          ),
+          bottomNavigationBar: AuthBottomBar(tabController: _tabController),
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: const [
-            Center(
-              child: SignInBody(),
-            ),
-            Center(
-              child: SignUpBody(),
-            )
-          ],
-        ),
-        bottomNavigationBar: AuthBottomBar(tabController: _tabController),
       ),
     );
   }

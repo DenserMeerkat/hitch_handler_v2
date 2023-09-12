@@ -13,11 +13,16 @@ class SignInBody extends StatefulWidget {
   State<SignInBody> createState() => _SignInBodyState();
 }
 
-class _SignInBodyState extends State<SignInBody> {
+class _SignInBodyState extends State<SignInBody>
+    with AutomaticKeepAliveClientMixin<SignInBody> {
   final textController = TextEditingController();
   final passController = TextEditingController();
+
+  @override
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BodyTemplate(
       illustration: Illustrations.renderSignIn(context),
       form: SignInForm(

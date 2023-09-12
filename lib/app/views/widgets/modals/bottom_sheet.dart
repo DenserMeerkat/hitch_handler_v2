@@ -43,7 +43,7 @@ class BottomSheetHeader extends StatelessWidget {
             Text(
               title!,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     letterSpacing: 1,
                   ),
             ),

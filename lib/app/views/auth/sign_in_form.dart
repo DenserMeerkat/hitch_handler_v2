@@ -50,6 +50,7 @@ class _SignInFormState extends State<SignInForm> {
                     showForgotSheet(context);
                   },
                   label: "Forgot Password?",
+                  decorationStyle: TextDecorationStyle.dashed,
                 ),
               ],
             ),
@@ -59,7 +60,11 @@ class _SignInFormState extends State<SignInForm> {
             LongFilledButton(
               label: "Log into Account",
               icon: Icons.arrow_forward_rounded,
-              onPressed: () {},
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  debugPrint("Validated");
+                }
+              },
             ),
           ],
         ),
