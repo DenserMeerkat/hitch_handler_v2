@@ -39,9 +39,6 @@ class _SignInFormState extends State<SignInForm> {
               controller: widget.passController,
               validator: lengthValidator,
             ),
-            SizedBox(
-              height: 10.h,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -59,10 +56,9 @@ class _SignInFormState extends State<SignInForm> {
             ),
             LongFilledButton(
               label: "Log into Account",
-              icon: Icons.arrow_forward_rounded,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  debugPrint("Validated");
+                  debugPrint("Sign In Validated");
                 }
               },
             ),

@@ -27,7 +27,7 @@ class AuthBottomBar extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: isDark(context) ? kBlack15 : kLBlack15,
+                    color: isDark(context) ? kBlack15 : kLBlack20,
                     offset: const Offset(0, -2),
                   ),
                 ],
@@ -41,7 +41,9 @@ class AuthBottomBar extends StatelessWidget {
                 borderRadius:
                     const BorderRadius.vertical(bottom: Radius.circular(30)),
                 borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary, width: 3.4),
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 3.4,
+                ),
                 insets: const EdgeInsets.fromLTRB(50.0, 0.0, 52.0, 43.0),
               ),
               tabs: [

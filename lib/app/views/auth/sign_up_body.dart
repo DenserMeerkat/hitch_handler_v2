@@ -13,8 +13,7 @@ class SignUpBody extends StatefulWidget {
   State<SignUpBody> createState() => _SignUpBodyState();
 }
 
-class _SignUpBodyState extends State<SignUpBody>
-    with AutomaticKeepAliveClientMixin<SignUpBody> {
+class _SignUpBodyState extends State<SignUpBody> {
   final rollController = TextEditingController();
   final dateController = TextEditingController();
 
@@ -26,10 +25,7 @@ class _SignUpBodyState extends State<SignUpBody>
   }
 
   @override
-  bool get wantKeepAlive => true;
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return BodyTemplate(
       illustration: Illustrations.renderSignUp(context),
       form: SignUpForm(

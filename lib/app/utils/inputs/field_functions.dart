@@ -31,17 +31,27 @@ Widget multiFieldButton(IconData icon, Function() onTap, Color? color) {
   );
 }
 
+Widget suffixButton(Function() onTap, IconData icon, Color? color) {
+  return IconButton(
+      onPressed: onTap,
+      icon: Icon(
+        icon,
+        color: color,
+        size: 16,
+      ));
+}
+
 Widget obscureButton(bool obscure, Function() onTap, Color? color) {
   return IconButton(
     onPressed: onTap,
     icon: obscure
         ? Icon(
-            Icons.visibility_rounded,
+            Icons.visibility_outlined,
             color: color,
             size: 16,
           )
         : Icon(
-            Icons.visibility_off_rounded,
+            Icons.visibility_off_outlined,
             color: color,
             size: 16,
           ),

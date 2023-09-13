@@ -15,6 +15,10 @@ extension StringExtensions on String {
     return this.length >= length;
   }
 
+  bool isValidLengthRange({low = 8, high = 10}) {
+    return length >= low && length <= high;
+  }
+
   bool isValidPassword() {
     return RegExp(
             r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')

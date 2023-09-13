@@ -6,10 +6,12 @@ import 'custom_field.dart';
 class PasswordField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final String? placeHolder;
   const PasswordField({
     super.key,
     required this.controller,
     this.validator,
+    this.placeHolder = "Password",
   });
 
   @override
@@ -29,7 +31,7 @@ class _PasswordFieldState extends State<PasswordField> {
     return CustomField(
       controller: widget.controller,
       validator: widget.validator ?? passwordValidator,
-      placeHolder: "Password",
+      placeHolder: widget.placeHolder,
       keyboardType: TextInputType.visiblePassword,
       icon: Icons.password_outlined,
       suffixIcon: suffix,

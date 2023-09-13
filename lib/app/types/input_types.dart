@@ -4,20 +4,20 @@ import 'package:hitch_handler_v2/app/utils/inputs/validators.dart';
 class MultiFields {
   static const FieldType email = FieldType(
     placeHolder: "E-mail",
-    suffixIcon: Icons.alternate_email,
+    suffixIcon: Icons.alternate_email_outlined,
     validator: emailValidator,
     keyboardType: TextInputType.emailAddress,
   );
   static const FieldType mobile = FieldType(
     placeHolder: "Phone",
-    suffixIcon: Icons.phone,
+    suffixIcon: Icons.phone_outlined,
     validator: phoneValidator,
     keyboardType: TextInputType.phone,
   );
   static const FieldType roll = FieldType(
     placeHolder: "Roll Number",
-    suffixIcon: Icons.badge,
-    validator: phoneValidator,
+    suffixIcon: Icons.badge_outlined,
+    validator: rollValidator,
     keyboardType: TextInputType.number,
   );
 

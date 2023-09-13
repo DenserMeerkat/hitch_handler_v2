@@ -56,10 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
         leading: LeadingWidget(
           onPressed: () => context.pop(),
         ),
-        bottom: bottomLine(context,
-            color: isDark(context)
-                ? Theme.of(context).colorScheme.outlineVariant
-                : kLBlack20),
+        bottom: bottomLine(context),
         toolbarHeight: kToolbarHeight,
       ),
       body: FutureBuilder<String>(
