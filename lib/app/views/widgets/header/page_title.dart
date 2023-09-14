@@ -10,17 +10,18 @@ class PageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 8, 30, 8).r,
       decoration: BoxDecoration(
-          color: isDark(context)
+          color: isDarkMode
               ? kBackgroundColor
               : Theme.of(context).colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(50),
           boxShadow: [
             BoxShadow(
               offset: const Offset(0, 2),
-              color: isDark(context) ? kBlack10 : kLGrey30,
+              color: isDarkMode ? kBlack10 : kLGrey30,
             )
           ]),
       child: Row(
@@ -29,7 +30,7 @@ class PageTitle extends StatelessWidget {
           Icon(
             icon,
             size: 18,
-            color: isDark(context)
+            color: isDarkMode
                 ? kTextColor
                 : Theme.of(context).colorScheme.onSecondaryContainer,
           ),
@@ -37,7 +38,7 @@ class PageTitle extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: isDark(context)
+              color: isDarkMode
                   ? kTextColor
                   : Theme.of(context).colorScheme.onSecondaryContainer,
               fontSize: 16,

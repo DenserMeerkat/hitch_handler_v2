@@ -18,6 +18,7 @@ class UnderlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     Color? foreGroundColor = enabled
         ? color ?? Theme.of(context).colorScheme.tertiary
         : Theme.of(context).colorScheme.outline;
@@ -34,7 +35,7 @@ class UnderlineButton extends StatelessWidget {
         label,
         style: TextStyle(
           fontSize: 11,
-          fontWeight: isDark(context) ? FontWeight.normal : FontWeight.bold,
+          fontWeight: isDarkMode ? FontWeight.normal : FontWeight.bold,
           letterSpacing: 0.8,
           color: Colors.transparent,
           shadows: [

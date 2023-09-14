@@ -47,6 +47,8 @@ dependencies:
   circular_countdown_timer: ^0.2.3
   pinput: ^3.0.1
   intl: ^0.18.1
+  password_strength: ^0.2.0
+  adaptive_theme: ^3.4.0
 
 dev_dependencies:
   flutter_test:

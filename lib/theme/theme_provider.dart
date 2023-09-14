@@ -1,28 +1,51 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-class ThemeProvider extends ChangeNotifier {
-  late String themeMode;
+class ThemeProvider with ChangeNotifier {
+  static String currentTheme = 'dark';
 
-  ThemeProvider() {
-    _init();
+  static String getThemeMode() => currentTheme;
+
+  ThemeMode get themeMode {
+    if (currentTheme == 'light') {
+      return ThemeMode.light;
+    } else if (currentTheme == 'dark') {
+      return ThemeMode.dark;
+    } else {
+      return ThemeMode.system;
+    }
   }
 
-  Future<void> _init() async {
-    // ignore: unused_local_variable
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    notifyListeners();
-  }
+  static final ThemeData lightTheme = FlexThemeData.light(
+    scheme: FlexScheme.greenM3,
+    surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+    blendLevel: 7,
+    subThemesData: const FlexSubThemesData(
+      blendOnLevel: 10,
+      blendOnColors: false,
+      useTextTheme: true,
+      useM2StyleDividerInM3: true,
+      alignedDropdown: true,
+      useInputDecoratorThemeInDialogs: true,
+    ),
+    visualDensity: FlexColorScheme.comfortablePlatformDensity,
+    useMaterial3: true,
+    swapLegacyOnMaterial3: true,
+  );
 
-  Future<String> get getThemeMode async {
-    final prefs = await SharedPreferences.getInstance();
-    themeMode = prefs.getString('themeMode') ?? 'dark';
-    return themeMode;
-  }
-
-  Future<void> setThemeMode(String theme) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('themeMode', theme).then((value) => null);
-    notifyListeners();
-  }
+  static final ThemeData darkTheme = FlexThemeData.dark(
+    scheme: FlexScheme.greenM3,
+    surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+    blendLevel: 7,
+    subThemesData: const FlexSubThemesData(
+      blendOnLevel: 10,
+      useTextTheme: true,
+      useM2StyleDividerInM3: true,
+      alignedDropdown: true,
+      useInputDecoratorThemeInDialogs: true,
+    ),
+    visualDensity: FlexColorScheme.comfortablePlatformDensity,
+    useMaterial3: true,
+    swapLegacyOnMaterial3: true,
+  );
 }

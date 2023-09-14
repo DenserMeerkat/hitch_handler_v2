@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/utils/inputs/field_functions.dart';
-import 'package:hitch_handler_v2/app/utils/inputs/validators.dart';
+import 'package:hitch_handler_v2/app/utils/input_functions.dart';
+import 'package:hitch_handler_v2/app/utils/input_validators.dart';
 import 'custom_field.dart';
 
 class PasswordField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final String? placeHolder;
+  final bool showErrors;
   const PasswordField({
     super.key,
     required this.controller,
     this.validator,
     this.placeHolder = "Password",
+    this.showErrors = true,
   });
 
   @override
@@ -38,6 +40,7 @@ class _PasswordFieldState extends State<PasswordField> {
       obscureText: obscureText,
       letterSpacing: letterSpacing,
       focusNode: focusNode,
+      showErrors: widget.showErrors,
     );
   }
 

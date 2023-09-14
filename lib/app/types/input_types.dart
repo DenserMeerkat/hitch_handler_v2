@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/utils/inputs/validators.dart';
+import 'package:hitch_handler_v2/app/utils/input_validators.dart';
 
 class MultiFields {
   static const FieldType email = FieldType(

@@ -46,6 +46,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     return AppWrapper(
       child: WillPopScope(
         onWillPop: () {
@@ -57,10 +58,10 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
           return Future.value(false);
         },
         child: Scaffold(
-          backgroundColor: isDark(context) ? kGrey30 : kLBlack10,
+          backgroundColor: isDarkMode ? kGrey30 : kLBlack10,
           appBar: AppBar(
             toolbarHeight: 80,
-            backgroundColor: isDark(context) ? kBlack20 : kLBackgroundColor,
+            backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
             automaticallyImplyLeading: false,
             elevation: 0,
             flexibleSpace: CustomAppBar(

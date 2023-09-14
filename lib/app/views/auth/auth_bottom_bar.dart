@@ -14,11 +14,12 @@ class AuthBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     return BottomAppBar(
       height: 50,
       padding: EdgeInsets.zero,
       child: Container(
-        color: isDark(context) ? kBlack20 : kLBackgroundColor,
+        color: isDarkMode ? kBlack20 : kLBackgroundColor,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -27,7 +28,7 @@ class AuthBottomBar extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: isDark(context) ? kBlack15 : kLBlack20,
+                    color: isDarkMode ? kBlack15 : kLBlack20,
                     offset: const Offset(0, -2),
                   ),
                 ],

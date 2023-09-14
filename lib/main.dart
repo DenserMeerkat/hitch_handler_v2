@@ -3,13 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
 import 'package:hitch_handler_v2/theme/theme_provider.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
-import 'package:provider/provider.dart';
 
 import 'package:hitch_handler_v2/routing/router.dart';
-import 'package:hitch_handler_v2/theme/default.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations(
@@ -18,21 +16,16 @@ void main() {
       DeviceOrientation.portraitDown,
     ],
   );
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
-    ),
-  );
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  runApp(MyApp(savedThemeMode: savedThemeMode));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AdaptiveThemeMode? savedThemeMode;
+  const MyApp({super.key, this.savedThemeMode});
 
   @override
   Widget build(BuildContext context) {
-    late ThemeMode themeMode;
-    final themeProvider = Provider.of<ThemeProvider>(context, listen: true);
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -42,19 +35,21 @@ class MyApp extends StatelessWidget {
           onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
           },
-          child: FutureBuilder<String>(
-            future: themeProvider.getThemeMode,
-            builder: (context, snapshot) {
-              themeMode = getThemeMode(snapshot.data ?? 'dark');
-              return MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                title: appName,
-                theme: lightTheme,
-                darkTheme: darkTheme,
-                themeMode: themeMode,
-                routerConfig: router,
-              );
-            },
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 5000),
+            child: AdaptiveTheme(
+                light: ThemeProvider.lightTheme,
+                dark: ThemeProvider.darkTheme,
+                initial: savedThemeMode ?? AdaptiveThemeMode.dark,
+                builder: (lightTheme, darkTheme) {
+                  return MaterialApp.router(
+                    debugShowCheckedModeBanner: false,
+                    title: appName,
+                    theme: lightTheme,
+                    darkTheme: darkTheme,
+                    routerConfig: router,
+                  );
+                }),
           ),
         );
       },

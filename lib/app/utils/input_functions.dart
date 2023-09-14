@@ -58,6 +58,16 @@ Widget obscureButton(bool obscure, Function() onTap, Color? color) {
   );
 }
 
+Color getStrengthColor(BuildContext context, double strength) {
+  if (strength < 0.3) {
+    return Theme.of(context).colorScheme.error;
+  } else if (strength < 0.6) {
+    return Theme.of(context).colorScheme.tertiary;
+  } else {
+    return Theme.of(context).colorScheme.primary;
+  }
+}
+
 OutlineInputBorder inputBorder(String type, BuildContext context,
     {double? width, double radius = 8, Color? color}) {
   return OutlineInputBorder(

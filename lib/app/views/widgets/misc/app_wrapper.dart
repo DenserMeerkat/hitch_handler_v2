@@ -11,11 +11,12 @@ class AppWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 40,
-        backgroundColor: isDark(context) ? kBlack20 : kLBackgroundColor,
+        backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
         title: Text(
           appName.toUpperCase(),
           style: TextStyle(

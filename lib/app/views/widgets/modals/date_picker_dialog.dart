@@ -5,6 +5,7 @@ import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 Future<DateTime?> showCustomDatePicker(
     BuildContext context, DateTime initialDate) {
+  final bool isDarkMode = isDark(context);
   DateTime now = DateTime.now();
   return showDatePicker(
     context: context,
@@ -17,10 +18,10 @@ Future<DateTime?> showCustomDatePicker(
         child: Theme(
           data: Theme.of(context).copyWith(
             datePickerTheme: DatePickerThemeData(
-              headerBackgroundColor: isDark(context)
+              headerBackgroundColor: isDarkMode
                   ? kBlack20
                   : Theme.of(context).colorScheme.primaryContainer,
-              backgroundColor: isDark(context) ? kGrey30 : null,
+              backgroundColor: isDarkMode ? kGrey30 : null,
               surfaceTintColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),

@@ -14,13 +14,14 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     return FlexibleSpaceBar(
       background: Padding(
         padding: const EdgeInsets.only(top: 5.0),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
-            color: isDark(context) ? kGrey30 : kLBlack10,
+            color: isDarkMode ? kGrey30 : kLBlack10,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
             boxShadow: [
               BoxShadow(

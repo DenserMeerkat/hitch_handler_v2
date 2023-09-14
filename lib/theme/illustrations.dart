@@ -27,7 +27,6 @@ class Illustrations {
     lightMixValue: 10,
     mixValue: 10,
   );
-
   static const IllustrationType darkMode = IllustrationType(
     pathName: "assets/illustrations/undraw_dark_mode.svg",
     height: 200,
@@ -48,6 +47,12 @@ class Illustrations {
   );
   static const IllustrationType letter = IllustrationType(
     pathName: "assets/illustrations/undraw_letter.svg",
+    height: 160,
+    lightMixValue: 10,
+    mixValue: 10,
+  );
+  static const IllustrationType safe = IllustrationType(
+    pathName: "assets/illustrations/undraw_safe.svg",
     height: 160,
     lightMixValue: 10,
     mixValue: 10,
@@ -75,6 +80,11 @@ class Illustrations {
       );
   static Widget renderOtp(BuildContext context) => SvgAssetImage(
         illustration: confidentialLetter,
+        color: Theme.of(context).colorScheme.primary,
+        isDark: isDark(context),
+      );
+  static Widget renderConfirmPass(BuildContext context) => SvgAssetImage(
+        illustration: safe,
         color: Theme.of(context).colorScheme.primary,
         isDark: isDark(context),
       );

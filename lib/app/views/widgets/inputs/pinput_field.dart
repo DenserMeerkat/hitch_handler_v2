@@ -15,6 +15,7 @@ class OtpField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     final defaultPinTheme = PinTheme(
       width: 60.w,
       height: 58.h,
@@ -30,12 +31,12 @@ class OtpField extends StatelessWidget {
       width: 300.w,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: isDark(context) ? kGrey30 : kLBackgroundColor,
+        color: isDarkMode ? kGrey30 : kLBackgroundColor,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             offset: const Offset(2, 2),
-            color: isDark(context) ? kBlack20 : kGrey150,
+            color: isDarkMode ? kBlack20 : kGrey150,
           )
         ],
       ),
@@ -49,7 +50,7 @@ class OtpField extends StatelessWidget {
         separatorBuilder: (index) => Container(
           height: 58.w,
           width: 2.w,
-          color: isDark(context) ? kGrey30 : kLBackgroundColor,
+          color: isDarkMode ? kGrey30 : kLBackgroundColor,
         ),
         focusedPinTheme: defaultPinTheme.copyWith(
             decoration: BoxDecoration(

@@ -17,13 +17,14 @@ class CircularCountDown extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     return CircularCountDownTimer(
       duration: duration,
       initialDuration: 0,
       controller: countDownController,
       width: 30,
       height: 30,
-      ringColor: isDark(context) ? kGrey40 : kLGrey30,
+      ringColor: isDarkMode ? kGrey40 : kLGrey30,
       ringGradient: null,
       fillColor: Theme.of(context).colorScheme.tertiary,
       fillGradient: null,
@@ -33,7 +34,7 @@ class CircularCountDown extends StatelessWidget {
       strokeCap: StrokeCap.round,
       textStyle: TextStyle(
           fontSize: 8.0,
-          color: isDark(context) ? kTextColor : kLTextColor,
+          color: isDarkMode ? kTextColor : kLTextColor,
           fontWeight: FontWeight.bold),
       textFormat: CountdownTextFormat.S,
       isReverse: true,

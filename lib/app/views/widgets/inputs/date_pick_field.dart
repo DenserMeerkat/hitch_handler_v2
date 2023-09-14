@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:hitch_handler_v2/app/utils/inputs/field_functions.dart';
-import 'package:hitch_handler_v2/app/utils/inputs/validators.dart';
+import 'package:hitch_handler_v2/app/utils/input_functions.dart';
+import 'package:hitch_handler_v2/app/utils/input_validators.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/date_picker_dialog.dart';
 import 'custom_field.dart';
 

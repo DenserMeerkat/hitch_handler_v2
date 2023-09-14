@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hitch_handler_v2/app/views/auth/otp_body.dart';
+import 'package:hitch_handler_v2/app/views/auth/confirm_pass_body.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
@@ -9,18 +9,17 @@ import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
-class OtpPage extends StatefulWidget {
-  final String contact;
-  const OtpPage({
+class CreatePasswordPage extends StatefulWidget {
+  const CreatePasswordPage({
     super.key,
-    required this.contact,
   });
 
   @override
-  State<OtpPage> createState() => _OtpPageState();
+  State<CreatePasswordPage> createState() => _CreatePasswordPageState();
 }
 
-class _OtpPageState extends State<OtpPage> with TickerProviderStateMixin {
+class _CreatePasswordPageState extends State<CreatePasswordPage>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   late int current = _tabController.index;
 
@@ -62,15 +61,13 @@ class _OtpPageState extends State<OtpPage> with TickerProviderStateMixin {
               onPressed: () => context.go('/'),
             ),
             title: const PageTitle(
-              title: "Verify",
-              icon: Icons.task_alt_outlined,
+              title: "Password",
+              icon: Icons.key,
             ),
           ),
           bottom: bottomLine(context),
         ),
-        body: OtpBody(
-          contact: widget.contact,
-        ),
+        body: const ConfirmPassBody(),
       ),
     );
   }

@@ -20,17 +20,15 @@ class SystemOverlayWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     SystemUiOverlayStyle mySystemTheme = SystemUiOverlayStyle(
-      systemNavigationBarColor:
-          isDark(context) ? navBarDarkColor : navBarLightColor,
+      systemNavigationBarColor: isDarkMode ? navBarDarkColor : navBarLightColor,
       systemNavigationBarIconBrightness:
-          isDark(context) ? Brightness.light : Brightness.dark,
+          isDarkMode ? Brightness.light : Brightness.dark,
       systemNavigationBarDividerColor: Colors.transparent,
-      statusBarColor:
-          isDark(context) ? statusBarDarkColor : statusBarLightColor,
-      statusBarBrightness: isDark(context) ? Brightness.light : Brightness.dark,
-      statusBarIconBrightness:
-          isDark(context) ? Brightness.light : Brightness.dark,
+      statusBarColor: isDarkMode ? statusBarDarkColor : statusBarLightColor,
+      statusBarBrightness: isDarkMode ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,
     );
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: mySystemTheme,

@@ -11,18 +11,19 @@ class AuthPageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
     return Container(
       constraints: const BoxConstraints(maxWidth: 140, maxHeight: 40),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-          color: isDark(context)
+          color: isDarkMode
               ? kBackgroundColor
               : Theme.of(context).colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(50),
           boxShadow: [
             BoxShadow(
               offset: const Offset(0, 2),
-              color: isDark(context) ? kBlack10 : kLGrey30,
+              color: isDarkMode ? kBlack10 : kLGrey30,
             )
           ]),
       child: TabBarView(
@@ -44,6 +45,7 @@ class AuthPageTitle extends StatelessWidget {
   }
 
   Widget renderTab(BuildContext context, String title, IconData icon) {
+    final bool isDarkMode = isDark(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0),
@@ -53,7 +55,7 @@ class AuthPageTitle extends StatelessWidget {
             Icon(
               icon,
               size: 18,
-              color: isDark(context)
+              color: isDarkMode
                   ? kTextColor
                   : Theme.of(context).colorScheme.onSecondaryContainer,
             ),
@@ -61,7 +63,7 @@ class AuthPageTitle extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: isDark(context)
+                color: isDarkMode
                     ? kTextColor
                     : Theme.of(context).colorScheme.onSecondaryContainer,
                 fontSize: 16,

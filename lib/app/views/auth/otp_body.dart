@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/utils/string_extenstions.dart';
 import 'package:hitch_handler_v2/app/views/auth/otp_countdown.dart';
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';
@@ -65,7 +66,9 @@ class _OtpBodyState extends State<OtpBody> {
                 enabled: isButtonEnabled,
                 label: "Verify OTP",
                 icon: Icons.arrow_forward_rounded,
-                onPressed: () {},
+                onPressed: () {
+                  context.go('/create-pass');
+                },
               ),
             ],
           ),
