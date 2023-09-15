@@ -40,8 +40,8 @@ class _MultiFieldState extends State<MultiField> {
 
   @override
   Widget build(BuildContext context) {
-    suffix =
-        multiFieldButton(_suffixIcon, onTap, Theme.of(context).primaryColor);
+    suffix = multiFieldButton(
+        _suffixIcon, onTap, Theme.of(context).colorScheme.primary);
     return CustomField(
       controller: widget.controller,
       validator: fields[currentIndex].validator,

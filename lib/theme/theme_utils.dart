@@ -1,13 +1,8 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
-String getCurrentTheme(BuildContext context) {
-  return AdaptiveTheme.of(context).mode.toString().split('.')[1];
-}
-
 bool isDark(BuildContext context) {
-  return AdaptiveTheme.of(context).brightness == Brightness.dark;
+  return Theme.of(context).brightness == Brightness.dark;
 }
 
 void setThemeMode(String themeMode, Function()? onSet) async {
@@ -26,6 +21,19 @@ ThemeMode getThemeMode(String themeName) {
       return ThemeMode.dark;
     default:
       return ThemeMode.dark;
+  }
+}
+
+String getThemeModeName(ThemeMode themeName) {
+  switch (themeName) {
+    case ThemeMode.system:
+      return 'system';
+    case ThemeMode.light:
+      return 'light';
+    case ThemeMode.dark:
+      return 'dark';
+    default:
+      return 'dark';
   }
 }
 
