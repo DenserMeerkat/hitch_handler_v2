@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/more_vert.dart';
-import 'package:hitch_handler_v2/theme/constants.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class CustomAppBar extends StatelessWidget {
   final Widget? leading;
@@ -14,14 +12,13 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = isDark(context);
     return FlexibleSpaceBar(
       background: Padding(
         padding: const EdgeInsets.only(top: 5.0),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
-            color: isDarkMode ? kGrey30 : kLBlack10,
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
             boxShadow: [
               BoxShadow(

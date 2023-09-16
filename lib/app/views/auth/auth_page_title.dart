@@ -13,35 +13,30 @@ class AuthPageTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDarkMode = isDark(context);
     return Container(
-      constraints: const BoxConstraints(maxWidth: 140, maxHeight: 40),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(
-          color: isDarkMode
-              ? kBackgroundColor
-              : Theme.of(context).colorScheme.primaryContainer,
-          borderRadius: BorderRadius.circular(50),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(0, 2),
-              color: isDarkMode ? kBlack10 : kLGrey30,
-            )
-          ]),
-      child: TabBarView(
-        controller: tabController,
-        children: [
-          renderTab(
-            context,
-            tabs[0].title,
-            tabs[0].icon,
-          ),
-          renderTab(
-            context,
-            tabs[1].title,
-            tabs[1].icon,
-          )
-        ],
-      ),
-    );
+        constraints: const BoxConstraints(maxWidth: 140, maxHeight: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+            color: isDark(context)
+                ? Theme.of(context).bottomAppBarTheme.color
+                : Theme.of(context).colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(50),
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(0, 2),
+                color: isDarkMode ? kBlack10 : kLGrey30,
+              )
+            ]),
+        child: tabController.index == 0
+            ? renderTab(
+                context,
+                tabs[0].title,
+                tabs[0].icon,
+              )
+            : renderTab(
+                context,
+                tabs[1].title,
+                tabs[1].icon,
+              ));
   }
 
   Widget renderTab(BuildContext context, String title, IconData icon) {

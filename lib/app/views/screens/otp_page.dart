@@ -51,10 +51,10 @@ class _OtpPageState extends State<OtpPage> with TickerProviderStateMixin {
     final bool isDarkMode = isDark(context);
     return AppWrapper(
       child: Scaffold(
-        backgroundColor: isDarkMode ? kGrey30 : kLBlack10,
+        // backgroundColor: isDarkMode ? kGrey30 : kLBlack10,
         appBar: AppBar(
           toolbarHeight: 80,
-          backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
+          // backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
           automaticallyImplyLeading: false,
           elevation: 0,
           flexibleSpace: CustomAppBar(

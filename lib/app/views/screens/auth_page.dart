@@ -8,8 +8,6 @@ import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
-import 'package:hitch_handler_v2/theme/constants.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -46,7 +44,6 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = isDark(context);
     return AppWrapper(
       child: WillPopScope(
         onWillPop: () {
@@ -58,10 +55,8 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
           return Future.value(false);
         },
         child: Scaffold(
-          backgroundColor: isDarkMode ? kGrey30 : kLBlack10,
           appBar: AppBar(
             toolbarHeight: 80,
-            backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
             automaticallyImplyLeading: false,
             elevation: 0,
             flexibleSpace: CustomAppBar(

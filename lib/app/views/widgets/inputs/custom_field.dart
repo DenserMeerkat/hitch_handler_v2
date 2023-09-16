@@ -83,7 +83,7 @@ class _CustomFieldState extends State<CustomField> {
               Stack(
                 alignment: Alignment.topLeft,
                 children: [
-                  AnimatedContainer(
+                  Container(
                     height: 48,
                     decoration: BoxDecoration(
                       color: shadowColor,
@@ -95,8 +95,8 @@ class _CustomFieldState extends State<CustomField> {
                         ),
                       ],
                     ),
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.linear,
+                    // duration: const Duration(milliseconds: 200),
+                    // curve: Curves.easeOutCirc,
                   ),
                   TextFormField(
                     enabled: widget.enabled,

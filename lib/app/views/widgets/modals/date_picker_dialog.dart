@@ -18,10 +18,10 @@ Future<DateTime?> showCustomDatePicker(
         child: Theme(
           data: Theme.of(context).copyWith(
             datePickerTheme: DatePickerThemeData(
-              headerBackgroundColor: isDarkMode
-                  ? kBlack20
-                  : Theme.of(context).colorScheme.primaryContainer,
-              backgroundColor: isDarkMode ? kGrey30 : null,
+              // headerBackgroundColor: isDarkMode
+              //     ? kBlack20
+              //     : Theme.of(context).colorScheme.primaryContainer,
+              // backgroundColor: isDarkMode ? kGrey30 : null,
               surfaceTintColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),

@@ -5,7 +5,6 @@ import 'package:hitch_handler_v2/app/views/screens/create_pass_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/otp_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/theme_settings_page.dart';
 import 'package:hitch_handler_v2/routing/route_wrapper.dart';
-import 'package:hitch_handler_v2/theme/constants.dart';
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
@@ -44,8 +43,6 @@ final GoRouter router = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             final contact = state.pathParameters['contact']!;
             return SystemOverlayWrapper(
-              navBarDarkColor: kGrey30,
-              navBarLightColor: kBlack10,
               child: OtpPage(
                 contact: contact,
               ),
@@ -56,8 +53,6 @@ final GoRouter router = GoRouter(
           path: 'create-pass',
           builder: (BuildContext context, GoRouterState state) {
             return const SystemOverlayWrapper(
-              navBarDarkColor: kGrey30,
-              navBarLightColor: kBlack10,
               child: CreatePasswordPage(),
             );
           },

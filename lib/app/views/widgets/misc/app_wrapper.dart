@@ -16,7 +16,7 @@ class AppWrapper extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 40,
-        backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
+        // backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
         title: Text(
           appName.toUpperCase(),
           style: TextStyle(

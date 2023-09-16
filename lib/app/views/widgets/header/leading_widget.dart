@@ -19,17 +19,15 @@ class LeadingWidget extends StatelessWidget {
       builder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.all(4.0),
-          child: FittedBox(
-            child: IconButton(
-              highlightColor:
-                  Theme.of(context).colorScheme.primary.withOpacity(0.2),
-              icon: iconData == null ? icon : Icon(iconData),
-              onPressed: () {
-                ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                onPressed?.call();
-              },
-              tooltip: tooltip,
-            ),
+          child: IconButton(
+            highlightColor:
+                Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            icon: iconData == null ? icon : Icon(iconData),
+            onPressed: () {
+              ScaffoldMessenger.of(context).removeCurrentSnackBar();
+              onPressed?.call();
+            },
+            tooltip: tooltip,
           ),
         );
       },

@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
@@ -20,16 +21,8 @@ class SystemOverlayWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = isDark(context);
-    SystemUiOverlayStyle mySystemTheme = SystemUiOverlayStyle(
-      systemNavigationBarColor: isDarkMode ? navBarDarkColor : navBarLightColor,
-      systemNavigationBarIconBrightness:
-          isDarkMode ? Brightness.light : Brightness.dark,
-      systemNavigationBarDividerColor: Colors.transparent,
-      statusBarColor: isDarkMode ? statusBarDarkColor : statusBarLightColor,
-      statusBarBrightness: isDarkMode ? Brightness.light : Brightness.dark,
-      statusBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,
-    );
+    SystemUiOverlayStyle mySystemTheme =
+        FlexColorScheme.themedSystemNavigationBar(context, opacity: 0);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: mySystemTheme,
       child: child,

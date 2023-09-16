@@ -16,48 +16,47 @@ class AuthBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDarkMode = isDark(context);
     return BottomAppBar(
+      surfaceTintColor: Theme.of(context).appBarTheme.backgroundColor,
       height: 50,
       padding: EdgeInsets.zero,
-      child: Container(
-        color: isDarkMode ? kBlack20 : kLBackgroundColor,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 2,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: isDarkMode ? kBlack15 : kLBlack20,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
-              ),
-            ),
-            TabBar(
-              controller: _tabController,
-              indicatorWeight: 4,
-              dividerColor: Colors.transparent,
-              indicator: UnderlineTabIndicator(
-                borderRadius:
-                    const BorderRadius.vertical(bottom: Radius.circular(30)),
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 3.4,
-                ),
-                insets: const EdgeInsets.fromLTRB(50.0, 0.0, 52.0, 43.0),
-              ),
-              tabs: [
-                AuthTab(
-                  title: tabs[0].title,
-                ),
-                AuthTab(
-                  title: tabs[1].title,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 2,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: isDarkMode ? kBlack15 : kLBlack20,
+                  offset: const Offset(0, -2),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+          TabBar(
+            controller: _tabController,
+            indicatorWeight: 4,
+            dividerColor: Colors.transparent,
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+            indicator: UnderlineTabIndicator(
+              borderRadius:
+                  const BorderRadius.vertical(bottom: Radius.circular(30)),
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                width: 3.4,
+              ),
+              insets: const EdgeInsets.fromLTRB(50.0, 0.0, 52.0, 43.0),
+            ),
+            tabs: [
+              AuthTab(
+                title: tabs[0].title,
+              ),
+              AuthTab(
+                title: tabs[1].title,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
