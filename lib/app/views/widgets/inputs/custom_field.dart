@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/utils/input_functions.dart';
-import 'package:hitch_handler_v2/theme/constants.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 import 'package:pinput/pinput.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 class CustomField extends StatefulWidget {
   final TextEditingController controller;
@@ -53,7 +53,7 @@ class _CustomFieldState extends State<CustomField> {
   void initState() {
     super.initState();
     widget.controller.addListener(() {
-      if (widget.showErrors) _onChange(0);
+      _onChange(0);
     });
   }
 
@@ -66,8 +66,9 @@ class _CustomFieldState extends State<CustomField> {
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = isDark(context);
-    shadowColor = isDarkMode ? kGrey50 : Colors.white;
-    if (widget.showErrors) _onChange(1);
+    shadowColor =
+        Theme.of(context).inputDecorationTheme.fillColor!.withOpacity(0.6);
+    _onChange(1);
     const hiddenTextStyle = TextStyle(
       fontSize: 0.0,
       height: 0,
@@ -90,13 +91,14 @@ class _CustomFieldState extends State<CustomField> {
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: isDarkMode ? kBlack15 : kLGrey30,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .shadow
+                              .withOpacity(0.2),
                           offset: const Offset(0, 1.2),
                         ),
                       ],
                     ),
-                    // duration: const Duration(milliseconds: 200),
-                    // curve: Curves.easeOutCirc,
                   ),
                   TextFormField(
                     enabled: widget.enabled,
@@ -155,20 +157,24 @@ class _CustomFieldState extends State<CustomField> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? kBlack20
-                            : Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.horizontal(
-                          left: const Radius.circular(8),
-                          right: Radius.circular(1.r),
+                      color: isDarkMode
+                          ? Theme.of(context).colorScheme.onTertiary
+                          : Theme.of(context).colorScheme.primaryContainer,
+                      borderRadius: BorderRadius.horizontal(
+                        left: const Radius.circular(8),
+                        right: Radius.circular(1.r),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .shadow
+                              .withOpacity(0.2),
+                          blurRadius: 1,
+                          offset: const Offset(2, 0),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: isDarkMode ? kBlack10 : kLBlack20,
-                            blurRadius: 1,
-                            offset: const Offset(2, 0),
-                          ),
-                        ]),
+                      ],
+                    ),
                     height: 48,
                     width: 48,
                     child: Center(
@@ -222,14 +228,19 @@ class _CustomFieldState extends State<CustomField> {
     if (string.isEmpty && type == 0) {
       setState(() {
         hasError = false;
-        shadowColor = isDarkMode ? kGrey50 : Colors.white;
+        shadowColor = isDarkMode
+            ? Theme.of(context).inputDecorationTheme.fillColor!.withOpacity(0.6)
+            : Theme.of(context).cardColor;
       });
     } else if (widget.validator?.call(string) == null) {
       setState(() {
         hasError = false;
         shadowColor = isDarkMode
             ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-            : Theme.of(context).colorScheme.primaryContainer;
+            : Theme.of(context)
+                .colorScheme
+                .primaryContainer
+                .mix(Colors.white, 50);
       });
     } else if (!hasError && widget.controller.length > 0) {
       setState(() {
@@ -245,7 +256,9 @@ class _CustomFieldState extends State<CustomField> {
       });
     } else {
       setState(() {
-        shadowColor = isDarkMode ? kGrey50 : Colors.white;
+        shadowColor = isDarkMode
+            ? Theme.of(context).inputDecorationTheme.fillColor!.withOpacity(0.6)
+            : Theme.of(context).cardColor;
       });
     }
   }

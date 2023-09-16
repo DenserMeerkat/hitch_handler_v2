@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class AppWrapper extends StatelessWidget {
   final Widget child;
@@ -11,12 +10,10 @@ class AppWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = isDark(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 40,
-        // backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
         title: Text(
           appName.toUpperCase(),
           style: TextStyle(

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/screens/auth_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/create_pass_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/otp_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/reset_pass_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/theme_settings_page.dart';
 import 'package:hitch_handler_v2/routing/route_wrapper.dart';
 
@@ -50,13 +51,21 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
+          path: 'reset-pass',
+          builder: (BuildContext context, GoRouterState state) {
+            return const SystemOverlayWrapper(
+              child: ResetPasswordPage(),
+            );
+          },
+        ),
+        GoRoute(
           path: 'create-pass',
           builder: (BuildContext context, GoRouterState state) {
             return const SystemOverlayWrapper(
               child: CreatePasswordPage(),
             );
           },
-        )
+        ),
       ],
     ),
   ],

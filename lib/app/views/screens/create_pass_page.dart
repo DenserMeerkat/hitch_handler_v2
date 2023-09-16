@@ -6,8 +6,6 @@ import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/page_title.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
-import 'package:hitch_handler_v2/theme/constants.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class CreatePasswordPage extends StatefulWidget {
   const CreatePasswordPage({
@@ -47,13 +45,10 @@ class _CreatePasswordPageState extends State<CreatePasswordPage>
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = isDark(context);
     return AppWrapper(
       child: Scaffold(
-        // backgroundColor: isDarkMode ? kGrey30 : kLBlack10,
         appBar: AppBar(
           toolbarHeight: 80,
-          // backgroundColor: isDarkMode ? kBlack20 : kLBackgroundColor,
           automaticallyImplyLeading: false,
           elevation: 0,
           flexibleSpace: CustomAppBar(
@@ -67,7 +62,9 @@ class _CreatePasswordPageState extends State<CreatePasswordPage>
           ),
           bottom: bottomLine(context),
         ),
-        body: const ConfirmPassBody(),
+        body: ConfirmPassBody(
+          onPressed: () {},
+        ),
       ),
     );
   }

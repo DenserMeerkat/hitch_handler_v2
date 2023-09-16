@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/types/auth_types.dart';
-import 'package:hitch_handler_v2/theme/constants.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class AuthBottomBar extends StatelessWidget {
   AuthBottomBar({
@@ -14,7 +12,6 @@ class AuthBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = isDark(context);
     return BottomAppBar(
       surfaceTintColor: Theme.of(context).appBarTheme.backgroundColor,
       height: 50,
@@ -23,12 +20,12 @@ class AuthBottomBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: 2,
+            height: 1,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: isDarkMode ? kBlack15 : kLBlack20,
-                  offset: const Offset(0, -2),
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                  offset: const Offset(0, -1),
                 ),
               ],
             ),
@@ -45,7 +42,7 @@ class AuthBottomBar extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
                 width: 3.4,
               ),
-              insets: const EdgeInsets.fromLTRB(50.0, 0.0, 52.0, 43.0),
+              insets: const EdgeInsets.fromLTRB(50.0, 0.0, 52.0, 42.0),
             ),
             tabs: [
               AuthTab(

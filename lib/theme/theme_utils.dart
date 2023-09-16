@@ -1,14 +1,7 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 bool isDark(BuildContext context) {
   return Theme.of(context).brightness == Brightness.dark;
-}
-
-void setThemeMode(String themeMode, Function()? onSet) async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString('themeMode', themeMode);
-  onSet?.call();
 }
 
 ThemeMode getThemeMode(String themeName) {

@@ -36,7 +36,7 @@ class OtpField extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             offset: const Offset(2, 2),
-            color: isDarkMode ? kBlack20 : kGrey150,
+            color: Theme.of(context).canvasColor,
           )
         ],
       ),

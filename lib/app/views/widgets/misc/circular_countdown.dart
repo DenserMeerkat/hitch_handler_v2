@@ -24,7 +24,7 @@ class CircularCountDown extends StatelessWidget {
       controller: countDownController,
       width: 30,
       height: 30,
-      ringColor: isDarkMode ? kGrey40 : kLGrey30,
+      ringColor: Theme.of(context).canvasColor,
       ringGradient: null,
       fillColor: Theme.of(context).colorScheme.tertiary,
       fillGradient: null,

@@ -17,7 +17,7 @@ class AuthPageTitle extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
             color: isDark(context)
-                ? Theme.of(context).bottomAppBarTheme.color
+                ? Theme.of(context).colorScheme.onTertiary.withOpacity(0.8)
                 : Theme.of(context).colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(50),
             boxShadow: [
@@ -51,7 +51,7 @@ class AuthPageTitle extends StatelessWidget {
               icon,
               size: 18,
               color: isDarkMode
-                  ? kTextColor
+                  ? Theme.of(context).colorScheme.tertiary
                   : Theme.of(context).colorScheme.onSecondaryContainer,
             ),
             SizedBox(width: 15.w),
@@ -59,7 +59,7 @@ class AuthPageTitle extends StatelessWidget {
               title,
               style: TextStyle(
                 color: isDarkMode
-                    ? kTextColor
+                    ? Theme.of(context).colorScheme.tertiary
                     : Theme.of(context).colorScheme.onSecondaryContainer,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,

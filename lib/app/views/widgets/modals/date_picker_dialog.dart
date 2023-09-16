@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/theme/constants.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 Future<DateTime?> showCustomDatePicker(
@@ -18,10 +17,9 @@ Future<DateTime?> showCustomDatePicker(
         child: Theme(
           data: Theme.of(context).copyWith(
             datePickerTheme: DatePickerThemeData(
-              // headerBackgroundColor: isDarkMode
-              //     ? kBlack20
-              //     : Theme.of(context).colorScheme.primaryContainer,
-              // backgroundColor: isDarkMode ? kGrey30 : null,
+              headerBackgroundColor: isDarkMode
+                  ? null
+                  : Theme.of(context).colorScheme.primaryContainer,
               surfaceTintColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),

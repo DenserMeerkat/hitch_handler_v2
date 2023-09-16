@@ -34,9 +34,12 @@ class _PasswordValidatorState extends State<PasswordValidator> {
   void updateState() {
     if (!mounted) return;
     setState(() {
-      if (passStrength < 0.6) {
+      if (passStrength < 0.3) {
         stateColor = getStrengthColor(context, passStrength);
         stateText = "Choose a Strong Password";
+      } else if (passStrength < 0.6) {
+        stateColor = getStrengthColor(context, passStrength);
+        stateText = "Choose a Stronger Password";
       } else if (widget.confPassController.text.isNotEmpty &&
           widget.confPassController.text != widget.passController.text) {
         stateColor = Theme.of(context).colorScheme.error;

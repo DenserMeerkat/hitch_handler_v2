@@ -67,7 +67,7 @@ class _OtpBodyState extends State<OtpBody> {
                 label: "Verify OTP",
                 icon: Icons.arrow_forward_rounded,
                 onPressed: () {
-                  context.go('/create-pass');
+                  context.go('/reset-pass');
                 },
               ),
             ],
