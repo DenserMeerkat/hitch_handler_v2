@@ -78,12 +78,8 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
           body: TabBarView(
             controller: _tabController,
             children: const [
-              Center(
-                child: SignInBody(),
-              ),
-              Center(
-                child: SignUpBody(),
-              )
+              SignInBody(),
+              SignUpBody(),
             ],
           ),
           bottomNavigationBar: AuthBottomBar(tabController: _tabController),

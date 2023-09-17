@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 import 'package:hitch_handler_v2/theme/theme_provider.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
 
@@ -129,9 +130,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
               ),
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: 150.w,
+                  maxWidth: 120.w,
                 ),
-                child: const LinearProgressIndicator(),
+                child: const LProgressIndicator(),
               ),
             ],
           ),

@@ -28,6 +28,7 @@ class _SignUpBodyState extends State<SignUpBody> {
   Widget build(BuildContext context) {
     return BodyTemplate(
       illustration: Illustrations.renderSignUp(context),
+      topSpacing: 70,
       form: SignUpForm(
         rollController: rollController,
         dateController: dateController,

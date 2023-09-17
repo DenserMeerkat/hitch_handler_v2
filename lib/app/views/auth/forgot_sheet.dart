@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/types/input_types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
+import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/bottom_sheet.dart';
 import 'package:hitch_handler_v2/theme/illustrations.dart';
 
@@ -44,8 +45,8 @@ class _ForgotSheetState extends State<ForgotSheet> {
             thickness: 2,
             height: 2,
           ),
-          isLoading ? const LinearProgressIndicator() : Container(height: 4),
-          const SizedBox(height: 30),
+          isLoading ? const LProgressIndicator() : Container(height: 3),
+          const SizedBox(height: 20),
           Illustrations.renderForgotPassword(context),
           const SizedBox(height: 20),
           MultiField(
