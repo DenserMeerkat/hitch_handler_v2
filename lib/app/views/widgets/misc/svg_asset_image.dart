@@ -14,16 +14,19 @@ class SvgAssetImage extends StatelessWidget {
     this.errorWidget,
     this.padding,
     this.isDark = true,
+    this.height,
+    this.width,
   }) : super(key: key);
   final IllustrationType illustration;
   final Color color;
   final Alignment alignment;
   final BoxFit fit;
-
   final Widget? placeholder;
   final Widget? errorWidget;
-  final EdgeInsets? padding;
+  final double? padding;
   final bool isDark;
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +35,13 @@ class SvgAssetImage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         if (snapshot.hasData) {
           return Container(
-            padding: padding ?? const EdgeInsets.all(16),
+            padding: padding != null
+                ? EdgeInsets.all(padding!)
+                : const EdgeInsets.all(16),
             child: SvgPicture.string(
               snapshot.data!,
-              height: illustration.height,
-              width: illustration.width,
+              height: height ?? illustration.height,
+              width: width ?? illustration.width,
               alignment: alignment,
               fit: fit,
               semanticsLabel: illustration.semanticLabel,
@@ -45,8 +50,8 @@ class SvgAssetImage extends StatelessWidget {
         } else if (snapshot.hasError) {
           return ConstrainedBox(
             constraints: BoxConstraints.tightFor(
-              height: illustration.height,
-              width: illustration.width,
+              height: height ?? illustration.height,
+              width: width ?? illustration.width,
             ),
             child: Center(
               child: errorWidget ?? const Text('Could not load asset image!'),
@@ -55,8 +60,8 @@ class SvgAssetImage extends StatelessWidget {
         } else {
           return ConstrainedBox(
             constraints: BoxConstraints.tightFor(
-              height: illustration.height,
-              width: illustration.width,
+              height: height ?? illustration.height,
+              width: width ?? illustration.width,
             ),
             child: Center(
               child: placeholder ?? const CircularProgressIndicator(),

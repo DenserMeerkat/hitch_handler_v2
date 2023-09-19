@@ -6,6 +6,7 @@ import 'package:hitch_handler_v2/app/views/template/body_template.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/password_field.dart';
 import 'package:hitch_handler_v2/theme/illustrations.dart';
+import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class ConfirmPassBody extends StatefulWidget {
   final String placeholder1;
@@ -31,7 +32,7 @@ class _ConfirmPassBodyState extends State<ConfirmPassBody> {
   @override
   Widget build(BuildContext context) {
     return BodyTemplate(
-      illustration: Illustrations.renderConfirmPass(context),
+      illustration: Illustrations.renderConfirmPass(context, isDark(context)),
       form: Center(
         child: Form(
           key: _formKey,

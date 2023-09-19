@@ -4,7 +4,7 @@ import 'package:hitch_handler_v2/app/views/screens/auth_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/create_pass_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/otp_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/reset_pass_page.dart';
-import 'package:hitch_handler_v2/app/views/screens/theme_settings_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/settings_page.dart';
 import 'package:hitch_handler_v2/routing/route_wrapper.dart';
 
 final GoRouter router = GoRouter(
@@ -16,7 +16,7 @@ final GoRouter router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'themesettings',
+          path: 'settings',
           pageBuilder: (context, state) {
             return CustomTransitionPage(
               key: state.pageKey,

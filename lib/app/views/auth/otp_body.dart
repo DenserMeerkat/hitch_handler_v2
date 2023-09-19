@@ -7,6 +7,7 @@ import 'package:hitch_handler_v2/app/views/template/body_template.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/pinput_field.dart';
 import 'package:hitch_handler_v2/theme/illustrations.dart';
+import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class OtpBody extends StatefulWidget {
   final String contact;
@@ -41,7 +42,7 @@ class _OtpBodyState extends State<OtpBody> {
   @override
   Widget build(BuildContext context) {
     return BodyTemplate(
-      illustration: Illustrations.renderOtp(context),
+      illustration: Illustrations.renderOtp(context, isDark(context)),
       form: Center(
         child: Form(
           key: _formKey,

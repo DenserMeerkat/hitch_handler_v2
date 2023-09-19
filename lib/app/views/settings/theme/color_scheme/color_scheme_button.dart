@@ -1,14 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/settings/theme/theme_scheme.dart';
+import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 import 'package:hitch_handler_v2/theme/themes.dart';
 
-class ThemeSchemeButton extends StatelessWidget {
+class ColorSchemeButton extends StatelessWidget {
   final FlexScheme flexScheme;
   final Function() onPressed;
   final bool isActive;
-  const ThemeSchemeButton({
+  const ColorSchemeButton({
     super.key,
     required this.flexScheme,
     required this.onPressed,
@@ -19,8 +19,10 @@ class ThemeSchemeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: flexScheme.name,
+      verticalOffset: 38,
+      preferBelow: true,
       child: Container(
-        padding: const EdgeInsets.all(6),
+        padding: const EdgeInsets.only(right: 6),
         child: FilledButton(
           style: FilledButton.styleFrom(
             backgroundColor: isActive
@@ -36,7 +38,7 @@ class ThemeSchemeButton extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              ThemeScheme(flexScheme: flexScheme),
+              ColorSchemePreview(flexScheme: flexScheme),
               isActive ? TickMark(flexScheme: flexScheme) : Container(),
             ],
           ),

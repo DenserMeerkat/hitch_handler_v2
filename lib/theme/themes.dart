@@ -6,7 +6,7 @@ ThemeData getTheme(FlexScheme scheme, bool isDark) {
     return FlexThemeData.dark(
       scheme: scheme,
       surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-      blendLevel: 10,
+      blendLevel: 12,
       subThemesData: const FlexSubThemesData(
         blendOnLevel: 10,
         useTextTheme: true,

@@ -4,8 +4,8 @@ import 'package:hitch_handler_v2/theme/theme_utils.dart';
 import 'package:hitch_handler_v2/theme/themes.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
-class ThemeScheme extends StatelessWidget {
-  const ThemeScheme({
+class ColorSchemePreview extends StatelessWidget {
+  const ColorSchemePreview({
     super.key,
     required this.flexScheme,
   });

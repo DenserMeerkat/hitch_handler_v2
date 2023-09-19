@@ -12,9 +12,9 @@ class _MoreVertState extends State<MoreVert> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () => context.push('/themesettings'),
+      onPressed: () => context.push('/settings'),
       icon: Icon(
-        Icons.more_vert_rounded,
+        Icons.settings_outlined,
         color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
       ),
       tooltip: "Settings",

@@ -39,17 +39,15 @@ class _SignInFormState extends State<SignInForm> {
               controller: widget.passController,
               validator: lengthValidator,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                UnderlineButton(
-                  onPressed: () {
-                    showForgotSheet(context);
-                  },
-                  label: "Forgot Password?",
-                  decorationStyle: TextDecorationStyle.dashed,
-                ),
-              ],
+            Container(
+              alignment: Alignment.centerRight,
+              child: UnderlineButton(
+                onPressed: () {
+                  showForgotSheet(context);
+                },
+                label: "Forgot Password?",
+                decorationStyle: TextDecorationStyle.dashed,
+              ),
             ),
             SizedBox(
               height: 6.h,

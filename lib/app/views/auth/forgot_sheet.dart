@@ -6,6 +6,7 @@ import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/bottom_sheet.dart';
 import 'package:hitch_handler_v2/theme/illustrations.dart';
+import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 void showForgotSheet(BuildContext context) {
   WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
@@ -47,7 +48,7 @@ class _ForgotSheetState extends State<ForgotSheet> {
           ),
           isLoading ? const LProgressIndicator() : Container(height: 3),
           const SizedBox(height: 20),
-          Illustrations.renderForgotPassword(context),
+          Illustrations.renderForgotPassword(context, isDark(context)),
           const SizedBox(height: 20),
           MultiField(
             fields: MultiFields().listWithoutRoll,

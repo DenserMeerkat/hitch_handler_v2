@@ -156,6 +156,9 @@ class _CustomFieldState extends State<CustomField> {
                     ),
                   ),
                   Container(
+                    height: 48,
+                    width: 48,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: isDarkMode
                           ? Theme.of(context).colorScheme.onTertiary
@@ -175,16 +178,13 @@ class _CustomFieldState extends State<CustomField> {
                         ),
                       ],
                     ),
-                    height: 48,
-                    width: 48,
-                    child: Center(
-                        child: Icon(
+                    child: Icon(
                       widget.icon,
                       color: isDarkMode
                           ? Theme.of(context).colorScheme.tertiary
                           : Theme.of(context).colorScheme.onPrimaryContainer,
                       size: 20,
-                    )),
+                    ),
                   )
                 ],
               ),
