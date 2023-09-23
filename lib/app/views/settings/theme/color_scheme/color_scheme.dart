@@ -14,7 +14,7 @@ class ColorSchemePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData schemeTheme = getTheme(flexScheme, isDark(context));
+    final ThemeData schemeTheme = getTheme(flexScheme, isDark(context), 40, 12);
     return Container(
       width: 48,
       height: 48,

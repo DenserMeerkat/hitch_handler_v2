@@ -27,6 +27,8 @@ class ThemeModeSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color borderColor =
+        Theme.of(context).colorScheme.outlineVariant.withOpacity(0.4);
     return Container(
       height: 50,
       clipBehavior: Clip.hardEdge,
@@ -37,7 +39,7 @@ class ThemeModeSwitch extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Theme.of(context).canvasColor.withOpacity(0.3),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outlineVariant,
+          color: borderColor,
           width: 1,
         ),
       ),
@@ -45,13 +47,13 @@ class ThemeModeSwitch extends StatelessWidget {
         children: [
           list[0],
           VerticalDivider(
-            color: Theme.of(context).colorScheme.outlineVariant,
+            color: borderColor,
             thickness: 1,
             width: 1,
           ),
           list[1],
           VerticalDivider(
-            color: Theme.of(context).colorScheme.outlineVariant,
+            color: borderColor,
             thickness: 1,
             width: 1,
           ),

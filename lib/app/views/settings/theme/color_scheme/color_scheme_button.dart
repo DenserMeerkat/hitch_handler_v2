@@ -26,13 +26,19 @@ class ColorSchemeButton extends StatelessWidget {
         child: FilledButton(
           style: FilledButton.styleFrom(
             backgroundColor: isActive
-                ? getTheme(flexScheme, isDark(context))
+                ? getTheme(flexScheme, isDark(context), 40, 12)
                     .colorScheme
                     .surfaceVariant
                 : Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
             padding: const EdgeInsets.all(12),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .outlineVariant
+                      .withOpacity(0.4),
+                )),
           ),
           onPressed: onPressed,
           child: Stack(
@@ -61,14 +67,15 @@ class TickMark extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color:
-            getTheme(flexScheme, isDark(context)).colorScheme.primaryContainer,
+        color: getTheme(flexScheme, isDark(context), 40, 12)
+            .colorScheme
+            .primaryContainer,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Icon(
         Icons.check_rounded,
         size: 20,
-        color: getTheme(flexScheme, isDark(context))
+        color: getTheme(flexScheme, isDark(context), 40, 12)
             .colorScheme
             .onPrimaryContainer,
       ),

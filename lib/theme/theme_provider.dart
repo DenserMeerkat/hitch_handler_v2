@@ -7,15 +7,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ThemeProvider extends ChangeNotifier {
   static const String _selectedColorKey = 'colorScheme';
   static const String _selectedThemeModeKey = 'themeMode';
+  static const String _lightBlendLevelKey = 'lightBlend';
+  static const String _darkBlendLevelKey = 'darkBlend';
   SharedPreferences? prefs;
   late bool _doneLoading;
   late FlexScheme _selectedColorScheme;
   late ThemeMode _selectedThemeMode;
+  late double _lightBlendLevel;
+  late double _darkBlendLevel;
 
   ThemeProvider() {
     _selectedColorScheme = FlexScheme.greenM3;
     _selectedThemeMode = ThemeMode.dark;
     _doneLoading = false;
+    _lightBlendLevel = 40;
+    _darkBlendLevel = 10;
     _loadFromPrefs();
   }
 
@@ -24,6 +30,10 @@ class ThemeProvider extends ChangeNotifier {
   FlexScheme get selectedColorScheme => _selectedColorScheme;
 
   ThemeMode get selectedThemeMode => _selectedThemeMode;
+
+  double get lightBlendLevel => _lightBlendLevel;
+
+  double get darkBlendLevel => _darkBlendLevel;
 
   set doneLoading(bool value) {
     _doneLoading = value;
@@ -40,6 +50,8 @@ class ThemeProvider extends ChangeNotifier {
         getFlexScheme(prefs!.getString(_selectedColorKey) ?? 'greenM3');
     _selectedThemeMode =
         getThemeMode(prefs!.getString(_selectedThemeModeKey) ?? 'dark');
+    _lightBlendLevel = prefs!.getDouble(_lightBlendLevelKey) ?? 40;
+    _darkBlendLevel = prefs!.getDouble(_darkBlendLevelKey) ?? 10;
 
     debugPrint('Loaded theme: ${_selectedColorScheme.name} '
         'and themeMode: $_selectedThemeMode');
@@ -56,10 +68,10 @@ class ThemeProvider extends ChangeNotifier {
   void updateSelectedColorScheme(FlexScheme colorScheme) {
     if (_selectedColorScheme != colorScheme) {
       _selectedColorScheme = colorScheme;
-      _saveColorSchemeToPrefs();
       debugPrint('Loaded theme: ${_selectedColorScheme.name} '
           'and themeMode: $_selectedThemeMode');
       notifyListeners();
+      _saveColorSchemeToPrefs();
     }
   }
 
@@ -72,7 +84,33 @@ class ThemeProvider extends ChangeNotifier {
   void updateSelectedThemeMode(ThemeMode themeMode) {
     if (_selectedThemeMode != themeMode) {
       _selectedThemeMode = themeMode;
+      notifyListeners();
       _saveThemeModeToPrefs();
+    }
+  }
+
+  void _saveLightBlendLevelToPrefs() async {
+    await _initPrefs();
+    prefs!.setDouble(_lightBlendLevelKey, _lightBlendLevel);
+  }
+
+  void updateLightBlendLevel(double blendLevel) {
+    if (_lightBlendLevel != blendLevel) {
+      _lightBlendLevel = blendLevel;
+      notifyListeners();
+      _saveLightBlendLevelToPrefs();
+    }
+  }
+
+  void _saveDarkBlendLevelToPrefs() async {
+    await _initPrefs();
+    prefs!.setDouble(_darkBlendLevelKey, _darkBlendLevel);
+  }
+
+  void updateDarkBlendLevel(double blendLevel) {
+    if (_darkBlendLevel != blendLevel) {
+      _darkBlendLevel = blendLevel;
+      _saveDarkBlendLevelToPrefs();
       notifyListeners();
     }
   }

@@ -1,4 +1,3 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_up_form.dart';
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';

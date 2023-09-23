@@ -1,4 +1,3 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_in_form.dart';
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';
@@ -21,7 +20,9 @@ class _SignInBodyState extends State<SignInBody> {
   @override
   Widget build(BuildContext context) {
     return BodyTemplate(
-      illustration: Illustrations.renderSignIn(context, isDark(context)),
+      topSpacing: 45,
+      illustration:
+          Illustrations.renderSignIn(context, isDark(context), padding: 12),
       form: SignInForm(
         textController: textController,
         passController: passController,

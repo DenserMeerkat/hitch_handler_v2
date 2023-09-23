@@ -6,6 +6,7 @@ showCustomModalBottomSheet(BuildContext context, Widget child,
   showModalBottomSheet(
     context: context,
     isScrollControlled: isScrollControlled,
+    useSafeArea: true,
     builder: (context) {
       return Container(
           color: isDark(context)

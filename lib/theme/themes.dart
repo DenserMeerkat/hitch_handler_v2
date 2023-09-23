@@ -1,12 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-ThemeData getTheme(FlexScheme scheme, bool isDark) {
+ThemeData getTheme(FlexScheme scheme, bool isDark, double lightBlendLevel,
+    double darkBlendLevel) {
   if (isDark) {
     return FlexThemeData.dark(
       scheme: scheme,
       surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-      blendLevel: 12,
+      blendLevel: darkBlendLevel.toInt(),
       subThemesData: const FlexSubThemesData(
         blendOnLevel: 10,
         useTextTheme: true,
@@ -22,7 +23,7 @@ ThemeData getTheme(FlexScheme scheme, bool isDark) {
   return FlexThemeData.light(
     scheme: scheme,
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-    blendLevel: 40,
+    blendLevel: lightBlendLevel.toInt(),
     subThemesData: const FlexSubThemesData(
       blendOnLevel: 10,
       blendOnColors: false,

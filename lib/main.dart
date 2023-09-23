@@ -50,8 +50,10 @@ class MyApp extends StatelessWidget {
                     ? MaterialApp.router(
                         debugShowCheckedModeBanner: false,
                         title: appName,
-                        theme: getTheme(value.selectedColorScheme, false),
-                        darkTheme: getTheme(value.selectedColorScheme, true),
+                        theme: getTheme(value.selectedColorScheme, false,
+                            value.lightBlendLevel, value.darkBlendLevel),
+                        darkTheme: getTheme(value.selectedColorScheme, true,
+                            value.lightBlendLevel, value.darkBlendLevel),
                         themeMode: value.selectedThemeMode,
                         routerConfig: router,
                       )
