@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return AppWrapper(
       showTitle: false,
-      toolbarHeight: 20,
+      toolbarHeight: 16.h,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(

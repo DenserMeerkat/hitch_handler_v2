@@ -5,7 +5,7 @@ import 'package:hitch_handler_v2/app/views/widgets/inputs/password_validator.dar
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/password_field.dart';
-import 'package:hitch_handler_v2/theme/illustrations.dart';
+import 'package:hitch_handler_v2/app/types/illustrations.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class ConfirmPassBody extends StatefulWidget {

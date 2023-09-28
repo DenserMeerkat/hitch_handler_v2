@@ -5,7 +5,7 @@ import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.da
 import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/bottom_sheet.dart';
-import 'package:hitch_handler_v2/theme/illustrations.dart';
+import 'package:hitch_handler_v2/app/types/illustrations.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 void showForgotSheet(BuildContext context) {

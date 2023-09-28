@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/auth/auth_bottom_bar.dart';
+import 'package:hitch_handler_v2/app/views/auth/auth_page_title.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_in_body.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_up_body.dart';
-import 'package:hitch_handler_v2/app/views/auth/auth_page_title.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';

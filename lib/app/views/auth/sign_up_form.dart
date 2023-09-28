@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/types/input_types.dart';
+import 'package:hitch_handler_v2/app/utils/notifiers.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/date_pick_field.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/uni_field.dart';
+import 'package:hitch_handler_v2/data/apis/signup_api.dart';
 
 class SignUpForm extends StatefulWidget {
   final TextEditingController rollController;
@@ -43,9 +45,21 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             LongFilledButton(
               label: "Let's Get Started",
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
+                  final scaffoldContext = ScaffoldMessenger.of(context);
                   debugPrint("Sign Up Validated");
+                  IsLoading(true).dispatch(context);
+                  String res = await getUser(
+                    widget.rollController.text,
+                    widget.dateController.text,
+                  );
+                  if (mounted) IsLoading(false).dispatch(context);
+                  final SnackBar snackBar = SnackBar(
+                    content: Text(res),
+                    behavior: SnackBarBehavior.floating,
+                  );
+                  scaffoldContext.showSnackBar(snackBar);
                 }
               },
             ),

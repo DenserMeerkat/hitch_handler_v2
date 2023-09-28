@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_in_form.dart';
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';
-import 'package:hitch_handler_v2/theme/illustrations.dart';
+import 'package:hitch_handler_v2/app/types/illustrations.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class SignInBody extends StatefulWidget {

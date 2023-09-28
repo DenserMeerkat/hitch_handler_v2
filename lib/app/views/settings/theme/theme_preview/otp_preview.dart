@@ -4,7 +4,7 @@ import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets.
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets.dart/preview_long_button.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets.dart/preview_otp_field.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets.dart/preview_template.dart';
-import 'package:hitch_handler_v2/theme/illustrations.dart';
+import 'package:hitch_handler_v2/app/types/illustrations.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 class OtpPreview extends StatelessWidget {
