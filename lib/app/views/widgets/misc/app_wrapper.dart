@@ -6,6 +6,7 @@ class AppWrapper extends StatelessWidget {
   final Widget child;
   final bool showTitle;
   final double toolbarHeight;
+  final PreferredSizeWidget? appBar;
   final Widget? bottomNavigationBar;
   const AppWrapper({
     super.key,
@@ -13,31 +14,34 @@ class AppWrapper extends StatelessWidget {
     this.showTitle = true,
     this.toolbarHeight = 40,
     this.bottomNavigationBar,
+    this.appBar,
   });
 
   @override
   Widget build(BuildContext context) {
     return SystemOverlayWrapper(
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          toolbarHeight: toolbarHeight,
-          title: showTitle
-              ? Text(
-                  appName.toUpperCase(),
-                  style: TextStyle(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.7),
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
-                  ),
-                )
-              : null,
-          centerTitle: true,
-        ),
+        appBar: appBar ??
+            AppBar(
+              scrolledUnderElevation: 0,
+              automaticallyImplyLeading: false,
+              toolbarHeight: toolbarHeight,
+              title: showTitle
+                  ? Text(
+                      appName.toUpperCase(),
+                      style: TextStyle(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withOpacity(0.7),
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
+                    )
+                  : null,
+              centerTitle: true,
+            ),
         body: child,
         bottomNavigationBar: bottomNavigationBar,
       ),

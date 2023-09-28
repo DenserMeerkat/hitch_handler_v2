@@ -1,41 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/more_vert.dart';
+import 'package:hitch_handler_v2/app/views/screens/home/feed_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/home/profile_page.dart';
 
 class HomeViews {
+  static List<String> homeViewTitles = const [
+    "Home",
+    "Add",
+    "Profile",
+  ];
   static List<Widget> homeViewList = const [
-    CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          automaticallyImplyLeading: false,
-          title: Text("Home"),
-          actions: [MoreVert()],
-        ),
-      ],
-    ),
-    CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          automaticallyImplyLeading: false,
-          title: Text("Search"),
-        ),
-      ],
-    ),
+    FeedPage(),
     SizedBox(),
-    CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          automaticallyImplyLeading: false,
-          title: Text("Bookmarks"),
-        ),
-      ],
-    ),
-    CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          automaticallyImplyLeading: false,
-          title: Text("Profile"),
-        ),
-      ],
-    ),
+    ProfilePage(),
   ];
 }

@@ -20,7 +20,7 @@ class PageTitle extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
           boxShadow: [
             BoxShadow(
-              offset: const Offset(0, 2),
+              offset: const Offset(0, 1),
               color: isDarkMode ? kBlack10 : kLGrey30,
             )
           ]),

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MoreVert extends StatefulWidget {
+class SettingsButton extends StatefulWidget {
   final String settingsPath;
-  const MoreVert({
+  const SettingsButton({
     super.key,
     this.settingsPath = '/settings',
   });
 
   @override
-  State<MoreVert> createState() => _MoreVertState();
+  State<SettingsButton> createState() => _SettingsButtonState();
 }
 
-class _MoreVertState extends State<MoreVert> {
+class _SettingsButtonState extends State<SettingsButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(

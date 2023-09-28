@@ -58,22 +58,23 @@ class _SignInFormState extends State<SignInForm> {
             LongFilledButton(
               label: "Log into Account",
               onPressed: () async {
-                context.go("/home");
-                // if (_formKey.currentState!.validate()) {
-                //   final scaffoldContext = ScaffoldMessenger.of(context);
-                //   debugPrint("Sign In Validated");
-                //   IsLoading(true).dispatch(context);
-                //   String res = await loginUser1(
-                //     widget.textController.text,
-                //     widget.passController.text,
-                //   );
-                //   if (mounted) IsLoading(false).dispatch(context);
-                //   final SnackBar snackBar = SnackBar(
-                //     content: Text(res),
-                //     behavior: SnackBarBehavior.floating,
-                //   );
-                //   scaffoldContext.showSnackBar(snackBar);
-                // }
+                if (mounted) context.go("/home");
+                //if (_formKey.currentState!.validate()) {
+                // final scaffoldContext = ScaffoldMessenger.of(context);
+                // debugPrint("Sign In Validated");
+                // IsLoading(true).dispatch(context);
+                // String res = await loginUser1(
+                //   widget.textController.text,
+                //   widget.passController.text,
+                // );
+                // if (mounted) IsLoading(false).dispatch(context);
+
+                // final SnackBar snackBar = SnackBar(
+                //   content: Text(res),
+                //   behavior: SnackBarBehavior.floating,
+                // );
+                // scaffoldContext.showSnackBar(snackBar);
+                //}
               },
             ),
           ],

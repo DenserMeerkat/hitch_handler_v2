@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hitch_handler_v2/app/views/screens/auth_page.dart';
-import 'package:hitch_handler_v2/app/views/screens/create_pass_page.dart';
-import 'package:hitch_handler_v2/app/views/screens/otp_page.dart';
-import 'package:hitch_handler_v2/app/views/screens/reset_pass_page.dart';
-import 'package:hitch_handler_v2/app/views/screens/settings_page.dart';
-import 'package:hitch_handler_v2/app/views/screens/user_home_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/auth/auth_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/auth/create_pass_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/auth/otp_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/auth/reset_pass_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/common/settings_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/home/user_home_page.dart';
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[

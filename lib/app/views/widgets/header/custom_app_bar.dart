@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/more_vert.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/settings_button.dart';
 
 class CustomAppBar extends StatelessWidget {
   final Widget? leading;
@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [title],
               ),
-              actions ?? const MoreVert(),
+              actions ?? const SettingsButton(),
             ],
           ),
         ),

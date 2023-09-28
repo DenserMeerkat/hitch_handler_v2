@@ -12,7 +12,7 @@ class HomeBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 6.w, right: 6.w, bottom: 6.h),
+      padding: EdgeInsets.only(left: 6.w, right: 6.w),
       decoration: BoxDecoration(
         color: Theme.of(context).appBarTheme.backgroundColor,
         border: Border(
@@ -23,7 +23,7 @@ class HomeBottomBar extends StatelessWidget {
         ),
       ),
       child: NavigationBar(
-        height: 50.h,
+        height: 70,
         surfaceTintColor: Colors.transparent,
         selectedIndex: currentPageIndex,
         onDestinationSelected: onDestinationChange,
@@ -31,29 +31,58 @@ class HomeBottomBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           side: BorderSide(
             color: Theme.of(context).colorScheme.primary,
-            width: 1,
+            width: 0.4,
           ),
         ),
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-        destinations: [
-          const NavigationDestination(
+        destinations: const [
+          NavigationDestination(
             selectedIcon: Icon(Icons.home),
             icon: Icon(Icons.home_outlined),
             label: "Home",
           ),
-          const NavigationDestination(
-            icon: Icon(Icons.search_outlined),
-            label: "Search",
+          // NavigationDestination(
+          //   icon: Icon(Icons.search_outlined),
+          //   label: "Search",
+          // ),
+          AddPostButton(),
+          // NavigationDestination(
+          //   selectedIcon: Icon(Icons.bookmark),
+          //   icon: Icon(Icons.bookmark_outline_outlined),
+          //   label: "Bookmarks",
+          // ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.account_circle),
+            icon: Icon(Icons.account_circle_outlined),
+            label: "Profile",
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2.0),
+        ],
+      ),
+    );
+  }
+}
+
+class AddPostButton extends StatelessWidget {
+  const AddPostButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 65,
+            height: 32,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
                   onTap: () {},
-                  child: Padding(
+                  child: Ink(
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: Icon(
                       Icons.add_circle_outline_outlined,
@@ -67,15 +96,13 @@ class HomeBottomBar extends StatelessWidget {
               ),
             ),
           ),
-          const NavigationDestination(
-            selectedIcon: Icon(Icons.bookmark),
-            icon: Icon(Icons.bookmark_outline_outlined),
-            label: "Bookmarks",
-          ),
-          const NavigationDestination(
-            selectedIcon: Icon(Icons.account_circle),
-            icon: Icon(Icons.account_circle_outlined),
-            label: "Profile",
+          const SizedBox(height: 4),
+          Text(
+            "Add",
+            style: TextStyle(
+              fontSize: 12.sp,
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
+            ),
           ),
         ],
       ),
