@@ -17,7 +17,7 @@ class ThemeProvider extends ChangeNotifier {
   late double _darkBlendLevel;
 
   ThemeProvider() {
-    _selectedColorScheme = FlexScheme.greenM3;
+    _selectedColorScheme = FlexScheme.materialBaseline;
     _selectedThemeMode = ThemeMode.dark;
     _doneLoading = false;
     _lightBlendLevel = 40;
@@ -46,8 +46,8 @@ class ThemeProvider extends ChangeNotifier {
 
   void _loadFromPrefs() async {
     await _initPrefs();
-    _selectedColorScheme =
-        getFlexScheme(prefs!.getString(_selectedColorKey) ?? 'greenM3');
+    _selectedColorScheme = getFlexScheme(
+        prefs!.getString(_selectedColorKey) ?? 'materialBaseline');
     _selectedThemeMode =
         getThemeMode(prefs!.getString(_selectedThemeModeKey) ?? 'dark');
     _lightBlendLevel = prefs!.getDouble(_lightBlendLevelKey) ?? 40;

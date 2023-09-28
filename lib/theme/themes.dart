@@ -39,11 +39,11 @@ ThemeData getTheme(FlexScheme scheme, bool isDark, double lightBlendLevel,
 }
 
 final Map<String, FlexScheme> colorSchemes = {
-  'greenM3': FlexScheme.greenM3,
-  'tealM3': FlexScheme.tealM3,
   'materialBaseline': FlexScheme.materialBaseline,
   'cyanM3': FlexScheme.cyanM3,
   'dellGenoa': FlexScheme.dellGenoa,
+  'tealM3': FlexScheme.tealM3,
+  'greenM3': FlexScheme.greenM3,
   'limeM3': FlexScheme.limeM3,
   'indigoM3': FlexScheme.indigoM3,
   'blue': FlexScheme.blue,

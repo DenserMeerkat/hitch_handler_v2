@@ -33,8 +33,8 @@ class _FeedPageState extends State<FeedPage> {
                   const Spacer(),
                   Container(
                     alignment: Alignment.centerLeft,
-                    width: 94,
-                    height: 36,
+                    width: 90,
+                    height: 34,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: isDarkMode
@@ -70,7 +70,7 @@ class _FeedPageState extends State<FeedPage> {
                                 .inputDecorationTheme
                                 .helperStyle!
                                 .color,
-                            fontSize: 14.sp,
+                            fontSize: 13,
                           ),
                         ),
                       ],
