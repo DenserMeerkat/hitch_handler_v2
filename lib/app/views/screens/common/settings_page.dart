@@ -44,27 +44,23 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           bottom: bottomLine(context),
         ),
-        body: Consumer<ThemeProvider>(
-          builder: (context, value, child) => SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 30.h),
-                const ThemePreview(),
-                SizedBox(height: 35.h),
-                ColorSchemeScroll(
-                  value: value,
-                ),
-                SizedBox(height: 20.h),
-                BlendSlider(
-                  value: value,
-                ),
-                SizedBox(height: 30.h),
-                ThemeModeSwitch(),
-                SizedBox(height: 20.h),
-              ],
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 30.h),
+            const ThemePreview(),
+            SizedBox(height: 35.h),
+            ColorSchemeScroll(
+              value: context.read<ThemeProvider>(),
             ),
-          ),
+            SizedBox(height: 20.h),
+            BlendSlider(
+              value: context.read<ThemeProvider>(),
+            ),
+            SizedBox(height: 30.h),
+            ThemeModeSwitch(),
+            SizedBox(height: 20.h),
+          ],
         ),
       ),
     );

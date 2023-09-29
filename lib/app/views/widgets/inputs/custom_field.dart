@@ -17,9 +17,9 @@ class CustomField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
   final bool? obscureText;
-  final bool readOnly;
   final double? fontSize;
   final double? letterSpacing;
+  final bool readOnly;
   final bool? enabled;
   final bool showErrors;
   const CustomField({

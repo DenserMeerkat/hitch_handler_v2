@@ -27,6 +27,7 @@ class LongFilledButton extends StatelessWidget {
         style: FilledButton.styleFrom(
           foregroundColor: foreGroundColor,
           backgroundColor: backgroundColor,
+          minimumSize: const Size(40, 40),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),

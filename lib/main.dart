@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hitch_handler_v2/app/controllers/filter_controller.dart';
 
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 import 'package:hitch_handler_v2/theme/theme_provider.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FilterController(),
         ),
       ],
       child: ScreenUtilInit(

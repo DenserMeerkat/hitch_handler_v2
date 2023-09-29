@@ -2,11 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 
 showCustomModalBottomSheet(BuildContext context, Widget child,
-    {bool isScrollControlled = true}) {
+    {bool isScrollControlled = true, Color? backgroundColor}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: isScrollControlled,
     useSafeArea: true,
+    builder: (context) {
+      return Container(
+          color:
+              backgroundColor ?? Theme.of(context).appBarTheme.backgroundColor,
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: child);
+    },
+  );
+}
+
+showCustomBottomSheet(BuildContext context, Widget child,
+    {bool isScrollControlled = true}) {
+  showBottomSheet(
+    context: context,
     builder: (context) {
       return Container(
           color: isDark(context)
