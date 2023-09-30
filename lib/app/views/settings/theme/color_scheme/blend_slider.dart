@@ -4,9 +4,13 @@ import 'package:hitch_handler_v2/theme/theme_provider.dart';
 
 class BlendSlider extends StatefulWidget {
   final ThemeProvider value;
+  final bool showColor;
+  final bool showBorder;
   const BlendSlider({
     super.key,
     required this.value,
+    this.showColor = true,
+    this.showBorder = true,
   });
 
   @override
@@ -47,13 +51,18 @@ class _BlendSliderState extends State<BlendSlider> {
         maxWidth: 330.w,
       ),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Theme.of(context).colorScheme.surface,
-          border: Border.all(
-            color:
-                Theme.of(context).colorScheme.outlineVariant.withOpacity(0.4),
-            width: 1,
-          )),
+        borderRadius: BorderRadius.circular(8),
+        color: widget.showColor ? Theme.of(context).colorScheme.surface : null,
+        border: widget.showBorder
+            ? Border.all(
+                color: Theme.of(context)
+                    .colorScheme
+                    .outlineVariant
+                    .withOpacity(0.4),
+                width: 1,
+              )
+            : null,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

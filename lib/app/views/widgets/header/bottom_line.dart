@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-PreferredSize bottomLine(BuildContext context, {Color? color}) {
+PreferredSize bottomLine(BuildContext context,
+    {Color? color, double height = 1}) {
   return PreferredSize(
-    preferredSize: const Size.fromHeight(1.0),
+    preferredSize: Size.fromHeight(height),
     child: Container(
       height: 1,
       color: color ?? (Theme.of(context).colorScheme.outlineVariant),

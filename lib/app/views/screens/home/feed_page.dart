@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/home/feed/chip_scroll_view.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/feed_flex.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/temp_view.dart';
 
 class FeedPage extends StatefulWidget {
@@ -13,20 +13,18 @@ class FeedPage extends StatefulWidget {
 class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
+    return CustomScrollView(
       slivers: [
         SliverAppBar(
+          primary: false,
           automaticallyImplyLeading: false,
           scrolledUnderElevation: 0,
           floating: true,
           pinned: true,
           snap: true,
-          expandedHeight: 90,
+          expandedHeight: 60,
           flexibleSpace: FeedFlex(),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(50),
-            child: ChipsScrollView(),
-          ),
+          bottom: bottomLine(context, height: 16),
         ),
         SliverFillRemaining(
           child: TempView(emptyText: "No Posts"),

@@ -6,7 +6,7 @@ class HomeViews {
   static List<String> homeViewTitles = const [
     "Home",
     "Add",
-    "Profile",
+    "Account",
   ];
   static List<Widget> homeViewList = const [
     FeedPage(),

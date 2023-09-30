@@ -8,6 +8,7 @@ class AppWrapper extends StatelessWidget {
   final double toolbarHeight;
   final PreferredSizeWidget? appBar;
   final Widget? bottomNavigationBar;
+  final Color? backgroundColor;
   const AppWrapper({
     super.key,
     required this.child,
@@ -15,6 +16,7 @@ class AppWrapper extends StatelessWidget {
     this.toolbarHeight = 40,
     this.bottomNavigationBar,
     this.appBar,
+    this.backgroundColor,
   });
 
   @override
@@ -23,6 +25,7 @@ class AppWrapper extends StatelessWidget {
       child: Scaffold(
         appBar: appBar ??
             AppBar(
+              backgroundColor: backgroundColor,
               scrolledUnderElevation: 0,
               automaticallyImplyLeading: false,
               toolbarHeight: toolbarHeight,

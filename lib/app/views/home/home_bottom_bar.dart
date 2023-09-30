@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
 
 class HomeBottomBar extends StatelessWidget {
   final int currentPageIndex;
@@ -31,7 +32,7 @@ class HomeBottomBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           side: BorderSide(
             color: Theme.of(context).colorScheme.primary,
-            width: 0.4,
+            width: 0.1,
           ),
         ),
         destinations: const [
@@ -53,7 +54,7 @@ class HomeBottomBar extends StatelessWidget {
           NavigationDestination(
             selectedIcon: Icon(Icons.account_circle),
             icon: Icon(Icons.account_circle_outlined),
-            label: "Profile",
+            label: "Account",
           ),
         ],
       ),
@@ -76,21 +77,18 @@ class AddPostButton extends StatelessWidget {
           SizedBox(
             width: 65,
             height: 32,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: Material(
-                type: MaterialType.transparency,
-                child: InkWell(
-                  onTap: () {},
-                  child: Ink(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Icon(
-                      Icons.add_circle_outline_outlined,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withOpacity(0.65),
-                    ),
+            child: MaterialClip(
+              borderRadius: 30,
+              child: InkWell(
+                onTap: () {},
+                child: Ink(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Icon(
+                    Icons.add_circle_outline_outlined,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.65),
                   ),
                 ),
               ),

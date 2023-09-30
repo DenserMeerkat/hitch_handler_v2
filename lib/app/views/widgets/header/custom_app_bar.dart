@@ -7,23 +7,38 @@ class CustomAppBar extends StatelessWidget {
   final Widget? leading;
   final Widget title;
   final Widget? actions;
-  const CustomAppBar(
-      {super.key, this.leading, required this.title, this.actions});
+  final Color? backgroundColor;
+  final bool? showLeading;
+  final bool? showActions;
+  final double? thickness;
+  final double? borderRadius;
+  const CustomAppBar({
+    super.key,
+    this.leading,
+    required this.title,
+    this.actions,
+    this.backgroundColor,
+    this.showLeading = true,
+    this.showActions = true,
+    this.thickness = 5,
+    this.borderRadius = 30,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FlexibleSpaceBar(
       background: Padding(
-        padding: const EdgeInsets.only(top: 5.0),
+        padding: EdgeInsets.only(top: thickness!),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+            color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+            borderRadius:
+                BorderRadius.vertical(top: Radius.circular(borderRadius!)),
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).colorScheme.primary,
-                offset: const Offset(0, -5),
+                offset: Offset(0, -thickness!),
               ),
             ],
           ),
@@ -31,16 +46,17 @@ class CustomAppBar extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              leading ??
-                  const LeadingWidget(
-                    onPressed: null,
-                    tooltip: "Exit",
-                  ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [title],
-              ),
-              actions ?? const SettingsButton(),
+              showLeading!
+                  ? leading ??
+                      const LeadingWidget(
+                        onPressed: null,
+                        tooltip: "Exit",
+                      )
+                  : const SizedBox(width: 50),
+              title,
+              showActions!
+                  ? actions ?? const SettingsButton()
+                  : const SizedBox(),
             ],
           ),
         ),

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/controllers/filter_controller.dart';
@@ -168,7 +166,7 @@ class _FilterSheetState extends State<FilterSheet> {
                 ),
                 segments: _sortTypes
                     .map((type) => ButtonSegment<SortEnum>(
-                          value: type.sortType,
+                          value: type.sortEnum,
                           label: type.label,
                           icon: Icon(type.icon),
                         ))

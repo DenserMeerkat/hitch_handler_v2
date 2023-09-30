@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/views/home/feed/filter_sheet.dart';
-import 'package:hitch_handler_v2/app/views/widgets/buttons/tertiary_icon_button.dart';
+import 'package:hitch_handler_v2/app/controllers/filter_controller.dart';
+import 'package:hitch_handler_v2/app/views/home/feed/sort_popup_menu.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
+import 'package:hitch_handler_v2/theme/color_enum.dart';
+import 'package:provider/provider.dart';
 
 class FeedFlex extends StatelessWidget {
   const FeedFlex({
@@ -10,66 +13,23 @@ class FeedFlex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final FilterController filterController = context.watch<FilterController>();
     return FlexibleSpaceBar(
       background: Container(
-        alignment: Alignment.topCenter,
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        alignment: Alignment.bottomCenter,
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 12),
         child: Row(
           children: [
             const Spacer(),
-            Container(
-              alignment: Alignment.centerLeft,
-              width: 90,
-              height: 34,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: isDarkMode
-                    ? Theme.of(context)
-                        .inputDecorationTheme
-                        .fillColor!
-                        .withOpacity(0.6)
-                    : Theme.of(context)
-                        .colorScheme
-                        .primaryContainer
-                        .withOpacity(0.4),
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.outline,
-                  width: 0.4,
-                ),
-              ),
-              child: Row(
-                children: [
-                  const SizedBox(width: 10),
-                  Icon(
-                    Icons.search,
-                    size: 18,
-                    color: Theme.of(context)
-                        .inputDecorationTheme
-                        .helperStyle!
-                        .color,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    "Search",
-                    style: TextStyle(
-                      color: Theme.of(context)
-                          .inputDecorationTheme
-                          .helperStyle!
-                          .color,
-                      fontSize: 13,
-                    ),
-                  ),
-                ],
-              ),
+            ColorIconButton(
+              tooltip: "Search",
+              icon: Icons.search,
+              onTap: () {},
+              color: ColorEnum.secondary,
             ),
             const SizedBox(width: 10),
-            TertiaryIconButton(
-              tooltip: "Filter",
-              icon: Icons.tune_outlined,
-              onTap: () {
-                showFilterSheet(context);
-              },
+            SortPopupMenu(
+              filterController: filterController,
             ),
           ],
         ),

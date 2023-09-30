@@ -6,9 +6,21 @@ import 'package:hitch_handler_v2/theme/themes.dart';
 
 class ColorSchemeScroll extends StatelessWidget {
   final ThemeProvider value;
+  final double size;
+  final double horizontalPadding;
+  final double rightMargin;
+  final double tooltipVerticalOffset;
+  final double padding;
+  final double borderRadius;
   const ColorSchemeScroll({
     super.key,
     required this.value,
+    this.size = 50,
+    this.horizontalPadding = 15,
+    this.rightMargin = 6,
+    this.tooltipVerticalOffset = 38,
+    this.padding = 12,
+    this.borderRadius = 12,
   });
 
   @override
@@ -19,7 +31,7 @@ class ColorSchemeScroll extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            width: 15.w,
+            width: horizontalPadding.w,
           ),
           ...colorSchemes.entries.map((entry) {
             final schemeName = entry.key;
@@ -32,10 +44,15 @@ class ColorSchemeScroll extends StatelessWidget {
               onPressed: () {
                 value.updateSelectedColorScheme(flexScheme);
               },
+              rightMargin: rightMargin,
+              tooltipVerticalOffset: tooltipVerticalOffset,
+              size: size,
+              padding: padding,
+              borderRadius: borderRadius,
             );
           }).toList(),
           SizedBox(
-            width: 15.w - 6,
+            width: horizontalPadding.w - rightMargin,
           ),
         ],
       ),

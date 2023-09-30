@@ -33,6 +33,7 @@ class _ProfilePageState extends State<ProfilePage>
     return CustomScrollView(
       slivers: [
         SliverAppBar(
+          primary: false,
           scrolledUnderElevation: 0,
           automaticallyImplyLeading: false,
           flexibleSpace: ProfileFlex(),

@@ -8,10 +8,20 @@ class ColorSchemeButton extends StatelessWidget {
   final FlexScheme flexScheme;
   final Function() onPressed;
   final bool isActive;
+  final double rightMargin;
+  final double tooltipVerticalOffset;
+  final double size;
+  final double padding;
+  final double borderRadius;
   const ColorSchemeButton({
     super.key,
     required this.flexScheme,
     required this.onPressed,
+    required this.rightMargin,
+    required this.tooltipVerticalOffset,
+    required this.size,
+    required this.padding,
+    required this.borderRadius,
     this.isActive = false,
   });
 
@@ -19,10 +29,10 @@ class ColorSchemeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tooltip(
       message: flexScheme.name,
-      verticalOffset: 38,
+      verticalOffset: tooltipVerticalOffset,
       preferBelow: true,
       child: Container(
-        padding: const EdgeInsets.only(right: 6),
+        padding: EdgeInsets.only(right: rightMargin),
         child: FilledButton(
           style: FilledButton.styleFrom(
             backgroundColor: isActive
@@ -30,22 +40,31 @@ class ColorSchemeButton extends StatelessWidget {
                     .colorScheme
                     .surfaceVariant
                 : Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(padding),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .outlineVariant
-                      .withOpacity(0.4),
-                )),
+              borderRadius: BorderRadius.circular(borderRadius),
+              side: BorderSide(
+                color: Theme.of(context)
+                    .colorScheme
+                    .outlineVariant
+                    .withOpacity(0.4),
+              ),
+            ),
           ),
           onPressed: onPressed,
           child: Stack(
             alignment: Alignment.center,
             children: [
-              ColorSchemePreview(flexScheme: flexScheme),
-              isActive ? TickMark(flexScheme: flexScheme) : Container(),
+              ColorSchemePreview(
+                flexScheme: flexScheme,
+                size: size,
+              ),
+              isActive
+                  ? TickMark(
+                      flexScheme: flexScheme,
+                      size: size,
+                    )
+                  : Container(),
             ],
           ),
         ),
@@ -55,9 +74,11 @@ class ColorSchemeButton extends StatelessWidget {
 }
 
 class TickMark extends StatelessWidget {
+  final double size;
   const TickMark({
     super.key,
     required this.flexScheme,
+    required this.size,
   });
 
   final FlexScheme flexScheme;
@@ -74,7 +95,7 @@ class TickMark extends StatelessWidget {
       ),
       child: Icon(
         Icons.check_rounded,
-        size: 20,
+        size: size * 0.4,
         color: getTheme(flexScheme, isDark(context), 40, 12)
             .colorScheme
             .onPrimaryContainer,
