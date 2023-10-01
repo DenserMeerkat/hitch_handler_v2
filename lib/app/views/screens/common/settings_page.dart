@@ -8,7 +8,7 @@ import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/theme_pr
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
 import 'package:hitch_handler_v2/theme/theme_provider.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -38,7 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           leading: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: LeadingWidget(
+            child: AppbarIconButton(
               onPressed: () => context.pop(),
             ),
           ),

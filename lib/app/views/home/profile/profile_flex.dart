@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
 
 class ProfileFlex extends StatelessWidget {
@@ -80,9 +81,11 @@ class ProfileFlex extends StatelessWidget {
                 ),
                 const Spacer(),
                 ColorIconButton(
-                  tooltip: "Account actions",
-                  onTap: () {},
-                  icon: Icons.manage_accounts_outlined,
+                  tooltip: "Logout",
+                  onTap: () {
+                    context.go("/");
+                  },
+                  icon: Icons.logout_outlined,
                 ),
               ],
             ),

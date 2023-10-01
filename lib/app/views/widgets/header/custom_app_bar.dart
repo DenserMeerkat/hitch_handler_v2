@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/settings_button.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -48,7 +48,7 @@ class CustomAppBar extends StatelessWidget {
             children: [
               showLeading!
                   ? leading ??
-                      const LeadingWidget(
+                      const AppbarIconButton(
                         onPressed: null,
                         tooltip: "Exit",
                       )

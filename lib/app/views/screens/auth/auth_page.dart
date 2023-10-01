@@ -6,7 +6,7 @@ import 'package:hitch_handler_v2/app/views/auth/sign_in_body.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_up_body.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
 
 class AuthPage extends StatefulWidget {
@@ -48,7 +48,6 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
       child: WillPopScope(
         onWillPop: () {
           if (current == 0) {
-            context.go('/');
           } else {
             _tabController.animateTo(0);
           }
@@ -60,7 +59,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
             automaticallyImplyLeading: false,
             elevation: 0,
             flexibleSpace: CustomAppBar(
-              leading: LeadingWidget(
+              leading: AppbarIconButton(
                 onPressed: () {
                   if (current == 0) {
                     context.go('/');

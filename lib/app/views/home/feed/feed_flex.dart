@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/controllers/filter_controller.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/sort_popup_menu.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
@@ -24,7 +25,9 @@ class FeedFlex extends StatelessWidget {
             ColorIconButton(
               tooltip: "Search",
               icon: Icons.search,
-              onTap: () {},
+              onTap: () {
+                context.go("/home/search");
+              },
               color: ColorEnum.secondary,
             ),
             const SizedBox(width: 10),

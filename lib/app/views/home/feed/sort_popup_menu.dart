@@ -4,7 +4,7 @@ import 'package:hitch_handler_v2/app/types/sort_types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
-class SortPopupMenu extends StatelessWidget {
+class SortPopupMenu extends StatefulWidget {
   final FilterController filterController;
   const SortPopupMenu({
     super.key,
@@ -12,10 +12,34 @@ class SortPopupMenu extends StatelessWidget {
   });
 
   @override
+  State<SortPopupMenu> createState() => _SortPopupMenuState();
+}
+
+class _SortPopupMenuState extends State<SortPopupMenu>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final List<SortType> sortList = sortTypes;
-    SortType sortType = getSortType(filterController.filterSort);
+    SortType sortType = getSortType(widget.filterController.filterSort);
+
     return MaterialClip(
       child: PopupMenuButton(
         offset: const Offset(0, 16),
@@ -33,10 +57,22 @@ class SortPopupMenu extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         splashRadius: 8,
+        onSelected: (value) {
+          _controller.reverse(from: 0.5);
+          if (widget.filterController.filterSort != value) {
+            widget.filterController.setFilterSort(value);
+          }
+        },
+        onCanceled: () {
+          _controller.reverse(from: 0.5);
+        },
+        onOpened: () {
+          _controller.forward(from: 0.5);
+        },
         itemBuilder: (context) => <PopupMenuEntry>[
-          buildPopupMenuItem(context, filterController, sortList[0]),
+          buildPopupMenuItem(context, widget.filterController, sortList[0]),
           buildPopupMenuItemDivider(context),
-          buildPopupMenuItem(context, filterController, sortList[1]),
+          buildPopupMenuItem(context, widget.filterController, sortList[1]),
         ],
         child: Container(
           decoration: BoxDecoration(
@@ -62,10 +98,13 @@ class SortPopupMenu extends StatelessWidget {
                 width: 1,
                 color: Theme.of(context).dividerColor,
               ),
-              Icon(
-                Icons.arrow_drop_down,
-                size: 20,
-                color: Theme.of(context).colorScheme.onSurface,
+              RotationTransition(
+                turns: Tween(begin: 0.0, end: 0.5).animate(_controller),
+                child: Icon(
+                  Icons.arrow_drop_down,
+                  size: 20,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
             ],
           ),

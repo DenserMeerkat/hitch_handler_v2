@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/views/home/home_bottom_bar.dart';
 import 'package:hitch_handler_v2/app/views/home/home_views.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/slider_page.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/app_leading_widget.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -41,23 +42,10 @@ class _HomePageState extends State<HomePage> {
             scrolledUnderElevation: 0,
             centerTitle: true,
             elevation: 0,
-            leading: LeadingWidget(
-              icon: Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.4),
-                ),
-                child: const Text(
-                  "HH",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
+            leading: const AppLeadingWidget(),
             actions: [
-              LeadingWidget(
+              AppbarIconButton(
+                tooltip: "Toggle Sidebar",
                 icon: Icon(
                   Symbols.side_navigation_rounded,
                   size: 20,
@@ -73,7 +61,7 @@ class _HomePageState extends State<HomePage> {
               viewTitles[currentPageIndex],
               style: TextStyle(
                 fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 letterSpacing: 0.8,
                 color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
               ),

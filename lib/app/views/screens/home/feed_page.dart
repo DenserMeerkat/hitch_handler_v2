@@ -23,10 +23,10 @@ class _FeedPageState extends State<FeedPage> {
           pinned: true,
           snap: true,
           expandedHeight: 60,
-          flexibleSpace: FeedFlex(),
+          flexibleSpace: const FeedFlex(),
           bottom: bottomLine(context, height: 16),
         ),
-        SliverFillRemaining(
+        const SliverFillRemaining(
           child: TempView(emptyText: "No Posts"),
         )
       ],

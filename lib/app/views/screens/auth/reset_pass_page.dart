@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/auth/confirm_pass_body.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/leading_widget.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/page_title.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
 
@@ -52,7 +52,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage>
           automaticallyImplyLeading: false,
           elevation: 0,
           flexibleSpace: CustomAppBar(
-            leading: LeadingWidget(
+            leading: AppbarIconButton(
               onPressed: () => context.go('/'),
             ),
             title: const PageTitle(
