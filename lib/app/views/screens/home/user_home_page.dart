@@ -32,62 +32,73 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SystemOverlayWrapper(
-      child: Scaffold(
-        body: SliderDrawer(
-          key: _sliderDrawerKey,
-          slideDirection: SlideDirection.RIGHT_TO_LEFT,
-          appBar: AppBar(
-            primary: true,
-            scrolledUnderElevation: 0,
-            centerTitle: true,
-            elevation: 0,
-            leading: const AppLeadingWidget(),
-            actions: [
-              AppbarIconButton(
-                tooltip: "Toggle Sidebar",
-                icon: Icon(
-                  Symbols.side_navigation_rounded,
-                  size: 20,
+    return WillPopScope(
+      onWillPop: () async {
+        if (_sliderDrawerKey.currentState!.isDrawerOpen) {
+          _sliderDrawerKey.currentState!.closeSlider();
+        }
+        return false;
+      },
+      child: SystemOverlayWrapper(
+        child: Scaffold(
+          body: SliderDrawer(
+            key: _sliderDrawerKey,
+            slideDirection: SlideDirection.RIGHT_TO_LEFT,
+            appBar: AppBar(
+              primary: true,
+              scrolledUnderElevation: 0,
+              centerTitle: true,
+              elevation: 0,
+              leading: const AppLeadingWidget(),
+              actions: [
+                AppbarIconButton(
+                  tooltip: "Toggle Sidebar",
+                  icon: Icon(
+                    Symbols.side_navigation_rounded,
+                    size: 20,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.8),
+                  ),
+                  onPressed: () {
+                    _sliderDrawerKey.currentState!.toggle();
+                  },
+                )
+              ],
+              title: Text(
+                viewTitles[currentPageIndex],
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.8,
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
                 ),
-                onPressed: () {
-                  _sliderDrawerKey.currentState!.toggle();
-                },
-              )
-            ],
-            title: Text(
-              viewTitles[currentPageIndex],
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.8,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
               ),
             ),
-          ),
-          sliderOpenSize: 300.w,
-          slider: SliderPage(sliderDrawerKey: _sliderDrawerKey),
-          animationDuration: 300,
-          child: GestureDetector(
-            onTap: () {
-              if (_sliderDrawerKey.currentState!.isDrawerOpen) {
-                _sliderDrawerKey.currentState!.closeSlider();
-              }
-            },
-            onHorizontalDragEnd: (dragDetail) {
-              if (dragDetail.velocity.pixelsPerSecond.dx < 1) {
-                _sliderDrawerKey.currentState?.openSlider();
-              } else {
-                _sliderDrawerKey.currentState?.closeSlider();
-              }
-            },
-            child: Scaffold(
-              body: viewList[currentPageIndex],
-              bottomNavigationBar: HomeBottomBar(
-                currentPageIndex: currentPageIndex,
-                onDestinationChange: onDestinationChange,
+            sliderOpenSize: 300.w,
+            slider: SliderPage(sliderDrawerKey: _sliderDrawerKey),
+            animationDuration: 300,
+            child: GestureDetector(
+              onTap: () {
+                if (_sliderDrawerKey.currentState!.isDrawerOpen) {
+                  _sliderDrawerKey.currentState!.closeSlider();
+                }
+              },
+              onHorizontalDragEnd: (dragDetail) {
+                if (dragDetail.velocity.pixelsPerSecond.dx < 1) {
+                  _sliderDrawerKey.currentState?.openSlider();
+                } else {
+                  _sliderDrawerKey.currentState?.closeSlider();
+                }
+              },
+              child: Scaffold(
+                body: viewList[currentPageIndex],
+                bottomNavigationBar: HomeBottomBar(
+                  currentPageIndex: currentPageIndex,
+                  onDestinationChange: onDestinationChange,
+                ),
               ),
             ),
           ),
