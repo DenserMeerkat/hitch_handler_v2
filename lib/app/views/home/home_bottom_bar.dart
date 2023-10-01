@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeBottomBar extends StatelessWidget {
   final int currentPageIndex;
@@ -70,27 +70,27 @@ class AddPostButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        context.go("/home/add");
+        debugPrint("Gesture Detector");
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             width: 65,
             height: 32,
-            child: MaterialClip(
-              borderRadius: 30,
-              child: InkWell(
-                onTap: () {},
-                child: Ink(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Icon(
-                    Icons.add_circle_outline_outlined,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withOpacity(0.65),
-                  ),
-                ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(30),
+              onTap: () {
+                context.go("/home/add");
+                debugPrint("Ink Well");
+              },
+              child: Icon(
+                Icons.add_circle_outline_outlined,
+                color:
+                    Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
               ),
             ),
           ),

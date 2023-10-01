@@ -6,6 +6,7 @@ import 'package:hitch_handler_v2/app/views/screens/auth/otp_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/auth/reset_pass_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/search_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/settings_page.dart';
+import 'package:hitch_handler_v2/app/views/screens/home/add_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/home/user_home_page.dart';
 
 final GoRouter router = GoRouter(
@@ -62,23 +63,51 @@ final GoRouter router = GoRouter(
       ],
     ),
     GoRoute(
-        path: '/home',
-        builder: (BuildContext context, GoRouterState state) {
-          return const HomePage();
-        },
-        routes: [
-          GoRoute(
-            path: 'search',
-            pageBuilder: (context, state) {
-              return NoTransitionPage(
-                key: state.pageKey,
-                child: const SearchPage(),
-              );
-            },
-            builder: (BuildContext context, GoRouterState state) {
-              return const SearchPage();
-            },
-          ),
-        ]),
+      path: '/home',
+      builder: (BuildContext context, GoRouterState state) {
+        return const HomePage();
+      },
+      routes: [
+        GoRoute(
+          path: 'search',
+          pageBuilder: (context, state) {
+            return NoTransitionPage(
+              key: state.pageKey,
+              child: const SearchPage(),
+            );
+          },
+          builder: (BuildContext context, GoRouterState state) {
+            return const SearchPage();
+          },
+        ),
+        GoRoute(
+          path: 'add',
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const AddPage(),
+              fullscreenDialog: true,
+              transitionDuration: const Duration(milliseconds: 500),
+              reverseTransitionDuration: const Duration(milliseconds: 300),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return SlideTransition(
+                  position: animation.drive(
+                    Tween<Offset>(
+                      begin: const Offset(0, 1),
+                      end: Offset.zero,
+                    ).chain(CurveTween(curve: Curves.easeInOut)),
+                  ),
+                  child: child,
+                );
+              },
+            );
+          },
+          builder: (BuildContext context, GoRouterState state) {
+            return const AddPage();
+          },
+        ),
+      ],
+    ),
   ],
 );

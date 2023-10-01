@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/views/home/feed/feed_flex.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+class AddPage extends StatefulWidget {
+  const AddPage({super.key});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<AddPage> createState() => _AddPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     return AppWrapper(
@@ -21,7 +20,7 @@ class _SearchPageState extends State<SearchPage> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          "Search",
+          "Add Post",
           style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.w500,
@@ -40,26 +39,10 @@ class _SearchPageState extends State<SearchPage> {
             Navigator.of(context).pop();
           },
         ),
+        bottom: bottomLine(context, height: 10),
       ),
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            primary: false,
-            automaticallyImplyLeading: false,
-            scrolledUnderElevation: 0,
-            floating: true,
-            pinned: true,
-            snap: true,
-            expandedHeight: 60,
-            flexibleSpace: const FeedFlex(),
-            bottom: bottomLine(context, height: 16),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 690.h,
-            ),
-          )
-        ],
+      child: Container(
+        height: 690.h,
       ),
     );
   }

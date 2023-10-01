@@ -9,9 +9,11 @@ import 'package:hitch_handler_v2/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SliderPage extends StatelessWidget {
+  final Function(bool)? onDrawerToggle;
   const SliderPage({
     super.key,
     required GlobalKey<SliderDrawerState> sliderDrawerKey,
+    this.onDrawerToggle,
   }) : _sliderDrawerKey = sliderDrawerKey;
 
   final GlobalKey<SliderDrawerState> _sliderDrawerKey;
@@ -28,8 +30,10 @@ class SliderPage extends StatelessWidget {
         onHorizontalDragEnd: (dragDetail) {
           if (dragDetail.velocity.pixelsPerSecond.dx < 1) {
             _sliderDrawerKey.currentState?.openSlider();
+            onDrawerToggle?.call(true);
           } else {
             _sliderDrawerKey.currentState?.closeSlider();
+            onDrawerToggle?.call(false);
           }
         },
         child: Container(
@@ -59,8 +63,10 @@ class SliderPage extends StatelessWidget {
                 ),
                 actions: [
                   IconButton(
+                    tooltip: "Close",
                     onPressed: () {
                       _sliderDrawerKey.currentState!.closeSlider();
+                      onDrawerToggle?.call(false);
                     },
                     icon: const Icon(
                       Icons.close_rounded,

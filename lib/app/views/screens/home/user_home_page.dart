@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<SliderDrawerState> _sliderDrawerKey =
       GlobalKey<SliderDrawerState>();
   int currentPageIndex = 0;
+  bool isDrawerOpen = false;
 
   final viewList = HomeViews.homeViewList;
   final viewTitles = HomeViews.homeViewTitles;
@@ -30,12 +31,19 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void onDrawerToggle(bool value) {
+    setState(() {
+      isDrawerOpen = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         if (_sliderDrawerKey.currentState!.isDrawerOpen) {
           _sliderDrawerKey.currentState!.closeSlider();
+          onDrawerToggle(false);
         }
         return false;
       },
@@ -62,7 +70,13 @@ class _HomePageState extends State<HomePage> {
                         .withOpacity(0.8),
                   ),
                   onPressed: () {
-                    _sliderDrawerKey.currentState!.toggle();
+                    if (_sliderDrawerKey.currentState!.isDrawerOpen) {
+                      _sliderDrawerKey.currentState!.closeSlider();
+                      onDrawerToggle(false);
+                    } else {
+                      _sliderDrawerKey.currentState!.openSlider();
+                      onDrawerToggle(true);
+                    }
                   },
                 )
               ],
@@ -78,26 +92,38 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             sliderOpenSize: 300.w,
-            slider: SliderPage(sliderDrawerKey: _sliderDrawerKey),
+            slider: SliderPage(
+              sliderDrawerKey: _sliderDrawerKey,
+              onDrawerToggle: onDrawerToggle,
+            ),
             animationDuration: 300,
             child: GestureDetector(
+              behavior: isDrawerOpen
+                  ? HitTestBehavior.opaque
+                  : HitTestBehavior.translucent,
               onTap: () {
                 if (_sliderDrawerKey.currentState!.isDrawerOpen) {
                   _sliderDrawerKey.currentState!.closeSlider();
+                  onDrawerToggle(false);
                 }
               },
               onHorizontalDragEnd: (dragDetail) {
                 if (dragDetail.velocity.pixelsPerSecond.dx < 1) {
                   _sliderDrawerKey.currentState?.openSlider();
+                  onDrawerToggle(true);
                 } else {
                   _sliderDrawerKey.currentState?.closeSlider();
+                  onDrawerToggle(false);
                 }
               },
-              child: Scaffold(
-                body: viewList[currentPageIndex],
-                bottomNavigationBar: HomeBottomBar(
-                  currentPageIndex: currentPageIndex,
-                  onDestinationChange: onDestinationChange,
+              child: AbsorbPointer(
+                absorbing: isDrawerOpen,
+                child: Scaffold(
+                  body: viewList[currentPageIndex],
+                  bottomNavigationBar: HomeBottomBar(
+                    currentPageIndex: currentPageIndex,
+                    onDestinationChange: onDestinationChange,
+                  ),
                 ),
               ),
             ),
