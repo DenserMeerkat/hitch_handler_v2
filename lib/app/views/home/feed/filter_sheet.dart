@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/controllers/filter_controller.dart';
+import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/types/sort_types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/type_ahead_field.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/bottom_sheet.dart';
@@ -34,7 +34,7 @@ class _FilterSheetState extends State<FilterSheet> {
 
   final List<SortType> _sortTypes = sortTypes;
 
-  late FilterController filterController;
+  late FilterProvider filterController;
 
   late SortEnum selectedSort;
   late LocationEnum selectedLocation;

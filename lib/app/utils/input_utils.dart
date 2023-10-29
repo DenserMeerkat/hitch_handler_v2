@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
+const hiddenTextStyle = TextStyle(
+  fontSize: 0.0,
+  height: 0,
+);
+
 Widget clearButton(TextEditingController controller) {
   return GestureDetector(
     onTap: () {

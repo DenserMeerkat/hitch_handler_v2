@@ -6,3 +6,12 @@ class IsLoading extends Notification {
     this.isLoading,
   );
 }
+
+class IsPhone extends Notification {
+  final bool isPhone;
+  final String countryCode;
+  IsPhone(
+    this.isPhone,
+    this.countryCode,
+  );
+}

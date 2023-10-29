@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hitch_handler_v2/app/controllers/filter_controller.dart';
+import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/sort_popup_menu.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
 import 'package:hitch_handler_v2/theme/color_enum.dart';
@@ -14,7 +14,7 @@ class FeedFlex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FilterController filterController = context.watch<FilterController>();
+    final FilterProvider filterController = context.watch<FilterProvider>();
     return FlexibleSpaceBar(
       background: Container(
         alignment: Alignment.bottomCenter,

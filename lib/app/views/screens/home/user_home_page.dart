@@ -44,6 +44,8 @@ class _HomePageState extends State<HomePage> {
         if (_sliderDrawerKey.currentState!.isDrawerOpen) {
           _sliderDrawerKey.currentState!.closeSlider();
           onDrawerToggle(false);
+        } else if (currentPageIndex != 0) {
+          onDestinationChange(0);
         }
         return false;
       },

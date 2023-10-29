@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/utils/input_functions.dart';
+import 'package:hitch_handler_v2/app/utils/input_utils.dart';
 import 'package:password_strength/password_strength.dart';
 
 class PasswordStrength extends StatefulWidget {

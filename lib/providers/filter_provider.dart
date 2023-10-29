@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/data/enums/domain.dart';
 import 'package:hitch_handler_v2/data/enums/location.dart';
 
-class FilterController extends ChangeNotifier {
+class FilterProvider extends ChangeNotifier {
   DomainEnum filterDomain = DomainEnum.none;
   LocationEnum filterLocation = LocationEnum.none;
   SortEnum filterSort = SortEnum.latest;

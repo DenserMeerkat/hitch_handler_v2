@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/controllers/filter_controller.dart';
+import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/types/sort_types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
 class SortPopupMenu extends StatefulWidget {
-  final FilterController filterController;
+  final FilterProvider filterController;
   const SortPopupMenu({
     super.key,
     required this.filterController,
@@ -126,8 +126,8 @@ PopupMenuItem<SortEnum> buildPopupMenuItemDivider(BuildContext context) {
       ));
 }
 
-PopupMenuItem<SortEnum> buildPopupMenuItem(BuildContext context,
-    FilterController filterController, SortType sortType) {
+PopupMenuItem<SortEnum> buildPopupMenuItem(
+    BuildContext context, FilterProvider filterController, SortType sortType) {
   return PopupMenuItem<SortEnum>(
     padding: const EdgeInsets.symmetric(horizontal: 12),
     height: 36,

@@ -7,7 +7,7 @@ import 'package:hitch_handler_v2/data/services/custom_interceptor.dart';
 class HttpService {
   late Dio _dio;
 
-  final baseUrl = baseURL;
+  final baseUrl = localIp;
   final Options options = Options(
     headers: {
       "api-key":

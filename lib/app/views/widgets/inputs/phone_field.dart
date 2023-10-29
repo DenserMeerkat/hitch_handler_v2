@@ -1,66 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/utils/input_utils.dart';
+import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/utils/input_utils.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
-class CustomField extends StatefulWidget {
+class PhoneField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
-  final Function(String)? onChanged;
-  final Function()? onTap;
   final String? placeHolder;
+  final Function(String)? onChanged;
+  final Function(String)? updateCountryCode;
+  final Function()? onTap;
   final IconData? icon;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
-  final bool? obscureText;
   final double? fontSize;
   final double? letterSpacing;
-  final bool readOnly;
   final bool? enabled;
   final bool showErrors;
-  const CustomField({
+  const PhoneField({
     super.key,
     required this.controller,
     this.validator,
+    this.placeHolder = "Phone",
     this.onChanged,
+    this.updateCountryCode,
     this.onTap,
-    this.placeHolder,
-    this.icon = Icons.title,
+    this.icon,
     this.suffixIcon,
-    this.obscureText,
     this.keyboardType,
     this.textInputAction,
     this.focusNode,
     this.fontSize = 13,
     this.letterSpacing = 1,
-    this.readOnly = false,
     this.enabled = true,
     this.showErrors = true,
   });
+
   @override
-  State<CustomField> createState() => _CustomFieldState();
+  State<PhoneField> createState() => _PhoneFieldState();
 }
 
-class _CustomFieldState extends State<CustomField> {
+class _PhoneFieldState extends State<PhoneField> {
   late Color shadowColor;
   late bool hasError = false;
 
   @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(() {
-      _onChange(0);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = isDark(context);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     shadowColor =
         Theme.of(context).inputDecorationTheme.fillColor!.withOpacity(0.6);
     _onChange(1);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -87,59 +82,102 @@ class _CustomFieldState extends State<CustomField> {
                       ],
                     ),
                   ),
-                  TextFormField(
-                    enabled: widget.enabled,
-                    onTap: widget.onTap,
-                    readOnly: widget.readOnly,
-                    onEditingComplete: () {
-                      widget.focusNode?.unfocus();
-                    },
-                    focusNode: widget.focusNode,
-                    controller: widget.controller,
-                    validator: (value) {
-                      final String? res = widget.validator?.call(value);
-                      if (mounted) {
-                        setState(() {
-                          hasError = res == null ? false : true;
-                        });
+                  MaterialClip(
+                    borderRadius: 24,
+                    child: IntlPhoneField(
+                      initialCountryCode: "IN",
+                      onCountryChanged: (value) =>
+                          widget.updateCountryCode?.call(value.dialCode),
+                      onTap: widget.onTap,
+                      focusNode: widget.focusNode,
+                      controller: widget.controller,
+                      disableLengthCheck: true,
+                      validator: (value) {
+                        final String? res =
+                            widget.validator?.call(value.toString());
+                        if (mounted) {
+                          setState(() {
+                            hasError = res == null ? false : true;
+                          });
+                          if (widget.showErrors) _onChange(1);
+                        }
+                        return res;
+                      },
+                      onChanged: (value) {
                         if (widget.showErrors) _onChange(1);
-                      }
-                      return res;
-                    },
-                    onChanged: widget.onChanged,
-                    keyboardType: widget.keyboardType,
-                    keyboardAppearance:
-                        isDarkMode ? Brightness.dark : Brightness.light,
-                    textInputAction: widget.textInputAction,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).nextFocus();
-                    },
-                    style: TextStyle(
-                      fontSize: widget.fontSize,
-                      letterSpacing: widget.letterSpacing,
-                    ),
-                    obscureText: widget.obscureText ?? false,
-                    decoration: InputDecoration(
-                      fillColor: Colors.transparent,
-                      isDense: true,
-                      hintText: widget.placeHolder,
-                      helperText: '_',
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      floatingLabelAlignment: FloatingLabelAlignment.start,
-                      contentPadding: const EdgeInsets.fromLTRB(65, 10, 12, 16),
-                      hintStyle: const TextStyle(
-                        fontSize: 12.0,
-                        letterSpacing: 2,
+                      },
+                      keyboardAppearance:
+                          isDarkMode ? Brightness.dark : Brightness.light,
+                      textInputAction: widget.textInputAction,
+                      style: TextStyle(
+                        fontSize: widget.fontSize,
+                        letterSpacing: widget.letterSpacing,
                       ),
-                      helperStyle: hiddenTextStyle,
-                      errorStyle: hiddenTextStyle,
-                      suffixIcon: widget.suffixIcon,
-                      border: inputBorder("border", context),
-                      errorBorder: inputBorder("error", context),
-                      disabledBorder: inputBorder("disabled", context),
-                      enabledBorder: inputBorder("enabled", context),
-                      focusedBorder: inputBorder("focused", context),
-                      focusedErrorBorder: inputBorder("focusedError", context),
+                      pickerDialogStyle: PickerDialogStyle(
+                        countryNameStyle: const TextStyle(fontSize: 12),
+                        listTilePadding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 16),
+                        listTileDivider: Container(
+                          width: double.infinity,
+                          height: 1,
+                          color: Theme.of(context).dividerColor,
+                        ),
+                        searchFieldInputDecoration: InputDecoration(
+                          isDense: true,
+                          hintText: "Search",
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          floatingLabelAlignment: FloatingLabelAlignment.start,
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(24, 10, 12, 16),
+                          hintStyle: const TextStyle(
+                            fontSize: 12.0,
+                          ),
+                          suffixIcon: Icon(
+                            Icons.search_rounded,
+                            size: 20,
+                            color: isDarkMode
+                                ? Theme.of(context).colorScheme.tertiary
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer,
+                          ),
+                          border: inputBorder("border", context, radius: 16),
+                          errorBorder:
+                              inputBorder("error", context, radius: 16),
+                          disabledBorder:
+                              inputBorder("disabled", context, radius: 16),
+                          enabledBorder:
+                              inputBorder("enabled", context, radius: 16),
+                          focusedBorder:
+                              inputBorder("focused", context, radius: 16),
+                          focusedErrorBorder:
+                              inputBorder("focusedError", context, radius: 16),
+                        ),
+                      ),
+                      decoration: InputDecoration(
+                        fillColor: Colors.transparent,
+                        isDense: true,
+                        hintText: widget.placeHolder,
+                        helperText: '_',
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        floatingLabelAlignment: FloatingLabelAlignment.start,
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(65, 10, 12, 16),
+                        hintStyle: const TextStyle(
+                          fontSize: 12.0,
+                          letterSpacing: 2,
+                        ),
+                        helperStyle: hiddenTextStyle,
+                        errorStyle: hiddenTextStyle,
+                        suffixIcon: widget.suffixIcon,
+                        border: inputBorder("border", context),
+                        errorBorder: inputBorder("error", context),
+                        disabledBorder: inputBorder("disabled", context),
+                        enabledBorder: inputBorder("enabled", context),
+                        focusedBorder: inputBorder("focused", context),
+                        focusedErrorBorder:
+                            inputBorder("focusedError", context),
+                      ),
                     ),
                   ),
                   Container(
@@ -209,9 +247,9 @@ class _CustomFieldState extends State<CustomField> {
   }
 
   void _onChange(int type) {
-    if (!mounted) return;
     final bool isDarkMode = isDark(context);
     String string = widget.controller.text;
+    if (!mounted) return;
     if (string.isEmpty && type == 0) {
       setState(() {
         hasError = false;

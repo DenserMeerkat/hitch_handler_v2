@@ -5,14 +5,14 @@ class MaterialClip extends StatelessWidget {
   final Widget? child;
   const MaterialClip({
     super.key,
-    this.borderRadius = 8,
+    this.borderRadius,
     this.child,
   });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius!),
+        borderRadius: BorderRadius.circular(borderRadius ?? 8),
         child: Material(
           color: Colors.transparent,
           child: child,

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hitch_handler_v2/app/controllers/login_controller.dart';
 import 'package:hitch_handler_v2/app/utils/input_validators.dart';
-import 'package:hitch_handler_v2/app/utils/notifiers.dart';
 import 'package:hitch_handler_v2/app/views/auth/forgot_sheet.dart';
-import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
-import 'package:hitch_handler_v2/app/views/widgets/buttons/underline_button.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/password_field.dart';
-import 'package:hitch_handler_v2/data/apis/signin_api.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
+import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
+import 'package:hitch_handler_v2/providers/login_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignInForm extends StatefulWidget {
   final TextEditingController textController;
@@ -23,8 +21,21 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  final _formKey = GlobalKey<FormState>();
+  late LoginController loginController;
+  @override
+  void initState() {
+    super.initState();
+    loginController = LoginController(context);
+    widget.textController.addListener(() {
+      loginController.updateUsername(widget.textController.text);
+    });
+    widget.passController.addListener(() {
+      loginController.updatePassword(widget.passController.text);
+    });
+  }
 
+  final _formKey = GlobalKey<FormState>();
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,12 +44,16 @@ class _SignInFormState extends State<SignInForm> {
         child: Column(
           children: [
             MultiField(
+              enabled: !context.watch<LoginProvider>().isLoading,
               controller: widget.textController,
+              updateCountryCode: updateCountryCode,
+              updateIsPhoneLogin: updateIsPhoneLogin,
             ),
             SizedBox(
               height: 10.h,
             ),
             PasswordField(
+              enabled: !context.watch<LoginProvider>().isLoading,
               controller: widget.passController,
               validator: lengthValidator,
             ),
@@ -56,30 +71,25 @@ class _SignInFormState extends State<SignInForm> {
               height: 6.h,
             ),
             LongFilledButton(
+              enabled: !context.watch<LoginProvider>().isLoading,
               label: "Log into Account",
               onPressed: () async {
-                if (mounted) context.go("/home");
-                //if (_formKey.currentState!.validate()) {
-                // final scaffoldContext = ScaffoldMessenger.of(context);
-                // debugPrint("Sign In Validated");
-                // IsLoading(true).dispatch(context);
-                // String res = await loginUser1(
-                //   widget.textController.text,
-                //   widget.passController.text,
-                // );
-                // if (mounted) IsLoading(false).dispatch(context);
-
-                // final SnackBar snackBar = SnackBar(
-                //   content: Text(res),
-                //   behavior: SnackBarBehavior.floating,
-                // );
-                // scaffoldContext.showSnackBar(snackBar);
-                //}
+                if (_formKey.currentState!.validate()) {
+                  loginController.loginUser(context);
+                }
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  void updateCountryCode(String countryCode) {
+    loginController.updateCountryCode('+$countryCode');
+  }
+
+  void updateIsPhoneLogin(bool isPhone) {
+    loginController.updateIsPhoneLogin(isPhone);
   }
 }

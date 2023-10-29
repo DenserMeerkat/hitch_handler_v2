@@ -5,7 +5,7 @@ import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/blend_sli
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme_scroll.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
-import 'package:hitch_handler_v2/theme/theme_provider.dart';
+import 'package:hitch_handler_v2/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SliderPage extends StatelessWidget {

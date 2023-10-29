@@ -40,7 +40,7 @@ String? phoneValidator(String? pattern) {
   return null;
 }
 
-String? lengthValidator(String? pattern, {int length = 8}) {
+String? lengthValidator(String? pattern, {int length = 3}) {
   if (pattern == null || !pattern.isValidLength(length: length)) {
     return "Must be atleast $length characters long";
   }

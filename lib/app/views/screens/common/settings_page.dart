@@ -6,7 +6,7 @@ import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_sch
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_mode/theme_mode_switch.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/theme_preview.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
-import 'package:hitch_handler_v2/theme/theme_provider.dart';
+import 'package:hitch_handler_v2/providers/theme_provider.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:provider/provider.dart';

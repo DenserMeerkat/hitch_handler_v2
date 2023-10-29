@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/controllers/filter_controller.dart';
+import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/types/sort_types.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/filter_chip_widget.dart';
 import 'package:hitch_handler_v2/data/enums/domain.dart';
@@ -15,7 +15,7 @@ class ChipsScrollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FilterController filterController = context.watch<FilterController>();
+    FilterProvider filterController = context.watch<FilterProvider>();
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
       width: 360.w,

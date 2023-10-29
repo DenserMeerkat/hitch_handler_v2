@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme_button.dart';
-import 'package:hitch_handler_v2/theme/theme_provider.dart';
+import 'package:hitch_handler_v2/providers/theme_provider.dart';
 import 'package:hitch_handler_v2/theme/themes.dart';
 
 class ColorSchemeScroll extends StatelessWidget {

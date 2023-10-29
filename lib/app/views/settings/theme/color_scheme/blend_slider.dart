@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/theme/theme_provider.dart';
+import 'package:hitch_handler_v2/providers/theme_provider.dart';
 
 class BlendSlider extends StatefulWidget {
   final ThemeProvider value;

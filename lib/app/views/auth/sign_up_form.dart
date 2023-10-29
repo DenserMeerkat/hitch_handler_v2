@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/types/input_types.dart';
 import 'package:hitch_handler_v2/app/utils/notifiers.dart';
-import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/date_pick_field.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/uni_field.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
+import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
 import 'package:hitch_handler_v2/data/apis/signup_api.dart';
 
 class SignUpForm extends StatefulWidget {
