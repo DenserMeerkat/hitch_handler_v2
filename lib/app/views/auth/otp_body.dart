@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hitch_handler_v2/app/utils/string_extenstions.dart';
+import 'package:hitch_handler_v2/app/views/utils/string_extenstions.dart';
 import 'package:hitch_handler_v2/app/views/auth/otp_countdown.dart';
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';

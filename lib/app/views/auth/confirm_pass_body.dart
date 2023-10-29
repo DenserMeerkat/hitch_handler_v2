@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/utils/input_validators.dart';
+import 'package:hitch_handler_v2/app/views/utils/input_validators.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/password_validator.dart';
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:hitch_handler_v2/app/utils/input_utils.dart';
+import 'package:hitch_handler_v2/app/views/utils/input_utils.dart';
 import 'package:hitch_handler_v2/theme/color_enum.dart';
 
 class CustomTypeAheadField extends StatefulWidget {

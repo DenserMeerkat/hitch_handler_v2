@@ -5,7 +5,7 @@ import 'package:hitch_handler_v2/data/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hitch_handler_v2/app/utils/string_extenstions.dart';
+import 'package:hitch_handler_v2/app/views/utils/string_extenstions.dart';
 import 'package:hitch_handler_v2/data/services/http_service.dart';
 
 Future<String> loginUser(String username, String password) async {

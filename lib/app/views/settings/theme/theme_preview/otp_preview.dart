@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/utils/string_extenstions.dart';
+import 'package:hitch_handler_v2/app/views/utils/string_extenstions.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets.dart/preview_header.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets.dart/preview_long_button.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets.dart/preview_otp_field.dart';

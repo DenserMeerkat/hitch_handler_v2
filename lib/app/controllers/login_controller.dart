@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hitch_handler_v2/app/utils/notifiers.dart';
+import 'package:hitch_handler_v2/app/views/utils/notifiers.dart';
 import 'package:hitch_handler_v2/data/apis/signin_api.dart';
 import 'package:hitch_handler_v2/providers/login_provider.dart';
 import 'package:provider/provider.dart';

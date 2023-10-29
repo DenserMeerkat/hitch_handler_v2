@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/utils/input_utils.dart';
+import 'package:hitch_handler_v2/app/views/utils/input_utils.dart';
 import 'package:hitch_handler_v2/app/types/input_types.dart';
 import 'custom_field.dart';
 
