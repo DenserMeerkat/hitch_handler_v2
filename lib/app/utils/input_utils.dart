@@ -90,3 +90,51 @@ OutlineInputBorder inputBorder(String type, BuildContext context,
     ),
   );
 }
+
+Container renderFieldBase(BuildContext context, Color shadowColor) {
+  return Container(
+    height: 48,
+    decoration: BoxDecoration(
+      color: shadowColor,
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+        BoxShadow(
+          color: Theme.of(context).colorScheme.shadow.withOpacity(0.2),
+          offset: const Offset(0, 1.2),
+        ),
+      ],
+    ),
+  );
+}
+
+Container renderFieldIcon(BuildContext context, IconData? icon) {
+  bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+  return Container(
+    height: 48,
+    width: 48,
+    alignment: Alignment.center,
+    decoration: BoxDecoration(
+      color: isDarkMode
+          ? Theme.of(context).colorScheme.onTertiary
+          : Theme.of(context).colorScheme.primaryContainer,
+      borderRadius: const BorderRadius.horizontal(
+        left: Radius.circular(8),
+        right: Radius.circular(1),
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Theme.of(context).colorScheme.shadow.withOpacity(0.2),
+          blurRadius: 1,
+          offset: const Offset(2, 0),
+        ),
+      ],
+    ),
+    child: Icon(
+      icon,
+      color: isDarkMode
+          ? Theme.of(context).colorScheme.tertiary
+          : Theme.of(context).colorScheme.onPrimaryContainer,
+      size: 20,
+    ),
+  );
+}

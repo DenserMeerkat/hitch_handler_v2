@@ -22,16 +22,13 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   late LoginController loginController;
+
   @override
   void initState() {
     super.initState();
     loginController = LoginController(context);
-    widget.textController.addListener(() {
-      loginController.updateUsername(widget.textController.text);
-    });
-    widget.passController.addListener(() {
-      loginController.updatePassword(widget.passController.text);
-    });
+    widget.textController.addListener(updateUsername);
+    widget.passController.addListener(updatePassword);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -91,5 +88,14 @@ class _SignInFormState extends State<SignInForm> {
 
   void updateIsPhoneLogin(bool isPhone) {
     loginController.updateIsPhoneLogin(isPhone);
+    debugPrint("isPhone: $isPhone");
+  }
+
+  void updateUsername() {
+    loginController.updateUsername(widget.textController.text);
+  }
+
+  void updatePassword() {
+    loginController.updatePassword(widget.passController.text);
   }
 }

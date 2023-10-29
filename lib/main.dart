@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hitch_handler_v2/providers/filter_provider.dart';
 
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
-import 'package:hitch_handler_v2/providers/theme_provider.dart';
+import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
 
 import 'package:hitch_handler_v2/routing/router.dart';
@@ -40,6 +39,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => FilterProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LoginProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ForgotProvider(),
         ),
       ],
       child: ScreenUtilInit(

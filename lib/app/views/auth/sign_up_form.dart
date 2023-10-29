@@ -47,7 +47,6 @@ class _SignUpFormState extends State<SignUpForm> {
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   final scaffoldContext = ScaffoldMessenger.of(context);
-                  debugPrint("Sign Up Validated");
                   IsLoading(true).dispatch(context);
                   String res = await getUser(
                     widget.rollController.text,

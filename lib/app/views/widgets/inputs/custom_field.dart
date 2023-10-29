@@ -71,22 +71,7 @@ class _CustomFieldState extends State<CustomField> {
               Stack(
                 alignment: Alignment.topLeft,
                 children: [
-                  Container(
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: shadowColor,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .shadow
-                              .withOpacity(0.2),
-                          offset: const Offset(0, 1.2),
-                        ),
-                      ],
-                    ),
-                  ),
+                  renderFieldBase(context, shadowColor),
                   TextFormField(
                     enabled: widget.enabled,
                     onTap: widget.onTap,
@@ -142,37 +127,7 @@ class _CustomFieldState extends State<CustomField> {
                       focusedErrorBorder: inputBorder("focusedError", context),
                     ),
                   ),
-                  Container(
-                    height: 48,
-                    width: 48,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: isDarkMode
-                          ? Theme.of(context).colorScheme.onTertiary
-                          : Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(8),
-                        right: Radius.circular(1),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .shadow
-                              .withOpacity(0.2),
-                          blurRadius: 1,
-                          offset: const Offset(2, 0),
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      widget.icon,
-                      color: isDarkMode
-                          ? Theme.of(context).colorScheme.tertiary
-                          : Theme.of(context).colorScheme.onPrimaryContainer,
-                      size: 20,
-                    ),
-                  )
+                  renderFieldIcon(context, widget.icon)
                 ],
               ),
               Offstage(

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:hitch_handler_v2/app/controllers/forgot_controller.dart';
 import 'package:hitch_handler_v2/app/types/input_types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/bottom_sheet.dart';
 import 'package:hitch_handler_v2/app/types/illustrations.dart';
+import 'package:hitch_handler_v2/providers/forgot_provider.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:provider/provider.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
 void showForgotSheet(BuildContext context) {
@@ -33,8 +35,17 @@ class ForgotSheet extends StatefulWidget {
 }
 
 class _ForgotSheetState extends State<ForgotSheet> {
-  bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
+  late ForgotController forgotController;
+
+  @override
+  void initState() {
+    super.initState();
+    forgotController = ForgotController(context);
+    widget.controller.addListener(() {
+      forgotController.updateUsername(widget.controller.text);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,23 +61,27 @@ class _ForgotSheetState extends State<ForgotSheet> {
             thickness: 2,
             height: 2,
           ),
-          isLoading ? const LProgressIndicator() : Container(height: 3),
+          context.watch<ForgotProvider>().isLoading
+              ? const LProgressIndicator()
+              : Container(height: 3),
           const SizedBox(height: 20),
           Illustrations.renderForgotPassword(context, isDark(context)),
           const SizedBox(height: 20),
           MultiField(
             fields: MultiFields().listWithoutRoll,
             controller: widget.controller,
+            updateCountryCode: updateCountryCode,
+            updateIsPhoneLogin: updateIsPhoneLogin,
+            enabled: !context.watch<ForgotProvider>().isLoading,
           ),
           const SizedBox(height: 10),
           LongFilledButton(
+            enabled: !context.watch<ForgotProvider>().isLoading,
             label: "Send OTP",
             icon: Icons.send_rounded,
             onPressed: () {
               if (_formKey.currentState?.validate() ?? false) {
-                final String contact = widget.controller.text;
-                Navigator.pop(context);
-                context.go('/otp/$contact');
+                forgotController.checkUser(context);
               }
             },
           ),
@@ -74,5 +89,13 @@ class _ForgotSheetState extends State<ForgotSheet> {
         ],
       ),
     );
+  }
+
+  void updateCountryCode(String countryCode) {
+    forgotController.updateCountryCode('+$countryCode');
+  }
+
+  void updateIsPhoneLogin(bool isPhone) {
+    forgotController.updateIsPhoneLogin(isPhone);
   }
 }

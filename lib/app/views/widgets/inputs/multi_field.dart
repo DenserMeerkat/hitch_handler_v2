@@ -57,6 +57,7 @@ class _MultiFieldState extends State<MultiField> {
         updateCountryCode: widget.updateCountryCode,
         icon: Icons.account_circle,
         suffixIcon: suffix,
+        focusNode: focusNode,
         enabled: widget.enabled,
       );
     }

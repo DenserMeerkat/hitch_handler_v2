@@ -16,7 +16,6 @@ class LoginController {
     _loginProvider.updateIsLoading(true);
     final scaffoldContext = ScaffoldMessenger.of(context);
     final goContext = GoRouter.of(context);
-    debugPrint("Sign In Validated");
     IsLoading(true).dispatch(context);
     final String username = context.read<LoginProvider>().isPhoneLogin
         ? "${context.read<LoginProvider>().countryCode} ${context.read<LoginProvider>().userName}"
@@ -35,6 +34,7 @@ class LoginController {
       );
     }
     if (context.mounted) IsLoading(false).dispatch(context);
+    _loginProvider.updateIsLoading(false);
     if (result == "user found" && context.mounted) {
       goContext.go("/home");
     } else {
@@ -44,10 +44,10 @@ class LoginController {
       );
       scaffoldContext.showSnackBar(snackBar);
     }
-    _loginProvider.updateIsLoading(false);
   }
 
   updateUsername(String userName) {
+    debugPrint(userName);
     if (_loginProvider.isPhoneLogin) {
       _loginProvider.updateUsername('${_loginProvider.countryCode} $userName');
     } else {
@@ -56,6 +56,7 @@ class LoginController {
   }
 
   updatePassword(String password) {
+    debugPrint(password);
     _loginProvider.updatePassword(password);
   }
 

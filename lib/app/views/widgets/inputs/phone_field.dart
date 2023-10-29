@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 import 'package:hitch_handler_v2/app/utils/input_utils.dart';
+import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:tinycolor2/tinycolor2.dart';
@@ -48,6 +49,15 @@ class PhoneField extends StatefulWidget {
 class _PhoneFieldState extends State<PhoneField> {
   late Color shadowColor;
   late bool hasError = false;
+  Country country = countries.firstWhere((element) => element.name == "India");
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(() {
+      _onChange(0);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,35 +76,24 @@ class _PhoneFieldState extends State<PhoneField> {
               Stack(
                 alignment: Alignment.topLeft,
                 children: [
-                  Container(
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: shadowColor,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .shadow
-                              .withOpacity(0.2),
-                          offset: const Offset(0, 1.2),
-                        ),
-                      ],
-                    ),
-                  ),
+                  renderFieldBase(context, shadowColor),
                   MaterialClip(
                     borderRadius: 24,
                     child: IntlPhoneField(
                       initialCountryCode: "IN",
-                      onCountryChanged: (value) =>
-                          widget.updateCountryCode?.call(value.dialCode),
+                      onCountryChanged: (value) {
+                        setState(() {
+                          country = value;
+                        });
+                        widget.updateCountryCode?.call(value.dialCode);
+                      },
                       onTap: widget.onTap,
                       focusNode: widget.focusNode,
                       controller: widget.controller,
                       disableLengthCheck: true,
                       validator: (value) {
                         final String? res =
-                            widget.validator?.call(value.toString());
+                            widget.validator?.call(widget.controller.text);
                         if (mounted) {
                           setState(() {
                             hasError = res == null ? false : true;
@@ -180,37 +179,7 @@ class _PhoneFieldState extends State<PhoneField> {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 48,
-                    width: 48,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: isDarkMode
-                          ? Theme.of(context).colorScheme.onTertiary
-                          : Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(8),
-                        right: Radius.circular(1),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .shadow
-                              .withOpacity(0.2),
-                          blurRadius: 1,
-                          offset: const Offset(2, 0),
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      widget.icon,
-                      color: isDarkMode
-                          ? Theme.of(context).colorScheme.tertiary
-                          : Theme.of(context).colorScheme.onPrimaryContainer,
-                      size: 20,
-                    ),
-                  )
+                  renderFieldIcon(context, widget.icon)
                 ],
               ),
               Offstage(
@@ -247,9 +216,9 @@ class _PhoneFieldState extends State<PhoneField> {
   }
 
   void _onChange(int type) {
+    if (!mounted) return;
     final bool isDarkMode = isDark(context);
     String string = widget.controller.text;
-    if (!mounted) return;
     if (string.isEmpty && type == 0) {
       setState(() {
         hasError = false;
