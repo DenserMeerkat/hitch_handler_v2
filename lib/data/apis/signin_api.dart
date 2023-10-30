@@ -1,15 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hitch_handler_v2/data/constants.dart';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hitch_handler_v2/app/views/utils/string_extenstions.dart';
 import 'package:hitch_handler_v2/data/services/http_service.dart';
 
-Future<String> loginUser(String username, String password) async {
-  String path = "protected/api/v1/authenticate/signin";
+Future<String> loginStudent(String username, String password) async {
+  String path = "student/login/";
 
   HttpService http = HttpService();
   late Response response;
@@ -23,82 +20,8 @@ Future<String> loginUser(String username, String password) async {
     roll = username;
   } else if (username.isValidMobile()) {
     phone = username;
-  }
-
-  Object body = jsonEncode({
-    "roll": roll,
-    "email": email,
-    "phone": phone,
-    "password": password,
-  });
-
-  try {
-    response = await http.postRequest(path, body);
-    if (response.statusCode == 200) {
-      return "user found";
-    } else {
-      return "${response.statusCode}";
-    }
-  } on Exception catch (e) {
-    debugPrint(e.toString());
-  }
-  return "error occurred";
-}
-
-Future<String> loginUser1(String username, String password) async {
-  String path = "protected/api/v1/authenticate/signin";
-
-  String email = "";
-  String phone = "";
-  String roll = "";
-  if (username.isValidEmail()) {
-    email = username;
-  } else if (username.isValidRoll()) {
-    roll = username;
-  } else if (username.isValidMobile()) {
-    phone = username;
-  }
-
-  Object body = jsonEncode({
-    "roll": roll,
-    "email": email,
-    "phone": phone,
-    "password": password,
-  });
-
-  try {
-    http.Response response = await http.post(
-      Uri.parse('$baseURL$path'),
-      headers: {
-        "content-type": "application/json",
-        "x-service-application": "hitch-handler",
-        "api-key": dotenv.env['API_KEY'] ?? "API_KEY not found",
-      },
-      body: body,
-    );
-    if (response.statusCode == 200) {
-      return "user found";
-    } else {
-      return "${response.statusCode} ${response.body}";
-    }
-  } on Exception catch (e) {
-    debugPrint(e.toString());
-  }
-  return "error occurred";
-}
-
-Future<String> loginStudent(String username, String password) async {
-  String path = "student/login/";
-
-  String? email;
-  String? phone;
-  String? roll;
-  if (username.isValidEmail()) {
-    email = username;
-  } else if (username.isValidRoll()) {
-    roll = username;
-  } else if (username.isValidMobile()) {
-    phone = username;
+  } else {
+    return "Invalid Username";
   }
 
   Object body = jsonEncode({
@@ -109,19 +32,48 @@ Future<String> loginStudent(String username, String password) async {
   });
   debugPrint(body.toString());
   try {
-    http.Response response = await http.post(
-      Uri.parse('$baseURL$path'),
-      headers: {
-        "content-type": "application/json",
-        "x-service-application": "hitch-handler",
-        "api-key": dotenv.env['API_KEY'] ?? "API_KEY not found",
-      },
-      body: body,
-    );
+    response = await http.postRequest(path, body);
     if (response.statusCode == 200) {
+      debugPrint(response.data.toString());
       return "user found";
     } else {
-      return "${response.statusCode} ${response.body}";
+      return "${response.statusCode}";
+    }
+  } on Exception catch (e) {
+    debugPrint(e.toString());
+  }
+  return "error occurred";
+}
+
+Future<String> loginAdmin(String username, String password) async {
+  String path = "admin/login/";
+
+  HttpService http = HttpService();
+  late Response response;
+
+  String email = "";
+  String phone = "";
+  if (username.isValidEmail()) {
+    email = username;
+  } else if (username.isValidMobile()) {
+    phone = username;
+  } else {
+    return "Invalid Username";
+  }
+
+  Object body = jsonEncode({
+    "email": email,
+    "phone": phone,
+    "password": password,
+  });
+
+  try {
+    response = await http.postRequest(path, body);
+    if (response.statusCode == 200) {
+      debugPrint(response.data.toString());
+      return "user found";
+    } else {
+      return "${response.statusCode}";
     }
   } on Exception catch (e) {
     debugPrint(e.toString());

@@ -43,10 +43,10 @@ class SliderPage extends StatelessWidget {
           child: Container(
             clipBehavior: Clip.hardEdge,
             width: 280.w,
-            height: 640.h,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(8)),
             ),
             child: Scaffold(
               appBar: AppBar(
@@ -109,6 +109,7 @@ class SliderPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
+                        showSelectedIcon: false,
                         segments: const [
                           ButtonSegment<ThemeMode>(
                             value: ThemeMode.system,

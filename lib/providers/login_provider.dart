@@ -44,4 +44,14 @@ class LoginProvider extends ChangeNotifier {
     _isPhone = isPhone;
     notifyListeners();
   }
+
+  void reset() {
+    _userName = "";
+    _password = "";
+    _isPhone = false;
+    _countryCode = "+91";
+    _isLoading = false;
+    _isAdminLogin = false;
+    notifyListeners();
+  }
 }

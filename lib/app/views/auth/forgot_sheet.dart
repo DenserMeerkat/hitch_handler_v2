@@ -9,7 +9,6 @@ import 'package:hitch_handler_v2/app/types/illustrations.dart';
 import 'package:hitch_handler_v2/providers/forgot_provider.dart';
 import 'package:hitch_handler_v2/theme/theme_utils.dart';
 import 'package:provider/provider.dart';
-import 'package:tinycolor2/tinycolor2.dart';
 
 void showForgotSheet(BuildContext context) {
   WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
@@ -20,9 +19,7 @@ void showForgotSheet(BuildContext context) {
     ForgotSheet(
       controller: controller,
     ),
-    backgroundColor: (isDark(context)
-        ? Theme.of(context).appBarTheme.backgroundColor
-        : Theme.of(context).highlightColor.mix(Colors.white, 80)),
+    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
   );
 }
 
@@ -49,6 +46,7 @@ class _ForgotSheetState extends State<ForgotSheet> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = context.watch<ForgotProvider>().isLoading;
     return Form(
       key: _formKey,
       child: Column(
@@ -61,9 +59,7 @@ class _ForgotSheetState extends State<ForgotSheet> {
             thickness: 2,
             height: 2,
           ),
-          context.watch<ForgotProvider>().isLoading
-              ? const LProgressIndicator()
-              : Container(height: 3),
+          isLoading ? const LProgressIndicator() : Container(height: 3),
           const SizedBox(height: 20),
           Illustrations.renderForgotPassword(context, isDark(context)),
           const SizedBox(height: 20),
@@ -72,11 +68,11 @@ class _ForgotSheetState extends State<ForgotSheet> {
             controller: widget.controller,
             updateCountryCode: updateCountryCode,
             updateIsPhoneLogin: updateIsPhoneLogin,
-            enabled: !context.watch<ForgotProvider>().isLoading,
+            enabled: !isLoading,
           ),
           const SizedBox(height: 10),
           LongFilledButton(
-            enabled: !context.watch<ForgotProvider>().isLoading,
+            enabled: !isLoading,
             label: "Send OTP",
             icon: Icons.send_rounded,
             onPressed: () {

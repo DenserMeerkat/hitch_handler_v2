@@ -69,40 +69,44 @@ class AddPostButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {
-        context.go("/home/add");
-        debugPrint("Gesture Detector");
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 65,
-            height: 32,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(30),
-              onTap: () {
-                context.go("/home/add");
-                debugPrint("Ink Well");
-              },
-              child: Icon(
-                Icons.add_circle_outline_outlined,
+    return Tooltip(
+      message: "Add Post",
+      triggerMode: TooltipTriggerMode.longPress,
+      verticalOffset: 42,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          context.go("/home/add");
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 65,
+              height: 32,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30),
+                onTap: () {
+                  context.go("/home/add");
+                },
+                child: Icon(
+                  Icons.add_circle_outline_outlined,
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
+                ),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "Add",
+              style: TextStyle(
+                fontSize: 12.sp,
                 color:
                     Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
               ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            "Add",
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

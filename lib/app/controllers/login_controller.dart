@@ -17,13 +17,11 @@ class LoginController {
     final scaffoldContext = ScaffoldMessenger.of(context);
     final goContext = GoRouter.of(context);
     IsLoading(true).dispatch(context);
-    final String username = context.read<LoginProvider>().isPhoneLogin
-        ? "${context.read<LoginProvider>().countryCode} ${context.read<LoginProvider>().userName}"
-        : context.read<LoginProvider>().userName;
+    final String username = context.read<LoginProvider>().userName;
     final String password = context.read<LoginProvider>().password;
     String result;
-    if (!_loginProvider.isAdminLogin) {
-      result = await loginStudent(
+    if (_loginProvider.isAdminLogin) {
+      result = await loginAdmin(
         username,
         password,
       );
@@ -33,10 +31,15 @@ class LoginController {
         password,
       );
     }
+
     if (context.mounted) IsLoading(false).dispatch(context);
     _loginProvider.updateIsLoading(false);
-    if (result == "user found" && context.mounted) {
-      goContext.go("/home");
+    if (result == "user found") {
+      if (!_loginProvider.isAdminLogin) {
+        goContext.go("/home");
+      } else {
+        goContext.go("/home");
+      }
     } else {
       final SnackBar snackBar = SnackBar(
         content: Text(result),
@@ -47,7 +50,6 @@ class LoginController {
   }
 
   updateUsername(String userName) {
-    debugPrint(userName);
     if (_loginProvider.isPhoneLogin) {
       _loginProvider.updateUsername('${_loginProvider.countryCode} $userName');
     } else {
@@ -56,7 +58,6 @@ class LoginController {
   }
 
   updatePassword(String password) {
-    debugPrint(password);
     _loginProvider.updatePassword(password);
   }
 
@@ -66,5 +67,13 @@ class LoginController {
 
   updateIsPhoneLogin(bool isPhone) {
     _loginProvider.updateIsPhoneLogin(isPhone);
+  }
+
+  updateIsAdminLogin(bool isAdmin) {
+    _loginProvider.updateIsAdminLogin(isAdmin);
+  }
+
+  reset() {
+    _loginProvider.reset();
   }
 }

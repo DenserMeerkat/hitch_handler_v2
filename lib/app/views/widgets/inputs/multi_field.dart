@@ -6,20 +6,22 @@ import 'custom_field.dart';
 
 class MultiField extends StatefulWidget {
   final TextEditingController controller;
-  final List<FieldType>? fields;
+  final List<FieldType> fields;
   final bool switchKeyBoards;
   final TextInputAction? textInputAction;
   final Function(bool)? updateIsPhoneLogin;
   final Function(String)? updateCountryCode;
+  final int currentIndex;
   final bool enabled;
   const MultiField({
     super.key,
     required this.controller,
-    this.fields,
+    required this.fields,
     this.switchKeyBoards = true,
     this.textInputAction = TextInputAction.next,
     this.updateIsPhoneLogin,
     this.updateCountryCode,
+    this.currentIndex = 0,
     this.enabled = true,
   });
 
@@ -29,7 +31,6 @@ class MultiField extends StatefulWidget {
 
 class _MultiFieldState extends State<MultiField> {
   final FocusNode focusNode = FocusNode();
-  late List<FieldType> fields;
   late Widget suffix;
   late IconData _suffixIcon;
   int currentIndex = 0;
@@ -37,22 +38,31 @@ class _MultiFieldState extends State<MultiField> {
   @override
   void initState() {
     super.initState();
-    fields = widget.fields ?? MultiFields().list;
-    _suffixIcon = fields[currentIndex].suffixIcon;
+    currentIndex = widget.currentIndex;
+    _suffixIcon = widget.fields[currentIndex].suffixIcon;
     widget.controller.addListener(_onStateChange);
     focusNode.addListener(_onStateChange);
   }
 
   @override
+  void didUpdateWidget(covariant MultiField oldWidget) {
+    if (currentIndex > widget.fields.length - 1) {
+      currentIndex = 0;
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _suffixIcon = widget.fields[currentIndex].suffixIcon;
     suffix = multiFieldButton(
         _suffixIcon, onTap, Theme.of(context).colorScheme.primary);
-    if (fields[currentIndex].keyboardType == TextInputType.phone) {
+    if (widget.fields[currentIndex].keyboardType == TextInputType.phone) {
       return PhoneField(
         controller: widget.controller,
-        validator: fields[currentIndex].validator,
-        placeHolder: fields[currentIndex].placeHolder,
-        keyboardType: fields[currentIndex].keyboardType,
+        validator: widget.fields[currentIndex].validator,
+        placeHolder: widget.fields[currentIndex].placeHolder,
+        keyboardType: widget.fields[currentIndex].keyboardType,
         textInputAction: widget.textInputAction,
         updateCountryCode: widget.updateCountryCode,
         icon: Icons.account_circle,
@@ -63,9 +73,9 @@ class _MultiFieldState extends State<MultiField> {
     }
     return CustomField(
       controller: widget.controller,
-      validator: fields[currentIndex].validator,
-      placeHolder: fields[currentIndex].placeHolder,
-      keyboardType: fields[currentIndex].keyboardType,
+      validator: widget.fields[currentIndex].validator,
+      placeHolder: widget.fields[currentIndex].placeHolder,
+      keyboardType: widget.fields[currentIndex].keyboardType,
       textInputAction: widget.textInputAction,
       icon: Icons.account_circle,
       suffixIcon: suffix,
@@ -91,13 +101,14 @@ class _MultiFieldState extends State<MultiField> {
   void onTap() {
     if (!mounted) return;
     setState(() {
-      currentIndex = currentIndex == fields.length - 1 ? 0 : currentIndex + 1;
-      if (fields[currentIndex].keyboardType == TextInputType.phone) {
+      currentIndex =
+          currentIndex == widget.fields.length - 1 ? 0 : currentIndex + 1;
+      if (widget.fields[currentIndex].keyboardType == TextInputType.phone) {
         widget.updateIsPhoneLogin?.call(true);
       } else {
         widget.updateIsPhoneLogin?.call(false);
       }
-      _suffixIcon = fields[currentIndex].suffixIcon;
+      _suffixIcon = widget.fields[currentIndex].suffixIcon;
       suffix =
           multiFieldButton(_suffixIcon, onTap, Theme.of(context).primaryColor);
       widget.controller.clear();

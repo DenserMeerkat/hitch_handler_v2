@@ -80,6 +80,11 @@ class _PhoneFieldState extends State<PhoneField> {
                   MaterialClip(
                     borderRadius: 24,
                     child: IntlPhoneField(
+                      showCountryFlag: false,
+                      dropdownIconPosition: IconPosition.trailing,
+                      flagsButtonPadding: const EdgeInsets.only(left: 8),
+                      flagsButtonMargin: const EdgeInsets.only(left: 48),
+                      enabled: widget.enabled!,
                       initialCountryCode: "IN",
                       onCountryChanged: (value) {
                         setState(() {
@@ -92,8 +97,8 @@ class _PhoneFieldState extends State<PhoneField> {
                       controller: widget.controller,
                       disableLengthCheck: true,
                       validator: (value) {
-                        final String? res =
-                            widget.validator?.call(widget.controller.text);
+                        final String? res = widget.validator?.call(
+                            '+${country.dialCode} ${widget.controller.text}');
                         if (mounted) {
                           setState(() {
                             hasError = res == null ? false : true;
@@ -103,7 +108,14 @@ class _PhoneFieldState extends State<PhoneField> {
                         return res;
                       },
                       onChanged: (value) {
-                        if (widget.showErrors) _onChange(1);
+                        final String? res = widget.validator?.call(
+                            '+${country.dialCode} ${widget.controller.text}');
+                        if (mounted) {
+                          setState(() {
+                            hasError = res == null ? false : true;
+                          });
+                          if (widget.showErrors) _onChange(1);
+                        }
                       },
                       keyboardAppearance:
                           isDarkMode ? Brightness.dark : Brightness.light,
@@ -189,7 +201,9 @@ class _PhoneFieldState extends State<PhoneField> {
                   children: [
                     Text(
                       hasError
-                          ? widget.validator!.call(widget.controller.text) ?? ""
+                          ? widget.validator!.call(
+                                  '+${country.dialCode} ${widget.controller.text}') ??
+                              ""
                           : "",
                       style: TextStyle(
                         fontSize: hasError ? 11 : 0,
@@ -218,7 +232,7 @@ class _PhoneFieldState extends State<PhoneField> {
   void _onChange(int type) {
     if (!mounted) return;
     final bool isDarkMode = isDark(context);
-    String string = widget.controller.text;
+    String string = '+${country.dialCode} ${widget.controller.text}';
     if (string.isEmpty && type == 0) {
       setState(() {
         hasError = false;

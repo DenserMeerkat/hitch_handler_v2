@@ -6,9 +6,7 @@ extension StringExtensions on String {
   }
 
   bool isValidMobile() {
-    return RegExp(
-            r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)')
-        .hasMatch(this);
+    return RegExp(r'(^[+][0-9]{2,4}[-\s]?[0-9]{8,13}$)').hasMatch(this);
   }
 
   bool isValidLength({length = 8}) {

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/utils/input_utils.dart';
 import 'package:hitch_handler_v2/app/types/input_types.dart';
-import 'custom_field.dart';
+import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
 
 class UniField extends StatefulWidget {
   final TextEditingController controller;
   final FieldType type;
   final IconData? icon;
+  final Function(String)? updateCountryCode;
+  final bool enabled;
   const UniField({
     super.key,
     required this.controller,
     required this.type,
     this.icon,
+    this.updateCountryCode,
+    this.enabled = true,
   });
 
   @override
@@ -50,6 +54,18 @@ class _UniFieldState extends State<UniField> {
   Widget build(BuildContext context) {
     suffix = suffixIcon(
         widget.type.suffixIcon, Theme.of(context).colorScheme.primary);
+    if (widget.type == MultiFields.mobile) {
+      return PhoneField(
+        controller: widget.controller,
+        validator: widget.type.validator,
+        placeHolder: widget.type.placeHolder,
+        keyboardType: widget.type.keyboardType,
+        updateCountryCode: widget.updateCountryCode,
+        icon: widget.icon,
+        suffixIcon: suffix,
+        focusNode: focusNode,
+      );
+    }
     return CustomField(
       controller: widget.controller,
       validator: widget.type.validator,

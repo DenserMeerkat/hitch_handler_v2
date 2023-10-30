@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/controllers/login_controller.dart';
+import 'package:hitch_handler_v2/app/types/input_types.dart';
 import 'package:hitch_handler_v2/app/views/utils/input_validators.dart';
 import 'package:hitch_handler_v2/app/views/auth/forgot_sheet.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
@@ -22,7 +23,8 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   late LoginController loginController;
-
+  late bool enabled;
+  late bool isAdmin;
   @override
   void initState() {
     super.initState();
@@ -32,16 +34,20 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   final _formKey = GlobalKey<FormState>();
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    enabled = !Provider.of<LoginProvider>(context).isLoading;
+    isAdmin = Provider.of<LoginProvider>(context, listen: true).isAdminLogin;
     return Center(
       child: Form(
         key: _formKey,
         child: Column(
           children: [
             MultiField(
-              enabled: !context.watch<LoginProvider>().isLoading,
+              enabled: enabled,
+              currentIndex: 0,
+              fields:
+                  isAdmin ? MultiFields().listWithoutRoll : MultiFields().list,
               controller: widget.textController,
               updateCountryCode: updateCountryCode,
               updateIsPhoneLogin: updateIsPhoneLogin,
@@ -50,25 +56,41 @@ class _SignInFormState extends State<SignInForm> {
               height: 10.h,
             ),
             PasswordField(
-              enabled: !context.watch<LoginProvider>().isLoading,
+              enabled: enabled,
               controller: widget.passController,
               validator: lengthValidator,
             ),
-            Container(
-              alignment: Alignment.centerRight,
-              child: UnderlineButton(
-                onPressed: () {
-                  showForgotSheet(context);
-                },
-                label: "Forgot Password?",
-                decorationStyle: TextDecorationStyle.dashed,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                StudentAdminButton(
+                  enabled: enabled,
+                  updateIsAdminLogin: (value) {
+                    debugPrint("isAdmin: $value");
+                    widget.textController.clear();
+                    widget.passController.clear();
+                    loginController.reset();
+                    loginController.updateIsAdminLogin(value);
+                    setState(() {
+                      isAdmin = value;
+                    });
+                  },
+                ),
+                UnderlineButton(
+                  enabled: enabled,
+                  onPressed: () {
+                    showForgotSheet(context);
+                  },
+                  label: "Forgot Password?",
+                  decorationStyle: TextDecorationStyle.dashed,
+                ),
+              ],
             ),
             SizedBox(
               height: 6.h,
             ),
             LongFilledButton(
-              enabled: !context.watch<LoginProvider>().isLoading,
+              enabled: enabled,
               label: "Log into Account",
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
@@ -88,7 +110,6 @@ class _SignInFormState extends State<SignInForm> {
 
   void updateIsPhoneLogin(bool isPhone) {
     loginController.updateIsPhoneLogin(isPhone);
-    debugPrint("isPhone: $isPhone");
   }
 
   void updateUsername() {

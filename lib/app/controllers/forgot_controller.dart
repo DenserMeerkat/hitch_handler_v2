@@ -15,9 +15,7 @@ class ForgotController {
     _forgotProvider.updateIsLoading(true);
     final goContext = GoRouter.of(context);
     IsLoading(true).dispatch(context);
-    final String username = context.read<ForgotProvider>().isPhoneLogin
-        ? "${context.read<ForgotProvider>().countryCode} ${context.read<ForgotProvider>().userName}"
-        : context.read<ForgotProvider>().userName;
+    final String username = context.read<ForgotProvider>().userName;
     String result;
     if (!_forgotProvider.isAdminLogin) {
       result = await Future.delayed(
