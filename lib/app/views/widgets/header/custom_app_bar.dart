@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/settings_button.dart';
+import 'package:hitch_handler_v2/theme/constants.dart';
 
 class CustomAppBar extends StatelessWidget {
   final Widget? leading;
   final Widget title;
   final Widget? actions;
   final Color? backgroundColor;
-  final bool? showLeading;
-  final bool? showActions;
-  final double? thickness;
-  final double? borderRadius;
+  final bool showLeading;
+  final bool showActions;
+  final double thickness;
+  final double borderRadius;
   const CustomAppBar({
     super.key,
     this.leading,
@@ -26,41 +27,58 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlexibleSpaceBar(
-      background: Padding(
-        padding: EdgeInsets.only(top: thickness!),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          decoration: BoxDecoration(
-            color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-            borderRadius:
-                BorderRadius.vertical(top: Radius.circular(borderRadius!)),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).colorScheme.primary,
-                offset: Offset(0, -thickness!),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              showLeading!
-                  ? leading ??
-                      const AppbarIconButton(
-                        onPressed: null,
-                        tooltip: "Exit",
-                      )
-                  : const SizedBox(width: 50),
-              title,
-              showActions!
-                  ? actions ?? const SettingsButton()
-                  : const SizedBox(),
-            ],
+    return Column(
+      children: [
+        Padding(
+            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top)),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.w),
+          child: Text(
+            appName.toUpperCase(),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
           ),
         ),
-      ),
+        Padding(
+          padding: EdgeInsets.only(top: thickness),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4),
+            decoration: BoxDecoration(
+              color:
+                  backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+              borderRadius:
+                  BorderRadius.vertical(top: Radius.circular(borderRadius)),
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).colorScheme.primary,
+                  offset: Offset(0, -thickness),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                showLeading
+                    ? leading ??
+                        const AppbarIconButton(
+                          onPressed: null,
+                          tooltip: "Exit",
+                        )
+                    : const SizedBox(width: 50),
+                title,
+                showActions
+                    ? actions ?? const SettingsButton()
+                    : const SizedBox(),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

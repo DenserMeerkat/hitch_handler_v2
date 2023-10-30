@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/providers/theme_provider.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class BlendSlider extends StatefulWidget {
   final ThemeProvider value;
@@ -46,7 +47,7 @@ class _BlendSliderState extends State<BlendSlider> {
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      padding: EdgeInsets.only(left: widget.showBorder ? 16.w : 24.w),
       constraints: BoxConstraints(
         maxWidth: 330.w,
       ),
@@ -63,36 +64,25 @@ class _BlendSliderState extends State<BlendSlider> {
               )
             : null,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          renderSlider(Icons.light_mode_outlined, lightBlendValue,
-              onChangeLightBlendValue, !isDark),
-          renderSlider(Icons.dark_mode_outlined, darkBlendValue,
-              onChangeDarkBlendValue, isDark),
-        ],
-      ),
+      child: renderSlider(
+          Symbols.layers_rounded,
+          isDark ? darkBlendValue : lightBlendValue,
+          isDark ? onChangeDarkBlendValue : onChangeLightBlendValue),
     );
   }
 
-  Row renderSlider(IconData icon, double blendValue,
-      Function(double)? onChanged, bool enabled) {
+  Row renderSlider(
+      IconData icon, double blendValue, Function(double)? onChanged) {
     return Row(
       children: [
-        Icon(
-          icon,
-          size: 20,
-          color: enabled
-              ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
-        ),
+        Icon(icon, size: 24, color: Theme.of(context).colorScheme.primary),
         Expanded(
           child: Slider(
             value: blendValue,
             max: 40,
             divisions: 8,
             label: blendValue.round().toString(),
-            onChanged: enabled ? onChanged : null,
+            onChanged: onChanged,
           ),
         ),
       ],

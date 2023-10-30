@@ -5,7 +5,7 @@ import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/page_title.dart';
-import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
+import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 
 class OtpPage extends StatefulWidget {
   final String contact;
@@ -46,10 +46,10 @@ class _OtpPageState extends State<OtpPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return AppWrapper(
+    return SystemOverlayWrapper(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 80,
+          toolbarHeight: 104,
           automaticallyImplyLeading: false,
           elevation: 0,
           flexibleSpace: CustomAppBar(

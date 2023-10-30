@@ -49,7 +49,7 @@ extension StringExtensions on String {
       caseSensitive: false,
     );
 
-    final RegExp phoneRegex = RegExp(r'^\d{10}$');
+    final RegExp phoneRegex = RegExp(r'(^[+][0-9]{2,4}[-\s]?[0-9]{8,13}$)');
 
     if (emailRegex.hasMatch(this)) {
       final List<String> parts = split('@');
@@ -58,12 +58,16 @@ extension StringExtensions on String {
 
         if (localPart.isNotEmpty) {
           final String obscuredLocalPart = replaceRange(
-              3, localPart.length - 2, "*" * (localPart.length - 5));
+            3,
+            localPart.length - 2,
+            "*" * (localPart.length - 5),
+          );
           return obscuredLocalPart;
         }
       }
     } else if (phoneRegex.hasMatch(this)) {
-      return replaceRange(2, 7, '*****');
+      int index = indexOf(' ');
+      return replaceRange(index + 3, index + 7, '*****');
     }
 
     return this;

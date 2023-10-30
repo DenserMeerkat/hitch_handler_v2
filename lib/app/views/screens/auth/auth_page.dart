@@ -7,7 +7,7 @@ import 'package:hitch_handler_v2/app/views/auth/sign_up_body.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
-import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
+import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -44,18 +44,19 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return AppWrapper(
-      child: WillPopScope(
-        onWillPop: () {
-          if (current == 0) {
-          } else {
-            _tabController.animateTo(0);
-          }
-          return Future.value(false);
-        },
+    return WillPopScope(
+      onWillPop: () {
+        if (current == 0) {
+        } else {
+          _tabController.animateTo(0);
+        }
+        return Future.value(false);
+      },
+      child: SystemOverlayWrapper(
         child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 80,
+            scrolledUnderElevation: 0,
+            toolbarHeight: 104,
             automaticallyImplyLeading: false,
             elevation: 0,
             flexibleSpace: CustomAppBar(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/utils/notifiers.dart';
+import 'package:hitch_handler_v2/app/views/utils/string_extenstions.dart';
+import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
 import 'package:hitch_handler_v2/data/apis/signin_api.dart';
 import 'package:hitch_handler_v2/providers/login_provider.dart';
 import 'package:provider/provider.dart';
@@ -41,11 +43,13 @@ class LoginController {
         goContext.go("/home");
       }
     } else {
-      final SnackBar snackBar = SnackBar(
-        content: Text(result),
-        behavior: SnackBarBehavior.floating,
-      );
-      scaffoldContext.showSnackBar(snackBar);
+      if (context.mounted) {
+        final MaterialBanner materialBanner = showCustomMaterialBanner(
+          context,
+          contentText: result.toCapitalize(),
+        );
+        scaffoldContext.showMaterialBanner(materialBanner);
+      }
     }
   }
 
