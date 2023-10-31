@@ -49,6 +49,7 @@ class _OtpPageState extends State<OtpPage> with TickerProviderStateMixin {
     return SystemOverlayWrapper(
       child: Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           toolbarHeight: 104,
           automaticallyImplyLeading: false,
           elevation: 0,

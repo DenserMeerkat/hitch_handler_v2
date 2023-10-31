@@ -35,6 +35,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (_) => JwtProvider(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
         ),
         ChangeNotifierProvider(
@@ -52,22 +55,35 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
-          return Consumer<ThemeProvider>(
-            builder: (context, value, child) {
+          return Consumer2<ThemeProvider, JwtProvider>(
+            builder: (context, themeValue, jwtValue, child) {
               return GestureDetector(
                 onTap: () {
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
-                child: value.doneLoading
+                child: themeValue.doneLoading
                     ? MaterialApp.router(
                         debugShowCheckedModeBanner: false,
                         title: appName,
-                        theme: getTheme(value.selectedColorScheme, false,
-                            value.lightBlendLevel, value.darkBlendLevel),
-                        darkTheme: getTheme(value.selectedColorScheme, true,
-                            value.lightBlendLevel, value.darkBlendLevel),
-                        themeMode: value.selectedThemeMode,
-                        routerConfig: router,
+                        theme: getTheme(
+                            themeValue.selectedColorScheme,
+                            false,
+                            themeValue.lightBlendLevel,
+                            themeValue.darkBlendLevel),
+                        darkTheme: getTheme(
+                            themeValue.selectedColorScheme,
+                            true,
+                            themeValue.lightBlendLevel,
+                            themeValue.darkBlendLevel),
+                        themeMode: themeValue.selectedThemeMode,
+                        routerConfig: router(
+                          initialLocation: jwtValue.jwtToken != null &&
+                                  jwtValue.userType != null
+                              ? jwtValue.userType == "student"
+                                  ? '/home'
+                                  : '/home'
+                              : '/',
+                        ),
                       )
                     : LaunchLoadingScreen(
                         context: context,
