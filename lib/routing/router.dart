@@ -26,7 +26,7 @@ GoRouter router = GoRouter(
           }
           return "/home";
         }
-        return "/";
+        return null;
       },
       routes: <RouteBase>[
         GoRoute(
