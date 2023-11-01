@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
+import 'package:hitch_handler_v2/data/model/models.dart';
 import 'package:hitch_handler_v2/data/services/http_service.dart';
 
-Future<String> loginStudent(String username, String password) async {
+Future<UserResponseModel> loginStudent(String username, String password) async {
   String path = "student/login/";
 
   HttpService http = HttpService();
@@ -21,7 +22,7 @@ Future<String> loginStudent(String username, String password) async {
   } else if (username.isValidMobile()) {
     phone = username;
   } else {
-    return "Invalid Username";
+    return UserResponseModel(statusCode: 400, message: "Invalid Username");
   }
 
   Object body = jsonEncode({
@@ -35,17 +36,25 @@ Future<String> loginStudent(String username, String password) async {
     response = await http.postRequest(path, body);
     if (response.statusCode == 200) {
       debugPrint(response.data.toString());
-      return "user found";
+      UserResponseModel userResponseModel = UserResponseModel(
+        statusCode: 200,
+        message: "Login Successful",
+        userData: UserModel.fromJson(response.data["data"]),
+        token: response.data["token"],
+      );
+      debugPrint(userResponseModel.toString());
+      return userResponseModel;
     } else {
-      return "${response.statusCode}";
+      return UserResponseModel(
+          statusCode: response.statusCode ?? 400, message: "Login Error");
     }
   } on Exception catch (e) {
     debugPrint(e.toString());
   }
-  return "error occurred";
+  return UserResponseModel(statusCode: 400, message: "Unknown Error");
 }
 
-Future<String> loginAdmin(String username, String password) async {
+Future<UserResponseModel> loginAdmin(String username, String password) async {
   String path = "admin/login/";
 
   HttpService http = HttpService();
@@ -58,7 +67,7 @@ Future<String> loginAdmin(String username, String password) async {
   } else if (username.isValidMobile()) {
     phone = username;
   } else {
-    return "Invalid Username";
+    return UserResponseModel(statusCode: 400, message: "Invalid Username");
   }
 
   Object body = jsonEncode({
@@ -71,12 +80,20 @@ Future<String> loginAdmin(String username, String password) async {
     response = await http.postRequest(path, body);
     if (response.statusCode == 200) {
       debugPrint(response.data.toString());
-      return "user found";
+      UserResponseModel userResponseModel = UserResponseModel(
+        statusCode: 200,
+        message: "Login Successful",
+        userData: UserModel.fromJson(response.data["data"]),
+        token: response.data["token"],
+      );
+      debugPrint(userResponseModel.toString());
+      return userResponseModel;
     } else {
-      return "${response.statusCode}";
+      return UserResponseModel(
+          statusCode: response.statusCode ?? 400, message: "Login Error");
     }
   } on Exception catch (e) {
     debugPrint(e.toString());
   }
-  return "error occurred";
+  return UserResponseModel(statusCode: 400, message: "Unknown Error");
 }

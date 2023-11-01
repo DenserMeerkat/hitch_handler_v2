@@ -36,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage>
           primary: false,
           scrolledUnderElevation: 0,
           automaticallyImplyLeading: false,
-          flexibleSpace: ProfileFlex(),
+          flexibleSpace: const ProfileFlex(),
           floating: true,
           pinned: true,
           snap: true,

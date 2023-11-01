@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hitch_handler_v2/app/views/utils/profile_utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
+import 'package:hitch_handler_v2/providers/providers.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../data/model/models.dart';
 
 class ProfileFlex extends StatelessWidget {
   const ProfileFlex({
@@ -10,6 +15,8 @@ class ProfileFlex extends StatelessWidget {
 
   @override
   FlexibleSpaceBar build(BuildContext context) {
+    final UserProvider userProvider = context.read<UserProvider>();
+    final UserModel? user = userProvider.userModel;
     return FlexibleSpaceBar(
       background: Padding(
         padding: EdgeInsets.symmetric(
@@ -21,7 +28,7 @@ class ProfileFlex extends StatelessWidget {
           children: [
             Row(
               children: [
-                ProfileAvatar(),
+                ProfileAvatar(name: user?.name ?? "Unknown"),
                 SizedBox(
                   width: 15.w,
                 ),
@@ -29,7 +36,7 @@ class ProfileFlex extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Ragul Raj M",
+                      user?.name ?? "Unknown",
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.bold,
@@ -83,6 +90,7 @@ class ProfileFlex extends StatelessWidget {
                 ColorIconButton(
                   tooltip: "Logout",
                   onTap: () {
+                    context.read<UserProvider>().logout();
                     context.go("/");
                   },
                   icon: Icons.logout_outlined,
@@ -97,8 +105,10 @@ class ProfileFlex extends StatelessWidget {
 }
 
 class ProfileAvatar extends StatelessWidget {
+  final String name;
   const ProfileAvatar({
     super.key,
+    required this.name,
   });
 
   @override
@@ -120,7 +130,7 @@ class ProfileAvatar extends StatelessWidget {
         ),
       ),
       child: Text(
-        "RR",
+        getInitials(name),
         style: TextStyle(
           color: Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.bold,

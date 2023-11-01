@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
+import 'phone_field.dart';
+import 'custom_field.dart';
 
 class UniField extends StatefulWidget {
   final TextEditingController controller;

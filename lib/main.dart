@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hitch_handler_v2/app/views/screens/common/launch_loading.dart';
 
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
+import 'package:hitch_handler_v2/app/views/screens/common/launch_loading.dart';
 
 import 'package:hitch_handler_v2/routing/router.dart';
 import 'package:hitch_handler_v2/theme/themes.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => JwtProvider(),
+          create: (_) => UserProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
@@ -55,8 +55,8 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
-          return Consumer2<ThemeProvider, JwtProvider>(
-            builder: (context, themeValue, jwtValue, child) {
+          return Consumer2<ThemeProvider, UserProvider>(
+            builder: (context, themeValue, userValue, child) {
               return GestureDetector(
                 onTap: () {
                   FocusManager.instance.primaryFocus?.unfocus();
@@ -76,14 +76,7 @@ class MyApp extends StatelessWidget {
                             themeValue.lightBlendLevel,
                             themeValue.darkBlendLevel),
                         themeMode: themeValue.selectedThemeMode,
-                        routerConfig: router(
-                          initialLocation: jwtValue.jwtToken != null &&
-                                  jwtValue.userType != null
-                              ? jwtValue.userType == "student"
-                                  ? '/home'
-                                  : '/home'
-                              : '/',
-                        ),
+                        routerConfig: router,
                       )
                     : LaunchLoadingScreen(
                         context: context,
