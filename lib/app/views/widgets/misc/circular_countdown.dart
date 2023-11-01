@@ -1,7 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 
 class CircularCountDown extends StatelessWidget {
   final CountDownController countDownController;

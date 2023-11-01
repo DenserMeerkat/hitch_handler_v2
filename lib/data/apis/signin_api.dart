@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hitch_handler_v2/app/views/utils/string_extenstions.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/data/services/http_service.dart';
 
 Future<String> loginStudent(String username, String password) async {

@@ -1,4 +1,4 @@
-import 'package:hitch_handler_v2/app/types/sort_types.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/data/enums/domain.dart';
 import 'package:hitch_handler_v2/data/enums/location.dart';

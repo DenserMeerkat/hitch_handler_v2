@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_up_form.dart';
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';
-import 'package:hitch_handler_v2/app/types/illustrations.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 
 class SignUpBody extends StatefulWidget {
   const SignUpBody({

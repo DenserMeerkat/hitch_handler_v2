@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/types/input_types.dart';
-import 'package:hitch_handler_v2/app/views/utils/notifiers.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
 import 'package:hitch_handler_v2/data/apis/signup_api.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/views/utils/notifiers.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 
 class BodyTemplate extends StatefulWidget {

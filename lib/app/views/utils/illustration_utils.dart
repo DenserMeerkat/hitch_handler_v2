@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hitch_handler_v2/app/types/illustration_type.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
 Future<String> loadAndModifySvg(

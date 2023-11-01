@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/types/auth_types.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
 
 class AuthBottomBar extends StatelessWidget {
   AuthBottomBar({

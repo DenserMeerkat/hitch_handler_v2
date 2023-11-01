@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 
 class PreviewOtpField extends StatelessWidget {
   const PreviewOtpField({

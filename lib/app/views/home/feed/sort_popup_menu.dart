@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/providers/filter_provider.dart';
-import 'package:hitch_handler_v2/app/types/sort_types.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 

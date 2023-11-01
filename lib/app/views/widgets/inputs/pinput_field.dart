@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpField extends StatelessWidget {

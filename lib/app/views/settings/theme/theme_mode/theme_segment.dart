@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/providers/theme_provider.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class ThemeSegment extends StatelessWidget {

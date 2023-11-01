@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/controllers/forgot_controller.dart';
-import 'package:hitch_handler_v2/app/types/input_types.dart';
-import 'package:hitch_handler_v2/app/views/widgets/buttons/long_filled_button.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/multi_field.dart';
+import 'package:hitch_handler_v2/app/controllers/controllers.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
+import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
-import 'package:hitch_handler_v2/app/views/widgets/modals/bottom_sheet.dart';
-import 'package:hitch_handler_v2/app/types/illustrations.dart';
-import 'package:hitch_handler_v2/providers/forgot_provider.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
+import 'package:hitch_handler_v2/providers/providers.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 void showForgotSheet(BuildContext context) {

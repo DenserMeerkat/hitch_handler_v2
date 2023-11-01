@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/providers/filter_provider.dart';
-import 'package:hitch_handler_v2/app/types/sort_types.dart';
+import 'package:hitch_handler_v2/providers/providers.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/filter_chip_widget.dart';
 import 'package:hitch_handler_v2/data/enums/domain.dart';
 import 'package:hitch_handler_v2/data/enums/location.dart';

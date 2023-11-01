@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hitch_handler_v2/app/types/illustration_type.dart';
-import 'package:hitch_handler_v2/app/views/utils/illustration_themer.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 
 class SvgAssetImage extends StatelessWidget {
   const SvgAssetImage({

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/utils/input_utils.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
 class CustomField extends StatefulWidget {

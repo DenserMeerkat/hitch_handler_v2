@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/utils/input_utils.dart';
-import 'package:hitch_handler_v2/app/types/input_types.dart';
-import 'package:hitch_handler_v2/app/views/widgets/inputs/phone_field.dart';
-import 'custom_field.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
+import 'package:hitch_handler_v2/app/types/types.dart';
+import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
 
 class MultiField extends StatefulWidget {
   final TextEditingController controller;
-  final List<FieldType> fields;
+  final List<InputType> fields;
   final bool switchKeyBoards;
   final TextInputAction? textInputAction;
   final Function(bool)? updateIsPhoneLogin;

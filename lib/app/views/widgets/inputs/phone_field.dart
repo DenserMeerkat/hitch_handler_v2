@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
-import 'package:hitch_handler_v2/theme/theme_utils.dart';
-import 'package:hitch_handler_v2/app/views/utils/input_utils.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';

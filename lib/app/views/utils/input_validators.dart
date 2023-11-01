@@ -1,4 +1,4 @@
-import 'package:hitch_handler_v2/app/views/utils/string_extenstions.dart';
+import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 
 String? emailValidator(String? pattern) {
   if (pattern == null || pattern.isEmpty) {

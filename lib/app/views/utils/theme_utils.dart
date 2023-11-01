@@ -29,29 +29,3 @@ String getThemeModeName(ThemeMode themeName) {
       return 'dark';
   }
 }
-
-int getThemeIndex(String themeMode) {
-  switch (themeMode) {
-    case 'system':
-      return 0;
-    case 'light':
-      return 1;
-    case 'dark':
-      return 2;
-    default:
-      return 2;
-  }
-}
-
-String getThemeFromIndex(int index) {
-  switch (index) {
-    case 0:
-      return 'system';
-    case 1:
-      return 'light';
-    case 2:
-      return 'dark';
-    default:
-      return 'system';
-  }
-}
