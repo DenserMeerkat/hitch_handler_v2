@@ -75,15 +75,17 @@ Future<UserResponseModel> loginAdmin(String username, String password) async {
     "phone": phone,
     "password": password,
   });
-
+  debugPrint(body.toString());
   try {
     response = await http.postRequest(path, body);
     if (response.statusCode == 200) {
       debugPrint(response.data.toString());
+      UserModel userModel = UserModel.fromJson(response.data["data"]);
+      userModel = userModel.copyWith(isAdmin: true);
       UserResponseModel userResponseModel = UserResponseModel(
         statusCode: 200,
         message: "Login Successful",
-        userData: UserModel.fromJson(response.data["data"]),
+        userData: userModel,
         token: response.data["token"],
       );
       debugPrint(userResponseModel.toString());

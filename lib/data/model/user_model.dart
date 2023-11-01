@@ -9,7 +9,7 @@ class UserModel with _$UserModel {
     required String name,
     required String email,
     required String phone,
-    required String roll,
+    String? roll,
     @Default(false) bool isAdmin,
   }) = _UserModel;
 

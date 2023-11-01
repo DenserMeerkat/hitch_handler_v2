@@ -23,7 +23,7 @@ mixin _$UserModel {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
-  String get roll => throw _privateConstructorUsedError;
+  String? get roll => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String name, String email, String phone, String roll, bool isAdmin});
+      {String name, String email, String phone, String? roll, bool isAdmin});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? name = null,
     Object? email = null,
     Object? phone = null,
-    Object? roll = null,
+    Object? roll = freezed,
     Object? isAdmin = null,
   }) {
     return _then(_value.copyWith(
@@ -73,10 +73,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      roll: null == roll
+      roll: freezed == roll
           ? _value.roll
           : roll // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -94,7 +94,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, String email, String phone, String roll, bool isAdmin});
+      {String name, String email, String phone, String? roll, bool isAdmin});
 }
 
 /// @nodoc
@@ -111,7 +111,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? email = null,
     Object? phone = null,
-    Object? roll = null,
+    Object? roll = freezed,
     Object? isAdmin = null,
   }) {
     return _then(_$UserModelImpl(
@@ -127,10 +127,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      roll: null == roll
+      roll: freezed == roll
           ? _value.roll
           : roll // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       isAdmin: null == isAdmin
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
@@ -146,7 +146,7 @@ class _$UserModelImpl implements _UserModel {
       {required this.name,
       required this.email,
       required this.phone,
-      required this.roll,
+      this.roll,
       this.isAdmin = false});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -159,7 +159,7 @@ class _$UserModelImpl implements _UserModel {
   @override
   final String phone;
   @override
-  final String roll;
+  final String? roll;
   @override
   @JsonKey()
   final bool isAdmin;
@@ -205,7 +205,7 @@ abstract class _UserModel implements UserModel {
       {required final String name,
       required final String email,
       required final String phone,
-      required final String roll,
+      final String? roll,
       final bool isAdmin}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -218,7 +218,7 @@ abstract class _UserModel implements UserModel {
   @override
   String get phone;
   @override
-  String get roll;
+  String? get roll;
   @override
   bool get isAdmin;
   @override
