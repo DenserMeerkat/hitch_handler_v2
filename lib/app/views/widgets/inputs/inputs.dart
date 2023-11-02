@@ -7,4 +7,6 @@ export 'password_validator.dart';
 export 'phone_field.dart';
 export 'date_pick_field.dart';
 export 'type_ahead_field.dart';
+export 'plain_type_ahead_field.dart';
+export 'plain_text_field.dart';
 export 'pinput_field.dart';

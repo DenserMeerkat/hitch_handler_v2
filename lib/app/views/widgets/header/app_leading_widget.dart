@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 
 class AppLeadingWidget extends StatelessWidget {
   const AppLeadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppbarIconButton(
+    return CustomIconButton(
       icon: Container(
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(

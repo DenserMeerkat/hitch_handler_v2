@@ -57,6 +57,7 @@ class LoginController {
           context,
           contentText: result.message,
         );
+        scaffoldContext.hideCurrentMaterialBanner();
         scaffoldContext.showMaterialBanner(materialBanner);
       }
     }

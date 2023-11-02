@@ -3,7 +3,7 @@ import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
 
 class AppWrapper extends StatelessWidget {
-  final Widget child;
+  final Widget body;
   final bool showTitle;
   final double toolbarHeight;
   final PreferredSizeWidget? appBar;
@@ -11,7 +11,7 @@ class AppWrapper extends StatelessWidget {
   final Color? backgroundColor;
   const AppWrapper({
     super.key,
-    required this.child,
+    required this.body,
     this.showTitle = true,
     this.toolbarHeight = 40,
     this.bottomNavigationBar,
@@ -45,7 +45,7 @@ class AppWrapper extends StatelessWidget {
                   : null,
               centerTitle: true,
             ),
-        body: child,
+        body: body,
         bottomNavigationBar: bottomNavigationBar,
       ),
     );

@@ -49,6 +49,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ForgotProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => PostProvider(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

@@ -3,3 +3,4 @@ export 'forgot_provider.dart';
 export 'login_provider.dart';
 export 'theme_provider.dart';
 export 'user_provider.dart';
+export 'post_provider.dart';

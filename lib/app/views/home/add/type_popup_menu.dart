@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
+import 'package:hitch_handler_v2/providers/post_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
-class SortPopupMenu extends StatefulWidget {
-  final FilterProvider filterProvider;
-  const SortPopupMenu({
+class TypePopupMenu extends StatefulWidget {
+  final double borderRadius;
+  final double popupMenuRadius;
+  const TypePopupMenu({
     super.key,
-    required this.filterProvider,
+    this.borderRadius = 20,
+    this.popupMenuRadius = 8,
   });
 
   @override
-  State<SortPopupMenu> createState() => _SortPopupMenuState();
+  State<TypePopupMenu> createState() => _TypePopupMenuState();
 }
 
-class _SortPopupMenuState extends State<SortPopupMenu>
+class _TypePopupMenuState extends State<TypePopupMenu>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
+  late PostProvider postProvider;
+  late List<PostType> postTypeList;
+  late PostType postType;
+  late PostTypeEnum postTypeEnum;
+
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -36,13 +43,15 @@ class _SortPopupMenuState extends State<SortPopupMenu>
 
   @override
   Widget build(BuildContext context) {
+    postProvider = context.watch<PostProvider>();
+    postTypeList = postTypes;
+    postType = postProvider.type;
+    postTypeEnum = postType.postTypeEnum;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final List<SortType> sortList = sortTypes;
-    SortType sortType = getSortType(widget.filterProvider.filterSort);
-
     return MaterialClip(
+      borderRadius: widget.borderRadius,
       child: PopupMenuButton(
-        offset: const Offset(0, 16),
+        offset: const Offset(0, 20),
         position: PopupMenuPosition.under,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
@@ -54,14 +63,12 @@ class _SortPopupMenuState extends State<SortPopupMenu>
             color: Theme.of(context).dividerColor,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(widget.popupMenuRadius),
         ),
         splashRadius: 8,
         onSelected: (value) {
           _controller.reverse(from: 0.5);
-          if (widget.filterProvider.filterSort != value) {
-            widget.filterProvider.setFilterSort(value);
-          }
+          postProvider.updateType(getPostType(value));
         },
         onCanceled: () {
           _controller.reverse(from: 0.5);
@@ -70,9 +77,9 @@ class _SortPopupMenuState extends State<SortPopupMenu>
           _controller.forward(from: 0.5);
         },
         itemBuilder: (context) => <PopupMenuEntry>[
-          buildPopupMenuItem(context, widget.filterProvider, sortList[0]),
+          buildPopupMenuItem(context, postProvider, postTypeList[0]),
           buildPopupMenuItemDivider(context),
-          buildPopupMenuItem(context, widget.filterProvider, sortList[1]),
+          buildPopupMenuItem(context, postProvider, postTypeList[1]),
         ],
         child: Container(
           decoration: BoxDecoration(
@@ -80,7 +87,7 @@ class _SortPopupMenuState extends State<SortPopupMenu>
                 .colorScheme
                 .tertiaryContainer
                 .withOpacity(isDarkMode ? 0.6 : 1),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(widget.borderRadius),
             border: Border.all(
               color: Theme.of(context).dividerColor,
               width: 1,
@@ -89,14 +96,23 @@ class _SortPopupMenuState extends State<SortPopupMenu>
           child: Row(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
-                child: Icon(sortType.icon, size: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Icon(postType.icon, size: 20),
               ),
               Container(
                 height: 34,
                 width: 1,
                 color: Theme.of(context).dividerColor,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  postType.title,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
               RotationTransition(
                 turns: Tween(begin: 0.0, end: 0.5).animate(_controller),
@@ -106,6 +122,7 @@ class _SortPopupMenuState extends State<SortPopupMenu>
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
+              const SizedBox(width: 4)
             ],
           ),
         ),
@@ -127,22 +144,22 @@ PopupMenuItem buildPopupMenuItemDivider(BuildContext context) {
   );
 }
 
-PopupMenuItem<SortEnum> buildPopupMenuItem(
-    BuildContext context, FilterProvider filterProvider, SortType sortType) {
-  return PopupMenuItem<SortEnum>(
+PopupMenuItem<PostTypeEnum> buildPopupMenuItem(
+    BuildContext context, PostProvider postProvider, PostType postType) {
+  return PopupMenuItem<PostTypeEnum>(
     padding: const EdgeInsets.symmetric(horizontal: 12),
     height: 36,
     onTap: () {
-      if (filterProvider.filterSort != sortType.sortEnum) {
-        filterProvider.setFilterSort(sortType.sortEnum);
+      if (postProvider.type.postTypeEnum != postType.postTypeEnum) {
+        postProvider.updateType(postType);
       }
     },
-    value: sortType.sortEnum,
+    value: postType.postTypeEnum,
     child: Row(
       children: [
-        Icon(sortType.icon, size: 16),
+        Icon(postType.icon, size: 16),
         const SizedBox(width: 8),
-        Text(sortType.title),
+        Text(postType.title),
       ],
     ),
   );

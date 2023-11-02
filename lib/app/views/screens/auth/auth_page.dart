@@ -4,9 +4,9 @@ import 'package:hitch_handler_v2/app/views/auth/auth_bottom_bar.dart';
 import 'package:hitch_handler_v2/app/views/auth/auth_page_title.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_in_body.dart';
 import 'package:hitch_handler_v2/app/views/auth/sign_up_body.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/custom_app_bar.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 
 class AuthPage extends StatefulWidget {
@@ -60,7 +60,7 @@ class _AuthPageState extends State<AuthPage> with TickerProviderStateMixin {
             automaticallyImplyLeading: false,
             elevation: 0,
             flexibleSpace: CustomAppBar(
-              leading: AppbarIconButton(
+              leading: CustomIconButton(
                 onPressed: () {
                   if (current == 0) {
                     context.go('/');

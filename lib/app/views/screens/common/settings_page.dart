@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme_widgets.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_mode/theme_mode_switch.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/theme_preview.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 import 'package:hitch_handler_v2/providers/theme_provider.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -36,7 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           leading: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: AppbarIconButton(
+            child: CustomIconButton(
               onPressed: () => context.pop(),
             ),
           ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
+import 'package:hitch_handler_v2/app/views/home/add/add_form.dart';
+import 'package:hitch_handler_v2/app/views/home/add/type_popup_menu.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
 
@@ -18,17 +20,10 @@ class _AddPageState extends State<AddPage> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          "Add Post",
-          style: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 0.8,
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-          ),
+        title: const Row(
+          children: [TypePopupMenu()],
         ),
-        leading: AppbarIconButton(
+        leading: CustomIconButton(
           tooltip: "Close",
           icon: Icon(
             Icons.close,
@@ -39,11 +34,16 @@ class _AddPageState extends State<AddPage> {
             Navigator.of(context).pop();
           },
         ),
-        bottom: bottomLine(context, height: 10),
+        actions: [
+          CustomFilledButton(
+            onPressed: () {},
+            label: "Next",
+          ),
+          SizedBox(width: 16.w),
+        ],
+        bottom: bottomLine(context),
       ),
-      child: Container(
-        height: 690.h,
-      ),
+      body: const AddForm(),
     );
   }
 }

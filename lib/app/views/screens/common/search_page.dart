@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/feed_flex.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
 
@@ -29,7 +29,7 @@ class _SearchPageState extends State<SearchPage> {
             color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
           ),
         ),
-        leading: AppbarIconButton(
+        leading: CustomIconButton(
           tooltip: "Close",
           icon: Icon(
             Icons.close,
@@ -41,7 +41,7 @@ class _SearchPageState extends State<SearchPage> {
           },
         ),
       ),
-      child: CustomScrollView(
+      body: CustomScrollView(
         slivers: [
           SliverAppBar(
             primary: false,

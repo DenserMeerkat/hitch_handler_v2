@@ -22,6 +22,8 @@ class CustomTypeAheadField extends StatefulWidget {
   final bool? enabled;
   final AxisDirection? direction;
   final ColorEnum? colorEnum;
+  final double borderRadius;
+  final double maxWidth;
   const CustomTypeAheadField({
     super.key,
     required this.onSuggestionSelected,
@@ -41,6 +43,8 @@ class CustomTypeAheadField extends StatefulWidget {
     this.enabled,
     this.direction,
     this.colorEnum = ColorEnum.secondary,
+    this.borderRadius = 8,
+    this.maxWidth = 280,
   });
 
   @override
@@ -54,13 +58,6 @@ class _CustomTypeAheadFieldState extends State<CustomTypeAheadField> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    widget.controller?.dispose();
-    widget.focusNode?.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     ColorFamily colorFamily = getColorFamily(widget.colorEnum!, context);
@@ -68,7 +65,7 @@ class _CustomTypeAheadFieldState extends State<CustomTypeAheadField> {
       mainAxisSize: MainAxisSize.min,
       children: [
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 280),
+          constraints: BoxConstraints(maxWidth: widget.maxWidth),
           child: Stack(
             alignment: Alignment.centerLeft,
             children: [
@@ -77,7 +74,7 @@ class _CustomTypeAheadFieldState extends State<CustomTypeAheadField> {
                 decoration: BoxDecoration(
                   color: colorFamily.colorContainer
                       .withOpacity(isDarkMode ? 0.4 : 0.8),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
                   border: Border.all(
                     color: Theme.of(context).dividerColor,
                     width: 1.2,
@@ -91,6 +88,7 @@ class _CustomTypeAheadFieldState extends State<CustomTypeAheadField> {
                 direction: widget.direction ?? AxisDirection.up,
                 onSuggestionSelected: widget.onSuggestionSelected,
                 suggestionsCallback: widget.suggestionsCallback,
+                suggestionsBoxVerticalOffset: 0,
                 itemBuilder: (context, dynamic suggestion) {
                   return Container(
                     padding:
@@ -126,13 +124,13 @@ class _CustomTypeAheadFieldState extends State<CustomTypeAheadField> {
                 suggestionsBoxDecoration: SuggestionsBoxDecoration(
                   hasScrollbar: false,
                   offsetX: 40,
-                  constraints: const BoxConstraints(maxWidth: 240),
+                  constraints: BoxConstraints(maxWidth: widget.maxWidth - 40),
                   shape: RoundedRectangleBorder(
                     side: BorderSide(
                       color: Theme.of(context).dividerColor,
                       width: 1.2,
                     ),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(widget.borderRadius),
                   ),
                   clipBehavior: Clip.hardEdge,
                   color: Theme.of(context).colorScheme.surface,
@@ -193,8 +191,8 @@ class _CustomTypeAheadFieldState extends State<CustomTypeAheadField> {
                 decoration: BoxDecoration(
                   color: colorFamily.colorContainer
                       .withOpacity(isDarkMode ? 0.6 : 1),
-                  borderRadius: const BorderRadius.horizontal(
-                    left: Radius.circular(7),
+                  borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(widget.borderRadius),
                   ),
                 ),
                 child: Icon(

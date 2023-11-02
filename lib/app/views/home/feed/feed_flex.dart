@@ -14,7 +14,7 @@ class FeedFlex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FilterProvider filterController = context.watch<FilterProvider>();
+    final FilterProvider filterProvider = context.watch<FilterProvider>();
     return FlexibleSpaceBar(
       background: Container(
         alignment: Alignment.bottomCenter,
@@ -32,7 +32,7 @@ class FeedFlex extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             SortPopupMenu(
-              filterController: filterController,
+              filterProvider: filterProvider,
             ),
           ],
         ),

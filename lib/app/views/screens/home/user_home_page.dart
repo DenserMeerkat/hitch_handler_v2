@@ -4,7 +4,7 @@ import 'package:hitch_handler_v2/app/views/home/home_bottom_bar.dart';
 import 'package:hitch_handler_v2/app/views/home/home_views.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/slider_page.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/app_leading_widget.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/appbar_icon_button.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/icon_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/app_wrapper.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: isDrawerOpen
               ? Theme.of(context).colorScheme.onInverseSurface
               : Theme.of(context).appBarTheme.backgroundColor,
-          child: SliderDrawer(
+          body: SliderDrawer(
             key: _sliderDrawerKey,
             slideDirection: SlideDirection.RIGHT_TO_LEFT,
             appBar: Container(
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                   elevation: 0,
                   leading: const AppLeadingWidget(),
                   actions: [
-                    AppbarIconButton(
+                    CustomIconButton(
                       tooltip: "Toggle Sidebar",
                       icon: Icon(
                         Symbols.side_navigation_rounded,

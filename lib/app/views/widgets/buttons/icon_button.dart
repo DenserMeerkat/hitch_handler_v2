@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AppbarIconButton extends StatelessWidget {
+class CustomIconButton extends StatelessWidget {
   final IconData? iconData;
   final Widget icon;
   final String? tooltip;
   final Function()? onPressed;
-  const AppbarIconButton({
+  const CustomIconButton({
     super.key,
     this.iconData,
     this.icon = const Icon(Icons.arrow_back_outlined),
