@@ -4,7 +4,7 @@ String appName = "Hitch Handler";
 String orgName = "CEG Tech Forum";
 
 const double kDefaultPadding = 20.0;
-const double kHeaderHeight = 120.0;
+const double kHeaderHeight = 106.0;
 const int otpCountdownTime = 90;
 
 const kStudentColor = Color.fromARGB(255, 104, 206, 201);

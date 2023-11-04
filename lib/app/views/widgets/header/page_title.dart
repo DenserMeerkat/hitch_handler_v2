@@ -13,7 +13,8 @@ class PageTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isDarkMode = isDark(context);
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 8, 30, 8).r,
+      constraints: const BoxConstraints(maxWidth: 180, maxHeight: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
           color: isDark(context)
               ? Theme.of(context).colorScheme.onTertiary.withOpacity(0.8)
@@ -25,29 +26,32 @@ class PageTitle extends StatelessWidget {
               color: isDarkMode ? kBlack10 : kLGrey30,
             )
           ]),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            size: 18,
-            color: isDarkMode
-                ? Theme.of(context).colorScheme.tertiary
-                : Theme.of(context).colorScheme.onSecondaryContainer,
-          ),
-          Gap(15.w),
-          Text(
-            title,
-            style: TextStyle(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 18,
               color: isDarkMode
                   ? Theme.of(context).colorScheme.tertiary
                   : Theme.of(context).colorScheme.onSecondaryContainer,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              letterSpacing: 1.5,
             ),
-          ),
-        ],
+            Gap(15.w),
+            Text(
+              title,
+              style: TextStyle(
+                color: isDarkMode
+                    ? Theme.of(context).colorScheme.tertiary
+                    : Theme.of(context).colorScheme.onSecondaryContainer,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1.5,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

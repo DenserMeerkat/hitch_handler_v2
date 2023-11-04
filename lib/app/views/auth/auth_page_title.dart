@@ -17,16 +17,17 @@ class AuthPageTitle extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 140, maxHeight: 40),
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
-            color: isDark(context)
-                ? Theme.of(context).colorScheme.onTertiary.withOpacity(0.8)
-                : Theme.of(context).colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(50),
-            boxShadow: [
-              BoxShadow(
-                offset: const Offset(0, 1),
-                color: isDarkMode ? kBlack10 : kLGrey30,
-              )
-            ]),
+          color: isDark(context)
+              ? Theme.of(context).colorScheme.onTertiary.withOpacity(0.8)
+              : Theme.of(context).colorScheme.primaryContainer,
+          borderRadius: BorderRadius.circular(50),
+          boxShadow: [
+            BoxShadow(
+              offset: const Offset(0, 1),
+              color: isDarkMode ? kBlack10 : kLGrey30,
+            )
+          ],
+        ),
         child: tabController.index == 0
             ? renderTab(
                 context,

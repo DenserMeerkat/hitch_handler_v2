@@ -48,9 +48,9 @@ class HomeBottomBar extends StatelessWidget {
           // ),
           AddPostButton(),
           // NavigationDestination(
-          //   selectedIcon: Icon(Icons.bookmark),
-          //   icon: Icon(Icons.bookmark_outline_outlined),
-          //   label: "Bookmarks",
+          //   selectedIcon: Icon(Icons.archive),
+          //   icon: Icon(Icons.archive_outlined),
+          //   label: "Archives",
           // ),
           NavigationDestination(
             selectedIcon: Icon(Icons.account_circle),
