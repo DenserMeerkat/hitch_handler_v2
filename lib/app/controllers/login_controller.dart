@@ -38,6 +38,7 @@ class LoginController {
     _loginProvider.updateIsLoading(false);
     if (result.statusCode == 200) {
       if (context.mounted) {
+        debugPrint("token : ${result.token}");
         context
             .read<UserProvider>()
             .saveToStorage(result.token, result.userData);

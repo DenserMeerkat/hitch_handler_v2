@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-enum PostTypeEnum { public, private }
+import 'package:hitch_handler_v2/data/enums/enums.dart';
 
 class PostType {
   final PostTypeEnum postTypeEnum;

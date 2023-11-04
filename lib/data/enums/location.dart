@@ -25,7 +25,7 @@ class Location {
   static String getLocationString(LocationEnum location) {
     return locations.keys.firstWhere(
       (element) => locations[element] == location,
-      orElse: () => "none",
+      orElse: () => "",
     );
   }
 

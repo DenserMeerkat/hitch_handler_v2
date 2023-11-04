@@ -52,6 +52,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
       hintFontSize: 14.sp,
       maxLines: 100,
       maxLength: 1000,
+      enabled: !context.watch<PostProvider>().isLoading,
     );
   }
 }

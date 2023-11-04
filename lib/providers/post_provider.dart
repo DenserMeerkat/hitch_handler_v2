@@ -17,7 +17,7 @@ class PostProvider extends ChangeNotifier {
     _type = postTypes[0];
     _domain = DomainEnum.none;
     _isLoading = false;
-    _useLocation = false;
+    _useLocation = true;
   }
 
   String? get title => _title;

@@ -64,6 +64,7 @@ class _DomainFieldState extends State<DomainField> {
       maxWidth: 360.w - 40,
       fontSize: 14.sp,
       fontWeight: FontWeight.w700,
+      enabled: !context.watch<PostProvider>().isLoading,
     );
   }
 

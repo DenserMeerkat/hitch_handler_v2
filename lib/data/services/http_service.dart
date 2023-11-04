@@ -12,6 +12,7 @@ class HttpService {
     headers: {
       "api-key":
           dotenv.env['API_KEY'] ?? "9d54df40-c3ba-45c9-ba8b-55d8071f8dd2",
+      "content-type": "application/json",
     },
   );
 
@@ -28,7 +29,8 @@ class HttpService {
   }
 
   Future<Response> getRequest(String path) async {
-    late Response response;
+    Response response =
+        Response(requestOptions: RequestOptions(path: "Error Response"));
 
     try {
       response = await _dio.get(
@@ -39,13 +41,35 @@ class HttpService {
       if (kDebugMode) {
         print(e.message);
       }
-      throw Exception(e.message);
+    }
+    return response;
+  }
+
+  Future<Response> getRequestProtected(String path, String token) async {
+    Response response =
+        Response(requestOptions: RequestOptions(path: "Error Response"));
+
+    try {
+      response = await _dio.get(
+        path,
+        options: Options(headers: {
+          "api-key":
+              dotenv.env['API_KEY'] ?? "9d54df40-c3ba-45c9-ba8b-55d8071f8dd2",
+          "content-type": "application/json",
+          "authorization": token,
+        }),
+      );
+    } on DioException catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
     }
     return response;
   }
 
   Future<Response> postRequest(String path, Object data) async {
-    late Response response;
+    Response response =
+        Response(requestOptions: RequestOptions(path: "Error Response"));
 
     try {
       response = await _dio.post(
@@ -57,7 +81,30 @@ class HttpService {
       if (kDebugMode) {
         print(e.message);
       }
-      throw Exception(e.message);
+    }
+    return response;
+  }
+
+  Future<Response> postRequestProtected(
+      String path, Object data, String token) async {
+    Response response =
+        Response(requestOptions: RequestOptions(path: "Error Response"));
+
+    try {
+      response = await _dio.post(
+        path,
+        data: data,
+        options: Options(headers: {
+          "api-key":
+              dotenv.env['API_KEY'] ?? "9d54df40-c3ba-45c9-ba8b-55d8071f8dd2",
+          "content-type": "application/json",
+          "authorization": token,
+        }),
+      );
+    } on DioException catch (e) {
+      if (kDebugMode) {
+        print(e.message);
+      }
     }
     return response;
   }

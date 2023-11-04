@@ -63,6 +63,7 @@ class _LocationFieldState extends State<LocationField> {
       maxWidth: 360.w - 40,
       fontSize: 14.sp,
       fontWeight: FontWeight.w700,
+      enabled: !context.watch<PostProvider>().isLoading,
     );
   }
 

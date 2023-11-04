@@ -54,6 +54,7 @@ class _TitleFieldState extends State<TitleField> {
       hintFontSize: 24.sp,
       hintFontWeight: FontWeight.w600,
       maxLength: 60,
+      enabled: !context.watch<PostProvider>().isLoading,
     );
   }
 }

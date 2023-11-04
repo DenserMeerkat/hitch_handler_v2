@@ -67,6 +67,7 @@ class _PlainTypeAheadFieldState extends State<PlainTypeAheadField> {
       child: TypeAheadFormField(
         ignoreAccessibleNavigation: true,
         suggestionsBoxVerticalOffset: 0,
+        getImmediateSuggestions: widget.minCharsForSuggestions == 0,
         minCharsForSuggestions: widget.minCharsForSuggestions,
         hideSuggestionsOnKeyboardHide: true,
         direction: AxisDirection.down,

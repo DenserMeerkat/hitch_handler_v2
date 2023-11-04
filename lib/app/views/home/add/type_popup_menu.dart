@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
+import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/providers/post_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tinycolor2/tinycolor2.dart';
@@ -10,11 +11,13 @@ class TypePopupMenu extends StatefulWidget {
   final double borderRadius;
   final double popupMenuRadius;
   final bool showTitle;
+  final bool enabled;
   const TypePopupMenu({
     super.key,
     this.borderRadius = 20,
     this.popupMenuRadius = 8,
     this.showTitle = false,
+    this.enabled = true,
   });
 
   @override
@@ -51,84 +54,87 @@ class _TypePopupMenuState extends State<TypePopupMenu>
     postType = postProvider.type;
     postTypeEnum = postType.postTypeEnum;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    return MaterialClip(
-      borderRadius: widget.borderRadius,
-      child: PopupMenuButton(
-        offset: const Offset(0, 20),
-        position: PopupMenuPosition.under,
-        elevation: 0,
-        surfaceTintColor: Colors.transparent,
-        color: Theme.of(context).colorScheme.background.mix(
-            Theme.of(context).colorScheme.tertiaryContainer,
-            isDarkMode ? 40 : 80),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Theme.of(context).dividerColor,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(widget.popupMenuRadius),
-        ),
-        splashRadius: 8,
-        onSelected: (value) {
-          _controller.reverse(from: 0.5);
-          postProvider.updateType(getPostType(value));
-        },
-        onCanceled: () {
-          _controller.reverse(from: 0.5);
-        },
-        onOpened: () {
-          _controller.forward(from: 0.5);
-        },
-        itemBuilder: (context) => <PopupMenuEntry>[
-          buildPopupMenuItem(context, postProvider, postTypeList[0]),
-          buildPopupMenuItemDivider(context),
-          buildPopupMenuItem(context, postProvider, postTypeList[1]),
-        ],
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context)
-                .colorScheme
-                .tertiaryContainer
-                .withOpacity(isDarkMode ? 0.6 : 1),
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            border: Border.all(
+    return AbsorbPointer(
+      absorbing: !widget.enabled,
+      child: MaterialClip(
+        borderRadius: widget.borderRadius,
+        child: PopupMenuButton(
+          offset: const Offset(0, 20),
+          position: PopupMenuPosition.under,
+          elevation: 0,
+          surfaceTintColor: Colors.transparent,
+          color: Theme.of(context).colorScheme.background.mix(
+              Theme.of(context).colorScheme.tertiaryContainer,
+              isDarkMode ? 40 : 80),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
               color: Theme.of(context).dividerColor,
               width: 1,
             ),
+            borderRadius: BorderRadius.circular(widget.popupMenuRadius),
           ),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Icon(postType.icon, size: widget.showTitle ? 20 : 18),
-              ),
-              Container(
-                height: widget.showTitle ? 34 : 30,
-                width: 1,
+          splashRadius: 8,
+          onSelected: (value) {
+            _controller.reverse(from: 0.5);
+            postProvider.updateType(getPostType(value));
+          },
+          onCanceled: () {
+            _controller.reverse(from: 0.5);
+          },
+          onOpened: () {
+            _controller.forward(from: 0.5);
+          },
+          itemBuilder: (context) => <PopupMenuEntry>[
+            buildPopupMenuItem(context, postProvider, postTypeList[0]),
+            buildPopupMenuItemDivider(context),
+            buildPopupMenuItem(context, postProvider, postTypeList[1]),
+          ],
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context)
+                  .colorScheme
+                  .tertiaryContainer
+                  .withOpacity(isDarkMode ? 0.6 : 1),
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              border: Border.all(
                 color: Theme.of(context).dividerColor,
+                width: 1,
               ),
-              widget.showTitle
-                  ? Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        postType.title,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    )
-                  : const Gap(0),
-              RotationTransition(
-                turns: Tween(begin: 0.0, end: 0.5).animate(_controller),
-                child: Icon(
-                  Icons.arrow_drop_down,
-                  size: 20,
-                  color: Theme.of(context).colorScheme.onSurface,
+            ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Icon(postType.icon, size: widget.showTitle ? 20 : 18),
                 ),
-              ),
-              const Gap(4)
-            ],
+                Container(
+                  height: widget.showTitle ? 34 : 30,
+                  width: 1,
+                  color: Theme.of(context).dividerColor,
+                ),
+                widget.showTitle
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          postType.title,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      )
+                    : const Gap(0),
+                RotationTransition(
+                  turns: Tween(begin: 0.0, end: 0.5).animate(_controller),
+                  child: Icon(
+                    Icons.arrow_drop_down,
+                    size: 20,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                const Gap(4)
+              ],
+            ),
           ),
         ),
       ),

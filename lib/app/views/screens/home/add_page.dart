@@ -24,103 +24,120 @@ class _AddPageState extends State<AddPage> {
     final PostController postController = PostController(context);
     final PostProvider postProvider = context.read<PostProvider>();
     final bool useLocation = context.watch<PostProvider>().useLocation;
-    return AppWrapper(
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        automaticallyImplyLeading: false,
-        titleSpacing: 4,
-        title: Row(
-          children: [
-            Icon(
-              MdiIcons.incognito,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-              size: 18,
-            ),
-            const Gap(10),
-            Text(
-              "Anonymous",
-              style: TextStyle(
-                fontSize: 17,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: AppWrapper(
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          automaticallyImplyLeading: false,
+          titleSpacing: 4,
+          title: Row(
+            children: [
+              Icon(
+                MdiIcons.incognito,
                 color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.2,
+                size: 18,
               ),
-            ),
-          ],
-        ),
-        leading: CustomIconButton(
-          tooltip: "Close",
-          icon: Icon(
-            Icons.close,
-            size: 20,
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+              const Gap(10),
+              Text(
+                "Anonymous",
+                style: TextStyle(
+                  fontSize: 17,
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.2,
+                ),
+              ),
+            ],
           ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        actions: [
-          CustomIconButton(
-            tooltip: "Info",
+          leading: CustomIconButton(
+            tooltip: "Close",
             icon: Icon(
-              Icons.help_outline_rounded,
+              Icons.close,
               size: 20,
               color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
             ),
-            onPressed: () {},
+            onPressed: !context.watch<PostProvider>().isLoading
+                ? () {
+                    Navigator.of(context).pop();
+                  }
+                : null,
           ),
-          const TypePopupMenu(),
-          Gap(16.w),
-        ],
-        bottom: bottomLine(context),
-      ),
-      body: AddForm(
-        showLocation: useLocation,
-      ),
-      bottomNavigationBar: Container(
-        height: 81,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          border: Border(
-            top: BorderSide(
-              color: Theme.of(context).dividerColor,
-              width: 1,
+          actions: [
+            CustomIconButton(
+              tooltip: "Info",
+              icon: Icon(
+                Icons.help_outline_rounded,
+                size: 20,
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+              ),
+              onPressed:
+                  !context.watch<PostProvider>().isLoading ? () {} : null,
             ),
-          ),
-        ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                IconToggleButton(
-                  verticalOffset: 40,
-                  borderRadius: 12,
-                  selectedIcon: Icons.place_outlined,
-                  icon: Icons.wrong_location_outlined,
-                  isSelected: useLocation,
-                  color:
-                      Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-                  selectedColor:
-                      Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                  onPressed: !postProvider.isLoading
-                      ? () {
-                          postProvider.updateUseLocation(!useLocation);
-                        }
-                      : null,
-                ),
-                const Spacer(),
-                CustomFilledButton(
-                  label: "Post",
-                  onPressed: () {},
-                  showIcon: true,
-                  enabled:
-                      !postProvider.isLoading && postController.isFromValid(),
-                ),
-              ],
+            TypePopupMenu(
+              enabled: !context.watch<PostProvider>().isLoading,
             ),
-            Gap(MediaQuery.of(context).padding.bottom),
+            Gap(16.w),
           ],
+          bottom: bottomLine(context),
+        ),
+        body: AddForm(
+          showLocation: useLocation,
+        ),
+        bottomNavigationBar: Container(
+          height: 81,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            border: Border(
+              top: BorderSide(
+                color: Theme.of(context).dividerColor,
+                width: 1,
+              ),
+            ),
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  IconToggleButton(
+                    verticalOffset: 40,
+                    borderRadius: 12,
+                    selectedIcon: Icons.place_outlined,
+                    icon: Icons.wrong_location_outlined,
+                    isSelected: useLocation,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.1),
+                    selectedColor:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                    onPressed: !postProvider.isLoading
+                        ? () {
+                            postProvider.updateUseLocation(!useLocation);
+                          }
+                        : null,
+                  ),
+                  const Spacer(),
+                  CustomFilledButton(
+                    label: "Post",
+                    onPressed: !postProvider.isLoading
+                        ? () {
+                            postController.post(context);
+                          }
+                        : null,
+                    showIcon: true,
+                    enabled:
+                        !postProvider.isLoading && postController.isFromValid(),
+                  ),
+                ],
+              ),
+              Gap(MediaQuery.of(context).padding.bottom),
+            ],
+          ),
         ),
       ),
     );

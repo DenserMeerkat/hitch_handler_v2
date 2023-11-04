@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
+import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/data/model/models.dart';
 import 'package:hitch_handler_v2/data/services/http_service.dart';
 
@@ -81,7 +82,7 @@ Future<UserResponseModel> loginAdmin(String username, String password) async {
     if (response.statusCode == 200) {
       debugPrint(response.data.toString());
       UserModel userModel = UserModel.fromJson(response.data["data"]);
-      userModel = userModel.copyWith(isAdmin: true);
+      userModel = userModel.copyWith(userType: UserEnum.admin);
       UserResponseModel userResponseModel = UserResponseModel(
         statusCode: 200,
         message: "Login Successful",

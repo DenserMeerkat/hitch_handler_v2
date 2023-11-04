@@ -125,8 +125,8 @@ class ProfileAvatar extends StatelessWidget {
             .primary
             .withOpacity(isDarkMode ? 0.2 : 0.3),
         border: Border.all(
-          color: Theme.of(context).colorScheme.primary,
-          width: 0.1,
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+          width: 1,
         ),
       ),
       child: Text(
