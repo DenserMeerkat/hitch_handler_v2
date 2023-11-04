@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme_widgets.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_mode/theme_mode_switch.dart';
@@ -46,19 +47,19 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: 30.h),
+              Gap(30.h),
               const ThemePreview(),
-              SizedBox(height: 35.h),
+              Gap(35.h),
               ColorSchemeScroll(
                 value: context.read<ThemeProvider>(),
               ),
-              SizedBox(height: 20.h),
+              Gap(20.h),
               BlendSlider(
                 value: context.read<ThemeProvider>(),
               ),
-              SizedBox(height: 30.h),
+              Gap(30.h),
               ThemeModeSwitch(),
-              SizedBox(height: 20.h),
+              Gap(20.h),
             ],
           ),
         ),

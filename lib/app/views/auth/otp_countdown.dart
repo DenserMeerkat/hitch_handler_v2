@@ -1,5 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/underline_button.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/circular_countdown.dart';
 
@@ -39,9 +40,7 @@ class _OtpCountdownState extends State<OtpCountdown> {
           label: "Resend Code",
           decorationStyle: TextDecorationStyle.dashed,
         ),
-        const SizedBox(
-          width: 10,
-        ),
+        const Gap(10),
         CircularCountDown(
           countDownController: countDownController,
           isCounting: isCounting,

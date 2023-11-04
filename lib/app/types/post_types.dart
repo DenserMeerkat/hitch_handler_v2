@@ -30,7 +30,7 @@ final List<PostType> postTypes = <PostType>[
   const PostType(
     postTypeEnum: PostTypeEnum.private,
     label: Text('Private'),
-    icon: Icons.vpn_lock_outlined,
+    icon: Icons.lock_outlined,
     title: 'Private',
   ),
 ];

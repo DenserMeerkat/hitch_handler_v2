@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/filter_chip_widget.dart';
@@ -32,9 +33,7 @@ class ChipsScrollView extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
-              width: 15.w,
-            ),
+            Gap(15.w),
             !filterController.isDomainNone()
                 ? Padding(
                     padding: const EdgeInsets.only(right: 8.0),
@@ -45,7 +44,7 @@ class ChipsScrollView extends StatelessWidget {
                       colorEnum: ColorEnum.tertiary,
                     ),
                   )
-                : const SizedBox(),
+                : const Gap(0),
             !filterController.isLocationNone()
                 ? Padding(
                     padding: const EdgeInsets.only(right: 8.0),
@@ -56,16 +55,14 @@ class ChipsScrollView extends StatelessWidget {
                       colorEnum: ColorEnum.secondary,
                     ),
                   )
-                : const SizedBox(),
+                : const Gap(0),
             FilterChipW(
               icon: getSortType(filterController.filterSort).icon,
               label: getSortType(filterController.filterSort).title,
               colorEnum: ColorEnum.primary,
               borderColor: Theme.of(context).colorScheme.primary,
             ),
-            SizedBox(
-              width: 15.w,
-            ),
+            Gap(15.w),
           ],
         ),
       ),

@@ -12,7 +12,9 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String,
       phone: json['phone'] as String,
       roll: json['roll'] as String?,
-      isAdmin: json['isAdmin'] as bool? ?? false,
+      userType: $enumDecodeNullable(_$UserEnumEnumMap, json['userType']) ??
+          UserEnum.student,
+      domain: json['domain'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
@@ -21,5 +23,11 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'email': instance.email,
       'phone': instance.phone,
       'roll': instance.roll,
-      'isAdmin': instance.isAdmin,
+      'userType': _$UserEnumEnumMap[instance.userType]!,
+      'domain': instance.domain,
     };
+
+const _$UserEnumEnumMap = {
+  UserEnum.student: 'student',
+  UserEnum.admin: 'admin',
+};

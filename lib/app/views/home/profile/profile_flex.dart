@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hitch_handler_v2/app/controllers/post_controller.dart';
 import 'package:hitch_handler_v2/app/views/utils/profile_utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../data/model/models.dart';
+import 'package:hitch_handler_v2/data/model/models.dart';
 
 class ProfileFlex extends StatelessWidget {
   const ProfileFlex({
@@ -29,9 +30,7 @@ class ProfileFlex extends StatelessWidget {
             Row(
               children: [
                 ProfileAvatar(name: user?.name ?? "Unknown"),
-                SizedBox(
-                  width: 15.w,
-                ),
+                Gap(15.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -90,7 +89,8 @@ class ProfileFlex extends StatelessWidget {
                 ColorIconButton(
                   tooltip: "Logout",
                   onTap: () {
-                    context.read<UserProvider>().logout();
+                    userProvider.logout();
+                    PostController(context).reset();
                     context.go("/");
                   },
                   icon: Icons.logout_outlined,

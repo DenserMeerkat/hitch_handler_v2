@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class PreviewLongFilledButton extends StatelessWidget {
   final String label;
@@ -29,9 +30,7 @@ class PreviewLongFilledButton extends StatelessWidget {
               color: Theme.of(context).colorScheme.onPrimary,
             ),
           ),
-          const SizedBox(
-            width: 2,
-          ),
+          const Gap(2),
           Icon(
             icon,
             size: 3,

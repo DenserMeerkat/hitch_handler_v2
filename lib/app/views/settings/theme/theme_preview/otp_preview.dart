@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets/theme_preview_widgets.dart';
 import 'package:hitch_handler_v2/app/views/template/preview_template.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
@@ -21,9 +22,7 @@ class OtpPreview extends StatelessWidget {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(
-            height: 20,
-          ),
+          const Gap(20),
           Illustrations.renderOtp(
             context,
             isDarkMode,
@@ -31,9 +30,7 @@ class OtpPreview extends StatelessWidget {
             width: 40,
             padding: 8,
           ),
-          const SizedBox(
-            height: 12,
-          ),
+          const Gap(12),
           ConstrainedBox(
             constraints: const BoxConstraints(
               maxWidth: 60,
@@ -61,9 +58,7 @@ class OtpPreview extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 2,
-                ),
+                const Gap(2),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -75,9 +70,7 @@ class OtpPreview extends StatelessWidget {
                         color: Theme.of(context).colorScheme.outline,
                       ),
                     ),
-                    const SizedBox(
-                      width: 4,
-                    ),
+                    const Gap(4),
                     Container(
                       alignment: Alignment.center,
                       height: 4,
@@ -103,13 +96,9 @@ class OtpPreview extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 6,
-          ),
+          const Gap(6),
           const PreviewOtpField(),
-          const SizedBox(
-            height: 8,
-          ),
+          const Gap(8),
           const PreviewLongFilledButton(
             label: "Verify OTP",
           ),

@@ -24,6 +24,7 @@ class PlainTypeAheadField extends StatefulWidget {
   final bool enabled;
   final AxisDirection? direction;
   final double maxWidth;
+  final int minCharsForSuggestions;
   const PlainTypeAheadField({
     super.key,
     required this.onSuggestionSelected,
@@ -45,6 +46,7 @@ class PlainTypeAheadField extends StatefulWidget {
     this.enabled = true,
     this.direction,
     this.maxWidth = 330,
+    this.minCharsForSuggestions = 1,
   });
 
   @override
@@ -65,7 +67,7 @@ class _PlainTypeAheadFieldState extends State<PlainTypeAheadField> {
       child: TypeAheadFormField(
         ignoreAccessibleNavigation: true,
         suggestionsBoxVerticalOffset: 0,
-        minCharsForSuggestions: 1,
+        minCharsForSuggestions: widget.minCharsForSuggestions,
         hideSuggestionsOnKeyboardHide: true,
         direction: AxisDirection.down,
         onSuggestionSelected: widget.onSuggestionSelected,

@@ -24,7 +24,8 @@ mixin _$UserModel {
   String get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String? get roll => throw _privateConstructorUsedError;
-  bool get isAdmin => throw _privateConstructorUsedError;
+  UserEnum get userType => throw _privateConstructorUsedError;
+  String get domain => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +39,12 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String name, String email, String phone, String? roll, bool isAdmin});
+      {String name,
+      String email,
+      String phone,
+      String? roll,
+      UserEnum userType,
+      String domain});
 }
 
 /// @nodoc
@@ -58,7 +64,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? email = null,
     Object? phone = null,
     Object? roll = freezed,
-    Object? isAdmin = null,
+    Object? userType = null,
+    Object? domain = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -77,10 +84,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.roll
           : roll // ignore: cast_nullable_to_non_nullable
               as String?,
-      isAdmin: null == isAdmin
-          ? _value.isAdmin
-          : isAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
+      userType: null == userType
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserEnum,
+      domain: null == domain
+          ? _value.domain
+          : domain // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -94,7 +105,12 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, String email, String phone, String? roll, bool isAdmin});
+      {String name,
+      String email,
+      String phone,
+      String? roll,
+      UserEnum userType,
+      String domain});
 }
 
 /// @nodoc
@@ -112,7 +128,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? email = null,
     Object? phone = null,
     Object? roll = freezed,
-    Object? isAdmin = null,
+    Object? userType = null,
+    Object? domain = null,
   }) {
     return _then(_$UserModelImpl(
       name: null == name
@@ -131,10 +148,14 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.roll
           : roll // ignore: cast_nullable_to_non_nullable
               as String?,
-      isAdmin: null == isAdmin
-          ? _value.isAdmin
-          : isAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
+      userType: null == userType
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserEnum,
+      domain: null == domain
+          ? _value.domain
+          : domain // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -147,7 +168,8 @@ class _$UserModelImpl implements _UserModel {
       required this.email,
       required this.phone,
       this.roll,
-      this.isAdmin = false});
+      this.userType = UserEnum.student,
+      this.domain = ""});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -162,11 +184,14 @@ class _$UserModelImpl implements _UserModel {
   final String? roll;
   @override
   @JsonKey()
-  final bool isAdmin;
+  final UserEnum userType;
+  @override
+  @JsonKey()
+  final String domain;
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, roll: $roll, isAdmin: $isAdmin)';
+    return 'UserModel(name: $name, email: $email, phone: $phone, roll: $roll, userType: $userType, domain: $domain)';
   }
 
   @override
@@ -178,13 +203,15 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.roll, roll) || other.roll == roll) &&
-            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin));
+            (identical(other.userType, userType) ||
+                other.userType == userType) &&
+            (identical(other.domain, domain) || other.domain == domain));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, email, phone, roll, isAdmin);
+      Object.hash(runtimeType, name, email, phone, roll, userType, domain);
 
   @JsonKey(ignore: true)
   @override
@@ -206,7 +233,8 @@ abstract class _UserModel implements UserModel {
       required final String email,
       required final String phone,
       final String? roll,
-      final bool isAdmin}) = _$UserModelImpl;
+      final UserEnum userType,
+      final String domain}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -220,7 +248,9 @@ abstract class _UserModel implements UserModel {
   @override
   String? get roll;
   @override
-  bool get isAdmin;
+  UserEnum get userType;
+  @override
+  String get domain;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

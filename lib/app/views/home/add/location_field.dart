@@ -44,7 +44,7 @@ class _LocationFieldState extends State<LocationField> {
   Widget build(BuildContext context) {
     updateIcon();
     return PlainTypeAheadField(
-      placeHolder: "Location",
+      placeHolder: "Location (optional)",
       controller: locationController,
       focusNode: locationFocusNode,
       direction: AxisDirection.down,

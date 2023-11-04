@@ -8,6 +8,7 @@ import 'package:hitch_handler_v2/app/views/screens/common/search_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/settings_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/home/add_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/home/user_home_page.dart';
+import 'package:hitch_handler_v2/data/enums/user.dart';
 import 'package:hitch_handler_v2/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +22,7 @@ GoRouter router = GoRouter(
       redirect: (context, state) {
         final userValue = context.read<UserProvider>();
         if (userValue.jwtToken != null && userValue.userModel != null) {
-          if (userValue.userModel?.isAdmin == true) {
+          if (userValue.userModel?.userType == UserEnum.admin) {
             return "/home";
           }
           return "/home";
@@ -78,6 +79,13 @@ GoRouter router = GoRouter(
       path: '/home',
       builder: (BuildContext context, GoRouterState state) {
         return const HomePage();
+      },
+      redirect: (context, state) {
+        final userValue = context.read<UserProvider>();
+        if (userValue.jwtToken == null && userValue.userModel == null) {
+          return "/";
+        }
+        return null;
       },
       routes: [
         GoRoute(

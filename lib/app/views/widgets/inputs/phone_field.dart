@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:intl_phone_field/countries.dart';
@@ -211,13 +212,13 @@ class _PhoneFieldState extends State<PhoneField> {
                         color: Theme.of(context).colorScheme.error,
                       ),
                     ),
-                    const SizedBox(width: 4),
+                    const Gap(4),
                     Icon(
                       Icons.error_outline,
                       color: Theme.of(context).colorScheme.error,
                       size: 12,
                     ),
-                    const SizedBox(width: 8),
+                    const Gap(8),
                   ],
                 ),
               )

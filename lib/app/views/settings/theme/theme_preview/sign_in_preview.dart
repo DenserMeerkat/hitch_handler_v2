@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/theme_preview/widgets/theme_preview_widgets.dart';
 import 'package:hitch_handler_v2/app/views/template/preview_template.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
@@ -20,9 +21,7 @@ class SignInPreview extends StatelessWidget {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(
-            height: 20,
-          ),
+          const Gap(20),
           Illustrations.renderSignIn(
             context,
             isDarkMode,
@@ -30,27 +29,21 @@ class SignInPreview extends StatelessWidget {
             width: 30,
             padding: 8,
           ),
-          const SizedBox(
-            height: 6,
-          ),
+          const Gap(6),
           PreviewField(
             prefixIcon: Icons.account_circle,
             isDarkMode: isDarkMode,
             suffixIcon: Icons.badge_outlined,
             hintText: "Roll Number",
           ),
-          const SizedBox(
-            height: 6,
-          ),
+          const Gap(6),
           PreviewField(
             prefixIcon: Icons.password,
             isDarkMode: isDarkMode,
             suffixIcon: Icons.visibility_outlined,
             hintText: "Password",
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const Gap(4),
           Container(
             width: 60,
             alignment: Alignment.centerRight,
@@ -62,9 +55,7 @@ class SignInPreview extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 6,
-          ),
+          const Gap(6),
           const PreviewLongFilledButton(
             label: "Log into Account",
           ),

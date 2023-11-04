@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
@@ -33,15 +34,11 @@ class _SignUpFormState extends State<SignUpForm> {
               controller: widget.rollController,
               type: MultiFields.roll,
             ),
-            SizedBox(
-              height: 10.h,
-            ),
+            Gap(10.h),
             DatePickField(
               controller: widget.dateController,
             ),
-            SizedBox(
-              height: 20.h,
-            ),
+            Gap(20.h),
             LongFilledButton(
               label: "Let's Get Started",
               onPressed: () async {

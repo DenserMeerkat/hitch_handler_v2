@@ -7,6 +7,7 @@ import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
+import 'package:gap/gap.dart';
 
 class OtpBody extends StatefulWidget {
   final String contact;
@@ -48,20 +49,14 @@ class _OtpBodyState extends State<OtpBody> {
           child: Column(
             children: [
               OtpMessage(contact: widget.contact),
-              const SizedBox(
-                height: 10,
-              ),
+              const Gap(10),
               const OtpCountdown(),
-              const SizedBox(
-                height: 20,
-              ),
+              const Gap(20),
               OtpField(
                 pinController: pinController,
                 focusNode: focusNode,
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const Gap(20),
               LongFilledButton(
                 enabled: isButtonEnabled,
                 label: "Verify OTP",

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeBottomBar extends StatelessWidget {
@@ -31,8 +32,8 @@ class HomeBottomBar extends StatelessWidget {
         indicatorShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
           side: BorderSide(
-            color: Theme.of(context).colorScheme.primary,
-            width: 0.1,
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            width: 1,
           ),
         ),
         destinations: const [
@@ -96,7 +97,7 @@ class AddPostButton extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 4),
+            const Gap(4),
             Text(
               "Add",
               style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:password_strength/password_strength.dart';
 
@@ -51,15 +52,9 @@ class _PasswordStrengthState extends State<PasswordStrength> {
           ),
           child: Row(
             children: [
-              SizedBox(
-                height: 8,
-                width: 80.w,
-              ),
+              Gap(80.w),
               renderDivider(context, 4),
-              SizedBox(
-                height: 8,
-                width: 80.w,
-              ),
+              Gap(80.w),
               renderDivider(context, 2),
             ],
           ),

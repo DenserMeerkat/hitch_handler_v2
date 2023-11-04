@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
@@ -141,7 +142,7 @@ PopupMenuItem<SortEnum> buildPopupMenuItem(
     child: Row(
       children: [
         Icon(sortType.icon, size: 16),
-        const SizedBox(width: 8),
+        const Gap(8),
         Text(sortType.title),
       ],
     ),

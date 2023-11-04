@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 
 showCustomModalBottomSheet(BuildContext context, Widget child,
@@ -56,7 +57,7 @@ class BottomSheetHeader extends StatelessWidget {
             ),
           ),
           if (title != null) ...[
-            const SizedBox(height: 16),
+            const Gap(16),
             Text(
               title!,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(

@@ -8,6 +8,7 @@ import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:provider/provider.dart';
+import 'package:gap/gap.dart';
 
 void showForgotSheet(BuildContext context) {
   WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
@@ -59,9 +60,9 @@ class _ForgotSheetState extends State<ForgotSheet> {
             height: 2,
           ),
           isLoading ? const LProgressIndicator() : Container(height: 3),
-          const SizedBox(height: 20),
+          const Gap(20),
           Illustrations.renderForgotPassword(context, isDark(context)),
-          const SizedBox(height: 20),
+          const Gap(20),
           MultiField(
             fields: MultiFields().listWithoutRoll,
             controller: widget.controller,
@@ -69,7 +70,7 @@ class _ForgotSheetState extends State<ForgotSheet> {
             updateIsPhoneLogin: updateIsPhoneLogin,
             enabled: !isLoading,
           ),
-          const SizedBox(height: 10),
+          const Gap(10),
           LongFilledButton(
             enabled: !isLoading,
             label: "Send OTP",
@@ -80,7 +81,7 @@ class _ForgotSheetState extends State<ForgotSheet> {
               }
             },
           ),
-          const SizedBox(height: 50),
+          const Gap(50),
         ],
       ),
     );

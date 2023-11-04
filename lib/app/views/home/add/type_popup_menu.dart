@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
 import 'package:hitch_handler_v2/providers/post_provider.dart';
@@ -8,10 +9,12 @@ import 'package:tinycolor2/tinycolor2.dart';
 class TypePopupMenu extends StatefulWidget {
   final double borderRadius;
   final double popupMenuRadius;
+  final bool showTitle;
   const TypePopupMenu({
     super.key,
     this.borderRadius = 20,
     this.popupMenuRadius = 8,
+    this.showTitle = false,
   });
 
   @override
@@ -97,23 +100,25 @@ class _TypePopupMenuState extends State<TypePopupMenu>
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Icon(postType.icon, size: 20),
+                child: Icon(postType.icon, size: widget.showTitle ? 20 : 18),
               ),
               Container(
-                height: 34,
+                height: widget.showTitle ? 34 : 30,
                 width: 1,
                 color: Theme.of(context).dividerColor,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  postType.title,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
+              widget.showTitle
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        postType.title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    )
+                  : const Gap(0),
               RotationTransition(
                 turns: Tween(begin: 0.0, end: 0.5).animate(_controller),
                 child: Icon(
@@ -122,7 +127,7 @@ class _TypePopupMenuState extends State<TypePopupMenu>
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
-              const SizedBox(width: 4)
+              const Gap(4)
             ],
           ),
         ),
@@ -158,7 +163,7 @@ PopupMenuItem<PostTypeEnum> buildPopupMenuItem(
     child: Row(
       children: [
         Icon(postType.icon, size: 16),
-        const SizedBox(width: 8),
+        const Gap(8),
         Text(postType.title),
       ],
     ),

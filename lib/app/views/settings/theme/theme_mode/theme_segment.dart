@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/providers/theme_provider.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -43,9 +44,7 @@ class ThemeSegment extends StatelessWidget {
                     ? Theme.of(context).colorScheme.onPrimary
                     : Theme.of(context).colorScheme.onSurface,
               ),
-              const SizedBox(
-                width: 6,
-              ),
+              const Gap(6),
               Text(
                 label,
                 style: TextStyle(

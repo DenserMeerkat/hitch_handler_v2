@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/filter_sheet.dart';
 import 'package:hitch_handler_v2/theme/color_enum.dart';
 
@@ -29,7 +30,7 @@ class FilterChipW extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: colorFamily.color,
-            width: 0.2,
+            width: 1,
           ),
         ),
         child: Row(
@@ -39,7 +40,7 @@ class FilterChipW extends StatelessWidget {
               icon,
               size: 12,
             ),
-            const SizedBox(width: 4),
+            const Gap(4),
             Text(
               label,
               style: const TextStyle(

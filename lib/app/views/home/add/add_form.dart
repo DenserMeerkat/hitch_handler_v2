@@ -10,7 +10,11 @@ import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:provider/provider.dart';
 
 class AddForm extends StatefulWidget {
-  const AddForm({super.key});
+  final bool showLocation;
+  const AddForm({
+    super.key,
+    required this.showLocation,
+  });
 
   @override
   State<AddForm> createState() => _AddFormState();
@@ -29,7 +33,7 @@ class _AddFormState extends State<AddForm> {
             isLoading ? const LProgressIndicator() : Container(height: 3),
             Gap(16.h),
             const DomainField(),
-            const LocationField(),
+            widget.showLocation ? const LocationField() : const Gap(0),
             const Divider(
               height: 1,
               thickness: 1,
@@ -40,6 +44,7 @@ class _AddFormState extends State<AddForm> {
             const TitleField(),
             Gap(8.h),
             const DescriptionField(),
+            Gap(24.h),
           ],
         ),
       ),

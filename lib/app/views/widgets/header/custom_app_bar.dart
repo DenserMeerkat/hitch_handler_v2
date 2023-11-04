@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/icon_button.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
@@ -69,7 +70,7 @@ class CustomAppBar extends StatelessWidget {
                           onPressed: null,
                           tooltip: "Exit",
                         )
-                    : const SizedBox(width: 50),
+                    : const Gap(50),
                 title,
                 showActions
                     ? actions ??
@@ -80,7 +81,7 @@ class CustomAppBar extends StatelessWidget {
                           },
                           tooltip: "Settings",
                         )
-                    : const SizedBox(),
+                    : const Gap(0),
               ],
             ),
           ),

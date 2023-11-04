@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/password_strength.dart';
 
@@ -81,9 +82,7 @@ class _PasswordValidatorState extends State<PasswordValidator> {
             passStrength: passStrength,
             changeStrength: changeStrength,
           ),
-          SizedBox(
-            height: 12.h,
-          ),
+          Gap(12.h),
           Text(
             stateText,
             style: TextStyle(
@@ -93,9 +92,7 @@ class _PasswordValidatorState extends State<PasswordValidator> {
               letterSpacing: 0.8,
             ),
           ),
-          SizedBox(
-            width: 15.w,
-          ),
+          Gap(15.w),
         ],
       ),
     );

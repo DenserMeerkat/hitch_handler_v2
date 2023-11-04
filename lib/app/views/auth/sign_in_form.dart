@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/controllers/controllers.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
@@ -52,8 +53,8 @@ class _SignInFormState extends State<SignInForm> {
               updateCountryCode: updateCountryCode,
               updateIsPhoneLogin: updateIsPhoneLogin,
             ),
-            SizedBox(
-              height: 10.h,
+            Gap(
+              10.h,
             ),
             PasswordField(
               enabled: enabled,
@@ -86,8 +87,8 @@ class _SignInFormState extends State<SignInForm> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 6.h,
+            Gap(
+              6.h,
             ),
             LongFilledButton(
               enabled: enabled,

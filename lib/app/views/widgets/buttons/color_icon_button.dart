@@ -20,29 +20,24 @@ class ColorIconButton extends StatelessWidget {
     final ColorFamily colorFamily = getColorFamily(color, context);
     return Tooltip(
       message: tooltip,
-      child: Container(
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          color: colorFamily.colorContainer.withOpacity(isDarkMode ? 0.5 : 0.5),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: colorFamily.color,
-            width: 0.1,
+      child: IconButton(
+        splashRadius: 8,
+        style: IconButton.styleFrom(
+          backgroundColor:
+              colorFamily.colorContainer.withOpacity(isDarkMode ? 0.5 : 0.5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          side: BorderSide(
+            color: colorFamily.color.withOpacity(0.2),
+            width: 1,
           ),
         ),
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: onTap,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                icon,
-                color: colorFamily.onColorContainer,
-                size: 18,
-              ),
-            ),
-          ),
+        onPressed: onTap,
+        icon: Icon(
+          icon,
+          color: colorFamily.onColorContainer,
+          size: 18,
         ),
       ),
     );

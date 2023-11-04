@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 
@@ -35,13 +36,9 @@ class _BodyTemplateState extends State<BodyTemplate> {
             ),
             child: Column(
               children: [
-                SizedBox(
-                  height: widget.topSpacing.h,
-                ),
+                Gap(widget.topSpacing.h),
                 widget.illustration,
-                SizedBox(
-                  height: 20.h,
-                ),
+                Gap(20.h),
                 NotificationListener<IsLoading>(
                   child: widget.form,
                   onNotification: (notification) {
@@ -51,7 +48,7 @@ class _BodyTemplateState extends State<BodyTemplate> {
                     return true;
                   },
                 ),
-                SizedBox(height: 45.h),
+                Gap(45.h),
               ],
             ),
           ),

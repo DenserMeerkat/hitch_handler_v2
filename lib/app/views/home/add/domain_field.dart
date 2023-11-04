@@ -60,6 +60,7 @@ class _DomainFieldState extends State<DomainField> {
       suffixIcon: suffixIcon,
       icon: Icons.domain_outlined,
       noItemFoundIcon: Icons.domain_disabled_outlined,
+      minCharsForSuggestions: 0,
       maxWidth: 360.w - 40,
       fontSize: 14.sp,
       fontWeight: FontWeight.w700,

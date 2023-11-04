@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme_button.dart';
 import 'package:hitch_handler_v2/providers/theme_provider.dart';
 import 'package:hitch_handler_v2/theme/themes.dart';
@@ -30,9 +31,7 @@ class ColorSchemeScroll extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            width: horizontalPadding.w,
-          ),
+          Gap(horizontalPadding.w),
           ...colorSchemes.entries.map((entry) {
             final schemeName = entry.key;
             final flexScheme = entry.value;
@@ -51,9 +50,7 @@ class ColorSchemeScroll extends StatelessWidget {
               borderRadius: borderRadius,
             );
           }).toList(),
-          SizedBox(
-            width: horizontalPadding.w - rightMargin,
-          ),
+          Gap(horizontalPadding.w - rightMargin.w),
         ],
       ),
     );

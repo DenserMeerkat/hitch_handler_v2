@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class LongFilledButton extends StatelessWidget {
   final String label;
@@ -44,9 +45,7 @@ class LongFilledButton extends StatelessWidget {
                 letterSpacing: 0.6,
               ),
             ),
-            const SizedBox(
-              width: 8,
-            ),
+            const Gap(8),
             Icon(
               icon,
               size: 18,

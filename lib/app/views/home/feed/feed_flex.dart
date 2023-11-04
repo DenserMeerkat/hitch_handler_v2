@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/sort_popup_menu.dart';
@@ -30,7 +31,7 @@ class FeedFlex extends StatelessWidget {
               },
               color: ColorEnum.secondary,
             ),
-            const SizedBox(width: 10),
+            const Gap(10),
             SortPopupMenu(
               filterProvider: filterProvider,
             ),

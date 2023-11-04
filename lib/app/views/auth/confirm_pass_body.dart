@@ -5,6 +5,7 @@ import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
 import 'package:hitch_handler_v2/app/views/template/body_template.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
+import 'package:gap/gap.dart';
 
 class ConfirmPassBody extends StatefulWidget {
   final String placeholder1;
@@ -42,25 +43,19 @@ class _ConfirmPassBodyState extends State<ConfirmPassBody> {
                 validator: lengthValidator,
                 showErrors: false,
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              Gap(10.h),
               PasswordField(
                 placeHolder: widget.placeholder2,
                 controller: confPassController,
                 validator: lengthValidator,
                 showErrors: false,
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              Gap(10.h),
               PasswordValidator(
                 passController: passController,
                 confPassController: confPassController,
               ),
-              SizedBox(
-                height: 20.h,
-              ),
+              Gap(20.h),
               LongFilledButton(
                 label: widget.buttonLabel,
                 onPressed: () {

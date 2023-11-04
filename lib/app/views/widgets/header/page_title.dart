@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 
@@ -34,7 +35,7 @@ class PageTitle extends StatelessWidget {
                 ? Theme.of(context).colorScheme.tertiary
                 : Theme.of(context).colorScheme.onSecondaryContainer,
           ),
-          SizedBox(width: 15.w),
+          Gap(15.w),
           Text(
             title,
             style: TextStyle(

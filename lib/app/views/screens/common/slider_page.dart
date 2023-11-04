@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/blend_slider.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme_scroll.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
@@ -86,7 +87,7 @@ class SliderPage extends StatelessWidget {
                     showBorder: false,
                     showColor: false,
                   ),
-                  const SizedBox(height: 8),
+                  const Gap(8),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: SegmentedButton<ThemeMode>(

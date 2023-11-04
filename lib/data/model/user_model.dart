@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hitch_handler_v2/data/enums/enums.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
@@ -10,7 +11,8 @@ class UserModel with _$UserModel {
     required String email,
     required String phone,
     String? roll,
-    @Default(false) bool isAdmin,
+    @Default(UserEnum.student) UserEnum userType,
+    @Default("") String domain,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, Object?> json) =>

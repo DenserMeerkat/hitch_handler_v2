@@ -10,12 +10,14 @@ class PostProvider extends ChangeNotifier {
   late PostType _type;
   late DomainEnum _domain;
   late bool _isLoading;
+  late bool _useLocation;
 
   PostProvider() {
     _location = LocationEnum.none;
     _type = postTypes[0];
     _domain = DomainEnum.none;
     _isLoading = false;
+    _useLocation = false;
   }
 
   String? get title => _title;
@@ -24,6 +26,7 @@ class PostProvider extends ChangeNotifier {
   PostType get type => _type;
   DomainEnum get domain => _domain;
   bool get isLoading => _isLoading;
+  bool get useLocation => _useLocation;
 
   void updateIsLoading(bool isLoading) {
     _isLoading = isLoading;
@@ -42,6 +45,11 @@ class PostProvider extends ChangeNotifier {
 
   void updateLocation(LocationEnum location) {
     _location = location;
+    notifyListeners();
+  }
+
+  void updateUseLocation(bool useLocation) {
+    _useLocation = useLocation;
     notifyListeners();
   }
 

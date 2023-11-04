@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
 
 class PreviewHeader extends StatelessWidget {
@@ -93,7 +94,7 @@ class PreviewHeader extends StatelessWidget {
                                   .colorScheme
                                   .onSecondaryContainer,
                         ),
-                        const SizedBox(width: 3),
+                        const Gap(3),
                         Text(
                           title,
                           style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/linear_progress_indicator.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 import 'package:hitch_handler_v2/providers/theme_provider.dart';
@@ -54,9 +55,7 @@ class _LaunchLoadingScreenState extends State<LaunchLoadingScreen> {
                 const FlutterLogo(
                   size: 100,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const Gap(20),
                 Text(
                   appName,
                   style: TextStyle(
@@ -65,9 +64,7 @@ class _LaunchLoadingScreenState extends State<LaunchLoadingScreen> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const Gap(20),
                 ConstrainedBox(
                   constraints: BoxConstraints(
                     maxWidth: 120.w,

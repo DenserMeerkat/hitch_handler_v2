@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/inputs/inputs.dart';
@@ -132,7 +133,7 @@ class _FilterSheetState extends State<FilterSheet> {
           thickness: 2,
           height: 2,
         ),
-        SizedBox(height: 10.h),
+        Gap(10.h),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           alignment: Alignment.centerLeft,
@@ -223,7 +224,7 @@ class _FilterSheetState extends State<FilterSheet> {
                 icon: Icons.location_on_outlined,
                 suffixIcon: locationSuffixIcon,
               ),
-              const SizedBox(height: 30),
+              const Gap(30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -237,7 +238,7 @@ class _FilterSheetState extends State<FilterSheet> {
                     ),
                     label: const Text("Cancel"),
                   ),
-                  const SizedBox(width: 20),
+                  const Gap(20),
                   FilledButton.icon(
                     onPressed: applyFilters,
                     icon: Icon(
@@ -248,7 +249,7 @@ class _FilterSheetState extends State<FilterSheet> {
                   )
                 ],
               ),
-              const SizedBox(height: 24),
+              const Gap(24),
             ],
           ),
         ),
