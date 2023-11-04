@@ -12,7 +12,11 @@ class SystemOverlayWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemUiOverlayStyle mySystemTheme =
-        FlexColorScheme.themedSystemNavigationBar(context, opacity: 0);
+        FlexColorScheme.themedSystemNavigationBar(
+      context,
+      opacity: 0,
+      noAppBar: true,
+    );
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: mySystemTheme,
       child: child,

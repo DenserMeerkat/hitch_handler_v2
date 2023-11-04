@@ -36,100 +36,106 @@ class SliderPage extends StatelessWidget {
         alignment: Alignment.topCenter,
         width: 300.w,
         color: Theme.of(context).colorScheme.onInverseSurface,
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          width: 280.w,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-          ),
-          child: Scaffold(
-            appBar: AppBar(
-              primary: false,
-              automaticallyImplyLeading: false,
-              elevation: 0,
-              title: Text(
-                "Settings",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 0.8,
-                ),
-              ),
-              actions: [
-                IconButton(
-                  tooltip: "Close",
-                  onPressed: () {
-                    _sliderDrawerKey.currentState!.closeSlider();
-                    onDrawerToggle?.call(false);
-                  },
-                  icon: const Icon(
-                    Icons.close_rounded,
-                    size: 18,
-                  ),
-                ),
-              ],
-              bottom: bottomLine(context),
+        child: SafeArea(
+          bottom: false,
+          child: Container(
+            clipBehavior: Clip.hardEdge,
+            width: 280.w,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(8)),
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0),
-                    child: ColorSchemeScroll(
-                      value: context.read<ThemeProvider>(),
-                      size: 40,
-                      padding: 8,
-                    ),
+            child: Scaffold(
+              appBar: AppBar(
+                primary: false,
+                automaticallyImplyLeading: false,
+                elevation: 0,
+                title: Text(
+                  "Settings",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.8,
                   ),
-                  BlendSlider(
-                    value: context.read<ThemeProvider>(),
-                    showBorder: false,
-                    showColor: false,
-                  ),
-                  const Gap(8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SegmentedButton<ThemeMode>(
-                      style: OutlinedButton.styleFrom(
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        visualDensity:
-                            const VisualDensity(horizontal: -1, vertical: -1),
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        side: BorderSide(
-                          color: Theme.of(context).dividerColor,
-                          width: 0.6,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      showSelectedIcon: false,
-                      segments: const [
-                        ButtonSegment<ThemeMode>(
-                          value: ThemeMode.system,
-                          icon: Icon(Icons.smartphone_outlined, size: 14),
-                          label: Text("System", style: TextStyle(fontSize: 12)),
-                        ),
-                        ButtonSegment<ThemeMode>(
-                          value: ThemeMode.light,
-                          icon: Icon(Icons.light_mode_outlined, size: 14),
-                          label: Text("Light", style: TextStyle(fontSize: 12)),
-                        ),
-                        ButtonSegment<ThemeMode>(
-                          value: ThemeMode.dark,
-                          icon: Icon(Icons.dark_mode_outlined, size: 14),
-                          label: Text("Dark", style: TextStyle(fontSize: 12)),
-                        ),
-                      ],
-                      selected: <ThemeMode>{selectedThemeMode},
-                      onSelectionChanged: (Set<ThemeMode> newSelection) {
-                        themeProvider
-                            .updateSelectedThemeMode(newSelection.first);
-                      },
+                ),
+                actions: [
+                  IconButton(
+                    tooltip: "Close",
+                    onPressed: () {
+                      _sliderDrawerKey.currentState!.closeSlider();
+                      onDrawerToggle?.call(false);
+                    },
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      size: 18,
                     ),
                   ),
                 ],
+                bottom: bottomLine(context),
+              ),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: ColorSchemeScroll(
+                        value: context.read<ThemeProvider>(),
+                        size: 40,
+                        padding: 8,
+                      ),
+                    ),
+                    BlendSlider(
+                      value: context.read<ThemeProvider>(),
+                      showBorder: false,
+                      showColor: false,
+                    ),
+                    const Gap(8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: SegmentedButton<ThemeMode>(
+                        style: OutlinedButton.styleFrom(
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          visualDensity:
+                              const VisualDensity(horizontal: -1, vertical: -1),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          side: BorderSide(
+                            color: Theme.of(context).dividerColor,
+                            width: 0.6,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        showSelectedIcon: false,
+                        segments: const [
+                          ButtonSegment<ThemeMode>(
+                            value: ThemeMode.system,
+                            icon: Icon(Icons.smartphone_outlined, size: 14),
+                            label:
+                                Text("System", style: TextStyle(fontSize: 12)),
+                          ),
+                          ButtonSegment<ThemeMode>(
+                            value: ThemeMode.light,
+                            icon: Icon(Icons.light_mode_outlined, size: 14),
+                            label:
+                                Text("Light", style: TextStyle(fontSize: 12)),
+                          ),
+                          ButtonSegment<ThemeMode>(
+                            value: ThemeMode.dark,
+                            icon: Icon(Icons.dark_mode_outlined, size: 14),
+                            label: Text("Dark", style: TextStyle(fontSize: 12)),
+                          ),
+                        ],
+                        selected: <ThemeMode>{selectedThemeMode},
+                        onSelectionChanged: (Set<ThemeMode> newSelection) {
+                          themeProvider
+                              .updateSelectedThemeMode(newSelection.first);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
