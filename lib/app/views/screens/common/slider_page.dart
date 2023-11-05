@@ -10,10 +10,12 @@ import 'package:provider/provider.dart';
 
 class SliderPage extends StatelessWidget {
   final Function(bool)? onDrawerToggle;
+  final bool reverse;
   const SliderPage({
     super.key,
     required GlobalKey<SliderDrawerState> sliderDrawerKey,
     this.onDrawerToggle,
+    this.reverse = false,
   }) : _sliderDrawerKey = sliderDrawerKey;
 
   final GlobalKey<SliderDrawerState> _sliderDrawerKey;
@@ -24,7 +26,9 @@ class SliderPage extends StatelessWidget {
     ThemeMode selectedThemeMode = themeProvider.selectedThemeMode;
     return GestureDetector(
       onHorizontalDragEnd: (dragDetail) {
-        if (dragDetail.velocity.pixelsPerSecond.dx < 1) {
+        if (reverse
+            ? dragDetail.velocity.pixelsPerSecond.dx >= 1
+            : dragDetail.velocity.pixelsPerSecond.dx < 1) {
           _sliderDrawerKey.currentState?.openSlider();
           onDrawerToggle?.call(true);
         } else {

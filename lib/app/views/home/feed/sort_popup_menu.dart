@@ -3,13 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
+import 'package:provider/provider.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
 class SortPopupMenu extends StatefulWidget {
-  final FilterProvider filterProvider;
   const SortPopupMenu({
     super.key,
-    required this.filterProvider,
   });
 
   @override
@@ -37,9 +36,10 @@ class _SortPopupMenuState extends State<SortPopupMenu>
 
   @override
   Widget build(BuildContext context) {
+    final FilterProvider filterProvider = context.watch<FilterProvider>();
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final List<SortType> sortList = sortTypes;
-    SortType sortType = getSortType(widget.filterProvider.filterSort);
+    SortType sortType = getSortType(filterProvider.filterSort);
 
     return MaterialClip(
       child: PopupMenuButton(
@@ -60,8 +60,8 @@ class _SortPopupMenuState extends State<SortPopupMenu>
         splashRadius: 8,
         onSelected: (value) {
           _controller.reverse(from: 0.5);
-          if (widget.filterProvider.filterSort != value) {
-            widget.filterProvider.setFilterSort(value);
+          if (filterProvider.filterSort != value) {
+            filterProvider.setFilterSort(value);
           }
         },
         onCanceled: () {
@@ -71,9 +71,9 @@ class _SortPopupMenuState extends State<SortPopupMenu>
           _controller.forward(from: 0.5);
         },
         itemBuilder: (context) => <PopupMenuEntry>[
-          buildPopupMenuItem(context, widget.filterProvider, sortList[0]),
+          buildPopupMenuItem(context, filterProvider, sortList[0]),
           buildPopupMenuItemDivider(context),
-          buildPopupMenuItem(context, widget.filterProvider, sortList[1]),
+          buildPopupMenuItem(context, filterProvider, sortList[1]),
         ],
         child: Container(
           decoration: BoxDecoration(

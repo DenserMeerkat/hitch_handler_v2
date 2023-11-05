@@ -26,7 +26,7 @@ class _AddPageState extends State<AddPage> {
     final bool useLocation = context.watch<PostProvider>().useLocation;
     return WillPopScope(
       onWillPop: () async {
-        return false;
+        return true;
       },
       child: SystemOverlayWrapper(
         child: Scaffold(

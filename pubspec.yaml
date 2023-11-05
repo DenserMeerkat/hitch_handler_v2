@@ -36,6 +36,9 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   gap: ^3.0.1
+  expandable_text: ^2.3.0
+  timeago: ^3.6.0
+  like_button: ^2.0.5
 
 dev_dependencies:
   flutter_test:

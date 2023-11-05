@@ -53,9 +53,7 @@ class HttpService {
       response = await _dio.get(
         path,
         options: Options(headers: {
-          "api-key":
-              dotenv.env['API_KEY'] ?? "9d54df40-c3ba-45c9-ba8b-55d8071f8dd2",
-          "content-type": "application/json",
+          ...?options.headers,
           "authorization": token,
         }),
       );
@@ -94,10 +92,8 @@ class HttpService {
       response = await _dio.post(
         path,
         data: data,
-        options: Options(headers: {
-          "api-key":
-              dotenv.env['API_KEY'] ?? "9d54df40-c3ba-45c9-ba8b-55d8071f8dd2",
-          "content-type": "application/json",
+        options: options.copyWith(headers: {
+          ...?options.headers,
           "authorization": token,
         }),
       );
