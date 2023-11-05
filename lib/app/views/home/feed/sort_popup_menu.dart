@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hitch_handler_v2/providers/filter_provider.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/material_clip.dart';
+import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:provider/provider.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
@@ -36,10 +36,10 @@ class _SortPopupMenuState extends State<SortPopupMenu>
 
   @override
   Widget build(BuildContext context) {
-    final FilterProvider filterProvider = context.watch<FilterProvider>();
+    final FeedProvider feedProvider = context.watch<FeedProvider>();
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final List<SortType> sortList = sortTypes;
-    SortType sortType = getSortType(filterProvider.filterSort);
+    SortType sortType = getSortType(feedProvider.sortType);
 
     return MaterialClip(
       child: PopupMenuButton(
@@ -60,8 +60,8 @@ class _SortPopupMenuState extends State<SortPopupMenu>
         splashRadius: 8,
         onSelected: (value) {
           _controller.reverse(from: 0.5);
-          if (filterProvider.filterSort != value) {
-            filterProvider.setFilterSort(value);
+          if (feedProvider.sortType != value) {
+            feedProvider.updateSortType(value);
           }
         },
         onCanceled: () {
@@ -71,9 +71,9 @@ class _SortPopupMenuState extends State<SortPopupMenu>
           _controller.forward(from: 0.5);
         },
         itemBuilder: (context) => <PopupMenuEntry>[
-          buildPopupMenuItem(context, filterProvider, sortList[0]),
+          buildPopupMenuItem(context, feedProvider, sortList[0]),
           buildPopupMenuItemDivider(context),
-          buildPopupMenuItem(context, filterProvider, sortList[1]),
+          buildPopupMenuItem(context, feedProvider, sortList[1]),
         ],
         child: Container(
           decoration: BoxDecoration(
@@ -129,13 +129,13 @@ PopupMenuItem buildPopupMenuItemDivider(BuildContext context) {
 }
 
 PopupMenuItem<SortEnum> buildPopupMenuItem(
-    BuildContext context, FilterProvider filterProvider, SortType sortType) {
+    BuildContext context, FeedProvider feedProvider, SortType sortType) {
   return PopupMenuItem<SortEnum>(
     padding: const EdgeInsets.symmetric(horizontal: 12),
     height: 36,
     onTap: () {
-      if (filterProvider.filterSort != sortType.sortEnum) {
-        filterProvider.setFilterSort(sortType.sortEnum);
+      if (feedProvider.sortType != sortType.sortEnum) {
+        feedProvider.updateSortType(sortType.sortEnum);
       }
     },
     value: sortType.sortEnum,

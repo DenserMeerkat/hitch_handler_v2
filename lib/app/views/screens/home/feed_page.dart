@@ -4,7 +4,7 @@ import 'package:hitch_handler_v2/app/views/home/feed/feed_flex.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/temp_view.dart';
 import 'package:hitch_handler_v2/app/views/widgets/post/post_card.dart';
-import 'package:hitch_handler_v2/data/model/feed_post_model.dart';
+import 'package:hitch_handler_v2/data/model/models.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:provider/provider.dart';
 
@@ -16,28 +16,22 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  List<FeedPostModel> posts = [];
   late FeedController _feedController;
+  List<FeedPostModel> posts = [];
   @override
   void initState() {
     super.initState();
-    _feedController = FeedController(context.read<UserProvider>().jwtToken!);
-    //fetchPosts();
+    _feedController =
+        FeedController(context.read<UserProvider>().jwtToken!, context);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    debugPrint("Feed Page didChangeDependencies");
-    fetchPosts();
-  }
-
-  Future<void> fetchPosts() async {
-    final List<FeedPostModel> fetchedPosts =
-        await _feedController.fetchFeedPosts(context);
-    setState(() {
-      posts = fetchedPosts;
-    });
+    posts = context.watch<FeedProvider>().feedPosts;
+    if (posts.isEmpty) {
+      _feedController.fetchFeedPosts(context);
+    }
   }
 
   @override

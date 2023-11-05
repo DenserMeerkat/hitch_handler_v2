@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 scrolledUnderElevation: 0,
                 centerTitle: true,
                 elevation: 0,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
                 ),
                 leading: const AppLeadingWidget(),

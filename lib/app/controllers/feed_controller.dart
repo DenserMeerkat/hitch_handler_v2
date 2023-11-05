@@ -3,15 +3,19 @@ import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
 import 'package:hitch_handler_v2/data/apis/fetch_feed_api.dart';
 import 'package:hitch_handler_v2/data/model/models.dart';
+import 'package:hitch_handler_v2/providers/feed_provider.dart';
+import 'package:provider/provider.dart';
 
 class FeedController {
+  late FeedProvider _feedProvider;
   late String _token;
 
-  FeedController(String token) {
+  FeedController(String token, BuildContext context) {
+    _feedProvider = context.read<FeedProvider>();
     _token = token;
   }
 
-  Future<List<FeedPostModel>> fetchFeedPosts(BuildContext context) async {
+  void fetchFeedPosts(BuildContext context) async {
     final scaffoldContext = ScaffoldMessenger.of(context);
     IsLoading(true).dispatch(context);
     FeedResponseModel result;
@@ -21,7 +25,9 @@ class FeedController {
     if (result.statusCode == 200) {
       scaffoldContext.hideCurrentMaterialBanner();
       scaffoldContext.hideCurrentSnackBar();
-      return result.feedData ?? [];
+      if (result.feedData != null) {
+        _feedProvider.updateFeedPosts(result.feedData!);
+      }
     } else {
       if (context.mounted) {
         final MaterialBanner materialBanner = showCustomMaterialBanner(
@@ -31,7 +37,6 @@ class FeedController {
         scaffoldContext.hideCurrentMaterialBanner();
         scaffoldContext.showMaterialBanner(materialBanner);
       }
-      return [];
     }
   }
 }

@@ -41,9 +41,6 @@ class MyApp extends StatelessWidget {
           create: (_) => ThemeProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => FilterProvider(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => LoginProvider(),
         ),
         ChangeNotifierProvider(
@@ -51,6 +48,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => PostProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FeedProvider(),
         ),
       ],
       child: ScreenUtilInit(
