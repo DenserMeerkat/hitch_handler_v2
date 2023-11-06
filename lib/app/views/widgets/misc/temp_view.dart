@@ -10,13 +10,16 @@ class TempView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        emptyText,
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
-          fontSize: 16.sp,
-          letterSpacing: 1,
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Center(
+        child: Text(
+          emptyText,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4),
+            fontSize: 16.sp,
+            letterSpacing: 1,
+          ),
         ),
       ),
     );

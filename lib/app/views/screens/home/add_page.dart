@@ -22,8 +22,8 @@ class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     final PostController postController = PostController(context);
-    final PostProvider postProvider = context.read<PostProvider>();
-    final bool useLocation = context.watch<PostProvider>().useLocation;
+    final PostProvider postProvider = context.watch<PostProvider>();
+    final bool useLocation = postProvider.useLocation;
     return WillPopScope(
       onWillPop: () async {
         return true;
@@ -57,18 +57,22 @@ class _AddPageState extends State<AddPage> {
                 ),
               ],
             ),
-            leading: CustomIconButton(
-              tooltip: "Close",
-              icon: Icon(
-                Icons.close,
-                size: 20,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomIconButton(
+                tooltip: "Close",
+                icon: Icon(
+                  Icons.close,
+                  size: 20,
+                  color:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                ),
+                onPressed: !postProvider.isLoading
+                    ? () {
+                        Navigator.of(context).pop();
+                      }
+                    : null,
               ),
-              onPressed: !context.watch<PostProvider>().isLoading
-                  ? () {
-                      Navigator.of(context).pop();
-                    }
-                  : null,
             ),
             actions: [
               CustomIconButton(
@@ -79,12 +83,11 @@ class _AddPageState extends State<AddPage> {
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
                 ),
-                onPressed:
-                    !context.watch<PostProvider>().isLoading ? () {} : null,
+                onPressed: !postProvider.isLoading ? () {} : null,
               ),
               TypePopupMenu(
                 postProvider: postProvider,
-                enabled: !context.watch<PostProvider>().isLoading,
+                enabled: !postProvider.isLoading,
                 borderRadius: BorderRadius.circular(30),
                 padding: const EdgeInsets.only(left: 10, right: 8),
               ),
@@ -96,8 +99,9 @@ class _AddPageState extends State<AddPage> {
             showLocation: useLocation,
           ),
           bottomNavigationBar: Container(
-            height: 81,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            height: 66 + MediaQuery.of(context).padding.bottom,
+            padding:
+                const EdgeInsets.only(top: 8, left: 16, right: 16, bottom: 8),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
               border: Border(

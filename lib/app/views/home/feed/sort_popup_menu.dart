@@ -5,11 +5,21 @@ import 'package:hitch_handler_v2/providers/providers.dart';
 
 class SortPopupMenu extends AbstractPopupMenu<SortType, SortEnum> {
   final FeedProvider feedProvider;
-
+  final bool enabled;
+  final BorderRadiusGeometry? borderRadius;
+  final EdgeInsetsGeometry? padding;
   const SortPopupMenu({
     super.key,
     required this.feedProvider,
-  });
+    this.enabled = true,
+    this.borderRadius,
+    this.padding,
+  }) : super(
+          isEnabled: enabled,
+          buttonBorderRadius: borderRadius,
+          buttonPadding: padding,
+          dividerHeight: 34,
+        );
 
   @override
   void updateSelectedItem(SortEnum itemEnum) {

@@ -90,9 +90,9 @@ class ProfileFlex extends StatelessWidget {
                 ColorIconButton(
                   tooltip: "Logout",
                   onTap: () {
-                    userProvider.logout();
-                    PostController(context).reset();
                     FeedController(userProvider.jwtToken!, context).reset();
+                    PostController(context).reset();
+                    userProvider.logout();
                     context.go("/");
                   },
                   icon: Icons.logout_outlined,

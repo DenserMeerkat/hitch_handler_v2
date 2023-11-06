@@ -9,6 +9,7 @@ class PostProvider extends ChangeNotifier {
   late DomainEnum _domain;
   late bool _isLoading;
   late bool _useLocation;
+  late bool _isEdited;
 
   PostProvider() {
     _location = LocationEnum.none;
@@ -16,6 +17,7 @@ class PostProvider extends ChangeNotifier {
     _domain = DomainEnum.none;
     _isLoading = false;
     _useLocation = true;
+    _isEdited = false;
   }
 
   String? get title => _title;
@@ -25,6 +27,7 @@ class PostProvider extends ChangeNotifier {
   DomainEnum get domain => _domain;
   bool get isLoading => _isLoading;
   bool get useLocation => _useLocation;
+  bool get isEdited => _isEdited;
 
   void updateIsLoading(bool isLoading) {
     _isLoading = isLoading;
@@ -33,31 +36,52 @@ class PostProvider extends ChangeNotifier {
 
   void updateTitle(String title) {
     _title = title;
+    updateIsEdited();
     notifyListeners();
   }
 
   void updateDescription(String description) {
     _description = description;
+    updateIsEdited();
     notifyListeners();
   }
 
   void updateLocation(LocationEnum location) {
     _location = location;
+    updateIsEdited();
     notifyListeners();
   }
 
   void updateUseLocation(bool useLocation) {
     _useLocation = useLocation;
+    updateIsEdited();
     notifyListeners();
   }
 
   void updateTypeEnum(PostTypeEnum type) {
     _type = type;
+    updateIsEdited();
     notifyListeners();
   }
 
   void updateDomain(DomainEnum domain) {
     _domain = domain;
+    updateIsEdited();
     notifyListeners();
+  }
+
+  void updateIsEdited() {
+    bool initValue = _isEdited;
+    if (_title != null && _title!.isNotEmpty ||
+        _description != null && _description!.isNotEmpty ||
+        _location != LocationEnum.none ||
+        _type != PostTypeEnum.public ||
+        _domain != DomainEnum.none) {
+      initValue = true;
+    }
+    if (initValue != _isEdited) {
+      _isEdited = initValue;
+      notifyListeners();
+    }
   }
 }

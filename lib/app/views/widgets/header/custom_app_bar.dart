@@ -32,8 +32,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        includePadding ? Gap(MediaQuery.of(context).padding.top) : const Gap(0),
+        if (includePadding) Gap(MediaQuery.of(context).padding.top),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Text(
@@ -49,7 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: EdgeInsets.only(top: thickness),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8),
             decoration: BoxDecoration(
               color:
                   backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
@@ -75,16 +76,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         )
                     : const Gap(50),
                 title,
-                showActions
-                    ? actions ??
-                        CustomIconButton(
-                          icon: const Icon(Icons.settings_outlined),
-                          onPressed: () {
-                            context.push("/settings");
-                          },
-                          tooltip: "Settings",
-                        )
-                    : const Gap(0),
+                if (showActions)
+                  actions ??
+                      CustomIconButton(
+                        icon: const Icon(Icons.settings_outlined),
+                        onPressed: () {
+                          context.push("/settings");
+                        },
+                        tooltip: "Settings",
+                      ),
               ],
             ),
           ),

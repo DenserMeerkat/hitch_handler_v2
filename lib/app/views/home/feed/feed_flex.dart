@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/sort_popup_menu.dart';
-import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
 import 'package:hitch_handler_v2/providers/feed_provider.dart';
-import 'package:hitch_handler_v2/theme/color_enum.dart';
 import 'package:provider/provider.dart';
 
 class FeedFlex extends StatelessWidget {
@@ -22,18 +20,45 @@ class FeedFlex extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 12),
         child: Row(
           children: [
-            const Spacer(),
-            ColorIconButton(
-              tooltip: "Search",
-              icon: Icons.search,
-              onTap: () {
-                context.go("/home/search");
-              },
-              color: ColorEnum.secondary,
-            ),
-            const Gap(10),
+            Expanded(
+                child: GestureDetector(
+              onTap: () => context.go("/home/search"),
+              child: Container(
+                height: 40,
+                decoration: BoxDecoration(
+                  color:
+                      Theme.of(context).colorScheme.primary.withOpacity(0.05),
+                  borderRadius:
+                      const BorderRadius.horizontal(left: Radius.circular(16)),
+                  border: Border.all(
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    width: 1,
+                  ),
+                ),
+                child: const Row(
+                  children: [
+                    Gap(12),
+                    Icon(
+                      Icons.search,
+                      size: 18,
+                    ),
+                    Gap(8),
+                    Text(
+                      'Search',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )),
             SortPopupMenu(
               feedProvider: feedProvider,
+              borderRadius:
+                  const BorderRadius.horizontal(right: Radius.circular(16)),
             ),
           ],
         ),

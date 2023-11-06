@@ -28,7 +28,7 @@ class CustomFilledButton extends StatelessWidget {
       style: FilledButton.styleFrom(
         foregroundColor: foreGroundColor,
         backgroundColor: backgroundColor,
-        minimumSize: const Size(50, 36),
+        minimumSize: const Size(80, 40),
         padding: padding ?? const EdgeInsets.symmetric(horizontal: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),

@@ -56,7 +56,7 @@ class _PostCardState extends State<PostCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
           border: Border(
             bottom: BorderSide(
               color: Theme.of(context).dividerColor,
@@ -213,9 +213,7 @@ class _PostCardState extends State<PostCard> {
               ],
             ),
             const Gap(8),
-            widget.post.location.isNotEmpty
-                ? Text(widget.post.location)
-                : const Gap(0),
+            if (widget.post.location.isNotEmpty) Text(widget.post.location),
             const Gap(16),
             Text(
               timeago.format(widget.post.createdAt),

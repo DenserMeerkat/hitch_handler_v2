@@ -30,16 +30,19 @@ class _SearchPageState extends State<SearchPage> {
               color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
             ),
           ),
-          leading: CustomIconButton(
-            tooltip: "Close",
-            icon: Icon(
-              Icons.close,
-              size: 20,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomIconButton(
+              tooltip: "Close",
+              icon: Icon(
+                Icons.close,
+                size: 20,
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
           ),
         ),
         body: CustomScrollView(

@@ -33,7 +33,7 @@ class _AddFormState extends State<AddForm> {
             isLoading ? const LProgressIndicator() : Container(height: 3),
             Gap(16.h),
             const DomainField(),
-            widget.showLocation ? const LocationField() : const Gap(0),
+            if (widget.showLocation) const LocationField(),
             const Divider(
               height: 1,
               thickness: 1,
