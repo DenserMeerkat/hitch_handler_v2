@@ -4,7 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/sort_popup_menu.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
+import 'package:hitch_handler_v2/providers/feed_provider.dart';
 import 'package:hitch_handler_v2/theme/color_enum.dart';
+import 'package:provider/provider.dart';
 
 class FeedFlex extends StatelessWidget {
   const FeedFlex({
@@ -13,6 +15,7 @@ class FeedFlex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FeedProvider feedProvider = context.watch<FeedProvider>();
     return FlexibleSpaceBar(
       background: Container(
         alignment: Alignment.bottomCenter,
@@ -29,7 +32,9 @@ class FeedFlex extends StatelessWidget {
               color: ColorEnum.secondary,
             ),
             const Gap(10),
-            const SortPopupMenu(),
+            SortPopupMenu(
+              feedProvider: feedProvider,
+            ),
           ],
         ),
       ),

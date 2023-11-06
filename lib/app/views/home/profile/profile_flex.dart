@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hitch_handler_v2/app/controllers/feed_controller.dart';
 import 'package:hitch_handler_v2/app/controllers/post_controller.dart';
 import 'package:hitch_handler_v2/app/views/utils/profile_utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
@@ -91,6 +92,7 @@ class ProfileFlex extends StatelessWidget {
                   onTap: () {
                     userProvider.logout();
                     PostController(context).reset();
+                    FeedController(userProvider.jwtToken!, context).reset();
                     context.go("/");
                   },
                   icon: Icons.logout_outlined,

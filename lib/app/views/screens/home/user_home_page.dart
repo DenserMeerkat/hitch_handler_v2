@@ -76,67 +76,68 @@ class _HomePageState extends State<HomePage> {
               }
             },
             child: ValueListenableBuilder(
-              valueListenable: zoomDrawerController.stateNotifier!,
-              builder: (context, value, child) => Container(
-                color: value == DrawerState.open
-                    ? Theme.of(context).colorScheme.onInverseSurface
-                    : Theme.of(context).colorScheme.surface,
-                child: ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(8)),
-                  child: SafeArea(
-                    bottom: false,
-                    child: Scaffold(
-                      backgroundColor: Colors.transparent,
-                      appBar: AppBar(
-                        primary: true,
-                        scrolledUnderElevation: 0,
-                        centerTitle: true,
-                        elevation: 0,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(8)),
-                        ),
-                        leading: const AppLeadingWidget(),
-                        actions: [
-                          CustomIconButton(
-                            tooltip: "Toggle Sidebar",
-                            icon: Icon(
-                              Symbols.side_navigation_rounded,
-                              size: 20,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurface
-                                  .withOpacity(0.8),
+                valueListenable: zoomDrawerController.stateNotifier!,
+                builder: (context, value, child) {
+                  return Container(
+                    color: value == DrawerState.open
+                        ? Theme.of(context).colorScheme.onInverseSurface
+                        : Theme.of(context).colorScheme.surface,
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(8)),
+                      child: SafeArea(
+                        bottom: false,
+                        child: Scaffold(
+                          backgroundColor: Colors.transparent,
+                          appBar: AppBar(
+                            primary: true,
+                            scrolledUnderElevation: 0,
+                            centerTitle: true,
+                            elevation: 0,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(8)),
                             ),
-                            onPressed: () {
-                              zoomDrawerController.toggle!();
-                            },
-                          )
-                        ],
-                        title: Text(
-                          viewTitles[currentPageIndex],
-                          style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 0.8,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurface
-                                .withOpacity(0.8),
+                            leading: const AppLeadingWidget(),
+                            actions: [
+                              CustomIconButton(
+                                tooltip: "Toggle Sidebar",
+                                icon: Icon(
+                                  Symbols.side_navigation_rounded,
+                                  size: 20,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurface
+                                      .withOpacity(0.8),
+                                ),
+                                onPressed: () {
+                                  zoomDrawerController.toggle!();
+                                },
+                              )
+                            ],
+                            title: Text(
+                              viewTitles[currentPageIndex],
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 0.8,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurface
+                                    .withOpacity(0.8),
+                              ),
+                            ),
+                          ),
+                          body: viewList[currentPageIndex],
+                          bottomNavigationBar: HomeBottomBar(
+                            currentPageIndex: currentPageIndex,
+                            onDestinationChange: onDestinationChange,
                           ),
                         ),
                       ),
-                      body: viewList[currentPageIndex],
-                      bottomNavigationBar: HomeBottomBar(
-                        currentPageIndex: currentPageIndex,
-                        onDestinationChange: onDestinationChange,
-                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  );
+                }),
           ),
         ),
       ),

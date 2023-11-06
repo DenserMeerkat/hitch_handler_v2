@@ -83,7 +83,10 @@ class _AddPageState extends State<AddPage> {
                     !context.watch<PostProvider>().isLoading ? () {} : null,
               ),
               TypePopupMenu(
+                postProvider: postProvider,
                 enabled: !context.watch<PostProvider>().isLoading,
+                borderRadius: BorderRadius.circular(30),
+                padding: const EdgeInsets.only(left: 10, right: 8),
               ),
               Gap(16.w),
             ],

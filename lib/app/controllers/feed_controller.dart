@@ -39,4 +39,13 @@ class FeedController {
       }
     }
   }
+
+  reset() {
+    _feedProvider.updateFeedPosts([]);
+    _feedProvider.updateUserPosts([]);
+    _feedProvider.updateBookmarkedPosts([]);
+    _feedProvider.updateIsFeedPostsLoading(false);
+    _feedProvider.updateIsUserPostsLoading(false);
+    _feedProvider.updateIsBookmarkedPostsLoading(false);
+  }
 }

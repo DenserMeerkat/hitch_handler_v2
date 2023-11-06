@@ -46,7 +46,7 @@ class PostController {
       PostModel(
         title: _postProvider.title!,
         desc: _postProvider.description!,
-        type: _postProvider.type.title.toLowerCase(),
+        type: getPostType(_postProvider.type).title.toLowerCase(),
         location: _postProvider.useLocation
             ? Location.getLocationString(_postProvider.location)
             : "",
@@ -90,7 +90,7 @@ class PostController {
   reset() {
     _postProvider.updateTitle('');
     _postProvider.updateDescription('');
-    _postProvider.updateType(postTypes[0]);
+    _postProvider.updateTypeEnum(PostTypeEnum.public);
     _postProvider.updateLocation(LocationEnum.none);
     _postProvider.updateDomain(DomainEnum.none);
     _postProvider.updateUseLocation(true);

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/types/types.dart';
-import 'package:hitch_handler_v2/data/enums/domain.dart';
-import 'package:hitch_handler_v2/data/enums/location.dart';
+import 'package:hitch_handler_v2/data/enums/enums.dart';
 
 class PostProvider extends ChangeNotifier {
   String? _title;
   String? _description;
   late LocationEnum _location;
-  late PostType _type;
+  late PostTypeEnum _type;
   late DomainEnum _domain;
   late bool _isLoading;
   late bool _useLocation;
 
   PostProvider() {
     _location = LocationEnum.none;
-    _type = postTypes[0];
+    _type = PostTypeEnum.public;
     _domain = DomainEnum.none;
     _isLoading = false;
     _useLocation = true;
@@ -23,7 +21,7 @@ class PostProvider extends ChangeNotifier {
   String? get title => _title;
   String? get description => _description;
   LocationEnum get location => _location;
-  PostType get type => _type;
+  PostTypeEnum get type => _type;
   DomainEnum get domain => _domain;
   bool get isLoading => _isLoading;
   bool get useLocation => _useLocation;
@@ -53,7 +51,7 @@ class PostProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateType(PostType type) {
+  void updateTypeEnum(PostTypeEnum type) {
     _type = type;
     notifyListeners();
   }
