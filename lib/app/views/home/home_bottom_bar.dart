@@ -6,10 +6,13 @@ import 'package:go_router/go_router.dart';
 class HomeBottomBar extends StatelessWidget {
   final int currentPageIndex;
   final Function(int) onDestinationChange;
-  const HomeBottomBar(
-      {super.key,
-      required this.currentPageIndex,
-      required this.onDestinationChange});
+  final bool isAdmin;
+  const HomeBottomBar({
+    super.key,
+    required this.currentPageIndex,
+    required this.onDestinationChange,
+    this.isAdmin = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +39,8 @@ class HomeBottomBar extends StatelessWidget {
             width: 1,
           ),
         ),
-        destinations: const [
-          NavigationDestination(
+        destinations: [
+          const NavigationDestination(
             selectedIcon: Icon(Icons.home),
             icon: Icon(Icons.home_outlined),
             label: "Home",
@@ -46,13 +49,13 @@ class HomeBottomBar extends StatelessWidget {
           //   icon: Icon(Icons.search_outlined),
           //   label: "Search",
           // ),
-          AddPostButton(),
+          if (!isAdmin) const AddPostButton(),
           // NavigationDestination(
           //   selectedIcon: Icon(Icons.archive),
           //   icon: Icon(Icons.archive_outlined),
           //   label: "Archives",
           // ),
-          NavigationDestination(
+          const NavigationDestination(
             selectedIcon: Icon(Icons.account_circle),
             icon: Icon(Icons.account_circle_outlined),
             label: "Account",
@@ -77,7 +80,7 @@ class AddPostButton extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          context.go("/home/add");
+          context.go("/student/add");
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +91,7 @@ class AddPostButton extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(30),
                 onTap: () {
-                  context.go("/home/add");
+                  context.go("/student/add");
                 },
                 child: Icon(
                   Icons.add_circle_outline_outlined,

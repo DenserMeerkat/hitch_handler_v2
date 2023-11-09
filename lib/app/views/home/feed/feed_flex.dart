@@ -22,7 +22,7 @@ class FeedFlex extends StatelessWidget {
           children: [
             Expanded(
                 child: GestureDetector(
-              onTap: () => context.go("/home/search"),
+              onTap: () => context.go("/student/search"),
               child: Container(
                 height: 40,
                 decoration: BoxDecoration(

@@ -68,7 +68,13 @@ class _PostCardState extends State<PostCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Gap(8),
-            Text(widget.post.domain),
+            Row(
+              children: [
+                Text(widget.post.domain),
+                const Spacer(),
+                Text(widget.post.currentstatus),
+              ],
+            ),
             const Gap(8),
             Text(
               widget.post.title,

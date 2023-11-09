@@ -31,7 +31,6 @@ class ProfileTabBar extends StatelessWidget {
         tabs: const [
           Tab(text: "Posts"),
           Tab(text: "Bookmarks"),
-          Tab(text: "Comments"),
           Tab(text: "Upvotes"),
         ],
       ),

@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hitch_handler_v2/app/views/home/home_bottom_bar.dart';
-import 'package:hitch_handler_v2/app/views/home/home_views.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/slider_page.dart';
-import 'package:hitch_handler_v2/app/views/widgets/header/app_leading_widget.dart';
-import 'package:hitch_handler_v2/app/views/widgets/buttons/icon_button.dart';
+import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
+import 'package:hitch_handler_v2/data/enums/enums.dart';
+import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:inner_drawer/inner_drawer.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final List<Widget> viewList;
+  final List<Widget> viewTitles;
+  final int currentIndex;
+  const HomePage({
+    super.key,
+    required this.viewList,
+    required this.viewTitles,
+    required this.currentIndex,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,8 +30,6 @@ class _HomePageState extends State<HomePage> {
   late Color backgroundColor;
   int currentPageIndex = 0;
   bool isDrawerOpen = true;
-  final viewList = HomeViews.homeViewList;
-  final viewTitles = HomeViews.homeViewTitles;
   ValueNotifier<double> dragPosition = ValueNotifier(0);
 
   void onDestinationChange(int index) {
@@ -49,6 +55,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = context.read<UserProvider>();
     return SystemOverlayWrapper(
       child: WillPopScope(
         onWillPop: () async {
@@ -110,9 +117,9 @@ class _HomePageState extends State<HomePage> {
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(8)),
                     ),
-                    leading: const AppLeadingWidget(),
-                    actions: [
-                      CustomIconButton(
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomIconButton(
                         tooltip: "Toggle Sidebar",
                         icon: Icon(
                           Symbols.side_navigation_rounded,
@@ -124,27 +131,34 @@ class _HomePageState extends State<HomePage> {
                         ),
                         onPressed: () {
                           _innerDrawerKey.currentState!
-                              .toggle(direction: InnerDrawerDirection.end);
+                              .open(direction: InnerDrawerDirection.start);
+                        },
+                      ),
+                    ),
+                    actions: [
+                      CustomIconButton(
+                        tooltip: "Account",
+                        icon: Icon(
+                          Icons.account_circle_outlined,
+                          size: 20,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.8),
+                        ),
+                        onPressed: () {
+                          _innerDrawerKey.currentState!
+                              .open(direction: InnerDrawerDirection.end);
                         },
                       )
                     ],
-                    title: Text(
-                      viewTitles[currentPageIndex],
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.8,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withOpacity(0.8),
-                      ),
-                    ),
+                    title: widget.viewTitles[currentPageIndex],
                   ),
-                  body: viewList[currentPageIndex],
+                  body: widget.viewList[currentPageIndex],
                   bottomNavigationBar: HomeBottomBar(
                     currentPageIndex: currentPageIndex,
                     onDestinationChange: onDestinationChange,
+                    isAdmin: userProvider.userModel!.userType == UserEnum.admin,
                   ),
                 ),
               ),

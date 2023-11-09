@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     current = tabController.index;
   }
 
@@ -55,7 +55,6 @@ class _ProfilePageState extends State<ProfilePage>
             children: const [
               TempView(emptyText: "No Posts"),
               TempView(emptyText: "No Bookmarks"),
-              TempView(emptyText: "No Comments"),
               TempView(emptyText: "No Upvotes"),
             ],
           ),

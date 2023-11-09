@@ -46,11 +46,11 @@ class LoginController {
       if (!_loginProvider.isAdminLogin) {
         scaffoldContext.hideCurrentMaterialBanner();
         scaffoldContext.hideCurrentSnackBar();
-        goContext.go("/home");
+        goContext.go("/student");
       } else {
         scaffoldContext.hideCurrentMaterialBanner();
         scaffoldContext.hideCurrentSnackBar();
-        goContext.go("/home");
+        goContext.go("/admin");
       }
     } else {
       if (context.mounted) {
