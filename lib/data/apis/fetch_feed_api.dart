@@ -12,14 +12,12 @@ Future<FeedResponseModel> fetchFeed(String token) async {
   try {
     response = await http.getRequestProtected(path, token);
     if (response.statusCode == 200) {
-      debugPrint(response.data.toString());
       FeedResponseModel feedResponseModel = FeedResponseModel(
         statusCode: 200,
         message: "Fetched Successfully",
         feedData: List<FeedPostModel>.from(
             response.data.map((x) => FeedPostModel.fromJson(x))),
       );
-      debugPrint(feedResponseModel.toString());
       return feedResponseModel;
     } else {
       return FeedResponseModel(

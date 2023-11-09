@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/blend_slider.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme_scroll.dart';
@@ -9,11 +8,9 @@ import 'package:hitch_handler_v2/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SliderPage extends StatelessWidget {
-  final ZoomDrawerController zoomDrawerController;
   final bool reverse;
   const SliderPage({
     super.key,
-    required this.zoomDrawerController,
     this.reverse = false,
   });
 
@@ -50,9 +47,7 @@ class SliderPage extends StatelessWidget {
               actions: [
                 IconButton(
                   tooltip: "Close",
-                  onPressed: () {
-                    zoomDrawerController.close!();
-                  },
+                  onPressed: () {},
                   icon: const Icon(
                     Icons.close_rounded,
                     size: 18,

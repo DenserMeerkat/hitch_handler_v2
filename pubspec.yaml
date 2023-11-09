@@ -38,7 +38,7 @@ dependencies:
   expandable_text: ^2.3.0
   timeago: ^3.6.0
   like_button: ^2.0.5
-  flutter_zoom_drawer: ^3.1.1
+  inner_drawer: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
                 },
                 child: themeValue.doneLoading
                     ? MaterialApp.router(
+                        //showPerformanceOverlay: true,
                         debugShowCheckedModeBanner: false,
                         title: appName,
                         theme: getTheme(
