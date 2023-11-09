@@ -73,17 +73,19 @@ class _HomePageState extends State<HomePage> {
           backgroundDecoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onInverseSurface),
           onDragUpdate: (value, direction) {
-            setState(() {
-              dragPosition.value = value;
-            });
+            dragPosition.value = value;
           },
           innerDrawerCallback: (isOpened) {
             setState(() {
               isDrawerOpen = isOpened;
             });
           },
-          rightChild: const SliderPage(),
-          leftChild: const SliderPage(),
+          rightChild: SliderPage(
+            innerDrawerKey: _innerDrawerKey,
+          ),
+          leftChild: SliderPage(
+            innerDrawerKey: _innerDrawerKey,
+          ),
           scaffold: ValueListenableBuilder<double>(
             valueListenable: dragPosition,
             builder: (context, value, child) {
