@@ -6,6 +6,7 @@ import 'package:hitch_handler_v2/app/controllers/feed_controller.dart';
 import 'package:hitch_handler_v2/app/controllers/post_controller.dart';
 import 'package:hitch_handler_v2/app/views/utils/profile_utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/color_icon_button.dart';
+import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:provider/provider.dart';
 import 'package:hitch_handler_v2/data/model/models.dart';
@@ -90,8 +91,14 @@ class ProfileFlex extends StatelessWidget {
                 ColorIconButton(
                   tooltip: "Logout",
                   onTap: () {
-                    FeedController(userProvider.jwtToken!, context).reset();
                     PostController(context).reset();
+                    FeedController(
+                      userProvider.jwtToken!,
+                      context,
+                      isAdmin:
+                          userProvider.userModel!.userType == UserEnum.admin,
+                      domain: userProvider.userModel!.domain,
+                    ).reset();
                     userProvider.logout();
                     context.go("/");
                   },

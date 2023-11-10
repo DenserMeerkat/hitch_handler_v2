@@ -1,7 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/theme/constants.dart';
-import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 
 class CircularCountDown extends StatelessWidget {
   final CountDownController countDownController;
@@ -17,7 +16,6 @@ class CircularCountDown extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = isDark(context);
     return CircularCountDownTimer(
       duration: duration,
       initialDuration: 0,
@@ -34,7 +32,7 @@ class CircularCountDown extends StatelessWidget {
       strokeCap: StrokeCap.round,
       textStyle: TextStyle(
           fontSize: 8.0,
-          color: isDarkMode ? kTextColor : kLTextColor,
+          color: Theme.of(context).colorScheme.onSurface,
           fontWeight: FontWeight.bold),
       textFormat: CountdownTextFormat.S,
       isReverse: true,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hitch_handler_v2/app/views/home/feed/feed_title.dart';
 import 'package:hitch_handler_v2/app/views/screens/home/feed_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/home/profile_page.dart';
 
 class HomeViews {
   static List<Widget> studentViewTitles = [
-    getHomeTitle("Home"),
+    const FeedTitle(),
     //"Search",
     getHomeTitle("Add"),
     //"Archive",

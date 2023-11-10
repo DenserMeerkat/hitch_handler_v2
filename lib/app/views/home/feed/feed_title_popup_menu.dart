@@ -3,23 +3,46 @@ import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/template/popup_menu.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 
-class SortPopupMenu extends AbstractPopupMenu<SortType, SortEnum> {
+class FeedTitlePopupMenu extends AbstractPopupMenu<SortType, SortEnum> {
   final FeedProvider feedProvider;
   final bool enabled;
   final BorderRadiusGeometry? borderRadius;
   final EdgeInsetsGeometry? padding;
-
-  const SortPopupMenu({
+  final String? feedTitle;
+  final Color? popupBackgroundColor;
+  final Color? popupBorderColor;
+  final Color? popupDividerColor;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  const FeedTitlePopupMenu({
     super.key,
     required this.feedProvider,
     this.enabled = true,
     this.borderRadius,
     this.padding,
+    this.feedTitle,
+    this.popupBackgroundColor,
+    this.popupBorderColor,
+    this.popupDividerColor,
+    this.backgroundColor,
+    this.borderColor,
   }) : super(
+          dividerHeight: 34,
+          showIcon: true,
+          showTitle: true,
+          titleStyle: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
           isEnabled: enabled,
           buttonBorderRadius: borderRadius,
           buttonPadding: padding,
-          dividerHeight: 34,
+          popupMenuColor: popupBackgroundColor,
+          popupMenuBorderColor: popupBorderColor,
+          popupMenuDividerColor: popupDividerColor,
+          popupChildColor: backgroundColor,
+          popupChildBorderColor: borderColor,
+          title: feedTitle,
         );
 
   @override

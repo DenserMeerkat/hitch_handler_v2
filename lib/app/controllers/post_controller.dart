@@ -88,6 +88,7 @@ class PostController {
   }
 
   reset() {
+    debugPrint("Resetting PostProvider");
     _postProvider.updateTitle('');
     _postProvider.updateDescription('');
     _postProvider.updateTypeEnum(PostTypeEnum.public);

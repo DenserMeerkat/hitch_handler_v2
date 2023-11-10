@@ -12,10 +12,10 @@ class PostCard extends StatefulWidget {
   final FeedPostModel post;
   final PostTypeEnum postType;
   const PostCard({
-    super.key,
+    Key? key,
     required this.post,
     this.postType = PostTypeEnum.public,
-  });
+  }) : super(key: key);
 
   @override
   State<PostCard> createState() => _PostCardState();

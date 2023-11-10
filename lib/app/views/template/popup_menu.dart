@@ -9,6 +9,15 @@ abstract class AbstractPopupMenu<T, E> extends StatefulWidget {
   final EdgeInsetsGeometry? buttonPadding;
   final bool isEnabled;
   final bool showTitle;
+  final bool showIcon;
+  final String? title;
+  final TextStyle? titleStyle;
+  final Color? popupMenuColor;
+  final Color? popupMenuBorderColor;
+  final Color? popupMenuDividerColor;
+  final Color? popupChildColor;
+  final Color? popupChildBorderColor;
+  final Color? popupForeground;
   const AbstractPopupMenu({
     Key? key,
     this.dividerHeight = 34,
@@ -16,6 +25,15 @@ abstract class AbstractPopupMenu<T, E> extends StatefulWidget {
     this.buttonPadding,
     this.isEnabled = true,
     this.showTitle = false,
+    this.showIcon = true,
+    this.title,
+    this.titleStyle,
+    this.popupMenuColor,
+    this.popupMenuBorderColor,
+    this.popupMenuDividerColor,
+    this.popupChildColor,
+    this.popupChildBorderColor,
+    this.popupForeground,
   }) : super(key: key);
 
   void updateSelectedItem(E itemEnum);
@@ -74,13 +92,15 @@ class _AbstractPopupMenuState<T, E> extends State<AbstractPopupMenu<T, E>>
           position: PopupMenuPosition.under,
           elevation: 0,
           surfaceTintColor: Colors.transparent,
-          color: Theme.of(context).colorScheme.background.mix(
-                Theme.of(context).colorScheme.tertiaryContainer,
-                isDarkMode ? 40 : 80,
-              ),
+          color: widget.popupMenuColor ??
+              Theme.of(context).colorScheme.background.mix(
+                    Theme.of(context).colorScheme.tertiaryContainer,
+                    isDarkMode ? 40 : 80,
+                  ),
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: Theme.of(context).dividerColor,
+              color:
+                  widget.popupMenuBorderColor ?? Theme.of(context).dividerColor,
               width: 1,
             ),
             borderRadius: BorderRadius.circular(12),
@@ -105,7 +125,6 @@ class _AbstractPopupMenuState<T, E> extends State<AbstractPopupMenu<T, E>>
               itemsWithDividers
                   .add(buildPopupMenuItem(context, widget.getEnum(items[i])));
 
-              // Add a divider after each element except the last one
               if (i < items.length - 1) {
                 itemsWithDividers.add(buildPopupMenuItemDivider(context));
               }
@@ -115,41 +134,50 @@ class _AbstractPopupMenuState<T, E> extends State<AbstractPopupMenu<T, E>>
           },
           child: Container(
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .tertiaryContainer
-                  .withOpacity(isDarkMode ? 0.6 : 1),
+              color: widget.popupChildColor ??
+                  Theme.of(context)
+                      .colorScheme
+                      .tertiaryContainer
+                      .withOpacity(isDarkMode ? 0.6 : 1),
               borderRadius:
                   widget.buttonBorderRadius ?? BorderRadius.circular(12),
               border: Border.all(
-                color: Theme.of(context).dividerColor,
+                color: widget.popupChildBorderColor ??
+                    Theme.of(context).dividerColor,
                 width: 1,
               ),
             ),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: widget.buttonPadding ??
-                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
-                  child: Icon(widget.getIconData(widget.getEnum(selectedItem)),
-                      size: 20),
-                ),
+                if (widget.showIcon)
+                  Padding(
+                    padding: widget.buttonPadding ??
+                        const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 6),
+                    child: Icon(
+                        widget.getIconData(widget.getEnum(selectedItem)),
+                        size: 20),
+                  ),
                 if (widget.showTitle)
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
-                      widget.getItemTitle(widget.getEnum(selectedItem)),
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      widget.title ??
+                          widget.getItemTitle(widget.getEnum(selectedItem)),
+                      style: widget.titleStyle ??
+                          TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
                   ),
                 Container(
                   height: widget.dividerHeight,
                   width: 1,
-                  color: Theme.of(context).dividerColor,
+                  color: widget.popupChildBorderColor ??
+                      Theme.of(context).dividerColor,
                 ),
                 RotationTransition(
                   turns: Tween(begin: 0.0, end: 0.5).animate(_controller),
@@ -195,7 +223,7 @@ class _AbstractPopupMenuState<T, E> extends State<AbstractPopupMenu<T, E>>
       value: widget.getNoneValue(),
       child: Container(
         height: 1,
-        color: Theme.of(context).dividerColor,
+        color: widget.popupMenuDividerColor ?? Theme.of(context).dividerColor,
       ),
     );
   }

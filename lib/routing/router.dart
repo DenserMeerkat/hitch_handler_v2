@@ -79,7 +79,9 @@ GoRouter router = GoRouter(
     GoRoute(
       path: '/student',
       builder: (BuildContext context, GoRouterState state) {
-        return const StudentHomePage();
+        return const StudentHomePage(
+          key: ValueKey("StudentHomePage"),
+        );
       },
       redirect: (context, state) {
         final userValue = context.read<UserProvider>();
@@ -133,7 +135,9 @@ GoRouter router = GoRouter(
     GoRoute(
       path: '/admin',
       builder: (BuildContext context, GoRouterState state) {
-        return const AdminHomePage();
+        return const AdminHomePage(
+          key: ValueKey("AdminHomePage"),
+        );
       },
       redirect: (context, state) {
         final userValue = context.read<UserProvider>();

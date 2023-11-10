@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hitch_handler_v2/data/constants.dart';
 import 'package:hitch_handler_v2/data/model/models.dart';
 import 'package:hitch_handler_v2/data/services/http_service.dart';
 
 Future<ResponseModel> addPost(PostModel post, String token) async {
-  String path = "student/create_post";
-
   HttpService http = HttpService();
   late Response response;
 
@@ -13,7 +12,7 @@ Future<ResponseModel> addPost(PostModel post, String token) async {
 
   debugPrint(body.toString());
   try {
-    response = await http.postRequestProtected(path, body, token);
+    response = await http.postRequestProtected(studentAddPostPath, body, token);
     if (response.statusCode == 200) {
       debugPrint(response.data.toString());
       ResponseModel responseModel = ResponseModel(

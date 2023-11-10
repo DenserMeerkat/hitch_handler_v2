@@ -9,17 +9,27 @@ import 'package:provider/provider.dart';
 class FeedController {
   late FeedProvider _feedProvider;
   late String _token;
-
-  FeedController(String token, BuildContext context) {
+  late bool _isAdmin;
+  late String _domain;
+  FeedController(String token, BuildContext context,
+      {bool isAdmin = false, String domain = ""}) {
     _feedProvider = context.read<FeedProvider>();
     _token = token;
+    _isAdmin = isAdmin;
+    _domain = domain;
   }
 
   void fetchFeedPosts(BuildContext context) async {
     final scaffoldContext = ScaffoldMessenger.of(context);
     IsLoading(true).dispatch(context);
     FeedResponseModel result;
-    result = await fetchFeed(_token);
+    if (_isAdmin) {
+      debugPrint("Admin Feed");
+      result = await fetchFeedAdmin(_token, _domain);
+    } else {
+      debugPrint("Student Feed");
+      result = await fetchFeed(_token);
+    }
 
     if (context.mounted) IsLoading(false).dispatch(context);
     if (result.statusCode == 200) {
@@ -41,6 +51,7 @@ class FeedController {
   }
 
   reset() {
+    debugPrint("Resetting FeedProvider");
     _feedProvider.updateFeedPosts([]);
     _feedProvider.updateUserPosts([]);
     _feedProvider.updateBookmarkedPosts([]);

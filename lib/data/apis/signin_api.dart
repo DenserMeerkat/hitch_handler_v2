@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
+import 'package:hitch_handler_v2/data/constants.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/data/model/models.dart';
 import 'package:hitch_handler_v2/data/services/http_service.dart';
 
 Future<UserResponseModel> loginStudent(String username, String password) async {
-  String path = "student/login/";
-
   HttpService http = HttpService();
   late Response response;
 
@@ -34,7 +33,7 @@ Future<UserResponseModel> loginStudent(String username, String password) async {
   });
   debugPrint(body.toString());
   try {
-    response = await http.postRequest(path, body);
+    response = await http.postRequest(studentLoginPath, body);
     if (response.statusCode == 200) {
       debugPrint(response.data.toString());
       UserResponseModel userResponseModel = UserResponseModel(
@@ -56,8 +55,6 @@ Future<UserResponseModel> loginStudent(String username, String password) async {
 }
 
 Future<UserResponseModel> loginAdmin(String username, String password) async {
-  String path = "admin/login/";
-
   HttpService http = HttpService();
   late Response response;
 
@@ -78,7 +75,7 @@ Future<UserResponseModel> loginAdmin(String username, String password) async {
   });
   debugPrint(body.toString());
   try {
-    response = await http.postRequest(path, body);
+    response = await http.postRequest(adminLoginPath, body);
     if (response.statusCode == 200) {
       debugPrint(response.data.toString());
       UserModel userModel = UserModel.fromJson(response.data["data"]);

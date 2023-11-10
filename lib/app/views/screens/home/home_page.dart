@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/home/home_bottom_bar.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/slider_page.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
+import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/overlay_wrapper.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
@@ -153,6 +154,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                     title: widget.viewTitles[currentPageIndex],
+                    bottom: bottomLine(context),
                   ),
                   body: widget.viewList[currentPageIndex],
                   bottomNavigationBar: HomeBottomBar(
