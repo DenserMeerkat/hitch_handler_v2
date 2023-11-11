@@ -9,12 +9,14 @@ class ThemeProvider extends ChangeNotifier {
   static const String _selectedThemeModeKey = 'themeMode';
   static const String _lightBlendLevelKey = 'lightBlend';
   static const String _darkBlendLevelKey = 'darkBlend';
+  static const String _trueDarkKey = 'trueDark';
   SharedPreferences? prefs;
   late bool _doneLoading;
   late FlexScheme _selectedColorScheme;
   late ThemeMode _selectedThemeMode;
   late double _lightBlendLevel;
   late double _darkBlendLevel;
+  late bool _trueDark;
 
   ThemeProvider() {
     _selectedColorScheme = FlexScheme.materialBaseline;
@@ -22,6 +24,7 @@ class ThemeProvider extends ChangeNotifier {
     _doneLoading = false;
     _lightBlendLevel = 40;
     _darkBlendLevel = 10;
+    _trueDark = false;
     _loadFromPrefs();
   }
 
@@ -34,6 +37,8 @@ class ThemeProvider extends ChangeNotifier {
   double get lightBlendLevel => _lightBlendLevel;
 
   double get darkBlendLevel => _darkBlendLevel;
+
+  bool get trueDark => _trueDark;
 
   set doneLoading(bool value) {
     _doneLoading = value;
@@ -111,6 +116,19 @@ class ThemeProvider extends ChangeNotifier {
     if (_darkBlendLevel != blendLevel) {
       _darkBlendLevel = blendLevel;
       _saveDarkBlendLevelToPrefs();
+      notifyListeners();
+    }
+  }
+
+  void _saveTrueDarkToPrefs() async {
+    await _initPrefs();
+    prefs!.setBool(_trueDarkKey, _trueDark);
+  }
+
+  void updateTrueDark(bool value) {
+    if (_trueDark != value) {
+      _trueDark = value;
+      _saveTrueDarkToPrefs();
       notifyListeners();
     }
   }

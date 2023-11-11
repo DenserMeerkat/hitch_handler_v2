@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/providers/theme_provider.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -46,46 +46,51 @@ class _BlendSliderState extends State<BlendSlider> {
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return Container(
-      padding: EdgeInsets.only(left: widget.showBorder ? 16.w : 24.w),
-      constraints: BoxConstraints(
-        maxWidth: 330.w,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: widget.showColor ? Theme.of(context).colorScheme.surface : null,
-        border: widget.showBorder
-            ? Border.all(
-                color: Theme.of(context)
-                    .colorScheme
-                    .outlineVariant
-                    .withOpacity(0.4),
-                width: 1,
-              )
-            : null,
-      ),
-      child: renderSlider(
-          Symbols.layers_rounded,
-          isDark ? darkBlendValue : lightBlendValue,
-          isDark ? onChangeDarkBlendValue : onChangeLightBlendValue),
-    );
+    return renderSlider(
+        Symbols.layers_rounded,
+        isDark ? darkBlendValue : lightBlendValue,
+        isDark ? onChangeDarkBlendValue : onChangeLightBlendValue);
   }
 
-  Row renderSlider(
+  Widget renderSlider(
       IconData icon, double blendValue, Function(double)? onChanged) {
     return Row(
+      mainAxisSize: MainAxisSize.max,
       children: [
         Icon(icon, size: 24, color: Theme.of(context).colorScheme.primary),
+        const Gap(20),
         Expanded(
-          child: Slider(
-            value: blendValue,
-            max: 40,
-            divisions: 8,
-            label: blendValue.round().toString(),
-            onChanged: onChanged,
+          child: SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              trackShape: CustomTrackShape(),
+            ),
+            child: Slider(
+              value: blendValue,
+              max: 40,
+              divisions: 8,
+              label: blendValue.round().toString(),
+              onChanged: onChanged,
+            ),
           ),
         ),
       ],
     );
+  }
+}
+
+class CustomTrackShape extends RoundedRectSliderTrackShape {
+  @override
+  Rect getPreferredRect({
+    required RenderBox parentBox,
+    Offset offset = Offset.zero,
+    required SliderThemeData sliderTheme,
+    bool isEnabled = false,
+    bool isDiscrete = false,
+  }) {
+    final trackHeight = sliderTheme.trackHeight;
+    final trackLeft = offset.dx;
+    final trackTop = offset.dy + (parentBox.size.height - trackHeight!) / 2;
+    final trackWidth = parentBox.size.width;
+    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
 }

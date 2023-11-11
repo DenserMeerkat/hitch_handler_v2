@@ -2,7 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 ThemeData getTheme(FlexScheme scheme, bool isDark, double lightBlendLevel,
-    double darkBlendLevel) {
+    double darkBlendLevel,
+    {bool trueBlack = false}) {
   if (isDark) {
     return FlexThemeData.dark(
       scheme: scheme,
@@ -19,6 +20,7 @@ ThemeData getTheme(FlexScheme scheme, bool isDark, double lightBlendLevel,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       useMaterial3: true,
       swapLegacyOnMaterial3: true,
+      darkIsTrueBlack: trueBlack,
     );
   }
   return FlexThemeData.light(

@@ -17,11 +17,15 @@ class SliderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = context.watch<ThemeProvider>();
     ThemeMode selectedThemeMode = themeProvider.selectedThemeMode;
-    return SafeArea(
-      bottom: false,
+    bool isAmoled = themeProvider.trueDark;
+    return Container(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      color: isAmoled || selectedThemeMode == ThemeMode.light
+          ? Theme.of(context).colorScheme.surfaceVariant
+          : Theme.of(context).colorScheme.onInverseSurface,
       child: Drawer(
         width: 300.w,
-        backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
+        backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -35,7 +39,7 @@ class SliderPage extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 4, bottom: 4),
                   color: Theme.of(context).colorScheme.surface,
                   child: Row(
                     children: [
@@ -80,10 +84,18 @@ class SliderPage extends StatelessWidget {
                           padding: 8,
                         ),
                       ),
-                      BlendSlider(
-                        value: context.read<ThemeProvider>(),
-                        showBorder: false,
-                        showColor: false,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: BlendSlider(
+                          value: context.read<ThemeProvider>(),
+                          showBorder: false,
+                          showColor: false,
+                        ),
+                      ),
+                      const Gap(8),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: const AmoledSwitch(),
                       ),
                       const Gap(8),
                       Padding(

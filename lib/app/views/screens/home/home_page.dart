@@ -46,8 +46,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   Color calculateBackgroundColor(double dragPosition) {
-    return Color.lerp(Theme.of(context).colorScheme.surface,
-        Theme.of(context).colorScheme.onInverseSurface, dragPosition)!;
+    bool isAmoled = context.watch<ThemeProvider>().trueDark;
+    ThemeMode selectedThemeMode =
+        context.read<ThemeProvider>().selectedThemeMode;
+    Color start = Theme.of(context).colorScheme.surface;
+    Color end = isAmoled || selectedThemeMode == ThemeMode.light
+        ? Theme.of(context).colorScheme.surfaceVariant
+        : Theme.of(context).colorScheme.onInverseSurface;
+    return Color.lerp(start, end, dragPosition)!;
   }
 
   void closeDrawer() {

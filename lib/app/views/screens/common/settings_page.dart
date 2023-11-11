@@ -54,8 +54,30 @@ class _SettingsPageState extends State<SettingsPage> {
                 value: context.read<ThemeProvider>(),
               ),
               Gap(20.h),
-              BlendSlider(
-                value: context.read<ThemeProvider>(),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8),
+                constraints: BoxConstraints(
+                  maxWidth: 330.w,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Theme.of(context).colorScheme.surface,
+                  border: Border.all(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .outlineVariant
+                        .withOpacity(0.4),
+                    width: 1,
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    BlendSlider(
+                      value: context.read<ThemeProvider>(),
+                    ),
+                    const AmoledSwitch(),
+                  ],
+                ),
               ),
               Gap(30.h),
               ThemeModeSwitch(),
