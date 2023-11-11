@@ -9,17 +9,18 @@ import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:inner_drawer/inner_drawer.dart';
 import 'package:provider/provider.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 class HomePage extends StatefulWidget {
   final List<Widget> viewList;
   final List<Widget> viewTitles;
   final int currentIndex;
   const HomePage({
-    super.key,
+    required Key key,
     required this.viewList,
     required this.viewTitles,
     required this.currentIndex,
-  });
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   ValueNotifier<double> dragPosition = ValueNotifier(0);
 
   void onDestinationChange(int index) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     setState(() {
       currentPageIndex = index;
     });
@@ -50,8 +52,13 @@ class _HomePageState extends State<HomePage> {
     ThemeMode selectedThemeMode =
         context.read<ThemeProvider>().selectedThemeMode;
     Color start = Theme.of(context).colorScheme.surface;
-    Color end = isAmoled || selectedThemeMode == ThemeMode.light
-        ? Theme.of(context).colorScheme.surfaceVariant
+    Color end = isAmoled
+        ? selectedThemeMode == ThemeMode.light
+            ? Theme.of(context).colorScheme.surfaceVariant
+            : Theme.of(context)
+                .colorScheme
+                .surface
+                .mix(Theme.of(context).colorScheme.primary, 5)
         : Theme.of(context).colorScheme.onInverseSurface;
     return Color.lerp(start, end, dragPosition)!;
   }
@@ -125,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                           BorderRadius.vertical(top: Radius.circular(8)),
                     ),
                     leading: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(6.0),
                       child: CustomIconButton(
                         tooltip: "Toggle Sidebar",
                         icon: Icon(
@@ -164,6 +171,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   body: widget.viewList[currentPageIndex],
                   bottomNavigationBar: HomeBottomBar(
+                    key: ValueKey("${widget.key}BottomBar"),
                     currentPageIndex: currentPageIndex,
                     onDestinationChange: onDestinationChange,
                     isAdmin: userProvider.userModel!.userType == UserEnum.admin,

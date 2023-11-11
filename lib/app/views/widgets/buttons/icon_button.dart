@@ -24,7 +24,7 @@ class CustomIconButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          maximumSize: const Size(40, 40),
+          maximumSize: const Size(50, 50),
         ),
         highlightColor: Theme.of(context).colorScheme.primary.withOpacity(0.2),
         icon: iconData == null ? icon : Icon(iconData),

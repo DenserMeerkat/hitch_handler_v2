@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:inner_drawer/inner_drawer.dart';
 import 'package:hitch_handler_v2/app/views/settings/theme/color_scheme/color_scheme_widgets.dart';
 import 'package:hitch_handler_v2/providers/theme_provider.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 class SliderPage extends StatelessWidget {
   final GlobalKey<InnerDrawerState> innerDrawerKey;
@@ -20,8 +21,13 @@ class SliderPage extends StatelessWidget {
     bool isAmoled = themeProvider.trueDark;
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      color: isAmoled || selectedThemeMode == ThemeMode.light
-          ? Theme.of(context).colorScheme.surfaceVariant
+      color: isAmoled
+          ? selectedThemeMode == ThemeMode.light
+              ? Theme.of(context).colorScheme.surfaceVariant
+              : Theme.of(context)
+                  .colorScheme
+                  .surface
+                  .mix(Theme.of(context).colorScheme.primary, 5)
           : Theme.of(context).colorScheme.onInverseSurface,
       child: Drawer(
         width: 300.w,
@@ -70,7 +76,7 @@ class SliderPage extends StatelessWidget {
                 Container(
                   height: 1,
                   width: double.infinity,
-                  color: Theme.of(context).dividerColor,
+                  color: Theme.of(context).colorScheme.outlineVariant,
                 ),
                 const Gap(8),
                 SingleChildScrollView(

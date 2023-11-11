@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
@@ -11,6 +12,7 @@ class FeedController {
   late String _token;
   late bool _isAdmin;
   late String _domain;
+
   FeedController(String token, BuildContext context,
       {bool isAdmin = false, String domain = ""}) {
     _feedProvider = context.read<FeedProvider>();
@@ -21,14 +23,15 @@ class FeedController {
 
   void fetchFeedPosts(BuildContext context) async {
     final scaffoldContext = ScaffoldMessenger.of(context);
+    final int cursor = _feedProvider.feedPostsCursor;
     IsLoading(true).dispatch(context);
     FeedResponseModel result;
     if (_isAdmin) {
       debugPrint("Admin Feed");
-      result = await fetchFeedAdmin(_token, _domain);
+      result = await fetchFeedAdmin(_token, _domain, cursor: cursor);
     } else {
       debugPrint("Student Feed");
-      result = await fetchFeed(_token);
+      result = await fetchFeed(_token, cursor: cursor);
     }
 
     if (context.mounted) IsLoading(false).dispatch(context);
@@ -36,7 +39,11 @@ class FeedController {
       scaffoldContext.hideCurrentMaterialBanner();
       scaffoldContext.hideCurrentSnackBar();
       if (result.feedData != null) {
-        _feedProvider.updateFeedPosts(result.feedData!);
+        List<FeedPostModel> posts = _feedProvider.feedPosts + result.feedData!;
+        posts.toSet().toList();
+        log(posts.toString());
+        _feedProvider.updateFeedPosts(posts);
+        _feedProvider.updateFeedPostsCursor(result.cursor ?? 0);
       }
     } else {
       if (context.mounted) {
@@ -58,5 +65,6 @@ class FeedController {
     _feedProvider.updateIsFeedPostsLoading(false);
     _feedProvider.updateIsUserPostsLoading(false);
     _feedProvider.updateIsBookmarkedPostsLoading(false);
+    _feedProvider.updateFeedPostsCursor(0);
   }
 }

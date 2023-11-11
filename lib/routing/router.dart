@@ -5,7 +5,6 @@ import 'package:hitch_handler_v2/app/views/screens/auth/auth_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/auth/create_pass_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/auth/otp_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/auth/reset_pass_page.dart';
-import 'package:hitch_handler_v2/app/views/screens/common/search_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/settings_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/home/add_page.dart';
 import 'package:hitch_handler_v2/app/views/user/student_home.dart';
@@ -24,7 +23,7 @@ GoRouter router = GoRouter(
         final userValue = context.read<UserProvider>();
         if (userValue.jwtToken != null && userValue.userModel != null) {
           if (userValue.userModel?.userType == UserEnum.admin) {
-            return "/student";
+            return "/admin";
           }
           return "/student";
         }
@@ -92,18 +91,6 @@ GoRouter router = GoRouter(
       },
       routes: [
         GoRoute(
-          path: 'search',
-          pageBuilder: (context, state) {
-            return NoTransitionPage(
-              key: state.pageKey,
-              child: const SearchPage(),
-            );
-          },
-          builder: (BuildContext context, GoRouterState state) {
-            return const SearchPage();
-          },
-        ),
-        GoRoute(
           path: 'add',
           pageBuilder: (context, state) {
             return CustomTransitionPage(
@@ -146,20 +133,7 @@ GoRouter router = GoRouter(
         }
         return null;
       },
-      routes: [
-        GoRoute(
-          path: 'search',
-          pageBuilder: (context, state) {
-            return NoTransitionPage(
-              key: state.pageKey,
-              child: const SearchPage(),
-            );
-          },
-          builder: (BuildContext context, GoRouterState state) {
-            return const SearchPage();
-          },
-        ),
-      ],
+      routes: const [],
     ),
   ],
 );

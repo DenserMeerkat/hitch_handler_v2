@@ -28,13 +28,15 @@ class HttpService {
     _dio.interceptors.add(CustomInterceptors());
   }
 
-  Future<Response> getRequest(String path) async {
+  Future<Response> getRequest(String path,
+      {Map<String, dynamic>? queryParameters}) async {
     Response response =
         Response(requestOptions: RequestOptions(path: "Error Response"));
 
     try {
       response = await _dio.get(
         path,
+        queryParameters: queryParameters,
         options: options,
       );
     } on DioException catch (e) {
@@ -45,13 +47,15 @@ class HttpService {
     return response;
   }
 
-  Future<Response> getRequestProtected(String path, String token) async {
+  Future<Response> getRequestProtected(String path, String token,
+      {Map<String, dynamic>? queryParameters}) async {
     Response response =
         Response(requestOptions: RequestOptions(path: "Error Response"));
 
     try {
       response = await _dio.get(
         path,
+        queryParameters: queryParameters,
         options: Options(headers: {
           ...?options.headers,
           "authorization": token,
@@ -83,14 +87,15 @@ class HttpService {
     return response;
   }
 
-  Future<Response> postRequestProtected(
-      String path, Object data, String token) async {
+  Future<Response> postRequestProtected(String path, Object data, String token,
+      {Map<String, dynamic>? queryParameters}) async {
     Response response =
         Response(requestOptions: RequestOptions(path: "Error Response"));
 
     try {
       response = await _dio.post(
         path,
+        queryParameters: queryParameters,
         data: data,
         options: options.copyWith(headers: {
           ...?options.headers,

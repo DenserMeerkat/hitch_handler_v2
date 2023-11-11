@@ -9,12 +9,11 @@ class AmoledSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      dense: true,
       contentPadding: EdgeInsets.zero,
       title: Row(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 6),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.tertiaryContainer,
               borderRadius: BorderRadius.circular(20),
@@ -22,12 +21,12 @@ class AmoledSwitch extends StatelessWidget {
             child: const Row(
               children: [
                 Icon(
-                  Icons.science_outlined,
-                  size: 10,
+                  Icons.science_rounded,
+                  size: 8,
                 ),
-                Gap(4),
+                Gap(2),
                 Text(
-                  "Beta",
+                  "Expt.",
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w500,

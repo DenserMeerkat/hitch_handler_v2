@@ -31,7 +31,7 @@ class HomeViews {
 
   static List<Widget> adminViewList = const [
     FeedPage(),
-    TempView(emptyText: "Search"),
+    SearchPage(),
     //FeedPage(),
     ProfilePage(),
   ];

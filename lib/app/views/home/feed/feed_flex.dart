@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/views/home/feed/sort_popup_menu.dart';
 import 'package:hitch_handler_v2/providers/feed_provider.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +21,7 @@ class FeedFlex extends StatelessWidget {
           children: [
             Expanded(
                 child: GestureDetector(
-              onTap: () => context.go("/student/search"),
+              onTap: () {},
               child: Container(
                 height: 40,
                 decoration: BoxDecoration(

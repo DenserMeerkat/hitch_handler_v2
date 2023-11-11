@@ -6,6 +6,7 @@ class FeedProvider extends ChangeNotifier {
   List<FeedPostModel> _feedPosts = [];
   List<FeedPostModel> _userPosts = [];
   List<FeedPostModel> _bookmarkedPosts = [];
+  int _feedPostsCursor = 0;
   bool _isFeedPostsLoading = false;
   bool _isUserPostsLoading = false;
   bool _isBookmarkedPostsLoading = false;
@@ -14,6 +15,7 @@ class FeedProvider extends ChangeNotifier {
   List<FeedPostModel> get feedPosts => _feedPosts;
   List<FeedPostModel> get userPosts => _userPosts;
   List<FeedPostModel> get bookmarkedPosts => _bookmarkedPosts;
+  int get feedPostsCursor => _feedPostsCursor;
   bool get isFeedPostsLoading => _isFeedPostsLoading;
   bool get isUserPostsLoading => _isUserPostsLoading;
   bool get isBookmarkedPostsLoading => _isBookmarkedPostsLoading;
@@ -51,6 +53,11 @@ class FeedProvider extends ChangeNotifier {
 
   void updateSortType(SortEnum sortType) {
     _sortType = sortType;
+    notifyListeners();
+  }
+
+  void updateFeedPostsCursor(int cursor) {
+    _feedPostsCursor = cursor;
     notifyListeners();
   }
 }
