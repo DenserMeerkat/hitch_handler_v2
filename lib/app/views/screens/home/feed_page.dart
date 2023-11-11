@@ -40,25 +40,28 @@ class _FeedPageState extends State<FeedPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        posts.isEmpty
-            ? const SliverFillRemaining(
-                child: TempView(emptyText: "No Posts"),
-              )
-            : SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final post = posts[index];
-                    return PostCard(
-                      key: ValueKey(post.postid),
-                      post: post,
-                    );
-                  },
-                  childCount: posts.length,
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: CustomScrollView(
+        slivers: [
+          posts.isEmpty
+              ? const SliverFillRemaining(
+                  child: TempView(emptyText: "No Posts"),
+                )
+              : SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final post = posts[index];
+                      return PostCard(
+                        key: ValueKey(post.postid),
+                        post: post,
+                      );
+                    },
+                    childCount: posts.length,
+                  ),
                 ),
-              ),
-      ],
+        ],
+      ),
     );
   }
 }

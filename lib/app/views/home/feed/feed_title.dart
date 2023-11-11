@@ -17,10 +17,11 @@ class FeedTitle extends StatelessWidget {
           .appBarTheme
           .backgroundColor!
           .mix(Theme.of(context).colorScheme.primary, 5),
-      popupBorderColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-      popupDividerColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+      popupBorderColor: Colors.transparent,
+      popupDividerColor: Theme.of(context).scaffoldBackgroundColor,
       backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-      borderColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+      borderColor: Theme.of(context).appBarTheme.backgroundColor!,
+      dividerColor: Theme.of(context).appBarTheme.backgroundColor!,
     );
   }
 }

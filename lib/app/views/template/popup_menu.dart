@@ -10,6 +10,7 @@ abstract class AbstractPopupMenu<T, E> extends StatefulWidget {
   final bool isEnabled;
   final bool showTitle;
   final bool showIcon;
+  final double? iconSize;
   final String? title;
   final TextStyle? titleStyle;
   final Color? popupMenuColor;
@@ -17,6 +18,7 @@ abstract class AbstractPopupMenu<T, E> extends StatefulWidget {
   final Color? popupMenuDividerColor;
   final Color? popupChildColor;
   final Color? popupChildBorderColor;
+  final Color? popupChildDividerColor;
   final Color? popupForeground;
   const AbstractPopupMenu({
     Key? key,
@@ -26,6 +28,7 @@ abstract class AbstractPopupMenu<T, E> extends StatefulWidget {
     this.isEnabled = true,
     this.showTitle = false,
     this.showIcon = true,
+    this.iconSize = 20,
     this.title,
     this.titleStyle,
     this.popupMenuColor,
@@ -33,6 +36,7 @@ abstract class AbstractPopupMenu<T, E> extends StatefulWidget {
     this.popupMenuDividerColor,
     this.popupChildColor,
     this.popupChildBorderColor,
+    this.popupChildDividerColor,
     this.popupForeground,
   }) : super(key: key);
 
@@ -156,8 +160,9 @@ class _AbstractPopupMenuState<T, E> extends State<AbstractPopupMenu<T, E>>
                         const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 6),
                     child: Icon(
-                        widget.getIconData(widget.getEnum(selectedItem)),
-                        size: 20),
+                      widget.getIconData(widget.getEnum(selectedItem)),
+                      size: widget.iconSize,
+                    ),
                   ),
                 if (widget.showTitle)
                   Padding(
@@ -176,7 +181,7 @@ class _AbstractPopupMenuState<T, E> extends State<AbstractPopupMenu<T, E>>
                 Container(
                   height: widget.dividerHeight,
                   width: 1,
-                  color: widget.popupChildBorderColor ??
+                  color: widget.popupChildDividerColor ??
                       Theme.of(context).dividerColor,
                 ),
                 RotationTransition(

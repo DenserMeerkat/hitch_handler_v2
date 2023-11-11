@@ -45,16 +45,24 @@ class HomeBottomBar extends StatelessWidget {
             icon: Icon(Icons.home_outlined),
             label: "Home",
           ),
-          // NavigationDestination(
-          //   icon: Icon(Icons.search_outlined),
-          //   label: "Search",
-          // ),
-          if (!isAdmin) const AddPostButton(),
-          // NavigationDestination(
-          //   selectedIcon: Icon(Icons.archive),
-          //   icon: Icon(Icons.archive_outlined),
-          //   label: "Archives",
-          // ),
+          const NavigationDestination(
+            selectedIcon: Icon(Icons.manage_search_rounded),
+            icon: Icon(Icons.search_outlined),
+            label: "Search",
+          ),
+          if (!isAdmin)
+            const CustomNavigationDestination(
+              tooltip: "Add Post",
+              route: "/student/add",
+              label: "Add",
+              icon: Icons.add_circle_outline_outlined,
+            ),
+          if (!isAdmin)
+            const NavigationDestination(
+              selectedIcon: Icon(Icons.archive),
+              icon: Icon(Icons.archive_outlined),
+              label: "Archives",
+            ),
           const NavigationDestination(
             selectedIcon: Icon(Icons.account_circle),
             icon: Icon(Icons.account_circle_outlined),
@@ -66,21 +74,29 @@ class HomeBottomBar extends StatelessWidget {
   }
 }
 
-class AddPostButton extends StatelessWidget {
-  const AddPostButton({
+class CustomNavigationDestination extends StatelessWidget {
+  final String tooltip;
+  final String route;
+  final String label;
+  final IconData icon;
+  const CustomNavigationDestination({
     super.key,
+    required this.tooltip,
+    required this.route,
+    required this.label,
+    required this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: "Add Post",
+      message: tooltip,
       triggerMode: TooltipTriggerMode.longPress,
       verticalOffset: 42,
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          context.go("/student/add");
+          context.go(route);
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -91,10 +107,10 @@ class AddPostButton extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(30),
                 onTap: () {
-                  context.go("/student/add");
+                  context.go(route);
                 },
                 child: Icon(
-                  Icons.add_circle_outline_outlined,
+                  icon,
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.65),
                 ),
@@ -102,7 +118,7 @@ class AddPostButton extends StatelessWidget {
             ),
             const Gap(4),
             Text(
-              "Add",
+              label,
               style: TextStyle(
                 fontSize: 12.sp,
                 color:

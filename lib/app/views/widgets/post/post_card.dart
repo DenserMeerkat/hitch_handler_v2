@@ -1,12 +1,10 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hitch_handler_v2/app/views/widgets/post/post_actions.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/data/model/feed_post_model.dart';
-import 'package:like_button/like_button.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:tinycolor2/tinycolor2.dart';
 
 class PostCard extends StatefulWidget {
   final FeedPostModel post;
@@ -22,36 +20,6 @@ class PostCard extends StatefulWidget {
 }
 
 class _PostCardState extends State<PostCard> {
-  bool isLiked = false;
-  bool isBookmarked = false;
-  int likeCount = 0;
-  @override
-  void initState() {
-    super.initState();
-    isLiked = false;
-    isBookmarked = false;
-    likeCount = 0;
-  }
-
-  Future<bool?> onLikeButtonTap(bool isLiked) async {
-    setState(() {
-      this.isLiked = !this.isLiked;
-      if (this.isLiked) {
-        likeCount++;
-      } else {
-        likeCount--;
-      }
-    });
-    return !isLiked;
-  }
-
-  Future<bool?> onBookmarkButtonTap(bool isBookmarked) async {
-    setState(() {
-      this.isBookmarked = !this.isBookmarked;
-    });
-    return !isBookmarked;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -68,13 +36,7 @@ class _PostCardState extends State<PostCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Gap(8),
-            Row(
-              children: [
-                Text(widget.post.domain),
-                const Spacer(),
-                Text(widget.post.currentstatus),
-              ],
-            ),
+            PostHeader(post: widget.post),
             const Gap(8),
             Text(
               widget.post.title,
@@ -97,127 +59,10 @@ class _PostCardState extends State<PostCard> {
               linkColor: Theme.of(context).primaryColor,
             ),
             const Gap(16),
-            Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.05),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.1),
-                      width: 1,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Gap(6),
-                      LikeButton(
-                        isLiked: isLiked,
-                        onTap: onLikeButtonTap,
-                        likeCount: likeCount,
-                        countBuilder: (likeCount, isLiked, text) {
-                          return Text(
-                            text,
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: isLiked
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context)
-                                      .colorScheme
-                                      .onSurface
-                                      .withOpacity(0.6),
-                              fontWeight: isLiked ? FontWeight.w600 : null,
-                            ),
-                          );
-                        },
-                        likeCountPadding:
-                            const EdgeInsets.only(left: 0, right: 4),
-                        bubblesColor: BubblesColor(
-                          dotPrimaryColor:
-                              Theme.of(context).colorScheme.primary,
-                          dotSecondaryColor:
-                              Theme.of(context).colorScheme.secondary,
-                          dotThirdColor: Theme.of(context).colorScheme.tertiary,
-                          dotLastColor:
-                              Theme.of(context).colorScheme.tertiaryContainer,
-                        ),
-                        circleColor: CircleColor(
-                          start: Theme.of(context).colorScheme.primary,
-                          end: Theme.of(context).colorScheme.secondary,
-                        ),
-                        likeBuilder: (isLiked) {
-                          return Icon(
-                            isLiked
-                                ? MdiIcons.arrowUpBold
-                                : MdiIcons.arrowUpBoldOutline,
-                            color: isLiked
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context)
-                                    .colorScheme
-                                    .onSurface
-                                    .withOpacity(0.6),
-                            size: 20,
-                          );
-                        },
-                      ),
-                      const Gap(8),
-                      Container(
-                        width: 1,
-                        height: 30,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withOpacity(0.1),
-                      ),
-                      const Gap(12),
-                      Icon(
-                        Icons.chat_outlined,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondary
-                            .withOpacity(0.6),
-                        size: 18,
-                      ),
-                      const Gap(12),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-                LikeButton(
-                  isLiked: isBookmarked,
-                  onTap: onBookmarkButtonTap,
-                  bubblesColor: BubblesColor(
-                    dotPrimaryColor: Theme.of(context).colorScheme.secondary,
-                    dotSecondaryColor: Theme.of(context).colorScheme.tertiary,
-                    dotThirdColor: Theme.of(context).colorScheme.error,
-                    dotLastColor: Theme.of(context).colorScheme.errorContainer,
-                  ),
-                  circleColor: CircleColor(
-                    start: Theme.of(context).colorScheme.errorContainer,
-                    end: Theme.of(context).colorScheme.error,
-                  ),
-                  likeBuilder: (isBookmarked) {
-                    return Icon(
-                      isBookmarked
-                          ? Icons.bookmark
-                          : Icons.bookmark_add_outlined,
-                      color: isBookmarked
-                          ? Theme.of(context).colorScheme.error.mix(
-                              Theme.of(context).colorScheme.errorContainer, 50)
-                          : Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withOpacity(0.6),
-                      size: 20,
-                    );
-                  },
-                ),
-              ],
-            ),
+            if (widget.postType == PostTypeEnum.public)
+              PostActions(
+                post: widget.post,
+              ),
             const Gap(8),
             if (widget.post.location.isNotEmpty) Text(widget.post.location),
             const Gap(16),
@@ -231,6 +76,56 @@ class _PostCardState extends State<PostCard> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class PostHeader extends StatelessWidget {
+  const PostHeader({
+    super.key,
+    required this.post,
+  });
+
+  final FeedPostModel post;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          decoration: BoxDecoration(
+            color: Theme.of(context)
+                .colorScheme
+                .tertiaryContainer
+                .withOpacity(0.4),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.domain,
+                size: 12,
+              ),
+              Container(
+                width: 1,
+                height: 24,
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                ),
+              ),
+              Text(post.domain,
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.8,
+                  )),
+            ],
+          ),
+        ),
+        const Spacer(),
+        Text(post.currentstatus),
+      ],
     );
   }
 }

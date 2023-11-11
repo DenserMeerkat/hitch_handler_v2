@@ -14,6 +14,7 @@ class FeedTitlePopupMenu extends AbstractPopupMenu<SortType, SortEnum> {
   final Color? popupDividerColor;
   final Color? backgroundColor;
   final Color? borderColor;
+  final Color? dividerColor;
   const FeedTitlePopupMenu({
     super.key,
     required this.feedProvider,
@@ -26,7 +27,9 @@ class FeedTitlePopupMenu extends AbstractPopupMenu<SortType, SortEnum> {
     this.popupDividerColor,
     this.backgroundColor,
     this.borderColor,
+    this.dividerColor,
   }) : super(
+          iconSize: 18,
           dividerHeight: 34,
           showIcon: true,
           showTitle: true,
@@ -42,6 +45,7 @@ class FeedTitlePopupMenu extends AbstractPopupMenu<SortType, SortEnum> {
           popupMenuDividerColor: popupDividerColor,
           popupChildColor: backgroundColor,
           popupChildBorderColor: borderColor,
+          popupChildDividerColor: dividerColor,
           title: feedTitle,
         );
 
