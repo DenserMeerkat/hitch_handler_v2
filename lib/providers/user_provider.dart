@@ -62,4 +62,8 @@ class UserProvider extends ChangeNotifier {
   Future<void> logout() async {
     await saveToStorage(null, null);
   }
+
+  Future<void> updateProfile(UserModel userModel) async {
+    await saveToStorage(_jwtToken, userModel);
+  }
 }

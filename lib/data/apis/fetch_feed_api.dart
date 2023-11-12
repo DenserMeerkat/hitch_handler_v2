@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hitch_handler_v2/data/constants.dart';
@@ -42,14 +41,11 @@ Future<FeedResponseModel> fetchFeedAdmin(String token, String domain,
   late Response response;
   Map<String, dynamic>? queryParameters = {
     "cursor": cursor,
-  };
-  Object body = jsonEncode({
     "domain": domain,
-  });
+  };
   try {
-    response = await http.postRequestProtected(
+    response = await http.getRequestProtected(
       adminFeedPath,
-      body,
       token,
       queryParameters: queryParameters,
     );

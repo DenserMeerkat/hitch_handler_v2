@@ -23,7 +23,7 @@ class HomeViews {
   ];
 
   static List<Widget> adminViewTitles = [
-    getHomeTitle("Home"),
+    const FeedTitle(),
     getHomeTitle("Search"),
     //"Archive",
     getHomeTitle("Account"),

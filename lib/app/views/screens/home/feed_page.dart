@@ -40,7 +40,11 @@ class _FeedPageState extends State<FeedPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    refreshPosts();
+    if (feedProvider.feedPosts.isEmpty) {
+      refreshPosts();
+    } else {
+      posts = feedProvider.feedPosts;
+    }
   }
 
   Future<void> refreshPosts() async {

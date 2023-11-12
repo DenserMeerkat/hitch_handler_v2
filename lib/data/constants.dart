@@ -9,3 +9,4 @@ const adminLoginPath = "admin/login/";
 const studentAddPostPath = "student/create_post";
 const studentFeedPath = "student/view_public/";
 const adminFeedPath = "admin/view_domain/";
+const studentLikePostPath = "student/like/";
