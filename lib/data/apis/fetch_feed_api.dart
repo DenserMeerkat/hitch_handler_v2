@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hitch_handler_v2/data/constants.dart';
@@ -19,7 +18,6 @@ Future<FeedResponseModel> fetchFeed(String token, {int cursor = 0}) async {
       queryParameters: queryParameters,
     );
     if (response.statusCode == 200) {
-      log(response.data.toString());
       FeedResponseModel feedResponseModel = FeedResponseModel(
         statusCode: 200,
         message: "Fetched Successfully",
@@ -48,7 +46,6 @@ Future<FeedResponseModel> fetchFeedAdmin(String token, String domain,
   Object body = jsonEncode({
     "domain": domain,
   });
-  debugPrint(body.toString());
   try {
     response = await http.postRequestProtected(
       adminFeedPath,

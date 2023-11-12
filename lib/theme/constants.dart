@@ -7,6 +7,8 @@ const double kDefaultPadding = 20.0;
 const double kHeaderHeight = 106.0;
 const int otpCountdownTime = 90;
 
+const int feedPageSize = 3;
+
 const kStudentColor = Color.fromARGB(255, 104, 206, 201);
 const kLStudentColor = Color.fromARGB(255, 87, 237, 229);
 const kAuthorityColor = Color.fromARGB(255, 181, 83, 72);

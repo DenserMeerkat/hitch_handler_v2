@@ -24,6 +24,8 @@ mixin _$UserModel {
   String get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String? get roll => throw _privateConstructorUsedError;
+  List<String> get liked => throw _privateConstructorUsedError;
+  List<String> get bookmarked => throw _privateConstructorUsedError;
   UserEnum get userType => throw _privateConstructorUsedError;
   String get domain => throw _privateConstructorUsedError;
 
@@ -43,6 +45,8 @@ abstract class $UserModelCopyWith<$Res> {
       String email,
       String phone,
       String? roll,
+      List<String> liked,
+      List<String> bookmarked,
       UserEnum userType,
       String domain});
 }
@@ -64,6 +68,8 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? email = null,
     Object? phone = null,
     Object? roll = freezed,
+    Object? liked = null,
+    Object? bookmarked = null,
     Object? userType = null,
     Object? domain = null,
   }) {
@@ -84,6 +90,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.roll
           : roll // ignore: cast_nullable_to_non_nullable
               as String?,
+      liked: null == liked
+          ? _value.liked
+          : liked // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      bookmarked: null == bookmarked
+          ? _value.bookmarked
+          : bookmarked // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       userType: null == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
@@ -109,6 +123,8 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String email,
       String phone,
       String? roll,
+      List<String> liked,
+      List<String> bookmarked,
       UserEnum userType,
       String domain});
 }
@@ -128,6 +144,8 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? email = null,
     Object? phone = null,
     Object? roll = freezed,
+    Object? liked = null,
+    Object? bookmarked = null,
     Object? userType = null,
     Object? domain = null,
   }) {
@@ -148,6 +166,14 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.roll
           : roll // ignore: cast_nullable_to_non_nullable
               as String?,
+      liked: null == liked
+          ? _value._liked
+          : liked // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      bookmarked: null == bookmarked
+          ? _value._bookmarked
+          : bookmarked // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       userType: null == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
@@ -168,8 +194,12 @@ class _$UserModelImpl implements _UserModel {
       required this.email,
       required this.phone,
       this.roll,
+      final List<String> liked = const [],
+      final List<String> bookmarked = const [],
       this.userType = UserEnum.student,
-      this.domain = ""});
+      this.domain = ""})
+      : _liked = liked,
+        _bookmarked = bookmarked;
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -182,6 +212,24 @@ class _$UserModelImpl implements _UserModel {
   final String phone;
   @override
   final String? roll;
+  final List<String> _liked;
+  @override
+  @JsonKey()
+  List<String> get liked {
+    if (_liked is EqualUnmodifiableListView) return _liked;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_liked);
+  }
+
+  final List<String> _bookmarked;
+  @override
+  @JsonKey()
+  List<String> get bookmarked {
+    if (_bookmarked is EqualUnmodifiableListView) return _bookmarked;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bookmarked);
+  }
+
   @override
   @JsonKey()
   final UserEnum userType;
@@ -191,7 +239,7 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, roll: $roll, userType: $userType, domain: $domain)';
+    return 'UserModel(name: $name, email: $email, phone: $phone, roll: $roll, liked: $liked, bookmarked: $bookmarked, userType: $userType, domain: $domain)';
   }
 
   @override
@@ -203,6 +251,9 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.roll, roll) || other.roll == roll) &&
+            const DeepCollectionEquality().equals(other._liked, _liked) &&
+            const DeepCollectionEquality()
+                .equals(other._bookmarked, _bookmarked) &&
             (identical(other.userType, userType) ||
                 other.userType == userType) &&
             (identical(other.domain, domain) || other.domain == domain));
@@ -210,8 +261,16 @@ class _$UserModelImpl implements _UserModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, email, phone, roll, userType, domain);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      email,
+      phone,
+      roll,
+      const DeepCollectionEquality().hash(_liked),
+      const DeepCollectionEquality().hash(_bookmarked),
+      userType,
+      domain);
 
   @JsonKey(ignore: true)
   @override
@@ -233,6 +292,8 @@ abstract class _UserModel implements UserModel {
       required final String email,
       required final String phone,
       final String? roll,
+      final List<String> liked,
+      final List<String> bookmarked,
       final UserEnum userType,
       final String domain}) = _$UserModelImpl;
 
@@ -247,6 +308,10 @@ abstract class _UserModel implements UserModel {
   String get phone;
   @override
   String? get roll;
+  @override
+  List<String> get liked;
+  @override
+  List<String> get bookmarked;
   @override
   UserEnum get userType;
   @override

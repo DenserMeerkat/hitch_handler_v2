@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/utils/utils.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
 import 'package:hitch_handler_v2/data/apis/fetch_feed_api.dart';
 import 'package:hitch_handler_v2/data/model/models.dart';
@@ -22,9 +21,9 @@ class FeedController {
   }
 
   Future<List<FeedPostModel>> fetchFeedPosts(BuildContext context) async {
+    debugPrint("Fetching Feed Posts");
     final scaffoldContext = ScaffoldMessenger.of(context);
     final int cursor = _feedProvider.feedPostsCursor;
-    IsLoading(true).dispatch(context);
     FeedResponseModel result;
     if (_isAdmin) {
       debugPrint("Admin Feed");
@@ -33,8 +32,6 @@ class FeedController {
       debugPrint("Student Feed");
       result = await fetchFeed(_token, cursor: cursor);
     }
-    debugPrint(result.toString());
-    if (context.mounted) IsLoading(false).dispatch(context);
     if (result.statusCode == 200) {
       scaffoldContext.hideCurrentMaterialBanner();
       scaffoldContext.hideCurrentSnackBar();
