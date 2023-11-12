@@ -57,6 +57,7 @@ class ThemeProvider extends ChangeNotifier {
         getThemeMode(prefs!.getString(_selectedThemeModeKey) ?? 'dark');
     _lightBlendLevel = prefs!.getDouble(_lightBlendLevelKey) ?? 40;
     _darkBlendLevel = prefs!.getDouble(_darkBlendLevelKey) ?? 10;
+    _trueDark = prefs!.getBool(_trueDarkKey) ?? false;
 
     debugPrint('Loaded theme: ${_selectedColorScheme.name} '
         'and themeMode: $_selectedThemeMode');

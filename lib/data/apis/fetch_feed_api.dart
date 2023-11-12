@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hitch_handler_v2/data/constants.dart';
@@ -18,12 +19,13 @@ Future<FeedResponseModel> fetchFeed(String token, {int cursor = 0}) async {
       queryParameters: queryParameters,
     );
     if (response.statusCode == 200) {
+      log(response.data.toString());
       FeedResponseModel feedResponseModel = FeedResponseModel(
         statusCode: 200,
         message: "Fetched Successfully",
         feedData: List<FeedPostModel>.from(
             response.data["posts"].map((x) => FeedPostModel.fromJson(x))),
-        cursor: response.data["cursor"],
+        cursor: response.data["nextCursor"],
       );
       return feedResponseModel;
     } else {
@@ -61,7 +63,6 @@ Future<FeedResponseModel> fetchFeedAdmin(String token, String domain,
         feedData: List<FeedPostModel>.from(
             response.data.map((x) => FeedPostModel.fromJson(x))),
       );
-      debugPrint(feedResponseModel.feedData.toString());
       return feedResponseModel;
     } else {
       return FeedResponseModel(

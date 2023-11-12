@@ -21,14 +21,14 @@ class SliderPage extends StatelessWidget {
     bool isAmoled = themeProvider.trueDark;
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      color: isAmoled
-          ? selectedThemeMode == ThemeMode.light
-              ? Theme.of(context).colorScheme.surfaceVariant
-              : Theme.of(context)
+      color: selectedThemeMode == ThemeMode.light
+          ? Theme.of(context).colorScheme.surfaceVariant
+          : isAmoled
+              ? Theme.of(context)
                   .colorScheme
                   .surface
                   .mix(Theme.of(context).colorScheme.primary, 5)
-          : Theme.of(context).colorScheme.onInverseSurface,
+              : Theme.of(context).colorScheme.onInverseSurface,
       child: Drawer(
         width: 300.w,
         backgroundColor: Colors.transparent,

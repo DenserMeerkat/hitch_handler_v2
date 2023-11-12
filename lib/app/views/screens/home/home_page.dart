@@ -52,14 +52,14 @@ class _HomePageState extends State<HomePage> {
     ThemeMode selectedThemeMode =
         context.read<ThemeProvider>().selectedThemeMode;
     Color start = Theme.of(context).colorScheme.surface;
-    Color end = isAmoled
-        ? selectedThemeMode == ThemeMode.light
-            ? Theme.of(context).colorScheme.surfaceVariant
-            : Theme.of(context)
+    Color end = selectedThemeMode == ThemeMode.light
+        ? Theme.of(context).colorScheme.surfaceVariant
+        : isAmoled
+            ? Theme.of(context)
                 .colorScheme
                 .surface
                 .mix(Theme.of(context).colorScheme.primary, 5)
-        : Theme.of(context).colorScheme.onInverseSurface;
+            : Theme.of(context).colorScheme.onInverseSurface;
     return Color.lerp(start, end, dragPosition)!;
   }
 

@@ -5,13 +5,13 @@ class FeedResponseModel {
     required this.statusCode,
     required this.message,
     this.feedData,
-    this.cursor,
+    this.cursor = 0,
   });
 
   int statusCode;
   String message;
   List<FeedPostModel>? feedData;
-  int? cursor;
+  int cursor;
 
   factory FeedResponseModel.fromJson(Map<String, dynamic> json) =>
       FeedResponseModel(
@@ -28,9 +28,7 @@ class FeedResponseModel {
       "message": message,
       "feedData": List<dynamic>.from(feedData!.map((x) => x.toJson())),
     };
-    if (cursor != null) {
-      data["cursor"] = cursor;
-    }
+    data["cursor"] = cursor;
     return data;
   }
 

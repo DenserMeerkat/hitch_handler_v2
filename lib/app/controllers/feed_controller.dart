@@ -21,7 +21,7 @@ class FeedController {
     _domain = domain;
   }
 
-  void fetchFeedPosts(BuildContext context) async {
+  Future<List<FeedPostModel>> fetchFeedPosts(BuildContext context) async {
     final scaffoldContext = ScaffoldMessenger.of(context);
     final int cursor = _feedProvider.feedPostsCursor;
     IsLoading(true).dispatch(context);
@@ -33,18 +33,20 @@ class FeedController {
       debugPrint("Student Feed");
       result = await fetchFeed(_token, cursor: cursor);
     }
-
+    debugPrint(result.toString());
     if (context.mounted) IsLoading(false).dispatch(context);
     if (result.statusCode == 200) {
       scaffoldContext.hideCurrentMaterialBanner();
       scaffoldContext.hideCurrentSnackBar();
       if (result.feedData != null) {
         List<FeedPostModel> posts = _feedProvider.feedPosts + result.feedData!;
-        posts.toSet().toList();
+        final uniquePosts = posts.toSet().toList();
         log(posts.toString());
-        _feedProvider.updateFeedPosts(posts);
-        _feedProvider.updateFeedPostsCursor(result.cursor ?? 0);
+        _feedProvider.updateFeedPosts(uniquePosts);
+        _feedProvider.updateFeedPostsCursor(result.cursor);
+        return uniquePosts;
       }
+      return [];
     } else {
       if (context.mounted) {
         final MaterialBanner materialBanner = showCustomMaterialBanner(
@@ -54,6 +56,7 @@ class FeedController {
         scaffoldContext.hideCurrentMaterialBanner();
         scaffoldContext.showMaterialBanner(materialBanner);
       }
+      return [];
     }
   }
 
