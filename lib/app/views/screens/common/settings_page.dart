@@ -75,7 +75,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     BlendSlider(
                       value: context.read<ThemeProvider>(),
                     ),
-                    const AmoledSwitch(),
+                    const AmoledSwitch(
+                      fullWidth: true,
+                    ),
                   ],
                 ),
               ),

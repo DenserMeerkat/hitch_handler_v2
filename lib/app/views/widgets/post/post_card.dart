@@ -2,6 +2,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/widgets/post/post_actions.dart';
+import 'package:hitch_handler_v2/app/views/widgets/post/post_header.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/data/model/feed_post_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -76,56 +77,6 @@ class _PostCardState extends State<PostCard> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class PostHeader extends StatelessWidget {
-  const PostHeader({
-    super.key,
-    required this.post,
-  });
-
-  final FeedPostModel post;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          decoration: BoxDecoration(
-            color: Theme.of(context)
-                .colorScheme
-                .tertiaryContainer
-                .withOpacity(0.4),
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: Row(
-            children: [
-              const Icon(
-                Icons.domain,
-                size: 12,
-              ),
-              Container(
-                width: 1,
-                height: 24,
-                margin: const EdgeInsets.symmetric(horizontal: 5),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                ),
-              ),
-              Text(post.domain,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.8,
-                  )),
-            ],
-          ),
-        ),
-        const Spacer(),
-        Text(post.currentstatus),
-      ],
     );
   }
 }

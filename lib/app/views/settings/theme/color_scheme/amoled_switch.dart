@@ -4,7 +4,11 @@ import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:provider/provider.dart';
 
 class AmoledSwitch extends StatelessWidget {
-  const AmoledSwitch({super.key});
+  final bool fullWidth;
+  const AmoledSwitch({
+    super.key,
+    this.fullWidth = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +22,19 @@ class AmoledSwitch extends StatelessWidget {
               color: Theme.of(context).colorScheme.tertiaryContainer,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Row(
+            child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.science_rounded,
                   size: 8,
                 ),
-                Gap(2),
+                const Gap(
+                  2,
+                ),
                 Text(
-                  "Expt.",
-                  style: TextStyle(
-                    fontSize: 10,
+                  fullWidth ? "Experimental" : "Expmt.",
+                  style: const TextStyle(
+                    fontSize: 9,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.8,
                   ),

@@ -1,5 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:hitch_handler_v2/theme/code_theme.dart';
 
 ThemeData getTheme(FlexScheme scheme, bool isDark, double lightBlendLevel,
     double darkBlendLevel,
@@ -21,6 +22,10 @@ ThemeData getTheme(FlexScheme scheme, bool isDark, double lightBlendLevel,
       useMaterial3: true,
       swapLegacyOnMaterial3: true,
       darkIsTrueBlack: trueBlack,
+      extensions: <ThemeExtension<dynamic>>[
+        CodeTheme.harmonized(
+            FlexThemeData.dark(scheme: scheme).primaryColor, Brightness.dark),
+      ],
     );
   }
   return FlexThemeData.light(
@@ -39,6 +44,10 @@ ThemeData getTheme(FlexScheme scheme, bool isDark, double lightBlendLevel,
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
     swapLegacyOnMaterial3: true,
+    extensions: <ThemeExtension<dynamic>>[
+      CodeTheme.harmonized(
+          FlexThemeData.light(scheme: scheme).primaryColor, Brightness.light),
+    ],
   );
 }
 
