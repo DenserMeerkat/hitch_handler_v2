@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hitch_handler_v2/app/views/screens/common/search_page.dart';
 import 'package:hitch_handler_v2/app/views/user/admin_home.dart';
 import 'package:hitch_handler_v2/app/views/screens/auth/auth_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/auth/create_pass_page.dart';
@@ -91,6 +92,18 @@ GoRouter router = GoRouter(
       },
       routes: [
         GoRoute(
+          path: 'search',
+          pageBuilder: (context, state) {
+            return NoTransitionPage(
+              key: state.pageKey,
+              child: const SearchPage(),
+            );
+          },
+          builder: (BuildContext context, GoRouterState state) {
+            return const SearchPage();
+          },
+        ),
+        GoRoute(
           path: 'add',
           pageBuilder: (context, state) {
             return CustomTransitionPage(
@@ -133,7 +146,20 @@ GoRouter router = GoRouter(
         }
         return null;
       },
-      routes: const [],
+      routes: [
+        GoRoute(
+          path: 'search',
+          pageBuilder: (context, state) {
+            return NoTransitionPage(
+              key: state.pageKey,
+              child: const SearchPage(),
+            );
+          },
+          builder: (BuildContext context, GoRouterState state) {
+            return const SearchPage();
+          },
+        ),
+      ],
     ),
   ],
 );

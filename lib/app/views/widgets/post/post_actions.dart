@@ -126,7 +126,7 @@ class _PostActionsState extends State<PostActions> {
               const Gap(12),
               Icon(
                 Icons.chat_outlined,
-                color: Theme.of(context).colorScheme.secondary.withOpacity(0.6),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 size: 18,
               ),
               const Gap(12),

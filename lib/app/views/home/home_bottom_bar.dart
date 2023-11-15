@@ -45,11 +45,6 @@ class HomeBottomBar extends StatelessWidget {
             icon: Icon(Icons.home_outlined),
             label: "Home",
           ),
-          const NavigationDestination(
-            selectedIcon: Icon(Icons.manage_search_rounded),
-            icon: Icon(Icons.search_outlined),
-            label: "Search",
-          ),
           if (!isAdmin)
             const CustomNavigationDestination(
               tooltip: "Add Post",
@@ -57,16 +52,10 @@ class HomeBottomBar extends StatelessWidget {
               label: "Add",
               icon: Icons.add_circle_outline_outlined,
             ),
-          if (!isAdmin)
-            const NavigationDestination(
-              selectedIcon: Icon(Icons.archive),
-              icon: Icon(Icons.archive_outlined),
-              label: "Archives",
-            ),
           const NavigationDestination(
-            selectedIcon: Icon(Icons.account_circle),
-            icon: Icon(Icons.account_circle_outlined),
-            label: "Account",
+            selectedIcon: Icon(Icons.archive),
+            icon: Icon(Icons.archive_outlined),
+            label: "Archive",
           ),
         ],
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/home/profile/profile_flex.dart';
-import 'package:hitch_handler_v2/app/views/home/profile/profile_tab_bar.dart';
+import 'package:hitch_handler_v2/app/views/home/archive/archive_flex.dart';
+import 'package:hitch_handler_v2/app/views/home/archive/archive_tab_bar.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/temp_view.dart';
 
 class ProfilePage extends StatefulWidget {

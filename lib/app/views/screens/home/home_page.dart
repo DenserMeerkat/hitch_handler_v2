@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/home/home_bottom_bar.dart';
+import 'package:hitch_handler_v2/app/views/screens/common/account_page.dart';
 import 'package:hitch_handler_v2/app/views/screens/common/slider_page.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/app/views/widgets/header/bottom_line.dart';
@@ -101,7 +102,7 @@ class _HomePageState extends State<HomePage> {
               isDrawerOpen = isOpened;
             });
           },
-          rightChild: SliderPage(
+          rightChild: AccountPage(
             innerDrawerKey: _innerDrawerKey,
           ),
           leftChild: SliderPage(
@@ -127,6 +128,7 @@ class _HomePageState extends State<HomePage> {
                     scrolledUnderElevation: 0,
                     centerTitle: true,
                     elevation: 0,
+                    titleSpacing: 0,
                     shape: const RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(8)),

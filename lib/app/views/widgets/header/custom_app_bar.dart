@@ -31,66 +31,69 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        if (includePadding) Gap(MediaQuery.of(context).padding.top),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Text(
-            appName.toUpperCase(),
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-              fontSize: 11,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.2,
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: thickness),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8),
-            decoration: BoxDecoration(
-              color:
-                  backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(borderRadius),
+    return Container(
+      color: Theme.of(context).appBarTheme.backgroundColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (includePadding) Gap(MediaQuery.of(context).padding.top),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Text(
+              appName.toUpperCase(),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context).colorScheme.primary,
-                  offset: Offset(0, -thickness),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                showLeading
-                    ? leading ??
-                        const CustomIconButton(
-                          onPressed: null,
-                          tooltip: "Exit",
-                        )
-                    : const Gap(50),
-                title,
-                if (showActions)
-                  actions ??
-                      CustomIconButton(
-                        icon: const Icon(Icons.settings_outlined),
-                        onPressed: () {
-                          context.push("/settings");
-                        },
-                        tooltip: "Settings",
-                      ),
-              ],
             ),
           ),
-        ),
-        bottomLine(context),
-      ],
+          Padding(
+            padding: EdgeInsets.only(top: thickness),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8),
+              decoration: BoxDecoration(
+                color: backgroundColor ??
+                    Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(borderRadius),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).colorScheme.primary,
+                    offset: Offset(0, -thickness),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  showLeading
+                      ? leading ??
+                          const CustomIconButton(
+                            onPressed: null,
+                            tooltip: "Exit",
+                          )
+                      : const Gap(50),
+                  title,
+                  if (showActions)
+                    actions ??
+                        CustomIconButton(
+                          icon: const Icon(Icons.settings_outlined),
+                          onPressed: () {
+                            context.push("/settings");
+                          },
+                          tooltip: "Settings",
+                        ),
+                ],
+              ),
+            ),
+          ),
+          bottomLine(context),
+        ],
+      ),
     );
   }
 

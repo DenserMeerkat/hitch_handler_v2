@@ -51,6 +51,8 @@ class _PostCardState extends State<PostCard> {
               widget.post.desc,
               expandText: 'show more',
               collapseText: 'show less',
+              expandOnTextTap: true,
+              collapseOnTextTap: true,
               maxLines: 3,
               style: TextStyle(
                 fontSize: 13,
