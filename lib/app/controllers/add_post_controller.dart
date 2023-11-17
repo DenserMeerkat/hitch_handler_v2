@@ -10,22 +10,22 @@ import 'package:provider/provider.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
 
 class AddPostController {
-  late AddPostProvider _postProvider;
+  late AddPostProvider _addPostProvider;
 
   AddPostController(BuildContext context) {
-    _postProvider = Provider.of<AddPostProvider>(context, listen: false);
+    _addPostProvider = Provider.of<AddPostProvider>(context, listen: false);
   }
 
   post(BuildContext context) async {
     AddPostController addPostController = AddPostController(context);
-    _postProvider.updateIsLoading(true);
+    _addPostProvider.updateIsLoading(true);
     final scaffoldContext = ScaffoldMessenger.of(context);
     final goContext = GoRouter.of(context);
     MaterialBanner materialBanner;
     SnackBar snackBar;
     UserModel? userModel = context.read<UserProvider>().userModel;
     if (userModel == null) {
-      _postProvider.updateIsLoading(false);
+      _addPostProvider.updateIsLoading(false);
       materialBanner = showCustomMaterialBanner(
         context,
         contentText: "No user logged in",
@@ -34,7 +34,7 @@ class AddPostController {
     }
     String? jwt = context.read<UserProvider>().jwtToken;
     if (jwt == null) {
-      _postProvider.updateIsLoading(false);
+      _addPostProvider.updateIsLoading(false);
       materialBanner = showCustomMaterialBanner(
         context,
         contentText: "JWT not found",
@@ -44,19 +44,19 @@ class AddPostController {
     ResponseModel result;
     result = await addPost(
       PostModel(
-        title: _postProvider.title!,
-        desc: _postProvider.description!,
-        type: getPostType(_postProvider.type).title.toLowerCase(),
-        location: _postProvider.useLocation
-            ? Location.getLocationString(_postProvider.location)
+        title: _addPostProvider.title!,
+        desc: _addPostProvider.description!,
+        type: getPostType(_addPostProvider.type).title.toLowerCase(),
+        location: _addPostProvider.useLocation
+            ? Location.getLocationString(_addPostProvider.location)
             : "",
-        domain: Domain.getDomainString(_postProvider.domain),
+        domain: Domain.getDomainString(_addPostProvider.domain),
         roll: userModel.roll!,
       ),
       jwt,
     );
 
-    _postProvider.updateIsLoading(false);
+    _addPostProvider.updateIsLoading(false);
     if (result.statusCode == 200) {
       addPostController.reset();
       goContext.pop();
@@ -81,27 +81,27 @@ class AddPostController {
   }
 
   bool isFromValid() {
-    if (_postProvider.title?.isEmpty ?? true) return false;
-    if (_postProvider.description?.isEmpty ?? true) return false;
-    if (_postProvider.domain == DomainEnum.none) return false;
+    if (_addPostProvider.title?.isEmpty ?? true) return false;
+    if (_addPostProvider.description?.isEmpty ?? true) return false;
+    if (_addPostProvider.domain == DomainEnum.none) return false;
     return true;
   }
 
   reset() {
     debugPrint("Resetting AddPostProvider");
-    _postProvider.updateTitle('');
-    _postProvider.updateDescription('');
-    _postProvider.updateTypeEnum(PostTypeEnum.public);
-    _postProvider.updateLocation(LocationEnum.none);
-    _postProvider.updateDomain(DomainEnum.none);
-    _postProvider.updateUseLocation(true);
+    _addPostProvider.updateTitle('');
+    _addPostProvider.updateDescription('');
+    _addPostProvider.updateTypeEnum(PostTypeEnum.public);
+    _addPostProvider.updateLocation(LocationEnum.none);
+    _addPostProvider.updateDomain(DomainEnum.none);
+    _addPostProvider.updateUseLocation(true);
   }
 
   updateLocation(LocationEnum location) {
-    _postProvider.updateLocation(location);
+    _addPostProvider.updateLocation(location);
   }
 
   updateDomain(DomainEnum domain) {
-    _postProvider.updateDomain(domain);
+    _addPostProvider.updateDomain(domain);
   }
 }

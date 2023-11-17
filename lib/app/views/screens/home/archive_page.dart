@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hitch_handler_v2/app/views/home/archive/archive_flex.dart';
 import 'package:hitch_handler_v2/app/views/home/archive/archive_tab_bar.dart';
 import 'package:hitch_handler_v2/app/views/widgets/misc/temp_view.dart';
 
@@ -22,12 +21,6 @@ class _ProfilePageState extends State<ProfilePage>
     current = tabController.index;
   }
 
-  void onTabTap(int index) {
-    setState(() {
-      current = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -36,22 +29,21 @@ class _ProfilePageState extends State<ProfilePage>
           primary: false,
           scrolledUnderElevation: 0,
           automaticallyImplyLeading: false,
-          flexibleSpace: const ProfileFlex(),
           floating: true,
           pinned: true,
           snap: true,
-          expandedHeight: 140,
+          expandedHeight: 54,
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(50),
-            child: ProfileTabBar(
+            preferredSize: const Size.fromHeight(54),
+            child: ArchiveTabBar(
               tabController: tabController,
-              onTabTap: onTabTap,
             ),
           ),
         ),
         SliverFillRemaining(
           child: TabBarView(
             controller: tabController,
+            physics: const NeverScrollableScrollPhysics(),
             children: const [
               TempView(emptyText: "No Posts"),
               TempView(emptyText: "No Bookmarks"),

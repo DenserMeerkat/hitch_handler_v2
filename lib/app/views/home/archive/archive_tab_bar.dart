@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProfileTabBar extends StatelessWidget {
+class ArchiveTabBar extends StatelessWidget {
   final TabController tabController;
-  final Function(int) onTabTap;
-  const ProfileTabBar({
+  const ArchiveTabBar({
     super.key,
     required this.tabController,
-    required this.onTabTap,
   });
 
   @override
@@ -27,7 +25,6 @@ class ProfileTabBar extends StatelessWidget {
         tabAlignment: TabAlignment.start,
         controller: tabController,
         dividerColor: Colors.transparent,
-        onTap: onTabTap,
         tabs: const [
           Tab(text: "Posts"),
           Tab(text: "Bookmarks"),

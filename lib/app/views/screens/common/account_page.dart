@@ -3,10 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hitch_handler_v2/app/controllers/controllers.dart';
-import 'package:hitch_handler_v2/app/views/screens/common/profile_avatar.dart';
+import 'package:hitch_handler_v2/app/views/home/slider/account_profile.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
-import 'package:hitch_handler_v2/data/model/models.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:provider/provider.dart';
 import 'package:inner_drawer/inner_drawer.dart';
@@ -24,8 +23,6 @@ class AccountPage extends StatelessWidget {
     ThemeProvider themeProvider = context.watch<ThemeProvider>();
     ThemeMode selectedThemeMode = themeProvider.selectedThemeMode;
     bool isAmoled = themeProvider.trueDark;
-    final UserProvider userProvider = context.read<UserProvider>();
-    final UserModel? user = userProvider.userModel;
     return Container(
       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       color: selectedThemeMode == ThemeMode.light
@@ -96,16 +93,7 @@ class AccountPage extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        ProfileAvatar(name: user?.name ?? "Unknown"),
-                        const Gap(12),
-                        Text(
-                          user?.name ?? "Unknown",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onSurface,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.sp,
-                          ),
-                        ),
+                        const AccountProfile(),
                         const Spacer(),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -117,6 +105,10 @@ class AccountPage extends StatelessWidget {
                                 Theme.of(context).colorScheme.secondary,
                             backgroundColor:
                                 Theme.of(context).colorScheme.surface,
+                            borderColor: Theme.of(context)
+                                .colorScheme
+                                .secondary
+                                .withOpacity(0.05),
                           ),
                         ),
                         const Gap(4),
@@ -125,23 +117,17 @@ class AccountPage extends StatelessWidget {
                           child: LongFilledButton(
                             label: "Logout",
                             onPressed: () {
-                              innerDrawerKey.currentState!.close();
-                              AddPostController(context).reset();
-                              FeedController(
-                                userProvider.jwtToken!,
-                                context,
-                                isAdmin: userProvider.userModel!.userType ==
-                                    UserEnum.admin,
-                                domain: userProvider.userModel!.domain,
-                              ).reset();
-                              userProvider.logout();
-                              context.go("/");
+                              logout(context);
                             },
                             icon: Icons.logout_rounded,
                             foreGroundColor:
                                 Theme.of(context).colorScheme.error,
                             backgroundColor:
                                 Theme.of(context).colorScheme.surface,
+                            borderColor: Theme.of(context)
+                                .colorScheme
+                                .error
+                                .withOpacity(0.05),
                           ),
                         ),
                       ],
@@ -154,5 +140,19 @@ class AccountPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void logout(BuildContext context) {
+    final UserProvider userProvider = context.read<UserProvider>();
+    innerDrawerKey.currentState!.close();
+    AddPostController(context).reset();
+    FeedController(
+      userProvider.jwtToken!,
+      context,
+      isAdmin: userProvider.userModel!.userType == UserEnum.admin,
+      domain: userProvider.userModel!.domain,
+    ).reset();
+    userProvider.logout();
+    context.go("/");
   }
 }

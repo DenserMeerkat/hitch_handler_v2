@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inner_drawer/inner_drawer.dart';
 
 class IsLoading extends Notification {
   final bool isLoading;
@@ -7,11 +8,9 @@ class IsLoading extends Notification {
   );
 }
 
-class IsPhone extends Notification {
-  final bool isPhone;
-  final String countryCode;
-  IsPhone(
-    this.isPhone,
-    this.countryCode,
+class OpenDrawer extends Notification {
+  final InnerDrawerDirection direction;
+  OpenDrawer(
+    this.direction,
   );
 }

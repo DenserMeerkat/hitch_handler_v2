@@ -6,6 +6,7 @@ class LongFilledButton extends StatelessWidget {
   final IconData icon;
   final Color? foreGroundColor;
   final Color? backgroundColor;
+  final Color? borderColor;
   final Function()? onPressed;
   final bool enabled;
   const LongFilledButton({
@@ -16,6 +17,7 @@ class LongFilledButton extends StatelessWidget {
     this.backgroundColor,
     this.onPressed,
     this.enabled = true,
+    this.borderColor,
   });
 
   @override
@@ -29,6 +31,10 @@ class LongFilledButton extends StatelessWidget {
           foregroundColor: foreGroundColor,
           backgroundColor: backgroundColor,
           minimumSize: const Size(40, 40),
+          side: BorderSide(
+            color: borderColor ?? Colors.transparent,
+            width: 1,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
