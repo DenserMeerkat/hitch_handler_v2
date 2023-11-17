@@ -14,14 +14,14 @@ class DescriptionField extends StatefulWidget {
 class _DescriptionFieldState extends State<DescriptionField> {
   final TextEditingController descController = TextEditingController();
   final FocusNode descFocusNode = FocusNode();
-  late PostProvider postProvider;
+  late AddPostProvider addPostProvider;
 
   @override
   void initState() {
     super.initState();
-    postProvider = context.read<PostProvider>();
-    if (postProvider.description?.isNotEmpty ?? false) {
-      descController.text = postProvider.description!;
+    addPostProvider = context.read<AddPostProvider>();
+    if (addPostProvider.description?.isNotEmpty ?? false) {
+      descController.text = addPostProvider.description!;
       descController.selection = TextSelection.fromPosition(
         TextPosition(offset: descController.text.length),
       );
@@ -30,7 +30,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
   }
 
   void updateDescription() {
-    postProvider.updateDescription(descController.text);
+    addPostProvider.updateDescription(descController.text);
   }
 
   String? descValidator(String? value) {
@@ -52,7 +52,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
       hintFontSize: 14.sp,
       maxLines: 100,
       maxLength: 1000,
-      enabled: !context.watch<PostProvider>().isLoading,
+      enabled: !context.watch<AddPostProvider>().isLoading,
     );
   }
 }

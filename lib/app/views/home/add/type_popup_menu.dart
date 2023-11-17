@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/types/types.dart';
 import 'package:hitch_handler_v2/app/views/template/popup_menu.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
-import 'package:hitch_handler_v2/providers/post_provider.dart';
+import 'package:hitch_handler_v2/providers/add_post_provider.dart';
 
 class TypePopupMenu extends AbstractPopupMenu<PostType, PostTypeEnum> {
-  final PostProvider postProvider;
+  final AddPostProvider addPostProvider;
   final bool enabled;
   final BorderRadiusGeometry? borderRadius;
   final EdgeInsetsGeometry? padding;
   const TypePopupMenu({
     super.key,
-    required this.postProvider,
+    required this.addPostProvider,
     this.enabled = true,
     this.borderRadius,
     this.padding,
@@ -24,7 +24,7 @@ class TypePopupMenu extends AbstractPopupMenu<PostType, PostTypeEnum> {
 
   @override
   void updateSelectedItem(PostTypeEnum itemEnum) {
-    postProvider.updateTypeEnum(itemEnum);
+    addPostProvider.updateTypeEnum(itemEnum);
   }
 
   @override
@@ -34,7 +34,7 @@ class TypePopupMenu extends AbstractPopupMenu<PostType, PostTypeEnum> {
 
   @override
   PostType getSelectedItem() {
-    return getPostType(postProvider.type);
+    return getPostType(addPostProvider.type);
   }
 
   @override

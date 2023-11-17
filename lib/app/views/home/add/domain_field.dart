@@ -15,15 +15,15 @@ class DomainField extends StatefulWidget {
 class _DomainFieldState extends State<DomainField> {
   final TextEditingController domainController = TextEditingController();
   final FocusNode domainFocusNode = FocusNode();
-  late PostProvider postProvider;
+  late AddPostProvider addPostProvider;
   late DomainEnum selectedDomain;
   Widget? suffixIcon;
 
   @override
   void initState() {
     super.initState();
-    postProvider = context.read<PostProvider>();
-    selectedDomain = postProvider.domain;
+    addPostProvider = context.read<AddPostProvider>();
+    selectedDomain = addPostProvider.domain;
     if (selectedDomain != DomainEnum.none) {
       domainController.text = Domain.getDomainString(selectedDomain);
       domainController.selection = TextSelection.fromPosition(
@@ -64,7 +64,7 @@ class _DomainFieldState extends State<DomainField> {
       maxWidth: 360.w - 40,
       fontSize: 14.sp,
       fontWeight: FontWeight.w700,
-      enabled: !context.watch<PostProvider>().isLoading,
+      enabled: !context.watch<AddPostProvider>().isLoading,
     );
   }
 
@@ -94,21 +94,21 @@ class _DomainFieldState extends State<DomainField> {
       setState(() {
         selectedDomain = DomainEnum.none;
       });
-      postProvider.updateDomain(selectedDomain);
+      addPostProvider.updateDomain(selectedDomain);
     } else if (domainController.text.isNotEmpty &&
         Domain.getDomainEnum(domainController.text) != DomainEnum.none) {
       if (!mounted) return;
       setState(() {
         selectedDomain = Domain.getDomainEnum(domainController.text);
       });
-      postProvider.updateDomain(selectedDomain);
+      addPostProvider.updateDomain(selectedDomain);
     } else if (domainController.text.isNotEmpty &&
         domainController.text != Domain.getDomainString(selectedDomain)) {
       if (!mounted) return;
       setState(() {
         selectedDomain = DomainEnum.none;
       });
-      postProvider.updateDomain(selectedDomain);
+      addPostProvider.updateDomain(selectedDomain);
     }
   }
 

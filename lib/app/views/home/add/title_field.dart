@@ -14,14 +14,14 @@ class TitleField extends StatefulWidget {
 class _TitleFieldState extends State<TitleField> {
   final TextEditingController titleController = TextEditingController();
   final FocusNode titleFocusNode = FocusNode();
-  late PostProvider postProvider;
+  late AddPostProvider addPostProvider;
 
   @override
   void initState() {
     super.initState();
-    postProvider = context.read<PostProvider>();
-    if (postProvider.title?.isNotEmpty ?? false) {
-      titleController.text = postProvider.title!;
+    addPostProvider = context.read<AddPostProvider>();
+    if (addPostProvider.title?.isNotEmpty ?? false) {
+      titleController.text = addPostProvider.title!;
       titleController.selection = TextSelection.fromPosition(
         TextPosition(offset: titleController.text.length),
       );
@@ -30,7 +30,7 @@ class _TitleFieldState extends State<TitleField> {
   }
 
   void updateTitle() {
-    postProvider.updateTitle(titleController.text);
+    addPostProvider.updateTitle(titleController.text);
   }
 
   String? titleValidator(String? value) {
@@ -54,7 +54,7 @@ class _TitleFieldState extends State<TitleField> {
       hintFontSize: 24.sp,
       hintFontWeight: FontWeight.w600,
       maxLength: 60,
-      enabled: !context.watch<PostProvider>().isLoading,
+      enabled: !context.watch<AddPostProvider>().isLoading,
     );
   }
 }

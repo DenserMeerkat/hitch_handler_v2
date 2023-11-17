@@ -33,6 +33,7 @@ class FeedController {
       result = await fetchFeed(_token, cursor: cursor);
     }
     if (result.statusCode == 200) {
+      log(result.feedData.toString());
       scaffoldContext.hideCurrentMaterialBanner();
       scaffoldContext.hideCurrentSnackBar();
       if (result.feedData != null) {

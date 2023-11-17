@@ -9,15 +9,15 @@ import 'package:provider/provider.dart';
 
 import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
 
-class PostController {
-  late PostProvider _postProvider;
+class AddPostController {
+  late AddPostProvider _postProvider;
 
-  PostController(BuildContext context) {
-    _postProvider = Provider.of<PostProvider>(context, listen: false);
+  AddPostController(BuildContext context) {
+    _postProvider = Provider.of<AddPostProvider>(context, listen: false);
   }
 
   post(BuildContext context) async {
-    PostController postController = PostController(context);
+    AddPostController addPostController = AddPostController(context);
     _postProvider.updateIsLoading(true);
     final scaffoldContext = ScaffoldMessenger.of(context);
     final goContext = GoRouter.of(context);
@@ -58,7 +58,7 @@ class PostController {
 
     _postProvider.updateIsLoading(false);
     if (result.statusCode == 200) {
-      postController.reset();
+      addPostController.reset();
       goContext.pop();
       if (context.mounted) {
         snackBar = showSnackBar(
@@ -88,7 +88,7 @@ class PostController {
   }
 
   reset() {
-    debugPrint("Resetting PostProvider");
+    debugPrint("Resetting AddPostProvider");
     _postProvider.updateTitle('');
     _postProvider.updateDescription('');
     _postProvider.updateTypeEnum(PostTypeEnum.public);

@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           create: (_) => ForgotProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => PostProvider(),
+          create: (_) => AddPostProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => FeedProvider(),

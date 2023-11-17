@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:hitch_handler_v2/app/controllers/post_controller.dart';
+import 'package:hitch_handler_v2/app/controllers/add_post_controller.dart';
 import 'package:hitch_handler_v2/app/views/home/add/add_form.dart';
 import 'package:hitch_handler_v2/app/views/home/add/type_popup_menu.dart';
 import 'package:hitch_handler_v2/app/views/widgets/buttons/buttons.dart';
@@ -21,9 +21,9 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
-    final PostController postController = PostController(context);
-    final PostProvider postProvider = context.watch<PostProvider>();
-    final bool useLocation = postProvider.useLocation;
+    final AddPostController addPostController = AddPostController(context);
+    final AddPostProvider addPostProvider = context.watch<AddPostProvider>();
+    final bool useLocation = addPostProvider.useLocation;
     return WillPopScope(
       onWillPop: () async {
         return true;
@@ -67,7 +67,7 @@ class _AddPageState extends State<AddPage> {
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
                 ),
-                onPressed: !postProvider.isLoading
+                onPressed: !addPostProvider.isLoading
                     ? () {
                         Navigator.of(context).pop();
                       }
@@ -83,11 +83,11 @@ class _AddPageState extends State<AddPage> {
                   color:
                       Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
                 ),
-                onPressed: !postProvider.isLoading ? () {} : null,
+                onPressed: !addPostProvider.isLoading ? () {} : null,
               ),
               TypePopupMenu(
-                postProvider: postProvider,
-                enabled: !postProvider.isLoading,
+                addPostProvider: addPostProvider,
+                enabled: !addPostProvider.isLoading,
                 borderRadius: BorderRadius.circular(30),
                 padding: const EdgeInsets.only(left: 10, right: 8),
               ),
@@ -129,23 +129,23 @@ class _AddPageState extends State<AddPage> {
                           .colorScheme
                           .primary
                           .withOpacity(0.2),
-                      onPressed: !postProvider.isLoading
+                      onPressed: !addPostProvider.isLoading
                           ? () {
-                              postProvider.updateUseLocation(!useLocation);
+                              addPostProvider.updateUseLocation(!useLocation);
                             }
                           : null,
                     ),
                     const Spacer(),
                     CustomFilledButton(
                       label: "Post",
-                      onPressed: !postProvider.isLoading
+                      onPressed: !addPostProvider.isLoading
                           ? () {
-                              postController.post(context);
+                              addPostController.post(context);
                             }
                           : null,
                       showIcon: true,
-                      enabled: !postProvider.isLoading &&
-                          postController.isFromValid(),
+                      enabled: !addPostProvider.isLoading &&
+                          addPostController.isFromValid(),
                     ),
                   ],
                 ),

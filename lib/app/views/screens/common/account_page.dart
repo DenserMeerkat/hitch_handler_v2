@@ -126,7 +126,7 @@ class AccountPage extends StatelessWidget {
                             label: "Logout",
                             onPressed: () {
                               innerDrawerKey.currentState!.close();
-                              PostController(context).reset();
+                              AddPostController(context).reset();
                               FeedController(
                                 userProvider.jwtToken!,
                                 context,

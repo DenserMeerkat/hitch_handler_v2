@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
 
-class PostProvider extends ChangeNotifier {
+class AddPostProvider extends ChangeNotifier {
   String? _title;
   String? _description;
   late LocationEnum _location;
@@ -11,7 +11,7 @@ class PostProvider extends ChangeNotifier {
   late bool _useLocation;
   late bool _isEdited;
 
-  PostProvider() {
+  AddPostProvider() {
     _location = LocationEnum.none;
     _type = PostTypeEnum.public;
     _domain = DomainEnum.none;

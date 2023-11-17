@@ -15,15 +15,15 @@ class LocationField extends StatefulWidget {
 class _LocationFieldState extends State<LocationField> {
   final TextEditingController locationController = TextEditingController();
   final FocusNode locationFocusNode = FocusNode();
-  late PostProvider postProvider;
+  late AddPostProvider addPostProvider;
   late LocationEnum selectedLocation;
   Widget? suffixIcon;
 
   @override
   void initState() {
     super.initState();
-    postProvider = context.read<PostProvider>();
-    selectedLocation = postProvider.location;
+    addPostProvider = context.read<AddPostProvider>();
+    selectedLocation = addPostProvider.location;
     if (selectedLocation != LocationEnum.none) {
       locationController.text = Location.getLocationString(selectedLocation);
       locationController.selection = TextSelection.fromPosition(
@@ -64,7 +64,7 @@ class _LocationFieldState extends State<LocationField> {
       fontSize: 14.sp,
       fontWeight: FontWeight.w700,
       minCharsForSuggestions: 0,
-      enabled: !context.watch<PostProvider>().isLoading,
+      enabled: !context.watch<AddPostProvider>().isLoading,
     );
   }
 
@@ -94,7 +94,7 @@ class _LocationFieldState extends State<LocationField> {
       setState(() {
         selectedLocation = LocationEnum.none;
       });
-      postProvider.updateLocation(selectedLocation);
+      addPostProvider.updateLocation(selectedLocation);
     } else if (locationController.text.isNotEmpty &&
         Location.getLocationEnum(locationController.text) !=
             LocationEnum.none) {
@@ -102,7 +102,7 @@ class _LocationFieldState extends State<LocationField> {
       setState(() {
         selectedLocation = Location.getLocationEnum(locationController.text);
       });
-      postProvider.updateLocation(selectedLocation);
+      addPostProvider.updateLocation(selectedLocation);
     } else if (locationController.text.isNotEmpty &&
         locationController.text !=
             Location.getLocationString(selectedLocation)) {
@@ -110,7 +110,7 @@ class _LocationFieldState extends State<LocationField> {
       setState(() {
         selectedLocation = LocationEnum.none;
       });
-      postProvider.updateLocation(selectedLocation);
+      addPostProvider.updateLocation(selectedLocation);
     }
   }
 

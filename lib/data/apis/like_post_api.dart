@@ -11,7 +11,6 @@ Future<ResponseModel> likePost(String postId, String roll, String token) async {
   late Response response;
 
   Object body = jsonEncode({
-    "roll": roll,
     "pid": postId,
   });
 
@@ -21,13 +20,13 @@ Future<ResponseModel> likePost(String postId, String roll, String token) async {
       debugPrint(response.data.toString());
       ResponseModel responseModel = ResponseModel(
         statusCode: 200,
-        message: "Post Added Successfully",
+        message: "Post Liked Successfully",
       );
       debugPrint(responseModel.toString());
       return responseModel;
     } else {
       return ResponseModel(
-          statusCode: response.statusCode ?? 400, message: "Error in Posting");
+          statusCode: response.statusCode ?? 400, message: "Error in Liking");
     }
   } on Exception catch (e) {
     debugPrint(e.toString());

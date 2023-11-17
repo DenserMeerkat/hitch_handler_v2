@@ -24,7 +24,7 @@ class _AddFormState extends State<AddForm> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    bool isLoading = context.watch<PostProvider>().isLoading;
+    bool isLoading = context.watch<AddPostProvider>().isLoading;
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
