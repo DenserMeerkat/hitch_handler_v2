@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:hitch_handler_v2/app/views/home/slider/profile_avatar.dart';
+import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/providers/providers.dart';
 import 'package:provider/provider.dart';
 import 'package:hitch_handler_v2/data/model/models.dart';
@@ -15,6 +16,7 @@ class AccountProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     final UserProvider userProvider = context.read<UserProvider>();
     final UserModel? user = userProvider.userModel;
+    final bool isAdmin = user?.userType == UserEnum.admin;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 20.w,
@@ -48,37 +50,45 @@ class AccountProfile extends StatelessWidget {
                       fontSize: 14.sp,
                     ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "CSE",
-                        style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withOpacity(0.8),
-                          fontSize: 12.sp,
-                          letterSpacing: 0,
+                  isAdmin
+                      ? Text(
+                          user?.domain ?? "Unknown Domain",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontSize: 14.sp,
+                          ),
+                        )
+                      : Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "CSE",
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurface
+                                    .withOpacity(0.8),
+                                fontSize: 12.sp,
+                                letterSpacing: 0,
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text("•"),
+                            ),
+                            Text(
+                              "2025",
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurface
+                                    .withOpacity(0.8),
+                                fontSize: 12.sp,
+                                letterSpacing: 0,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text("•"),
-                      ),
-                      Text(
-                        "2025",
-                        style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withOpacity(0.8),
-                          fontSize: 12.sp,
-                          letterSpacing: 0,
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ],

@@ -25,6 +25,8 @@ mixin _$FeedPostModel {
   String get desc => throw _privateConstructorUsedError;
   String get roll => throw _privateConstructorUsedError;
   String get domain => throw _privateConstructorUsedError;
+  int get likes => throw _privateConstructorUsedError;
+  List<String> get liked => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
@@ -49,6 +51,8 @@ abstract class $FeedPostModelCopyWith<$Res> {
       String desc,
       String roll,
       String domain,
+      int likes,
+      List<String> liked,
       String location,
       DateTime createdAt,
       DateTime updatedAt,
@@ -74,6 +78,8 @@ class _$FeedPostModelCopyWithImpl<$Res, $Val extends FeedPostModel>
     Object? desc = null,
     Object? roll = null,
     Object? domain = null,
+    Object? likes = null,
+    Object? liked = null,
     Object? location = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -101,6 +107,14 @@ class _$FeedPostModelCopyWithImpl<$Res, $Val extends FeedPostModel>
           ? _value.domain
           : domain // ignore: cast_nullable_to_non_nullable
               as String,
+      likes: null == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as int,
+      liked: null == liked
+          ? _value.liked
+          : liked // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -139,6 +153,8 @@ abstract class _$$FeedPostModelImplCopyWith<$Res>
       String desc,
       String roll,
       String domain,
+      int likes,
+      List<String> liked,
       String location,
       DateTime createdAt,
       DateTime updatedAt,
@@ -162,6 +178,8 @@ class __$$FeedPostModelImplCopyWithImpl<$Res>
     Object? desc = null,
     Object? roll = null,
     Object? domain = null,
+    Object? likes = null,
+    Object? liked = null,
     Object? location = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -189,6 +207,14 @@ class __$$FeedPostModelImplCopyWithImpl<$Res>
           ? _value.domain
           : domain // ignore: cast_nullable_to_non_nullable
               as String,
+      likes: null == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as int,
+      liked: null == liked
+          ? _value._liked
+          : liked // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
@@ -222,11 +248,14 @@ class _$FeedPostModelImpl implements _FeedPostModel {
       required this.desc,
       required this.roll,
       required this.domain,
+      required this.likes,
+      required final List<String> liked,
       this.location = "",
       required this.createdAt,
       required this.updatedAt,
       this.currentstatus = "INPROGRESS",
-      this.type = "public"});
+      this.type = "public"})
+      : _liked = liked;
 
   factory _$FeedPostModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$FeedPostModelImplFromJson(json);
@@ -241,6 +270,16 @@ class _$FeedPostModelImpl implements _FeedPostModel {
   final String roll;
   @override
   final String domain;
+  @override
+  final int likes;
+  final List<String> _liked;
+  @override
+  List<String> get liked {
+    if (_liked is EqualUnmodifiableListView) return _liked;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_liked);
+  }
+
   @override
   @JsonKey()
   final String location;
@@ -257,7 +296,7 @@ class _$FeedPostModelImpl implements _FeedPostModel {
 
   @override
   String toString() {
-    return 'FeedPostModel(postid: $postid, title: $title, desc: $desc, roll: $roll, domain: $domain, location: $location, createdAt: $createdAt, updatedAt: $updatedAt, currentstatus: $currentstatus, type: $type)';
+    return 'FeedPostModel(postid: $postid, title: $title, desc: $desc, roll: $roll, domain: $domain, likes: $likes, liked: $liked, location: $location, createdAt: $createdAt, updatedAt: $updatedAt, currentstatus: $currentstatus, type: $type)';
   }
 
   @override
@@ -270,6 +309,8 @@ class _$FeedPostModelImpl implements _FeedPostModel {
             (identical(other.desc, desc) || other.desc == desc) &&
             (identical(other.roll, roll) || other.roll == roll) &&
             (identical(other.domain, domain) || other.domain == domain) &&
+            (identical(other.likes, likes) || other.likes == likes) &&
+            const DeepCollectionEquality().equals(other._liked, _liked) &&
             (identical(other.location, location) ||
                 other.location == location) &&
             (identical(other.createdAt, createdAt) ||
@@ -283,8 +324,20 @@ class _$FeedPostModelImpl implements _FeedPostModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, postid, title, desc, roll,
-      domain, location, createdAt, updatedAt, currentstatus, type);
+  int get hashCode => Object.hash(
+      runtimeType,
+      postid,
+      title,
+      desc,
+      roll,
+      domain,
+      likes,
+      const DeepCollectionEquality().hash(_liked),
+      location,
+      createdAt,
+      updatedAt,
+      currentstatus,
+      type);
 
   @JsonKey(ignore: true)
   @override
@@ -307,6 +360,8 @@ abstract class _FeedPostModel implements FeedPostModel {
       required final String desc,
       required final String roll,
       required final String domain,
+      required final int likes,
+      required final List<String> liked,
       final String location,
       required final DateTime createdAt,
       required final DateTime updatedAt,
@@ -326,6 +381,10 @@ abstract class _FeedPostModel implements FeedPostModel {
   String get roll;
   @override
   String get domain;
+  @override
+  int get likes;
+  @override
+  List<String> get liked;
   @override
   String get location;
   @override

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
+import 'package:hitch_handler_v2/app/types/status_types.dart';
+import 'package:hitch_handler_v2/app/views/widgets/post/elements/admin_status_indicator.dart';
 import 'package:hitch_handler_v2/app/views/widgets/post/elements/status_indicator.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/data/model/models.dart';
+import 'package:hitch_handler_v2/providers/providers.dart';
+import 'package:provider/provider.dart';
 
 class PostHeader extends StatelessWidget {
   const PostHeader({
@@ -14,6 +16,10 @@ class PostHeader extends StatelessWidget {
   final FeedPostModel post;
   @override
   Widget build(BuildContext context) {
+    final UserModel user = context.read<UserProvider>().userModel!;
+    final bool isAdmin = user.userType == UserEnum.admin;
+    final StatusEnum statusEnum =
+        getStatusTypeFromString(post.currentstatus).statusEnum;
     return Row(
       children: [
         Container(
@@ -51,35 +57,11 @@ class PostHeader extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        SizedBox(
-          width: 200.w,
-          child: const SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                StatusIndicator(
-                  stateEnum: StatusEnum.opened,
-                ),
-                Gap(5),
-                StatusIndicator(
-                  stateEnum: StatusEnum.duplicate,
-                ),
-                Gap(5),
-                StatusIndicator(
-                  stateEnum: StatusEnum.working,
-                ),
-                Gap(5),
-                StatusIndicator(
-                  stateEnum: StatusEnum.completed,
-                ),
-                Gap(5),
-                StatusIndicator(
-                  stateEnum: StatusEnum.closed,
-                ),
-              ],
-            ),
-          ),
-        ),
+        isAdmin
+            ? AdminStatusIndicator(statusEnum: statusEnum)
+            : StatusIndicator(
+                stateEnum: statusEnum,
+              ),
       ],
     );
   }

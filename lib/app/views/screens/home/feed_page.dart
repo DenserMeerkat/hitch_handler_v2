@@ -21,7 +21,6 @@ class _FeedPageState extends State<FeedPage> {
   late UserProvider userProvider;
   List<FeedPostModel> posts = [];
   bool hasMore = true;
-  bool isLoading = false;
 
   @override
   void initState() {
@@ -48,27 +47,23 @@ class _FeedPageState extends State<FeedPage> {
   }
 
   Future<void> refreshPosts() async {
-    if (isLoading) return;
-    setState(() {
-      isLoading = true;
-    });
+    if (feedProvider.isFeedPostsLoading) return;
+    feedProvider.updateIsFeedPostsLoading(true);
     debugPrint("Refreshing Posts");
     final List<FeedPostModel> fetchedPosts =
         await feedController.fetchFeedPosts(context);
     setState(() {
       posts = fetchedPosts;
-      isLoading = false;
     });
+    feedProvider.updateIsFeedPostsLoading(false);
   }
 
   Future<void> fetchMorePosts() async {
     debugPrint("Fetching More Posts");
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      if (isLoading || !hasMore) return;
-      setState(() {
-        isLoading = true;
-      });
+      if (feedProvider.isFeedPostsLoading || !hasMore) return;
+      feedProvider.updateIsFeedPostsLoading(true);
       final List<FeedPostModel> fetchedPosts =
           await feedController.fetchFeedPosts(context);
       if (fetchedPosts.length - posts.length < feedPageSize) {
@@ -78,8 +73,8 @@ class _FeedPageState extends State<FeedPage> {
       }
       setState(() {
         posts = fetchedPosts;
-        isLoading = false;
       });
+      feedProvider.updateIsFeedPostsLoading(false);
     }
   }
 
@@ -119,23 +114,3 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 }
-      // CustomScrollView(
-      //   slivers: [
-      //     posts.isEmpty
-      //         ? const SliverFillRemaining(
-      //             child: TempView(emptyText: "No Posts"),
-      //           )
-      //         : SliverList(
-      //             delegate: SliverChildBuilderDelegate(
-      //               (context, index) {
-      //                 final post = posts[index];
-      //                 return PostCard(
-      //                   key: ValueKey(post.postid),
-      //                   post: post,
-      //                 );
-      //               },
-      //               childCount: posts.length,
-      //             ),
-      //           ),
-      //   ],
-      // ),

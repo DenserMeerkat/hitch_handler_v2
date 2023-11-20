@@ -7,7 +7,7 @@ import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/data/model/feed_post_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class PostCard extends StatefulWidget {
+class PostCard extends StatelessWidget {
   final FeedPostModel post;
   final PostTypeEnum postType;
   const PostCard({
@@ -16,11 +16,6 @@ class PostCard extends StatefulWidget {
     this.postType = PostTypeEnum.public,
   }) : super(key: key);
 
-  @override
-  State<PostCard> createState() => _PostCardState();
-}
-
-class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,10 +32,10 @@ class _PostCardState extends State<PostCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Gap(8),
-            PostHeader(post: widget.post),
+            PostHeader(post: post),
             const Gap(8),
             Text(
-              widget.post.title,
+              post.title,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -48,7 +43,7 @@ class _PostCardState extends State<PostCard> {
             ),
             const Gap(6),
             ExpandableText(
-              widget.post.desc,
+              post.desc,
               expandText: 'show more',
               collapseText: 'show less',
               expandOnTextTap: true,
@@ -62,15 +57,15 @@ class _PostCardState extends State<PostCard> {
               linkColor: Theme.of(context).primaryColor,
             ),
             const Gap(16),
-            if (widget.postType == PostTypeEnum.public)
+            if (postType == PostTypeEnum.public)
               PostActions(
-                post: widget.post,
+                post: post,
               ),
             const Gap(8),
-            if (widget.post.location.isNotEmpty) Text(widget.post.location),
+            if (post.location.isNotEmpty) Text(post.location),
             const Gap(16),
             Text(
-              timeago.format(widget.post.createdAt),
+              timeago.format(post.createdAt),
               style: TextStyle(
                 fontSize: 11,
                 color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),

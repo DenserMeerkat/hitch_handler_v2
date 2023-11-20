@@ -11,7 +11,6 @@ class UserModel with _$UserModel {
     required String email,
     required String phone,
     String? roll,
-    @Default([]) List<String> liked,
     @Default([]) List<String> bookmarked,
     @Default(UserEnum.student) UserEnum userType,
     @Default("") String domain,

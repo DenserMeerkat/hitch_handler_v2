@@ -19,6 +19,11 @@ StatusType getStatusType(StatusEnum statusEnum) {
   return statusTypes.firstWhere((element) => element.statusEnum == statusEnum);
 }
 
+StatusType getStatusTypeFromString(String status) {
+  return statusTypes
+      .firstWhere((element) => element.title.toLowerCase() == status);
+}
+
 final List<StatusType> statusTypes = <StatusType>[
   const StatusType(
     statusEnum: StatusEnum.opened,

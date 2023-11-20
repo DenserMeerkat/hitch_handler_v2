@@ -68,7 +68,6 @@ class _SignInFormState extends State<SignInForm> {
                   enabled: enabled,
                   updateIsAdminLogin: (value) {
                     FocusManager.instance.primaryFocus?.unfocus();
-                    debugPrint("isAdmin: $value");
                     widget.textController.clear();
                     widget.passController.clear();
                     loginController.reset();

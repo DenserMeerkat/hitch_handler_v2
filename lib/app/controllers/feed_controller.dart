@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hitch_handler_v2/app/views/widgets/modals/modals.dart';
 import 'package:hitch_handler_v2/data/apis/fetch_feed_api.dart';
@@ -7,6 +6,7 @@ import 'package:hitch_handler_v2/providers/feed_provider.dart';
 import 'package:provider/provider.dart';
 
 class FeedController {
+  static const int pageSize = 10;
   late FeedProvider _feedProvider;
   late String _token;
   late bool _isAdmin;
@@ -33,13 +33,11 @@ class FeedController {
       result = await fetchFeed(_token, cursor: cursor);
     }
     if (result.statusCode == 200) {
-      log(result.feedData.toString());
       scaffoldContext.hideCurrentMaterialBanner();
       scaffoldContext.hideCurrentSnackBar();
       if (result.feedData != null) {
-        List<FeedPostModel> posts = _feedProvider.feedPosts + result.feedData!;
-        final uniquePosts = posts.toSet().toList();
-        log(posts.toString());
+        List<FeedPostModel> uniquePosts =
+            _feedProvider.feedPosts + result.feedData!;
         _feedProvider.updateFeedPosts(uniquePosts);
         _feedProvider.updateFeedPostsCursor(result.cursor);
         return uniquePosts;
@@ -61,11 +59,8 @@ class FeedController {
   reset() {
     debugPrint("Resetting FeedProvider");
     _feedProvider.updateFeedPosts([]);
-    _feedProvider.updateUserPosts([]);
-    _feedProvider.updateBookmarkedPosts([]);
     _feedProvider.updateIsFeedPostsLoading(false);
-    _feedProvider.updateIsUserPostsLoading(false);
-    _feedProvider.updateIsBookmarkedPostsLoading(false);
     _feedProvider.updateFeedPostsCursor(0);
+    _feedProvider.updateHasMore(true);
   }
 }

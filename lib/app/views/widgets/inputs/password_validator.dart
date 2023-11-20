@@ -61,7 +61,6 @@ class _PasswordValidatorState extends State<PasswordValidator> {
     setState(() {
       passStrength = strength;
     });
-    debugPrint("Strength: $strength");
     updateState();
   }
 

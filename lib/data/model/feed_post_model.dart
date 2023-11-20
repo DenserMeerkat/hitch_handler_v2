@@ -11,6 +11,8 @@ class FeedPostModel with _$FeedPostModel {
     required String desc,
     required String roll,
     required String domain,
+    required int likes,
+    required List<String> liked,
     @Default("") String location,
     required DateTime createdAt,
     required DateTime updatedAt,

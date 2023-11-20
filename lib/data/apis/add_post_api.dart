@@ -10,16 +10,13 @@ Future<ResponseModel> addPost(PostModel post, String token) async {
 
   Object body = post.toJson();
 
-  debugPrint(body.toString());
   try {
     response = await http.postRequestProtected(studentAddPostPath, body, token);
     if (response.statusCode == 200) {
-      debugPrint(response.data.toString());
       ResponseModel responseModel = ResponseModel(
         statusCode: 200,
         message: "Post Added Successfully",
       );
-      debugPrint(responseModel.toString());
       return responseModel;
     } else {
       return ResponseModel(

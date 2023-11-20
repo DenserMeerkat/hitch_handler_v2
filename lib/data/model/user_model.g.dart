@@ -12,9 +12,6 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String,
       phone: json['phone'] as String,
       roll: json['roll'] as String?,
-      liked:
-          (json['liked'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              const [],
       bookmarked: (json['bookmarked'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -30,7 +27,6 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'email': instance.email,
       'phone': instance.phone,
       'roll': instance.roll,
-      'liked': instance.liked,
       'bookmarked': instance.bookmarked,
       'userType': _$UserEnumEnumMap[instance.userType]!,
       'domain': instance.domain,
