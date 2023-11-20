@@ -36,8 +36,8 @@ class FeedController {
       scaffoldContext.hideCurrentMaterialBanner();
       scaffoldContext.hideCurrentSnackBar();
       if (result.feedData != null) {
-        List<FeedPostModel> uniquePosts =
-            _feedProvider.feedPosts + result.feedData!;
+        List<FeedPostModel> posts = _feedProvider.feedPosts + result.feedData!;
+        List<FeedPostModel> uniquePosts = posts.toSet().toList();
         _feedProvider.updateFeedPosts(uniquePosts);
         _feedProvider.updateFeedPostsCursor(result.cursor);
         return uniquePosts;

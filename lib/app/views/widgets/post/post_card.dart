@@ -5,6 +5,8 @@ import 'package:hitch_handler_v2/app/views/widgets/post/post_actions.dart';
 import 'package:hitch_handler_v2/app/views/widgets/post/post_header.dart';
 import 'package:hitch_handler_v2/data/enums/enums.dart';
 import 'package:hitch_handler_v2/data/model/feed_post_model.dart';
+import 'package:hitch_handler_v2/providers/providers.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class PostCard extends StatelessWidget {
@@ -18,6 +20,8 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isAdmin =
+        context.read<UserProvider>().userModel!.userType == UserEnum.admin;
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
@@ -57,7 +61,7 @@ class PostCard extends StatelessWidget {
               linkColor: Theme.of(context).primaryColor,
             ),
             const Gap(16),
-            if (postType == PostTypeEnum.public)
+            if (postType == PostTypeEnum.public && !isAdmin)
               PostActions(
                 post: post,
               ),
