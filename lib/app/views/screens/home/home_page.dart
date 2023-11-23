@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 .surface
                 .mix(Theme.of(context).colorScheme.primary, 5)
             : Theme.of(context).colorScheme.onInverseSurface;
-    return Color.lerp(start, end, dragPosition)!;
+    return dragPosition == 0 ? start : end;
   }
 
   void closeDrawer() {
@@ -80,8 +80,9 @@ class _HomePageState extends State<HomePage> {
           }
           if (currentPageIndex != 0) {
             onDestinationChange(0);
+            return false;
           }
-          return false;
+          return true;
         },
         child: InnerDrawer(
           key: _innerDrawerKey,
@@ -95,7 +96,11 @@ class _HomePageState extends State<HomePage> {
           backgroundDecoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onInverseSurface),
           onDragUpdate: (value, direction) {
-            dragPosition.value = value;
+            if (value > 0.98) {
+              dragPosition.value = 1;
+            } else {
+              dragPosition.value = 0;
+            }
           },
           innerDrawerCallback: (isOpened) {
             setState(() {
