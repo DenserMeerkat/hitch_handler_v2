@@ -1,16 +1,6 @@
-# hitch_handler_v2
+# Hitch Handler v2 - [WIP]
 
-A new Flutter project.
+Hitch Handler is an issue reporting app designed to address issues faced by students with the college administration. It serves as a platform for students to report their concerns, ensuring that each issue is thoroughly addressed and resolved.
 
-## Getting Started
+https://github.com/DenserMeerkat/hitch_handler_v2/assets/95911940/a311e0d5-2264-4b54-a714-3718b406916f
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
